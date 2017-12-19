@@ -1,0 +1,19 @@
+﻿/*************************** SITE SPECIFIC ***********************/ 
+.clear    { clear:both; float:none; }
+.cmspgw   { }
+.hlcolor  { color:#176548}
+.hlbg     { color:#fff}
+.hlgradbg { color:#fff; font-weight: normal;}
+.hlgradbg a, .hlgradbg a:link, .hlgradbg a:visited { color: #fff;}
+.hlgradbg a:hover, .hlgradbg a:active, .hlgradbg a:focus { text-decoration: underline; outline: none; color: #fff;}
+.pg span:hover {}
+#cmslogo { padding: 5px 0px 5px 20px; width: auto; height: 70px; }
+.selcmstab { color:#fff; }
+.newWdropbox  { color:#06c; }
+
+.adminbtnrow {margin:8px 0; text-align:center;}
+.adminbtn { display:inline-block; margin-right:10px; padding:8px 10px; background:#ccc; cursor:pointer; }
+.adminbtn:hover { background:#aaa;}
+/*Login Page*/
+#loginframe {background:#d4eda9 url('core/images/img-cover.jpg') no-repeat top right; }
+#cmslogin #logo  { width:210px; height:42px; background:url('images/logo-login.png') no-repeat; }

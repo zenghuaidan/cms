@@ -1,0 +1,320 @@
+	
+	/* ==========================================================================
+		INSIDE PAGE COMMON
+	============================================================================= */
+
+	.inside .pg-edge-top { padding-top:205px}
+
+	.include-top-btn { margin-top:-130px}
+	.leftcol-pg-edge { padding-right:50px}
+
+	.left-nav { display:block}/*edit*/
+
+	/* • Display Section Name
+	---------------------------------------------------------------------------- */
+	.select-blk 		{ background-color:#ececec; padding:20px 50px}
+	.select-blk .s-pos 	{ margin-left:30%}
+	.select-blk .title  { margin-top:5px;}
+	.select-blk  .subinfo 			{ margin-top:10px}
+
+	/* • Breadcrumb
+	---------------------------------------------------------------------------- */
+	ul.breadcrumb 		{ margin:0; padding:0; list-style: none; background-color: #eee;}
+	ul.breadcrumb li 	{ display:inline;  }
+	ul.breadcrumb li+li:before 	{ padding: 8px; color:#666; content: "/\00a0";}
+	ul.breadcrumb li a 			{ color: #666; text-decoration:none;}
+
+	#body.theme-green ul.breadcrumb li a:hover  	{ color:#80bb47} 
+	#body.theme-blue ul.breadcrumb li a:hover  		{ color:#003399} 
+	#body.theme-red ul.breadcrumb li a:hover 		{ color:#b20838} 
+	#body.theme-yellow ul.breadcrumb li a:hover 	{ color:#e0b300}
+	#body.theme-cyan ul.breadcrumb li a:hover 		{ color:#02a9d3}
+	#body.theme-orange ul.breadcrumb li a:hover  	{ color:#ed7b35}
+
+
+	/* • Inside Page Contain left/right col
+	---------------------------------------------------------------------------- */
+	.inside-main 			{ padding-top:50px}
+	.in-col-left 			{ width:30%; float:left;  }
+	.in-col-right 			{ width:70%; float:left; }
+
+
+
+	.square-box 					{ width:150px; height:150px; float:left; margin-right:20px; margin-bottom:40px; display:block;
+										  -webkit-border-top-right-radius: 20px;
+										-webkit-border-bottom-left-radius: 20px;
+											  -moz-border-radius-topright: 20px;
+											-moz-border-radius-bottomleft: 20px;
+												  border-top-right-radius: 20px;
+												border-bottom-left-radius: 20px;}
+	.square-box .pos-center 		{ position:relative; top:50%; transform:translateY(-50%); }
+	.square-box .s-padding			{ padding:20px; text-align:center; color:#fff; }
+	.square-box.link 				{ transition: all 0.3s ease-out; cursor:pointer}
+	.square-box .icon				{ width:40%; text-align:center; margin:0 auto; margin-bottom:15px}
+
+
+	#body.theme-green .square-box 	{ background-color:#80bb47}
+	#body.theme-blue .square-box  	{ background-color:#003399} 
+	#body.theme-red .square-box 	{ background-color:#b20838} 
+	#body.theme-yellow .square-box 	{ background-color:#e0b300}
+	#body.theme-cyan .square-box 	{ background-color:#02a9d3}
+	#body.theme-orange .square-box  { background-color:#ed7b35}
+	#body.theme-gray .square-box    { background-color:#666}
+
+	#body.theme-green .square-box.link:hover 	{ background-color:#538523}
+	#body.theme-blue .square-box.link:hover  	{ background-color:#011e57} 
+	#body.theme-red .square-box.link:hover		{ background-color:#760626} 
+	#body.theme-yellow .square-box.link:hover 	{ background-color:#c29c03}
+	#body.theme-cyan .square-box.link:hover 	{ background-color:#006e8a}
+	#body.theme-orange .square-box.link:hover   { background-color:#ed7b35}
+	#body.theme-gray .square-box.link:hover   { background-color:#333}
+
+
+	/* • Inside Page left col
+	---------------------------------------------------------------------------- */
+	.sub-title 		{ font-weight:bold; margin-bottom:10px}
+
+	.li-item-blk 						{}
+	.li-item-blk .list-title 			{ width:100%; background-color:#dcdcdc}
+	.li-item-blk .list-title .list-pos,
+	.li-item-blk .list-content .list-pos { padding:15px 20px}
+	.li-item-blk .list-content      	  { width:100%; background-color:#ececec; }
+	.li-item-blk .media 			{ font-size:35px; padding-right:10px; transition: all 0.3s ease-out; cursor:pointer;}
+	.li-item-blk .media.facebook 	{ color:#44589c }
+	.li-item-blk .media.envelope 	{ color:#999 }
+	.li-item-blk .media.share 		{ color:#7ea304 }
+	.li-item-blk a:hover .media 	{ opacity:0.7} 
+	.li-item-blk .media-adj  		{ border-bottom:1px solid #fff}
+
+
+	ul.featured 	{ margin:0 0 0 20px; padding:0}
+	ul.featured li 	{ margin:0 0 20px 0; padding:0 0 15px 0; border-bottom:1px solid #fff}
+	ul.featured li .name { font-family: 'robotomedium', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+	ul.featured li .date { font-family: 'robotomedium', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+	ul.featured li a 	{ cursor:pointer;}
+	ul.featured li:last-child 	{ margin-bottom:0px; border-bottom:none}
+
+	ul.other		{ margin:0 0 0 20px; padding:0}
+	ul.other li		{ margin:0 0 10px 0; padding:0}
+	ul.other li a 	{ cursor:pointer;}
+	ul.other li:last-child { margin-bottom:0px; border-bottom:none}
+
+	ul.activities		{ margin:0; padding:0}
+	ul.activities li	{ margin:0 0 20px 0; padding:0 0 20px 0; list-style:none; border-bottom:1px solid #fff}
+	ul.activities li a 	{ cursor:pointer;}
+	ul.activities li:last-child { margin-bottom:0px; border-bottom:none}
+	ul.activities li .fa-calendar { padding-right:10px}
+
+	ul.detail 				{ margin:0; padding:0; display:}
+	ul.detail li			{ margin:0 0 0 0; padding:20px 0; list-style:none; border-bottom:1px solid #fff}
+	ul.detail li a 			{ cursor:pointer;}
+	ul.detail li:last-child { padding-bottom:0px; border-bottom:none}
+	ul.detail li .bold { font-weight:bold;}
+	ul.detail li:first-child			{ padding-top:0}
+
+
+	ul.ticket			{ margin:5px 0 10px 20px; padding:0}
+	ul.ticket li		{ margin:0 0 10px 0; padding:0; list-style: disc; border:none}
+	ul.ticket li a 		{ cursor:pointer;}
+
+	ul li .fa-arrow-circle-right.padding { padding-left:8px; line-height:1;}
+
+	.btn-download 			{ width:calc(100% - 40px); padding:15px 20px; background-color:#dcdcdc; border-bottom:1px solid #fff; transition: all 0.3s ease-out; }
+	.btn-download .icon-pdf { padding-right:8px;}
+	.btn-download:hover		{ background-color:#333; color:#fff; cursor:pointer;}
+
+	.how-book-detail { margin-bottom:10px}
+
+    .bottom-m { display:none}
+
+    .media-desktop { display:block;}
+    .media-mobile  { display:none}
+
+	/* • Inside Page left col for "Concert-info page" only
+	---------------------------------------------------------------------------- */
+	.list-d	 			{ display:block;}
+	.download-title 	{ display:none;}
+
+
+	/* •Inside Page left col for "World Premier" only
+	---------------------------------------------------------------------------- */
+	.world-premier 	{ padding:10px 20px; display:block}
+
+	/* • blockquote
+	---------------------------------------------------------------------------- */
+	blockquote 				{ width:calc(100% - 100px); margin:0; padding:40px 40px 40px 60px; position:relative; margin-bottom:0px; color:#999;
+								border-top:5px solid #ececec; margin-top:100px}
+	blockquote::before,
+	blockquote::after 		{ font-size:500%; font-family: "Times","Times New Roman", Georgia, Serif; display:block; position:absolute; font-weight:bold}
+	blockquote::before 		{ content:open-quote; left:10px; /*line-height:40px;*/ line-height:normal; top:18px; }
+	blockquote::after 		{ content:close-quote; right:10px; line-height:normal; bottom:20px;
+							     -webkit-transform:rotate(-180deg);
+									-moz-transform:rotate(-180deg);
+									  -o-transform:rotate(-180deg);
+									     transform:rotate(-180deg);
+										 ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+									 filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+									  unicode-bidi:bidi-override;
+									  direction:rtl; }
+	blockquote .txt-content { width:90%; padding-top:10px}
+
+
+	.stories-container blockquote 				{ margin-top:0; border-top:none;} /*edit 20171219*/
+
+
+	/* • Inside Page left col Nav menu
+	---------------------------------------------------------------------------- */
+	ul.left-nav	 				{ margin:0; padding:0}
+	ul.left-nav a li.first  	{ margin:0; padding:20px; list-style:none; border-top:1px solid #ececec; cursor:pointer;}
+	
+	ul.left-subnav 		{ margin:0; padding:0;}
+	ul.left-subnav li.second 		{ margin:0; padding:0px 20px 15px 40px; list-style:none}
+	ul.left-subnav li.second:before	{ content: "•"; padding-right:10px;}
+
+	ul.left-nav a li.first-section { border-top:0;!important}
+
+	.nav-d { display:block;}
+
+	.left-nav-space { margin-top:50px}
+
+
+	ul.left-nav ul.third 			{ margin:0; padding:0; color:#999; font-size:13px}
+	ul.left-nav ul.third a 			{ color:#999!important; }
+	ul.left-nav ul.third a:hover 	{ color:#b20838!important }
+	ul.left-nav ul.third a li		{ margin:0; padding:0 0 20px 60px; list-style:none }/*edit*/
+
+
+	ul.left-nav ul.sub {}
+
+	/* ==========================================================================
+		Media Style
+	============================================================================= */
+	@media only screen and (max-width: 1250px) {
+	.left-nav 		{ display:none} /*edit*/
+	blockquote 		{ margin-top:50px} /*edit*/
+
+	.leftcol-pg-edge 	{ padding-right:0px}
+	.select-blk .s-pos 	{ margin-left:0}
+	.select-blk 		{ padding:20px 50px}
+	.include-top-btn 	{ margin-top:0}
+
+	.inside-main	{ display:-webkit-box;
+    				  display: -moz-box;
+    				  display: -ms-flexbox;
+    				  display: -webkit-flex;
+   					  display: flex;
+    	   -webkit-box-orient: vertical;
+    		  -moz-box-orient: vertical;
+       -webkit-flex-direction: column;
+   		   -ms-flex-direction: column;
+    		   flex-direction: column;
+    /* optional */
+       		-webkit-box-align: start;
+   			   -moz-box-align: start;
+    		   -ms-flex-align: start;
+    	  -webkit-align-items: flex-start;
+   				  align-items: flex-start;}
+
+	.in-col-left 	{ width:100%; float:left;  -webkit-box-ordinal-group: 2;
+	    -moz-box-ordinal-group: 2;
+		    	-ms-flex-order: 2;
+		    	 -webkit-order: 2;
+		    			 order: 2;  }
+	.in-col-right 	{ width:100%; float:left; 
+		-webkit-box-ordinal-group: 1;
+      	   -moz-box-ordinal-group: 1;
+    			   -ms-flex-order: 1;
+    				-webkit-order: 1;
+    						order: 1;}
+
+	.nav-d { display:none;}
+	.left-nav-space { margin-top:0px}
+	.world-premier 	{ display:none}
+
+	}
+
+
+	@media only screen and (max-width: 1250px) {
+	.select-blk 		{ padding:20px 25px}
+
+	/* • Inside Page left col for "Concert-info page" only
+	---------------------------------------------------------------------------- */
+	.list-d 			{ display:none;}
+	.download-title 	{ display:block;}
+	.bt-table			{ width:100%; border-collapse:collapse; border-top:1px solid #fff; }
+
+	#body.theme-blue .bt-table		{ background-color:#003399} 
+	#body.theme-green .bt-table		{ background-color:#80bb47} 
+	#body.theme-red .bt-table		{ background-color:#b20838} 
+	#body.theme-yellow .bt-table	{ background-color:#e0b300} 
+	#body.theme-cyan .bt-table		{ background-color:#02a9d3} 
+
+
+	.bottom-m			{ display:block; position:fixed; z-index: 999; width:100%; bottom:0; left:0; }
+	.bottom-m .bottom-item 			{ width:100%; }
+    .ticket-m, .book-blk-m			{  padding:20px 30px; } 
+
+	.book-blk-m { border-right:1px solid #fff}
+
+
+    .ticket-m	.b-col1 ,
+	.book-blk-m	.b-col1 { }
+	.ticket-m	.b-col2 ,
+    .book-blk-m	.b-col2 { text-align:right; vertical-align:middle; }
+	.ticket-m	.b-col2 i ,
+	.book-blk-m	.b-col2 i {  line-height:1.4; font-size:20px}
+	.ticket-m .corner-bar	{ color:#fff;  }
+	
+	.book-blk-m	.corner-bar:before,
+	.ticket-m .corner-bar:before  { content: ''; display:inline-block; height:20px; width:30px; margin-right:8px; margin-top:4px;}
+	.book-blk-m	.corner-bar:before { background-image: url('images/icon-book.svg');
+									  background-size: contain;
+								    background-repeat: no-repeat; }
+
+	.ticket-m .corner-bar:before {   background-image: url('images/icon-information.svg');
+									  background-size: contain;
+								    background-repeat: no-repeat; }
+
+
+	.ticket-m .fa-pm	{ position: absolute; right:20px; top:50%; transform:translateY(-50%); color:#fff; }
+	.ticket-m .fa-pm  .fa-plus-square, .ticket-m .fa-pm.open  .fa-minus-square	{ display:block; }
+	.ticket-m .fa-pm.open  .fa-plus-square, .ticket-m .fa-pm  .fa-minus-square	{ display:none; }
+	
+    .book-detail-m			{ display:none; background-color:#ececec; width:calc(100% - 60px); height:calc(100vh - 100% - 40px - 20vh); overflow:auto; padding:20px 30px;
+    						  position:absolute; bottom:100%; left: 0;
+    						  border-top:5px solid #333}
+	.book-detail-m	.close 	{ position:absolute; right:20px; top:20px; font-size:18px; color:#ccc;}
+	.book-detail-m	.close:hover 	{ color:#666; transition: all 0.3s ease-out;}
+
+	body.inspires blockquote 	{ border-top:1px solid #ececec; margin-top:50px}
+
+    .media-desktop { display:none;}
+    .media-mobile  { display:block}
+    .media-corner  {  -webkit-border-top-right-radius: 20px;
+					-webkit-border-bottom-left-radius: 20px;
+						  -moz-border-radius-topright: 20px;
+						-moz-border-radius-bottomleft: 20px;
+							  border-top-right-radius: 20px;
+							border-bottom-left-radius: 20px;}
+	}
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { 
+	.inside .pg-edge-top { padding-top:185px}
+	}
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
+	.inside .pg-edge-top { padding-top:185px}
+	}
+
+	@media only screen and (max-width:667px) {
+	.select-blk 		{ padding:15px 25px}
+	.square-box 		{ width:120px; height:120px;}
+    .book-blk-m			{ padding:10px 20px; }
+	.ticket-m			{ padding:10px 40px 10px 20px; }
+	.book-blk-m	.corner-bar:before,
+	.ticket-m .corner-bar:before  { content: ''; display: inline-block; height:20px; width:30px; margin-right:5px;}
+	.ticket-m, .book-blk-m	{ height:30px; }
+	.inside .pg-edge-top { padding-top:0}
+
+
+	}

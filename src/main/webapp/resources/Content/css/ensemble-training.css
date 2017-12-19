@@ -1,0 +1,56 @@
+
+	
+	.instructors { padding: 10px 20px;}
+	.instructors .section 			{ clear:both; padding:0px; margin:0px;}
+	.instructors .col 				{ display:block; float:left; margin:1% 0 1% 1.6%;  transition: all 0.3s ease-out; }
+	.instructors .col:first-child 	{ margin-left:0; }
+
+	.instructors .col .img-col		{ width:40%; float:left; }
+	.instructors .col .img-col img 	{ width:100%; height:auto;
+									-webkit-border-top-right-radius: 10px;
+										-moz-border-radius-topright: 10px;
+											border-top-right-radius: 10px; }
+
+	.instructors .col .detail-col			{ width:60%; float:left;}
+	.instructors .col .detail-col .d-pos	{ padding:5px 0px 0px 15px}
+	.artist { font-weight:bold; padding-bottom:5px; line-height:1.2}
+	#body.en .loc, #body.en .instruments { color:#666; font-size:13px }
+	#body.cn .loc, #body.cn .instruments { color:#666; font-size:14px }
+
+	#body.theme-green .instructors .col:hover 	{ cursor:pointer; color:#80bb47;}
+	#body.theme-green .instructors .col:hover .img-col img {
+									  -webkit-box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11);
+										 -moz-box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11);
+											  box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11); 
+											  transition: all 0.3s ease-out; }
+
+
+	/*  GROUPING  */
+	.instructors .group:before,
+	.instructors .group:after { content:""; display:table; }
+	.instructors .group:after { clear:both;}
+	.instructors .group { zoom:1; /* For IE 6/7 */ }
+	/*  GRID OF THREE  */
+	.instructors .span_1_of_3 { width: 32.26%; }
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { 
+	#body.en .artist { font-size:13px }
+	#body.cn .artist { font-size:14px }
+	}
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
+	.instructors .col .img-col		{ width:30%; }
+	.instructors .col .detail-col   { width:70%; }
+
+	#body.en .artist { font-size:13px }
+	#body.cn .artist { font-size:14px }
+	}
+
+
+
+
+	@media only screen and (max-width:667px) {
+	.instructors .span_1_of_3 	{ width: 100%; }
+	.instructors .col 			{ margin: 10px 0 }
+
+	}

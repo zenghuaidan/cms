@@ -1,0 +1,23 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<c:set var="context" value="${pageContext.request.contextPath}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width" />
+<link href="${context}/resources/css/cms.css" rel="stylesheet" type="text/css" />
+<link href="${context}/resources/css/cmsstyle.css" rel="stylesheet" type="text/css" />
+<link href="${context}/resources/css/appcms.css" rel="stylesheet" type="text/css" />
+<link href="${context}/resources/script/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="${context}/resources/css/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+<link href="${context}/resources/css/jquery.multiselect.filter.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="${context}/resources/script/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${context}/resources/script/jqueryui/jquery-ui.js"></script>
+<script type="text/javascript" src="${context}/resources/script/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${context}/resources/script/jquery.form.js"></script>
+<script type="text/javascript" src="${context}/resources/script/jquery.multiselect.filter.js"></script>
+<script type="text/javascript" src="${context}/resources/script/jquery.multiselect.js"></script>
+<script type="text/javascript" src="${context}/resources/script/jquery.formatDateTime.js"></script>
+<script type="text/javascript" src="${context}/resources/script/tinybox.js"></script>
+<script type="text/javascript" src="${context}/dwr/engine.js"></script>
+<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>
+<script type="text/javascript" src="${context}/resources/script/admin/index.js"></script>

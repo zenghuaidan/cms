@@ -1,0 +1,224 @@
+
+/* = Header (resize)
+-------------------------------------------------------------- */
+	#body header .fa-search.color 				{ color:#fff;}
+	#body header.smaller .fa-search.color 		{ color:#666;}
+
+	#body header .tagline 	{ position:absolute; top:10px; left:30px; color:#fff}
+	.tagline-m			{ display:none;}
+
+
+	/*.fa-search:hover.color  { color:#666; transition: all 0.3s ease-out; cursor:pointer;}*/
+
+	.clearfix:after { visibility:hidden; display:block; content: ""; clear:both; height:0; }
+
+	#body header 	{ width:100%; height:190px; overflow:hidden; position:fixed; top:0; left:0; z-index:999; background-color:#fff; padding:15px 0 0 0;
+		            -webkit-transition: height 0.3s;
+		               -moz-transition: height 0.3s;
+		                -ms-transition: height 0.3s;
+		                 -o-transition: height 0.3s;
+		                    transition: height 0.3s; }
+  	#body header .row1	{ height:150px}
+  	#body header .row2	{ height:50px}
+
+  	#body header div#logo 	{ display:inline-block; float:left;
+				    -webkit-transition: all 0.3s;
+				       -moz-transition: all 0.3s;
+				        -ms-transition: all 0.3s;
+				         -o-transition: all 0.3s;
+				    		transition: all 0.3s; }
+  
+    #body header div#logo img { width:30%; height:auto; padding-left:50px}
+  	#body header nav 		{ display:inline-block; float:right; }
+   
+  	#body header.smaller 			{ height:80px;
+  								-webkit-box-shadow: 3px 3px 8px 0px rgba(50, 50, 50, 0.13);
+								   -moz-box-shadow: 3px 3px 8px 0px rgba(50, 50, 50, 0.13);
+									    box-shadow: 3px 3px 8px 0px rgba(50, 50, 50, 0.13);}
+   #body header.smaller div#logo { width:480px; height:auto;  }
+
+	#body header .nav-smaller  { position:absolute; top:16px; right:150px; width:150px;}
+
+	#body header ul.nav-d li.menu-smaller-m 			{ display:none}
+	#body header.smaller ul.nav-d li.menu-smaller-m 	{ display:none}
+
+
+	#body header .nav-smaller 		{ display:none}
+	#body header.smaller .nav-smaller { display:block}
+
+	#body header .row 		{ display:block}
+	#body header.smaller .row { display:none}
+
+	#body header .square-section 			{ display:block;}
+	#body header.smaller .square-section	{ display:none}
+
+
+
+
+/* = Header (square-menu)
+-------------------------------------------------------------- */	
+	#body header .square-menu				{ width:calc(100% - 350px); float:left; text-align:left; }
+	#body header .square-menu .pos	    { position:absolute; right:50px; width:calc(100% - 50px); font-size:12px; color:#fff; font-family:robotobold; line-height:1.2; height:130px;  }
+	#body header .square-menu .pos .size 		{ width:65px; height:65px; }
+	#body header .square-menu .pos .menu  	{ position:absolute; right:0;} 
+	#body header .square-menu .pos .news  	{ position:absolute; right:80px;} 
+	#body header .square-menu .pos .overseas  { position:absolute; right:80px; top:65px;} 
+	#body header .square-menu .pos .heritage  { position:absolute; right:145px; top:65px;} 
+	#body header .square-menu .pos .musicus   { position:absolute; right:210px;} 
+	#body header .square-menu .pos .inspires  { position:absolute; right:275px; top:65px} 
+
+	#body header .square-menu .pos .menu,
+	#body header .square-menu .pos .news, 
+	#body header .square-menu .pos .overseas,
+	#body header .square-menu .pos .heritage, 
+	#body header .square-menu .pos .musicus,
+	#body header .square-menu .pos .inspires	{ transition: all 0.3s ease-out; cursor:pointer;} 
+
+	#body header .square-menu .pos .menu:hover  		{ background-color:#333;} 
+	#body header .square-menu .pos .news:hover 		{ background-color:#c29c03}
+	#body header .square-menu .pos .overseas:hover 	{ background-color:#006e8a}
+	#body header .square-menu .pos .heritage:hover 	{ background-color:#760626}
+	#body header .square-menu .pos .musicus:hover 	{ background-color:#011e57}
+	#body header .square-menu .pos .inspires:hover 	{ background-color:#538523}
+
+	#body header .square-menu .pos .menu:hover .txt-pos,
+	#body header .square-menu .pos .news:hover .txt-pos,
+	#body header .square-menu .pos .overseas:hover .txt-pos,
+	#body header .square-menu .pos .heritage:hover .txt-pos,
+	#body header .square-menu .pos .musicus:hover .txt-pos,
+	#body header .square-menu .pos .inspires:hover .txt-pos  	{ left:9px;} 
+
+
+	#body header .square-menu .txt-pos { position:absolute; bottom:5px; left:5px; transition: all 0.3s ease-out; }
+	#body header .fa-bars.pos-menu 	{ position:absolute; top:8px; right:8px; font-size:20px}
+
+
+/* = nav
+-------------------------------------------------------------- */	
+    .nav-blk         { width:100%; background-color:#b20838; text-align:right; display:block; color:#fff;}
+    ul.nav-d      { margin:0; padding:8px 0;}
+    ul.nav-d li   { margin:0; padding:0 15px 0 0; display:inline-block; list-style:none; line-height:normal;}
+    ul.nav-d li:last-child   { padding:0 50px 0 0;}
+
+    #body header ul.nav-d li a        { color:#fff; transition: all 0.3s ease-out; cursor:pointer;}
+    #body header ul.nav-d li a:hover  { color:#eeafc4;}
+
+    #body header.smaller ul.nav-d li a        { color:#666; transition: all 0.3s ease-out; cursor:pointer;}
+    #body header.smaller ul.nav-d li a:hover  { color:#b20838;}
+
+    .nav-smaller ul.nav-d .last { padding-right:0}
+
+
+
+	/* ==========================================================================
+		Media Style
+	============================================================================= */
+	
+	@media only screen and (max-width: 1024px) {
+	#body header .nav-smaller  { top:10px; right:150px;}
+	}
+
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) 	{
+	#body header 			{ height:170px }
+ 	#body header .row1	{ height:130px }
+  	#body header .row2	{ height:50px  }
+  	#body header.smaller 	{ height:70px;}
+	#body header .nav-smaller  { top:10px; right:100px;}
+
+	/* ===== Same Style.  Don't forget update "@media only screen and (max-width:600px) ========== */
+	#body header .square-menu				{ width:calc(100% - 250px); float:left; text-align:left; }
+	#body header .square-menu .pos	    { position:absolute; right:20px; width:calc(100% - 20px); font-size:11px; color:#fff; font-family:robotoregular; height:130px; }
+	#body header .square-menu .pos .size 	{ width:55px; height:55px; }
+	#body header .square-menu .pos .menu  	{ right:0} 
+	#body header .square-menu .pos .news  	{ right:65px} 
+	#body header .square-menu .pos .overseas  { right:65px; top:55px} 
+	#body header .square-menu .pos .heritage  { right:120px; top:55px} 
+	#body header .square-menu .pos .musicus   { right:175px;} 
+	#body header .square-menu .pos .inspires  { right:230px; top:55px} 
+
+	#body header .square-menu .pos .menu:hover .txt-pos,
+	#body header .square-menu .pos .news:hover .txt-pos,
+	#body header .square-menu .pos .overseas:hover .txt-pos,
+	#body header .square-menu .pos .heritage:hover .txt-pos,
+	#body header .square-menu .pos .musicus:hover .txt-pos,
+	#body header .square-menu .pos .inspires:hover .txt-pos  	{ left:5px;} 
+	/* ============================================================================================ */
+	}
+
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { 	
+    #body header div#logo img { width:28%; height:auto; padding-left:30px}
+	}
+
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
+    #body header div#logo img { width:32%; height:auto; padding-left:20px}
+    #body header.smaller div#logo { width:420px; height:auto;  }
+	}
+
+
+	@media only screen and (max-width:667px) {
+	#body header .fa-search.color 				{ color:#666;}
+	#body header.smaller .fa-search.color 		{ color:#666;}
+    #body header ul.nav-d li a        { color:#666; }
+
+
+	ul.nav-d li.m-hidden-media { display:none;}
+	.tagline-m			{ display:block;  width:calc(100% - 40px);  color:#fff; margin-top:205px; padding:5px 20px; font-size:10px}
+
+
+	#body header { padding:0}
+  	#body header .row1	{ height:150px}
+  	#body header .row2	{ display:none}
+	#body header 			{ height:200px;}
+  	
+  	#body header div#logo     { display:block; float:none; margin:0 auto; height:50px; }
+    #body header div#logo img { width:40%; height:auto; padding-left:18px; padding-top:10px}
+
+  	#body header nav 		{ display:block; float:none; height:140px; margin: 0 auto;} 
+  	#body header.smaller 	{ height:60px; }
+    #body header div#logo img 	{ width:42%; height:auto; padding-left:20px}
+    #body header.smaller div#logo { width:220px; height:auto; float:left; }
+ 
+	#body header .nav-smaller 		{ display:block; top:20px; right:-65px;} /*edit 20171219*/
+	#body header.smaller .nav-smaller { display:block; top:0px; right:20px; width:auto;}
+
+	#body header ul.nav-d li.menu-smaller-m 			{ display:none}
+	#body header.smaller ul.nav-d li.menu-smaller-m 	{ display:inline-block; padding-right:0; padding-left:10px;}
+	#body header.smaller ul.nav-d li.menu-smaller-m .icon { width:40px; height:26px; padding-top:14px; background-color:#999; top:2px; color:#fff; text-align:center;
+														-webkit-border-top-right-radius: 5px;
+															-moz-border-radius-topright: 5px;
+																border-top-right-radius: 5px;}
+	#body header.smaller .square-menu { display:none}
+
+	#body header .square-menu					{ width:100%; }
+	#body header .square-menu .pos	    	{ position:absolute; right:15px; width:calc(100% - 15px); }	
+
+
+
+
+	/* ===== Same Style.  Don't forget update "@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) 	 ========== */
+	#body header .square-menu .pos	    { font-size:11px; padding-top:20px}
+	#body header .square-menu .pos .size 	{ width:55px; height:55px; }
+	#body header .square-menu .pos .menu  	{ right:0} 
+	#body header .square-menu .pos .news  	{ right:65px} 
+	#body header .square-menu .pos .overseas  { right:65px; top:55px} 
+	#body header .square-menu .pos .heritage  { right:120px; top:55px} 
+	#body header .square-menu .pos .musicus   { right:175px;} 
+	#body header .square-menu .pos .inspires  { right:230px; top:55px} 
+
+	#body header .square-menu .pos .menu:hover .txt-pos,
+	#body header .square-menu .pos .news:hover .txt-pos,
+	#body header .square-menu .pos .overseas:hover .txt-pos,
+	#body header .square-menu .pos .heritage:hover .txt-pos,
+	#body header .square-menu .pos .musicus:hover .txt-pos,
+	#body header .square-menu .pos .inspires:hover .txt-pos  	{ left:5px;} 
+	/* ============================================================================================ */
+
+
+	}
+
+
+
+

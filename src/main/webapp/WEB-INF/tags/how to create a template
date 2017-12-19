@@ -1,0 +1,37 @@
+Put the following in WEB-INF/tags/genericpage.tag
+
+<%@tag description="Overall Page template" pageEncoding="UTF-8"%>
+<%@attribute name="header" fragment="true" %>
+<%@attribute name="footer" fragment="true" %>
+<html>
+  <body>
+    <div id="pageheader">
+      <jsp:invoke fragment="header"/>
+    </div>
+    <div id="body">
+      <jsp:doBody/>
+    </div>
+    <div id="pagefooter">
+      <jsp:invoke fragment="footer"/>
+    </div>
+  </body>
+</html>
+To use this:
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
+<t:genericpage>
+    <jsp:attribute name="header">
+      <h1>Welcome</h1>
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+    </jsp:attribute>
+    <jsp:body>
+        <p>Hi I'm the heart of the message</p>
+    </jsp:body>
+</t:genericpage>
+That does exactly what you think it does!
+
+This was part of a great answer by Will Hartung on this link.

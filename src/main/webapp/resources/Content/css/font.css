@@ -1,0 +1,164 @@
+	
+
+	#body      {  font-family:"robotoregular", "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+
+	#body.en	{ font-weight:normal; letter-spacing:normal; font-size:15px; line-height:1.4;
+					-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none; }
+	#body.cn	{ font-size:16px; font-weight:normal; letter-spacing:1.4px;
+				-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none;   }
+
+
+	h1 	{ font-family: 'robotobold',"robotoregular", "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;} 
+   
+    #body.en h1 	    { font-size:40px; 
+    					  letter-spacing:-0.8px; line-height:1; }
+    #body.cn h1 	    { font-size:40px;
+    					  letter-spacing:normal; line-height:1.4; }
+
+    #body.en .adj-sp-title       { font-size:24px!important; }
+    #body.cn .adj-sp-title       { font-size:24px!important}
+
+    #body.en .adj-concert-title       { font-size:20px!important; line-height: 1.6}
+    #body.cn .adj-concert-title       { font-size:24px!important}
+    .sp-txt-pos 	{ padding-top:5px}
+
+    .section-name		{ font-size:20px; line-height:1}
+    .corner-bar 		{ font-size:20px; line-height:normal; color:#fff;  font-family: 'robotomedium', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+    .landing-section    { font-size:20px; line-height:normal; }
+
+	#body.en .sm-section-name { font-size:16px!important}
+	#body.cn .sm-section-name { font-size:20px!important}
+
+
+    h2, .font-l 			{ font-size:24px;}
+    .general h2 			{ margin-bottom:15px; line-height:1.4}
+	h3, .font-m 			{ font-size:18px}
+	.font-s 			    { font-size:12px}
+
+
+	@media only screen and (max-width:667px) {
+	#body.cn	{ font-size:14px; font-weight:normal; letter-spacing:1.4px;
+				-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none;   }  /*edit 20171219*/
+	#body.en    { font-size:14px}
+
+    #body.en h1 	    { font-size:22px; 
+    					  letter-spacing:-0.8px; line-height:1.2; } /*edit 20171219*/
+    #body.cn h1 	    { font-size:28px;
+    					  letter-spacing:normal; line-height:normal; } /*edit 20171219*/
+    .section-name		{ font-size:20px; line-height:1; }
+	.square-box .section-name {font-size: 14px} /*edit 20171219*/
+    h2, .font-l 			{ font-size:18px;} /*edit 20171219*/
+
+	#body.en .sm-section-name { font-size:16px!important}
+	#body.cn .sm-section-name { font-size:16px!important}
+
+    #body.en .adj-sp-title       { font-size:16px!important} /*edit 20171219*/
+    #body.cn .adj-sp-title       { font-size:18px!important} /*edit 20171219*/
+
+    #body.en .adj-concert-title       { font-size:16px!important; }
+    #body.cn .adj-concert-title       { font-size:18px!important}
+
+	#body.en .font-s  { font-size:12px}
+	#body.cn .font-s  { font-size:14px}
+
+	.corner-title .sp-txt-pos { font-size:12px}
+
+	}	
+
+	@media only screen and (max-width:667px) {
+	#body.en footer table { font-size:10px}
+	#body.cn footer table { font-size:11px}
+    .landing-section    { font-size:16px; line-height:normal; } /*edit 20171219*/
+
+	}
+
+
+	@media only screen and (max-width:500px) {
+    .corner-bar 		{ font-size:13px;  line-height:1.2; }
+	#body.en .sm-section-name { font-size:14px!important}
+	#body.cn .sm-section-name { font-size:18px!important}
+
+	}
+	/* ==========================================================================
+		Global :: Font Roboto
+	============================================================================= */
+
+	.robotothin 	{ font-family: 'robotothin', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+	.robotolight 	{ font-family: 'robotolight', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+	.robotoregular 	{ font-family: 'robotoregular', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+	.robotobold 	{ font-family: 'robotobold', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+	.robotoblack 	{ font-family: 'robotoblack', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+
+
+
+	@font-face {
+	    font-family: 'robotothin';
+	    src: url('roboto/Roboto-Thin-webfont.eot');
+	    src: url('roboto/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'),
+	         url('roboto/Roboto-Thin-webfont.woff') format('woff'),
+	         url('roboto/Roboto-Thin-webfont.ttf') format('truetype'),
+	         url('roboto/Roboto-Thin-webfont.svg#robotothin') format('svg');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+
+
+	@font-face {
+	    font-family: 'robotolight';
+	    src: url('roboto/Roboto-Light-webfont.eot');
+	    src: url('roboto/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
+	         url('roboto/Roboto-Light-webfont.woff') format('woff'),
+	         url('roboto/Roboto-Light-webfont.ttf') format('truetype'),
+	         url('roboto/Roboto-Light-webfont.svg#robotolight') format('svg');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+
+
+	@font-face {
+	    font-family: 'robotoregular';
+	    src: url('roboto/Roboto-Regular-webfont.eot');
+	    src: url('roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+	         url('roboto/Roboto-Regular-webfont.woff') format('woff'),
+	         url('roboto/Roboto-Regular-webfont.ttf') format('truetype'),
+	         url('roboto/Roboto-Regular-webfont.svg#robotoregular') format('svg');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+
+
+	@font-face {
+	    font-family: 'robotomedium';
+	    src: url('roboto/Roboto-Medium-webfont.eot');
+	    src: url('roboto/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
+	         url('roboto/Roboto-Medium-webfont.woff') format('woff'),
+	         url('roboto/Roboto-Medium-webfont.ttf') format('truetype'),
+	         url('roboto/Roboto-Medium-webfont.svg#robotomedium') format('svg');
+	    font-weight: normal;
+	    font-style: normal;
+
+	}
+
+	@font-face {
+	    font-family: 'robotobold';
+	    src: url('roboto/Roboto-Bold-webfont.eot');
+	    src: url('roboto/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+	         url('roboto/Roboto-Bold-webfont.woff') format('woff'),
+	         url('roboto/Roboto-Bold-webfont.ttf') format('truetype'),
+	         url('roboto/Roboto-Bold-webfont.svg#robotobold') format('svg');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+
+	@font-face {
+    font-family: 'robotoblack';
+    src: url('roboto/Roboto-Black-webfont.eot');
+    src: url('roboto/Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('roboto/Roboto-Black-webfont.woff') format('woff'),
+         url('roboto/Roboto-Black-webfont.ttf') format('truetype'),
+         url('roboto/Roboto-Black-webfont.svg#robotoblack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+   }
+

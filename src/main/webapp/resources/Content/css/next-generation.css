@@ -1,0 +1,75 @@
+	
+	/* • Stories (For Next Generation) Page
+	---------------------------------------------------------------------------- */
+	.stories  { margin:50px 0}
+    .stories .font-xl { font-size:40px; font-family: 'robotobold';}
+
+	.stories-container 			{ display:table;  width:100%;}
+	.stories-container .s-col 	{ display:table-cell; vertical-align:top; text-align:left;}
+	.stories-container .s-col.s-left  { width:45%}
+	.stories-container .s-col.s-right { width:55%}
+	.stories-container .s-col.s-right .s-pos { padding-left:50px}
+	.stories-container .s-col.s-right img { -webkit-border-top-right-radius: 40px;
+												-moz-border-radius-topright: 40px;
+												    border-top-right-radius: 40px; width:100%; height:auto;}
+
+    .stories-container .quote-pos { margin-left:-57px; margin-top:-10px}
+
+	.stories-container .num-blk 		{ position:absolute; left:0; bottom:0}
+	.stories-container .num-blk ul.num 	{ margin:0; padding:0}
+	.stories-container .num-blk ul.num li  			{ width:15px; height:15px; background-color:#ececec; display:inline-block; margin-right:8px; cursor:pointer; 
+													   transition: all 0.3s ease-out;}
+	.stories-container .num-blk ul.num li.current	{ background-color:#80bb47}
+	.stories-container .num-blk ul.num li:hover 	{ background-color:#80bb47 }
+
+	.storirs-container .more-blk	{ padding:0 10px;}
+	a.storirs-pg:hover blockquote   { color:#80bb47; transition: all 0.3s ease-out; }
+
+
+	/* • Download pdf
+	---------------------------------------------------------------------------- */
+	a.link-img>.theme-bgcolor 		{ transition: all 0.3s ease-out; cursor:pointer;}
+	a.link-img:hover>.theme-bgcolor { background-color:#538523!important;  } 
+	a.link-img:hover .download-img 	{ -webkit-box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11);
+										 -moz-box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11);
+											  box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11); 
+											  transition: all 0.3s ease-out; }
+	.download-btn {  position:absolute; top:0; left:0}
+	.download-img {  width:80%; height:auto; margin-top:100px;
+					 -webkit-border-bottom-right-radius: 40px;
+						 -moz-border-radius-bottomright: 40px;
+						     border-bottom-right-radius: 40px;}
+
+
+
+	/* ==========================================================================
+		Media Style
+	============================================================================= */
+	@media only screen and (max-width: 1250px) {
+
+    .stories-container .quote-pos { margin-left:-10px}
+	.stories-container .s-col.s-left  { width:55%}
+	.stories-container .s-col.s-right { width:45%}
+	.stories-container .s-col.s-right .s-pos { padding-left:50px; padding-top:50px;}
+
+	.quote-pos blockquote::before, .quote-pos blockquote::after { font-size:250%;}
+	.quote-pos blockquote { width: calc(100% - 60px); padding: 40px 30px 50px 30px;}
+
+	.m-pos-only 	{ margin-top:60px; border-top:1px solid #ececec}
+	.download-btn 	{ position: absolute;
+    top: 60px;
+    left: 0;
+}
+
+
+
+	}
+
+	@media only screen and (max-width:667px) {
+	.stories-container 			{ display:block;  width:100%;}
+	.stories-container .s-col 	{ display:block; vertical-align:inherit; text-align:left;}
+	.stories-container .s-col.s-left  { width:100%}
+	.stories-container .s-col.s-right { width:100%}
+	.stories-container .s-col.s-right .s-pos { padding-left:0; padding-top:10px; padding-bottom: 50px}
+
+	}

@@ -1,0 +1,186 @@
+﻿/*body{margin:0px; line-height:18px;color:#666666;text-decoration: none; -webkit-text-size-adjust:none;}
+h1,h2,h3 { padding:0px; margin:0px; text-align:left; }      
+img{border: 0;}
+div{position:relative}
+table td { vertical-align:top; }
+.clear{clear:both}*/
+
+
+/* Site Color ============================================================ */
+
+#cmslogin #formdiv .fieldrow { background-color:#BB2650} /* index login box */ 
+#cmslogin .cmsbtn { background-color:#BB2650; border:none;}
+#cmslogin .cmsbtn:hover { background-color:#333;}
+
+#siteadmin #homepage { background-color:#BB2650}
+.hlbg                { background:#BB2650}
+.hlgradbg            { background-color:#BB2650}
+#admintopheader.hlgradbg { background-color:#BB2650}
+.woptlist .nwColorBox img, .woptlist .nwColorBox:hover img { background-color:#BB2650} /* Editor Color Box background color */ 
+.whitefontover:hover { background-color:#d4eda9; color:#333;} /* CMS "Publish", "Mark Delete"...btn hover color */ 
+/* ======================================================================= */
+
+
+
+
+.cmstyle { color:#333 }
+.cmsbtn  { color:#fff; background:#666; transition:all 0.3s ease;}
+.cmsbtn:hover { background:#333;}
+
+.gradbtn  { color:#fff; background:#3B3B3B;
+  /* IE10 Consumer Preview */ 
+  background-image: -ms-linear-gradient(top, #696B6E 0%, #3B3B3B 100%);
+  /* Mozilla Firefox */ 
+  background-image: -moz-linear-gradient(top, #696B6E 0%, #3B3B3B 100%);
+  /* Opera */ 
+  background-image: -o-linear-gradient(top, #696B6E 0%, #3B3B3B 100%);
+  /* Webkit (Safari/Chrome 10) */ 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #696B6E), color-stop(1, #3B3B3B));
+  /* Webkit (Chrome 11+) */ 
+  background-image: -webkit-linear-gradient(top, #696B6E 0%, #3B3B3B 100%);
+  /* W3C Markup, IE10 Release Preview */ 
+  background-image: linear-gradient(to bottom, #696B6E 0%, #3B3B3B 100%);
+}
+.gradbtn:hover { background:#696B6E;
+  /* IE10 Consumer Preview */ 
+  background-image: -ms-linear-gradient(top, #3B3B3B 0%, #696B6E 100%);
+  /* Mozilla Firefox */ 
+  background-image: -moz-linear-gradient(top, #3B3B3B 0%, #696B6E 100%);
+  /* Opera */ 
+  background-image: -o-linear-gradient(top, #3B3B3B 0%, #696B6E 100%);
+  /* Webkit (Safari/Chrome 10) */ 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #3B3B3B), color-stop(1, #696B6E));
+  /* Webkit (Chrome 11+) */ 
+  background-image: -webkit-linear-gradient(top, #3B3B3B 0%, #696B6E 100%);
+  /* W3C Markup, IE10 Release Preview */ 
+  background-image: linear-gradient(to bottom, #3B3B3B 0%, #696B6E 100%);
+}
+
+.gradlightbtn       { background:#666; color:#fff; cursor:pointer; transition:all 0.3s ease;}
+.gradlightbtn:hover { background:#333; }
+
+.darkbg         { background:#666; color:#eee;}
+.cmslightgreybg { background:#ccc;}
+.cmslightgreyborder { border-color:#ccc;}
+.cmsdarkgreybg      { background:#333; }
+.cmsgreybg          { background:#666; color:#fff;}
+.cmspalegreybg      { background:#eee; }
+.cmsnearwhitebg     { background:#fafafa; }
+.cmslightcolorbg    { background:#fdd; }
+
+
+.darkgradbg { background:#333;}
+
+.lightgraybg { background:#999;}
+.btmshadow {}
+.smbtnload { width:16px; height:16px; background:url(core/images/smbtnload.gif) no-repeat; }
+
+/*************************** HEADER ***********************/ 
+#cmsheader #toprightbox .bottom { border-color:#cecece; }
+h2.darkbg { padding:5px 10px; font-weight:bold; text-transform:uppercase; text-align:left; display:block;
+            font-size:12px}           
+
+/*************************** TOP MENU ***********************/ 
+.cmstmitm:hover {color:#fff;}
+
+#admintopheader .search { padding:3px 0px 0px 0px;  float:left; }
+#admintopheader .search input,#btnUsrSearch, #btnClrSearch { line-height:24px; height:24px; margin-top:2px;}
+#admintopheader .search input { border:none; padding:0px 4px; float:left;  width:250px; font-size:11px; color:#333; font-family: Verdana,Arial;}
+.icosearch { width:30px; height:28px; background:url(core/images/icon-search.png); }
+#admintopheader .search .icosearch { float:left; vertical-align:middle; margin:0px 5px 0px 0px;}
+#btnUsrSearch, #btnClrSearch{ float:left; font-size:14px;  padding:0px 8px;cursor:pointer; }
+#btnClrSearch { margin-left:5px; }
+
+#admintopheader .leftblock { width:700px; float:left; }
+#admintopheader .rightblock { float:right; margin:8px 45px 0px 0px; text-transform:uppercase;}
+#admintopheader  .sep { height:15px; margin:10px 15px 0 0; background:#fff; float:left; width:1px; opacity:0.5}
+#admintopheader .btn  { line-height:35px; padding:0px 0px 0px 30px; float:left; cursor:pointer; text-transform:uppercase;}
+#admintopheader .btn:hover {text-decoration:underline; }
+                             
+#newbtn { width:65px; height:35px; line-height:35px; padding:0 0 0 30px; margin:0; left:20px;
+          background:url(images/icon-new-user.png) no-repeat; float:left; cursor:pointer; text-transform:uppercase;
+          transition:all 0.3s ease;}
+#newbtn:hover { text-decoration:underline;}     
+
+
+/*************************** AJAX FORM ***********************/
+#ajaxform h1 { font-size:16px; text-transform:uppercase; font-weight:normal; font-weight:bold;
+              line-height:50px; height:40px; display:block; padding: 0px 10px; text-align:left }
+#widgetformtbl {font-size:12px;}
+#widgetformtbl td.label { background:#666; color:#fff; text-align:right; text-transform:uppercase; 
+                          padding:8px 10px; width:160px; }
+#widgetformtbl td.field>.imgfield{ padding-bottom:15px}
+#widgetformtbl td.field { background:#eee; padding:8px 10px;}
+
+#widgetformtbl td.txtfield input { width:99%; }
+#widgetformtbl td.ttafield textarea { width:99%; height:100px; }
+#widgetformtbl td.xedfield textarea { width:99%; height:400px; }
+#widgetformtbl td.redfield textarea { width:99%; height:400px; }
+#widgetformtbl td.datfield input { width:90px;}
+#widgetformtbl input.datfield { width:90px; }
+#widgetformtbl tr.wideheader td.label { text-align:center; }
+#widgetformtbl tr.widefield td.field { padding:0px; }
+#widgetformtbl div.datopts , #propertyform div.datopts{ padding:5px; border:solid 1px #ccc; margin-top:5px; text-align:center;}
+#widgetformtbl .datopt, #propertyform .datopt { padding:2px 5px; background:#fff; float:left; margin-right:5px; }
+#widgetformtbl .datopt .del,#propertyform .datopt .del { background:#333; color:#fff; padding:1px 3px; margin-left:5px; cursor:pointer; }
+#widgetformtbl .datopt .del:hover, #propertyform .datopt .del:hover { background:#666;}
+#widgetformtbl tr.mtdfieldtr .doclist { }
+#widgetformtbl tr.mtdfieldtr .mtdoc { margin-top:5px; padding:3px 30px 3px 20px; background:#fafafa; }
+#widgetformtbl tr.mtdfieldtr .doclbl { width:99%; }
+#widgetformtbl tr.mtdfieldtr .mtdoc .del { padding:0 5px; position:absolute; right:5px; background:#666; color:#fff; cursor:pointer;}
+
+#widgetformtbl tr.mlkfieldtr .mtlnk { margin-top:5px; padding:3px 30px 3px 20px; background:#fafafa; }
+#widgetformtbl tr.mlkfieldtr input.txt { width:90%; margin-bottom:2px;  }
+#widgetformtbl tr.mlkfieldtr input.txt.lnklbl { width:60%; }
+#widgetformtbl tr.mlkfieldtr input.lnkurl { margin-left:14px; }
+#widgetformtbl tr.mlkfieldtr .mtlnk .del { padding:5px; position:absolute; top:2px; right:5px; background:#666; color:#fff; cursor:pointer;}
+
+#widgetformtbl .mpnfield div.map { overflow:hidden; }
+#widgetformtbl .mpnfield div.map img.bg { position:absolute; top:0; left:0; z-index:1; }
+#widgetformtbl .mpnfield div.map img.pin { position:absolute; top:0; left:0; z-index:100; cursor:move; }
+
+/************* Tabs ***************/
+.cmstab,.selcmstab { color:#fff; }
+.cmstab       { background:#ccc; color:#666; transition:all 0.3s ease;}
+.cmstab:hover { background-color:#666; color:#fff; }
+.selcmstab { background:#BB2650; }
+.cmssubtab, .selcmssubtab { border:solid 1px #BB2650; color:#BB2650; }
+.cmssubtab:hover { background:#fbb; }
+.selcmssubtab { background:#BB2650; color:#fff; }
+
+/*************************** CHANGE PASSWORD FORM ***********************/
+.chgpwdform { width:605px; height:220px;  }
+.chgpwdform h2 { line-height:50px; font-size:20px; font-weight:normal; padding:0px 0px 0px 100px; }
+.chgpwdform .table { *display:inline-block; }
+.chgpwdform .table .label  { width:300px; background:#666; color:#fff; padding:0px 15px 0px 0px; 
+                            font-size:14px; line-height:34px; margin:0px 0px 3px 0px; 
+                            text-align:right; float:left; clear:left; }
+.chgpwdform .table .value { width:270px; background:#cecece;  padding:0px 10px; color:#000; 
+                            font-size:11px; line-height:34px; margin:0px 0px 3px 0px; 
+                            float:left; clear:right; height:34px;}  
+.chgpwdform .table .value  input { margin:2px; *margin:5px 2px;}                            
+.chgpwdform .btnrow { float:right; width:275px; margin:5px 0px 0px 0px; }                          
+.chgpwdform .btnrow .gradbtn { padding: 5px; margin:0px 5px 0px 0px; float:left; cursor:pointer;}
+.chgpwdform .bigicon { position:absolute; width:128px; height:134px; top:10px; left:10px; }                     
+.chgpwdform .btnrow .errmsg { color:red; float:left; line-height:28px; }            
+.chgpwdform .bigicon { background:url(core/images/icon-new-use-modify.png) no-repeat; background-position:10px 5px}
+
+/************* Site Admin ***************/
+#siteadmin #homepage { color:#fff; font-size:16px; text-transform:uppercase; transition:all 0.3s ease;}
+#siteadmin #homepage:hover { opacity:0.9; background-color:#333}
+#siteadmin .cmsbtn         { background-color:#eee; color:#333; border:1px solid #ccc; padding:8px 10px;}
+#siteadmin .cmsbtn:hover   { background-color:#666; color:#fff; border:1px solid #666;}
+
+#siteadmin .topsect .p1 { background:#666; color:#fff; font-weight:bold; }
+#siteadmin .topsect .p2 { background:#eee; }
+#siteadmin .newpgdrophl { background:#ffc; border:dotted 1px black;}
+#siteadmin .topsect .p3 { background:#fafafa; }
+#siteadmin .righttab    { background:#ffc; border:solid 1px #770; font-weight:bold; }
+#siteadmin .righttab:hover    { background:#cc9; }
+#siteadmin .fullsect .header  { color:#fff; background:#666; font-weight:bold;}
+#siteadmin .fullsect .pg      { background:#eee;}
+#siteadmin .fullsect .p-1 .pg { background:#fafafa; }
+#rightslider .content .header { background:#666; color:#fff; font-weight:bold; font-size:14px;}
+
+/************* Page Admin ***************/
+#cmspage { border:solid 0px #333;}

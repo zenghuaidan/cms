@@ -1,0 +1,56 @@
+	/* • Download pdf
+	---------------------------------------------------------------------------- */
+	a.link-img>.theme-bgcolor 		{ transition: all 0.3s ease-out; cursor:pointer;}
+	a.link-img:hover .download-img 	{ -webkit-box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11);
+										 -moz-box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11);
+											  box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.11); 
+											  transition: all 0.3s ease-out; }
+	.download-btn {  position:absolute; top:0; left:0}
+	.download-img {  width:80%; height:auto; margin-top:100px;
+					 -webkit-border-bottom-right-radius: 40px;
+						 -moz-border-radius-bottomright: 40px;
+						     border-bottom-right-radius: 40px;}
+
+   .download-m-only { display:none;}
+
+
+
+   	#body.theme-blue a.link-img .box-color 		{ background-color:#003399; transition: all 0.3s ease-out;  }
+   	#body.theme-green a.link-img .box-color 	{ background-color:#80bb47; transition: all 0.3s ease-out;  }
+   	#body.theme-red a.link-img .box-color 		{ background-color:#b20838; transition: all 0.3s ease-out;  }
+   	#body.theme-yellow a.link-img .box-color 	{ background-color:#e0b300; transition: all 0.3s ease-out;  }
+   	#body.theme-cyan a.link-img .box-color 		{ background-color:#02a9d3; transition: all 0.3s ease-out; }
+
+
+   	#body.theme-blue a.link-img:hover .box-color 	{ background-color:#011e57 }
+   	#body.theme-green a.link-img:hover .box-color 	{ background-color:#538523 }
+   	#body.theme-red a.link-img:hover .box-color 	{ background-color:#760626 }
+   	#body.theme-yellow a.link-img:hover .box-color 	{ background-color:#c29c03 }
+   	#body.theme-cyan a.link-img:hover .box-color 	{ background-color:#006e8a }
+
+
+	/* ==========================================================================
+		Media Style
+	============================================================================= */
+	@media only screen and (max-width: 1250px) {
+	.m-pos-only 	{ margin-top:0; margin-bottom:20px}
+
+	.download-btn 	{ display:none; margin-top:0}
+	.download-img   { width:30%; margin-top:10px; height: auto; margin-left:0;}
+	
+	.download-m-only { display:block; padding:10px 20px; color:#fff; margin-top:20px; width:calc(30% - 40px) ;
+						-webkit-border-top-right-radius: 10px;
+							-moz-border-radius-topright: 10px;
+							    border-top-right-radius: 10px} 
+
+
+   /* .download {width:40%}*/
+	}
+
+	@media only screen and (max-width:667px) {
+	.m-pos-only 	 { margin-top:0px;}
+	.download-img    { width:100%;}
+	.download-m-only { width:calc(100% - 40px) ;}
+    /*.download {width:100%}*/
+
+	}

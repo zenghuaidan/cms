@@ -1,0 +1,21 @@
+
+	.result-blk { margin-bottom:30px}
+	.result-summary { background-color:#e3e3e3; padding:5px 20px; margin-bottom:20px;
+						-webkit-border-radius: 50px;
+                           -moz-border-radius: 50px;
+                                border-radius: 50px;}
+
+	.total { border-top:1px solid #fff; padding-top:5px; margin-top:5px}
+
+    .result-item                        { padding:20px 5px; border-bottom:1px solid #ececec;}
+    .result-item .result-title a        { color:#b20838!important;}
+    .result-item .result-title a:hover  { color:#760626!important; text-decoration:underline;}
+
+    .result-highlight { color:#684f40; font-weight:bold;}
+
+    @media only screen and (max-width: 745px) {
+    .result-summary {   -webkit-border-radius: 5px;
+                           -moz-border-radius: 5px;
+                                border-radius: 5px;}
+
+    }

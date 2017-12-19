@@ -1,0 +1,66 @@
+    
+    .pg-adj { width:100%; margin:0 auto}/*edit*/
+
+    .pagination { text-align:right; color:#666; height:60px; overflow:hidden; margin-top:50px; background-color:#dcdcdc; overflow:hidden;}
+   
+    .pagination input [type=text] { width: 25px; border:none; outline:none; color:#fff; }
+    .pagination .fa-angle-left,
+    .pagination .fa-angle-right { font-size:30px; vertical-align:middle; }
+
+    .pagination .fa-angle-left    { border-right:1px solid #ececec }
+    .pagination .fa-angle-right   { border-left:1px solid #ececec  }
+    .pagination .arrow-box        { background-color:#dfdcdc; height:62px; width:60px; text-align:center;}
+	.pagination .arrow-box.hidden { opacity:0; visibility:hidden; }
+    .pagination .page-box         { background-color:#dfdcdc; padding:25px 20px; overflow:hidden; font-size:15px; line-height:normal;} 
+
+    .pagination .fa-angle-left:before, .pagination .fa-angle-right:before { line-height:1.8}
+ 
+    .pagination .fa       { transition: all 0.3s ease-out; cursor:pointer; }
+    .pagination .fa:hover { color:#b20838 }
+
+    #body.theme-green .pagination .fa:hover     { color:#80bb47 }
+    #body.theme-blue .pagination .fa:hover      { color:#003399 }
+    #body.theme-red .pagination .fa:hover       { color:#b20838 }
+    #body.theme-yellow .pagination .fa:hover    { color:#e0b300 }
+    #body.theme-cyan .pagination .fa:hover      { color:#02a9d3 }
+    #body.theme-orange .pagination .fa:hover    { color:#B75A22 }
+
+    .field-input       { width:40px; margin:0 10px; padding:0 20px; height:58px; font-size:15px; line-height:normal; text-align: center;
+                        border:none; outline:none; background-color:#cbcbcb; color:#454753; transition: all 0.3s ease-out;}
+    .field-input:focus { background-color:#454753; color:#fff;}
+
+
+	/* iOS hack */
+	.pagination textarea, .pagination input[type="text"], .pagination input[type="button"], .pagination input[type="submit"] {-webkit-appearance: none; border-radius: 0;}
+
+
+	/* ==========================================================================
+		Media Style
+	============================================================================= */
+
+    @media only screen and (max-width: 1250px) {
+    .pg-adj { width:100%; margin:0 auto}
+    }
+
+	@media only screen and (max-width: 1024px) {
+    .pagination { height:54px;}
+
+    .pagination .arrow-box  { width:54px; height:54px; }
+    .field-input       		{ width:32px; margin:0 5px; padding:0 5px; height:54px; font-size:14px;}
+    .pagination .page-box   { padding:19px 15px; font-size:12px; } 
+    .pagination .fa-angle-left:before, .pagination .fa-angle-right:before { line-height:3}
+    .pagination .fa-angle-left,
+    .pagination .fa-angle-right { font-size:20px; }
+	}
+
+
+	@media only screen and (max-width: 745px) {
+    .pagination { height:40px;}
+    .pagination .arrow-box  { height:40px; width:40px;}
+    .field-input       		{ width:32px; margin:0 5px; padding:0 5px; height:38px; font-size:14px;}
+    .pagination .page-box   { padding:11px 15px; font-size:12px; } 
+    .pagination .fa-angle-left:before, .pagination .fa-angle-right:before { line-height:2}
+    .pagination .fa-angle-left,
+    .pagination .fa-angle-right { font-size:18px; }
+
+	}

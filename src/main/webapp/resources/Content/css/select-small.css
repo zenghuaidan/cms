@@ -1,0 +1,56 @@
+		
+  
+   select:active, select:hover { outline:none; border:0px solid; }
+   textarea:focus, input:focus, select:focus { outline:none;}
+
+   /* ---- for stories page ---*/
+   .select-sm select         {  background:transparent; border:none; padding:10px; margin-bottom:20px; -webkit-appearance: none; }
+   .select-sm.slate select   {  font-size:16px; height:46px; 
+                                    font-family:'robotoregular', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;
+                                    color:#666; 
+                                 -webkit-border-radius: 5px;
+                                    -moz-border-radius: 5px;
+                                         border-radius: 5px;
+                                            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);  
+                                      background-color: #ececee;
+                                      background-image: url(images/icon-down-arrow.svg);
+                                     background-repeat: no-repeat;
+                                   background-position: right center; }
+
+    .select-sm .width-story { width: 50%;}
+    .width-all  	  { width:40%; display:inline-block; padding-right:10px}
+    .width-selected { width:100%}
+
+
+   /* ---- for year ---*/
+    .select-sm.year-sm select   {  background:transparent; border:none; padding:0; margin-bottom:0px; -webkit-appearance: none; }
+
+    .select-sm.year-sm select   {  font-size:30px; height:55px; width:120px; 
+                                    font-family:'robotobold', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;
+                                    color:#999; 
+                                      background-color: transparent;
+                                      background-image: url(images/icon-down-arrow.svg);
+                                     background-repeat: no-repeat;
+                                   background-position: right center; }
+
+
+    /* ---- for left col ---*/
+    .left-width { width:100%}
+    .left-d     { display:block;}
+    .left-m     { display:none;}
+
+    @media only screen and (max-width: 1250px) {
+    .left-d     { display:none;}
+    .left-m     { display:block;}
+    }
+
+    @media only screen and (max-width:667px) {
+    .select-sm .width-story { width: 100%;}
+    .width-all  	{ width:100%; display:block; padding-right:0}
+
+
+    .select-sm.year-sm select   {  font-size:20px; height:inherit; width:100px;}/*edit 20171219*/
+
+
+
+   }

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<main 
+
+	videoWidth="0"
+	videoHeight="0"
+	videoBgColor="ffffff"
+	videoAutoStart="yes"
+	videoBufferTime="1"
+	videoVolumeStart="20"
+	videoSmoothness="yes"
+	allowfullscreen="true"
+  allowScriptAccess="true"
+
+	videoDefaultQuality="small"
+		
+	playerWidth="1000"
+	playerHeight="30"
+	playerNavigations="ply,sek,vol,ful,hdv"
+	playerAutoHide="yes"
+	playerFixedSizeOnFullScreenMode="no"
+	playerSkinGlassType="yes"
+	playerButtonWidth="30"
+	playerIconSize="50"
+	playerBorderSize="0"
+	playerCornerRadius="0"
+	playerHorizontalMargin="0"
+	playerVerticalMargin="0"
+	playerTimerAlignBottom="yes"
+	playerSeekBarHeight="4"
+	
+	playerBgColor="ffffff"
+	playerBgTransparency="100"
+	playerIconColor="000000"
+	playerOverlayColor="ffffff"
+	playerOverlayTransparency="0"
+	playerBorderColor="000000"
+	playerBorderTransparency="40"
+	playerButtonRollOverColor="d4eda9"
+	playerSeparatorColor="000000"
+	playerSeekBarColor="000000"
+	playerShadowTransparency="60"
+	
+	reflection="no"
+	reflectVideoOnly="yes"
+	refelectionDistance="1"
+	reflectionDepth="39"
+	reflectionTransparency="50"
+		
+	textEmbedFont="yes"
+	textBgColor="ffffff"
+	textBgTransparency="100"
+	titleVerticalSpace="75"
+	
+>
+
+
+	
+</main>

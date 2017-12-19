@@ -1,0 +1,14 @@
+﻿#newbtn { background:url(images/icon-new-press-release.png) no-repeat 3px 7px; }
+#configbtn { background:url(images/icon-config.png) no-repeat 3px 7px; }
+
+#articlelist table { width:100%; margin:20px 0px;}
+#articlelist table th { background:#666; color:#fff; text-align:left; }
+#articlelist table th,#articlelist table td { padding:5px; line-height:2}
+#articlelist table th.colico { width:40px; }
+#articlelist table th.colid { width:50px; }
+#articlelist table th.coldate { width:150px; }
+#articlelist table th.colfns { width:50px; padding-right:50px; }
+#articlelist table td.colfns .cmsbtn { float:left; }
+#articlelist table tr:nth-child(odd) { background:#fafafa; }
+#articlelist table tr:nth-child(even) { background:#eee; }
+#articlelist table tr:hover { background:#c2c2c2; }

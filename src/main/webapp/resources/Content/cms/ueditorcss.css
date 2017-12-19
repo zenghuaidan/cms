@@ -1,0 +1,37 @@
+@import '//fonts.googleapis.com/css?family=Noto+Sans';
+@import '//fonts.googleapis.com/css?family=Oswald:400,700,300%27';
+@import '../css/font.css';
+
+html,  p, h1, h2, h3, h4,h5, h6, figure	{ margin:0; padding: 0; font:inherit; vertical-align:baseline}
+body { background:#fff; font-family:'Noto Sans', Verdana, "Lucida Grande", Arial, Helvetica, sans-serif; color:#333; 
+		font-size: 14px;
+		-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none; line-height:1.8; font-weight:400; }
+
+hr { height:1px; background-color:#e7e7e7; border:none; margin:2% 0;}
+
+a,a:link,a:visited 		{ color: #176548; text-decoration:none}
+a:hover,a:active,a:focus { text-decoration:underline; }
+a:focus { -moz-outline-style:none; }	
+	
+h1, h2 { line-height:normal; color:#176548; margin-bottom:1%} 
+h1 { font-size:35px; }
+h2 { font-size:20px; line-height:1.5; }
+
+.font-s { font-size:11px; line-height:normal; }
+.txt-green  { color:#176548}
+
+table.gen 			  { text-align:left; vertical-align:top; margin:1% 0 0 0;}
+table.gen th		  { background-color:#176548; padding:1% 2%; color:#fff; text-align:left; vertical-align:top; }
+table.gen tr:nth-child(even) td  { background-color:#dbdbdb; padding:1% 2%; border-bottom:1px solid #fff; text-align:left; vertical-align:top; }
+table.gen tr:nth-child(odd) td { background-color:#e7e7e7; padding:1% 2%; border-bottom:1px solid #fff; text-align:left; vertical-align:top; }
+
+table.nude 		  { text-align:left; vertical-align:top;  margin:0;}
+table.nude th		  { padding:0; color:#333; text-align:left; vertical-align:top; }
+table.nude tr:nth-child(even) td  { padding:0; /*border-bottom:1px solid #fff;*/ text-align:left; vertical-align:top; }
+table.nude tr:nth-child(odd) td { padding:0; /*border-bottom:1px solid #fff;*/ text-align:left; vertical-align:top; }
+
+/* ueditor will add p inside temporary breaking the layout, applying li style will break the layout
+ul 	{ margin:0px; padding:10px 0px; text-indent:-1.3em;}
+ul li 	{ margin:0px 0px 0px 20px; padding:0; }
+ul li:before  { content: "•"; color:#176548; padding-right:7px;}
+li p { margin:0; }*/

@@ -1,0 +1,9 @@
+﻿body { padding:0px; margin:0px; height:100%; width:100%; color:#333; 
+      font-family: Arial, Helvetica, sans-serif; font-size: 12px;
+       webkit-font-smoothing:antialiased; -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none;}
+#cmspage    { width:100%;}
+#cmspage	{ font-family:"Lucida Grande", Verdana, Arial, Helvetica, sans-serif; color:#333; font-size:14px; line-height:1.8;
+				-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none; }
+#cmspage .header-pos-fixed { position:relative; }
+#cmspage .header-container .header { margin:0; }
+#cmspage .section { margin-top:0; }

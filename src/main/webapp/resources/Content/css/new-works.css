@@ -1,0 +1,58 @@
+	
+	table.info 			{ width:100%; border:0;}
+	table.info tr td 	{ vertical-align:top; text-align:left; padding-bottom:5px}
+	table.info tr td.col1 	{ width:30px}
+
+	.composer:before { padding-right:10px; font-weight:bold; color:#666;}
+	#body.en .composer:before  { content:"Composer"; }
+	#body.tc .composer:before  { content:"作曲家";}
+	#body.sc .composer:before  { content:"作曲家";}
+
+	/* ---- widget "World Premier" ---*/
+	.sp .row-container 			 { display: table; width: 100%; border-bottom:1px solid #fff}
+	.sp .row-container .r-col    { display: table-cell; }
+	.sp .row-container .r-col.left    { width:15%; font-weight:bold}
+	.sp .row-container .r-col.right   { width:85%}
+	.l-pos { padding:15px 10px 15px 20px;}
+	.r-pos { padding:15px 20px 15px 10px}
+
+
+	.sp .row-container:nth-child(odd)  { background-color:#e7e7e7;   }
+	.sp .row-container:nth-child(even) { background-color:#dbdbdb;   }
+
+    .new-works-title { padding-bottom:10px}
+ 	.adj-pos { padding:20px;}
+
+
+ 	.other { background-color: #f6f6f6; }
+ 	.other .o-col1		{ width:30%; float:left; }
+ 	.other .o-col1	img { width:100%; height:auto; }
+ 	.other .o-col2	{ width:70%; float:left; }
+ 	.other .o-col2 .o-table { display:table; width: 100%; border-bottom:1px solid #e0dede;}
+ 	.other .o-col2 .o-table .ot-col 		{  display: table-cell; padding: 16px;}
+ 	.other .o-col2 .o-table .ot-col.ot-col1 {  width:20%}
+ 	.other .o-col2 .o-table .ot-col.ot-col2 {  width:80%}
+ 	.other .o-col2 .ot-col2-pos { padding-left:20px} 	
+ 	.other .o-col2 .o-table:last-child 		{ border-bottom:none}
+
+	@media only screen and (max-width:667px) {
+	.sp .row-container 			 { display: block; width: 100%; border-bottom:1px solid #fff}
+	.sp .row-container .r-col    { display: block; padding:0}
+	.sp .row-container .r-col.left    { width:100%}
+	.sp .row-container .r-col.right   { width:100%}
+
+	.l-pos { padding:10px 20px 5px 20px}
+	.r-pos { padding:0px 20px 10px 20px}
+
+ 	.other .o-col1		{ width:calc(100% - 20px); text-align: center; background-color:#666; padding: 10px; }
+ 	.other .o-col2		{ width:100%; }
+ 	.other .o-col2 .ot-col2-pos { padding-left:0px} 
+  	.other .o-col2 .o-table { display:block; width:100%; border-bottom:1px solid #ececec}
+ 	.other .o-col2 .o-table .ot-col 		{  display: block; padding:0 15px;}
+	
+ 	.other .o-col2 .o-table .ot-col.ot-col1 { width:calc(100% - 30px);  padding-top:15px; padding-bottom:5px; font-weight:bold;}
+ 	.other .o-col2 .o-table .ot-col.ot-col2 { width:calc(100% - 30px);  padding-bottom:15px }
+	.composer:before { display:block;}/*edit 20171219*/
+
+
+	}

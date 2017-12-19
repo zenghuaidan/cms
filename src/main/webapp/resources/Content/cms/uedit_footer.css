@@ -1,0 +1,5 @@
+@import 'ueditorcss.css';
+
+body { background:#f0f0f0; line-height:2; font-size:11px; }
+a, a:link, a:visited { color:#333; text-decoration: underline!important;}
+a:hover, a:active, a:focus { color:#176548; transition:all 0.3s ease;}

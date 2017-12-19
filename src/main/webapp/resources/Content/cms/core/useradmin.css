@@ -1,0 +1,53 @@
+﻿#newbtn { background:url(images/icon-new-user.png) no-repeat;}
+
+#userlist {padding:14px 0px 0px 0px; width:1423px}
+.userblock { width:474px; margin:0px 0px 14px 14px; height:180px; float:left; }
+.userblock .band { float:left; width:30px; height:100%; background:url(images/img-paper-side.jpg); }
+.userblock .inner { width:444px; height:100%; float:left; background:#DFDFDF; 
+  /* IE10 Consumer Preview */ 
+  background-image: -ms-linear-gradient(bottom left, #DFDFDF 0%, #FFFFFF 100%);
+  /* Mozilla Firefox */ 
+  background-image: -moz-linear-gradient(bottom left, #DFDFDF 0%, #FFFFFF 100%);
+  /* Opera */ 
+  background-image: -o-linear-gradient(bottom left, #DFDFDF 0%, #FFFFFF 100%);
+  /* Webkit (Safari/Chrome 10) */ 
+  background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0, #DFDFDF), color-stop(1, #FFFFFF));
+  /* Webkit (Chrome 11+) */ 
+  background-image: -webkit-linear-gradient(bottom left, #DFDFDF 0%, #FFFFFF 100%);
+  /* W3C Markup, IE10 Release Preview */ 
+  background-image: linear-gradient(to top right, #DFDFDF 0%, #FFFFFF 100%); }
+
+/* USER BLOCK */
+.userblock .table { width:400px; margin:14px 0px 0px 0px; float:right; }
+.userblock .table .label { width:125px; background:#666; color:#fff; padding:0px 15px 0px 0px; 
+                            font-size:14px; line-height:34px; margin:0px 0px 3px 0px; 
+                            text-align:right; float:left; clear:left; }
+.userblock .table .value { width:240px; background:#cecece;  padding:0px 10px; color:#000; 
+                            font-size:11px; line-height:34px; margin:0px 0px 3px 0px; 
+                            float:left; clear:right; }
+.userblock .inner .icon { width:128px; height:134px; top:10px; left:10px; 
+                          position:absolute; background:url(images/icon-new-use-large.png);}
+.userblock .btnrow { float:right; width:260px; margin:5px 0px 0px 0px; }                          
+.userblock .btnrow .gradbtn { padding: 5px; margin:0px 5px 0px 0px; float:left; cursor:pointer;}
+.userblock .btnrow .gradbtn img { border:1px solid #aaa; vertical-align:bottom; margin:0px 0px 0px 5px; }
+
+.nousr { text-align:center; font-weight:bold; font-size:18px; margin:80px 0px; }
+
+/* USER FORM */
+.userform { width:705px; height:300px; /*border:solid 3px black;*/ }
+.userform h2 { line-height:50px; font-size:26px; font-weight:normal; padding:0px 0px 0px 100px; }
+.userform .table { !display:inline-block; }
+.userform .table .label  { width:220px; background:#666; color:#fff; padding:0px 15px 0px 0px; 
+                            font-size:14px; line-height:34px; margin:0px 0px 3px 0px; 
+                            text-align:right; float:left; clear:left; }
+.userform .table .value { width:450px; background:#cecece;  padding:0px 10px; color:#000; 
+                            font-size:11px; line-height:34px; margin:0px 0px 3px 0px; 
+                            float:left; clear:right; !height:34px;}     
+.userform .table .value input { !margin-top:5px; }                            
+.userform .btnrow { float:right; width:470px; margin:5px 0px 0px 0px; }                          
+.userform .btnrow .gradbtn { padding: 5px; margin:0px 5px 0px 0px; float:left; cursor:pointer;}
+.userform .bigicon { position:absolute; width:128px; height:134px; top:10px; left:10px; }                     
+.userform .btnrow .errmsg { color:red; float:left; line-height:28px; }            
+.newusr .bigicon {background:url(images/icon-new-use-large2.png);}
+.editusr .bigicon {background:url(images/icon-new-use-modify.png);}
+                     

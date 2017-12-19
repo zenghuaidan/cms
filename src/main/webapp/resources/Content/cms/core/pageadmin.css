@@ -1,0 +1,112 @@
+﻿#cmspage { overflow:initial; width:980px; padding:0 0px; }
+#header { z-index:100; }
+/***** Header *****/
+#breadcumber { /*width:600px; float:left; margin:3px 0px 0px 20px;*/ padding:3px 0px 0px 20px}
+#pgsearchdrop { width:325px; float:right; margin:0px 10px 0px 0px; }
+
+/***** Top Menu *****/
+#pgtopmenu {}
+#pgtopmenu table { border-bottom:solid 1px #fff; padding:4px 15px 0 15px; text-transform:uppercase; }
+#pgtopmenu table tr td { font-weight:bold; font-size:10px}
+
+.buttoncell .cmsbtn { float:right; margin:0px 0px 0px 5px;}     
+.leftbuttoncell .cmsbtn { float:left; margin:0px 0px 0px 5px;}     
+
+#pgfuncbar { height:35px; overflow:hidden}
+#pgfuncbar .left,#pgfuncbar .right { height:38px; z-index:25;}
+#pgfuncbar .left { float:left; margin:0px 0px 0px 10px; }
+#pgfuncbar .right { float:right; margin:0px 10px 0px 0px; }
+
+#pgfuncbar .icobtn, .fnbar .icobtn { padding:0px 10px 0px 45px; line-height:38px; background-position:5px 0;
+                                    background-repeat:no-repeat; float:left; cursor:pointer; font-size:11px;
+                                    text-transform:none; font-weight:normal;
+                                	transition:all 0.3s ease;}
+#pgfuncbar .btnsep, .fnbar .btnsep { float:left; width:1px; height:35px; margin:0px 0px 0px 0px; 
+                                    background:#777; opacity:0.5}
+
+#btnpublish 			{ background-image:url(images/icon-publish.png); }
+#btnpublish:hover 		{ background-image:url(images/icon-publish-d.png); }
+#btnreqpublish 	  		{ background-image:url(images/iicon-publish.png); }
+#btnreqpublish:hover	{ background-image:url(images/iicon-publish.png); }
+
+#btndelete 				{ background-image:url(images/icon-reqDelete.png); }
+#btndelete:hover 		{ background-image:url(images/icon-reqDelete-d.png); }
+#btnreqdel 				{ background-image:url(images/icon-reqDelete.png); }
+#btnreqdel:hover 		{ background-image:url(images/icon-reqDelete-d.png); }
+
+#btnapplyen 			   { background-image:url(images/apply-eng.png); }
+#btnapplyen:hover 		{ background-image:url(images/apply-eng-d.png); }
+#btnapplytc 			{ background-image:url(images/apply-tc.png); }
+#btnapplytc:hover 		{ background-image:url(images/apply-tc-d.png); }
+
+#btnconfig 				  { background-image:url(images/icon-config.png); }
+#btnconfig:hover 		{ background-image:url(images/icon-config-d.png); }
+#btnpreview 			  { background-image:url(images/icon-preview.png); }
+#btnpreview:hover 	{ background-image:url(images/icon-preview-d.png); }
+
+
+#btnundoreqdel 		     { background-image:url(images/icon-undoDelete.png); }
+#btnundoreqdel:hover    { background-image:url(images/icon-undoDelete-d.png); }
+
+#btndecline 			{ background-image:url(images/icon-decline.png); }
+
+
+#btnhistory				{ background-image:url(images/icon-history.png); }
+
+
+#btnapplysc 			{ background-image:url(images/apply-sc.png); }
+#btnapplycn 			{ background-image:url(images/apply-cn.png); }
+
+
+#btnnewpg 				{ background-image:url(images/icon-new.png); }
+
+#btnnewpg.icobtn		{ background-position:12px 9px; }
+#btnclosepg 			{ background-image:url(images/icon-close-page.png); }
+#btnundoreqdel 			{ background-image:url(images/icon-undoDelete.png); }
+
+#pgfuncbar   #btnundoreqdel  { padding-left:52px; }
+
+#btnconfig.whitefontover  { background-position:10px 8px; padding:0 10px 0px 35px;}
+#btnpreview.whitefontover { padding:0 10px 0px 35px;}
+#btnreqdel.whitefontover  { padding:0 10px 0px 40px;}
+#btndelete.whitefontover  { padding:0 10px 0px 40px;}
+
+#ajaxform .btmshadow { margin-top:-11px; height:35px; overflow:hidden;}
+#ajaxform .whitefontover { padding-top:0px}
+#ajaxform #btnnewpg {background-position:10px 5px}
+
+#ajaxform .whitefontover:hover { background:#999; height:35px; color:#fff;
+								 background-image:url(images/icon-new.png); background-position:10px 5px; background-repeat:no-repeat;}
+
+
+/***** Property *****/
+#propertybox {  }
+#propertybox h2 { background:#666; color:#fff; padding:5px 15px; height:23px; line-height:23px;
+                  margin:0px; font-weight:bold; text-align:left; text-transform:uppercase; overflow:hidden}
+#propertybox .btns { padding:5px 0px; background:#ccc; overflow:auto; }   
+#propertybox div.ec { position:absolute; right:0px; top:0px; width:28px; height:33px; cursor:pointer;}
+#propertyform .txtfield input { width: 600px; margin-right:10px}
+#propertyform .ttafield textarea { width: 600px; height:50px;}
+#propertybox .content { background:#fafafa; }
+#propertyformtbl { margin:10px; width:100%;}
+#propertybox .savecancel { float:left; margin:0px 0px 0px 560px}
+#propertybox .url { float:left; margin:5px 0px 0px 13px}
+#propertybox .url .hlbg { padding:4px; margin-right:10px;
+							-webkit-border-radius: 3px;
+							   -moz-border-radius: 3px;
+							        border-radius: 3px;}
+#propertyformtbl input { padding:5px 10px;}
+
+/***** Widget CMS *****/
+.wfn {padding: 8px 0px; text-align:center; font-size:14px;}
+#widgetformtbl .txtfield input {width:100%;}
+
+/***** Disable *****/
+#disablemask .icolbl { font-size:40px;}
+#disablemask .icolbl { margin:0px auto; width:125px; height:172px; }
+#disablemask .icolbl  div { line-height:1.2; }
+#disablemask .tobedel  {background:url(images/icon-be-delete.png) no-repeat; padding:0px 0px 0px 175px; }
+#disablemask .tobedel div { padding-top: 48px; }
+#disablemask .inactive  {background:url(images/icon-inactive-popup.png) no-repeat 26px 0px; 
+                          padding:0px 0px 0px 149px;}
+#disablemask .inactive div { padding-top: 60px; }

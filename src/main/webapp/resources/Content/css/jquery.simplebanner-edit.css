@@ -1,0 +1,91 @@
+#body .simpleBanner {overflow:hidden;position:relative;width:100%;padding:0;}
+#body .simpleBanner.hiddenArrows .bannerControlsWpr,
+#body .simpleBanner.hiddenIndicators .bannerIndicators {display:none;}
+
+#body .simpleBanner ul {list-style:none;margin:0;padding:0;}
+#body .simpleBanner .bannerListWpr {clear:both;overflow:hidden;}
+#body .simpleBanner .bannerListWpr ul {width:100%;overflow:hidden;display: table;}
+#body .simpleBanner .bannerListWpr ul li {display:table-cell;} /* Make sure to set the width for this */
+#body .simpleBanner .bannerListWpr ul li img {display:block;}
+#body .simpleBanner .bannerControlsWpr {cursor:pointer;padding:10px 12px;position:absolute;top:50%;transform:translateY(-50%);}
+#body .simpleBanner .bannerControlsPrev {left:0;padding:5px 10px;}
+#body .simpleBanner .bannerControlsNext {right:0;padding:5px 10px;}
+/* #body .simpleBanner .bannerControlsPrev .bannerControls {border-color: transparent #3f3f3f transparent transparent;border-width:20px 20px 20px 0;}
+#body .simpleBanner .bannerControlsNext .bannerControls {border-color: transparent transparent transparent #3f3f3f;border-width:20px 0 20px 20px;} */
+/* #body .simpleBanner .bannerControlsPrev:hover .bannerControls {border-color:transparent #FFF transparent transparent;}
+#body .simpleBanner .bannerControlsNext:hover .bannerControls {border-color:transparent transparent transparent #FFF;} */
+#body .simpleBanner .bannerControlsPrev,
+#body .simpleBanner .bannerControlsNext {display:none;}
+#body .simpleBanner .bannerControls { width:0;height:0;border-style:solid;}
+#body .simpleBanner .bannerIndicators { background:transparent;    right: 50%;
+    transform: translateX(50%);opacity:0.9;padding:4px 8px 4px 0;position:absolute;bottom:5%;}
+#body .simpleBanner .bannerIndicators ul {overflow:hidden;}
+
+#body .simpleBanner .bannerIndicators .bannerIndicator { background:#999;  cursor:pointer;  float:left; height:20px;  margin-left:20px; width:20px; z-index:3;
+														-webkit-border-radius: 50px;
+														   -moz-border-radius: 50px;
+														        border-radius: 50px; } /*edit 20171219*/
+
+#body .simpleBanner .bannerIndicators .bannerIndicator:hover {background:#FFF;  transition: all 0.3s ease-out;}
+#body .simpleBanner .bannerIndicators .bannerIndicator.current {background:#FFF;cursor:default;}
+#body .simpleBanner .bannerIndicators {	left:3%; transform: translateX(0%); }
+#body .simpleBanner .captions { position:absolute; z-index: 2; bottom:30px; left:100%; transform:translateX(-100%); }
+#body .simpleBanner .captions .caption { position:absolute; right:0; bottom:0; background-color:rgba(0, 0, 0, 0.7); color:#fff;  
+										 display:inline-block; opacity:0; visibility:hidden; line-height:1.4; white-space: nowrap; transition:all 0.5s; }
+#body .simpleBanner .captions .caption > span { display:inline-block; margin:0 30px 0 5px; }
+#body .simpleBanner .captions .caption.current { opacity:1; visibility:visible; }
+
+@media only screen and (max-width: 1024px) {
+	#body .simpleBanner .bannerControlsPrev,
+	#body .simpleBanner .bannerControlsNext {display:block;}
+	
+	#body .simpleBanner .bannerControlsPrev img,
+	#body .simpleBanner .bannerControlsNext img {width:24px;}
+	
+}
+
+@media only screen and (max-width: 745px) {
+	
+	#body .simpleBanner .bannerControlsPrev img,
+	#body .simpleBanner .bannerControlsNext img {width:auto;}
+	
+}
+@media only screen and (max-width:667px) {
+	#body .simpleBanner .bannerIndicators {
+		position: relative;
+		opacity:1;
+		background: #333;
+		padding:10px 0px 10px 10px;
+		left: auto;
+		right: auto;
+	}
+	#body .simpleBanner .captions{
+		position:relative;
+		background: #333;
+	}
+	#body .simpleBanner .captions .caption{
+		white-space: normal;
+		transition: opacity 0.5s, visibility 0s ease-out 0s;
+	}
+	#body .simpleBanner .captions .caption.current{
+		position:relative;
+		transition: opacity 0.5s, visibility 0s;
+	}
+	#body .simpleBanner .captions {
+		bottom:0;
+		width: 100%;
+	}
+	#body .simpleBanner .captions .caption{
+		width: 100%;
+	}
+	
+	#body .simpleBanner .captions .caption > span{
+		margin-left:20px;
+		padding-bottom:10px;
+		display:block;
+	}
+
+
+#body .simpleBanner .bannerIndicators .bannerIndicator { height:12px; width:12px; } /*edit 20171219*/
+
+}

@@ -1,0 +1,74 @@
+
+	.landing-item 		{ margin-top:60px}
+	.landing .section 	{ clear: both; padding:0px; margin:0px;}
+	.landing .col 		{ display:block; float:left; margin:20px 0 20px 2%; }
+
+	.landing .col img 	{ -webkit-border-top-right-radius: 40px;
+	    					  -moz-border-radius-topright: 40px;
+	   							  border-top-right-radius: 40px;
+	   							  width:100%; height:auto;}
+
+    .landing .col .cover { -webkit-border-top-right-radius: 40px;
+	    					  -moz-border-radius-topright: 40px;
+	   							  border-top-right-radius: 40px;}
+
+	.landing .col:first-child { margin-left: 0; }
+
+	.landing .col:hover 						{ cursor:pointer}
+	#body.theme-blue .landing .col:hover   		{ color:#003399; transition: all 0.3s ease-out;}
+	#body.theme-green .landing .col:hover   	{ color:#538523; transition: all 0.3s ease-out;}
+	#body.theme-red .landing .col:hover   		{ color:#760626; transition: all 0.3s ease-out;}
+	#body.theme-yellow .landing .col:hover   	{ color:#e0b300; transition: all 0.3s ease-out;}
+	#body.theme-cyan .landing .col:hover   		{ color:#02a9d3; transition: all 0.3s ease-out;}
+
+	.landing .col img 			{ opacity:1; transition: all 0.3s ease-out; }
+	.landing .col:hover img 	{ opacity:0.7; transition: all 0.3s ease-out; }
+
+
+	/*  GROUPING  */
+	.landing .group:before,
+	.landing .group:after { content:""; display:table; }
+	.landing .group:after { clear:both;}
+	.landing .group { zoom:1; /* For IE 6/7 */ }
+	/*  GRID OF THREE  */
+	.landing .span_3_of_3 { width: 100%; }
+	.landing .span_2_of_3 { width: 66%; }
+	.landing .span_1_of_3 { width: 32%; }
+
+
+	.landing .intro 	{ padding-top:20px}
+	.landing .intro-txt {}
+
+
+	/* ===== For "new-works.html" ============= */
+	.landing .col table.info		{ margin-top:10px; padding-left:5px}
+	.landing .col:hover table.info	{ color:#333; }
+
+
+
+	@media only screen and (max-width:1024px) {
+	.landing .col 		{ display:block; float:left; margin:20px 0 20px 3%;}
+	.landing .span_1_of_3 { width: 31.33%; }
+	.landing .intro 	{ padding-right:20px}
+	}
+
+
+	@media only screen and (max-width:667px) {
+	.landing .span_1_of_3 	{ width: 100%; }
+	.landing .col 			{ margin: 20px 0 }
+
+	.landing .cover 		{ width:35%; float:left;}
+	.landing .intro 		{  width:calc(65% - 20px); float:left; padding-left:20px; padding-top:0}
+
+	.landing .col img 	{ -webkit-border-top-right-radius: 20px;
+	    					  -moz-border-radius-topright: 20px;
+	   							  border-top-right-radius: 20px;}
+
+    .landing .col .cover { -webkit-border-top-right-radius: 20px;
+	    					   -moz-border-radius-topright: 20px;
+	   							   border-top-right-radius: 20px;}
+
+
+
+	.landing .intro 	{ padding-right:0}
+	}

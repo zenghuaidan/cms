@@ -1,0 +1,49 @@
+
+
+	/* ==========================================================================
+		Index Banner
+	============================================================================= */
+
+	.index .banner-blk	{ margin-bottom:20px; margin-top:205px}
+	
+
+	/* ==========================================================================
+		Inside Banner
+	============================================================================= */
+	.inside .banner-blk	{ }
+	.inside .banner-blk .play-video-blk	{ position:absolute; color:#fff; bottom:20px; left:40px }
+	.inside .banner-blk .play-video-blk .icon-col					{ width:60px }
+	.inside .banner-blk .play-video-blk .icon-col .fa-play-circle 	{ font-size:60px; opacity:0.8;}
+	.inside .banner-blk .play-video-blk .icontxt-col				{ text-transform:uppercase; font-weight:bold; }
+	.inside .banner-blk .play-video-blk:hover .icontxt-col			{ color:#b20838; cursor:pointer; transition: all 0.3s ease-out;}
+
+	.fr-m	{ display:none}
+
+
+	@media only screen and (max-width:1250px) {
+	.inside .banner-blk .play-video-blk	{ bottom:10px; left:20px }
+	}
+
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { 
+	.index .banner-blk	{  margin-top:185px}
+
+	}
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
+	.index .banner-blk	{  margin-top:185px}
+
+	}
+
+	@media only screen and (max-width:667px) {
+	.index .banner-blk { margin-top: 0px; }
+	.inside .banner-blk .play-video-blk	{ bottom:10px; left:20px }
+	.inside .banner-blk .play-video-blk .icon-col					{ width:30px }
+		#body.en .inside .banner-blk .play-video-blk .icontxt-col				{ font-size:10px; font-weight:normal;}/*edit 20171219*/
+		#body.cn .inside .banner-blk .play-video-blk .icontxt-col				{ font-size:12px; font-weight:normal;}/*edit 20171219*/
+
+	.inside .banner-blk .play-video-blk .icon-col .fa-play-circle 	{ font-size:30px; opacity:0.8;}
+	
+	.fr-m	{ display:block}
+	.inside .banner-content { background-color:black; padding:20px;}
+	}
