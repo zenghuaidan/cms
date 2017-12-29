@@ -16,7 +16,7 @@
 	<!-- 打开Spring的Annotation支持 -->
 	<context:annotation-config />		
 	<!-- 设定Spring 去哪些包中找Annotation -->
-	<context:component-scan base-package="com.edeas.cms.dao.impl,com.edeas.cms.service.impl" />
+	<context:component-scan base-package="com.edeas.dao.impl,com.edeas.service.impl" />
 		
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 	
@@ -56,13 +56,13 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 设置Spring取那个包中查找相应的实体类 -->
 		<property name="packagesToScan">
-			<value>com.edeas.cms.model</value>
+			<value>com.edeas.model</value>
 		</property>
 		<property name="hibernateProperties">
 			<!-- <value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value> -->
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.format_sql">false</prop>
 				
