@@ -18,6 +18,6 @@
 <script src="<%=request.getContextPath()%>/resources/script/jquery.form.min.js"></script>
 </head>
 <body>
-	
+homepage	
 </body>
 </html>
