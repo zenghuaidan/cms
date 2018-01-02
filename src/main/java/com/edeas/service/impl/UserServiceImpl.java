@@ -1,12 +1,9 @@
 package com.edeas.service.impl;
 
-import java.nio.charset.Charset;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edeas.model.User;
-import com.edeas.utils.MessageDigestUtils;
 
 @Service(value="userService")
 @Transactional
@@ -17,9 +14,8 @@ public class UserServiceImpl extends BasicService {
 	}
 
 	public User tryLogin(String userName, String password) {
-		try {
-			String encryptPassword = MessageDigestUtils.encryptBASE64(MessageDigestUtils.encryptSHA("testing".getBytes(Charset.forName("utf-8"))));
-			return userDao.findByUserNameAndPassword(userName, encryptPassword);
+		try {			
+			return userDao.findByUserNameAndPassword(userName, User.getEncryptPassword(password));
 		} catch (Exception e) {
 		}
 		return null;

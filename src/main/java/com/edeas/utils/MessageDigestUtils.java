@@ -53,7 +53,7 @@ public abstract class MessageDigestUtils {
 
 	// BASE64加密
 	public static String encryptBASE64(byte[] key) throws Exception {
-		return (new BASE64Encoder()).encodeBuffer(key);
+		return (new BASE64Encoder()).encodeBuffer(key).trim();
 	}
 
 	// MD5加密

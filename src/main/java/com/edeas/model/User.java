@@ -1,5 +1,7 @@
 package com.edeas.model;
 
+import java.beans.Transient;
+import java.nio.charset.Charset;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +13,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+
+import com.edeas.utils.MessageDigestUtils;
 
 @Entity
 @Table(name = "CmsUser")
@@ -126,6 +130,15 @@ public class User {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	@Transient
+	public static String getEncryptPassword(String password) {
+		try {
+			return MessageDigestUtils.encryptBASE64(MessageDigestUtils.encryptSHA(password.getBytes(Charset.forName("utf-8"))));
+		} catch (Exception e) {
+		}
+		return "";
 	}
 
 }
