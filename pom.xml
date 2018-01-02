@@ -244,7 +244,12 @@
 		<groupId>org.aspectj</groupId>
 		<artifactId>aspectjweaver</artifactId>
 		<version>1.7.2</version>
-	</dependency>
+	</dependency>	
+	<dependency>
+	    <groupId>org.sitemesh</groupId>
+	    <artifactId>sitemesh</artifactId>
+	    <version>3.0.1</version>
+	</dependency>	
   </dependencies>
   <build>
   	<pluginManagement>

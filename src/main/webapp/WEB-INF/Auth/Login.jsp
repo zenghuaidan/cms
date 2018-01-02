@@ -8,7 +8,7 @@
     <meta name="description" content="Edeas is an interactive agency in Hong Kong. We blend website strategy, design and technology innovations to create and sustain a successful digital experience." />
     <meta name="keywords" content="Hong Kong website design,corporate website,intranet,user experience,user interface,custom web application, interface" />
     
-    <%@ include file="/WEB-INF/public/commons.jspf" %>
+    <%@ include file="/WEB-INF/Shared/commons.jspf" %>
     
     <!-- Favicons -->
     <link rel="shortcut icon" href="${Content}/images/favicon.png" />
@@ -65,13 +65,13 @@
                     </div>
                     <section class="text-effect pos">
                         <span class="input input--ruri">
-                            <input type="text" class="input__field input__field--ruri" name="userName" id="userName" />
+                            <input type="text" class="input__field input__field--ruri" name="userName" id="userName" value="larry" />
                             <label class="input__label input__label--ruri" for="userName">
                                 <span class="input__label-content input__label-content--ruri"><i class="fa fa-user"></i> Username</span>
                             </label>
                         </span>
                         <span class="input input--ruri">
-                            <input type="password" class="input__field input__field--ruri" name="password" id="password" />                            
+                            <input type="password" class="input__field input__field--ruri" name="password" id="password" value="testing" />                            
                             <label class="input__label input__label--ruri" for="password">
                                 <span class="input__label-content input__label-content--ruri"><i class="fa fa-lock"></i> Password</span>
                             </label>

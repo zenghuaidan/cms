@@ -69,6 +69,16 @@
 		<filter-name>loginFilter</filter-name>
 		<url-pattern>/cmsadmin/*</url-pattern>
 	</filter-mapping>
+	
+	<filter> 
+		<filter-name>sitemesh</filter-name> 
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class> 
+	</filter> 
+	  
+	<filter-mapping> 
+	   <filter-name>sitemesh</filter-name> 
+	   <url-pattern>/*</url-pattern> 
+	</filter-mapping> 
 	<!--filter>
 		<filter-name>SystemContextFilter</filter-name>
 		<filter-class>com.edeas.admango.web.SystemContextFilter</filter-class>

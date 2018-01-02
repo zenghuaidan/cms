@@ -1,6 +1,6 @@
 package com.edeas.model;
 
-import java.beans.Transient;
+
 import java.nio.charset.Charset;
 import java.util.Date;
 
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
@@ -132,6 +133,16 @@ public class User {
 		this.updateTime = updateTime;
 	}
 	
+//	今天做项目的时候想在一个实体类中添加一个属性，不去关联实体类对应的表的任何字段。
+//	但是发现按照网上的怎么做都不成功，最后找到了原因。
+//	@Transient 在 import的时候要注意引用的是 javax.persistence这个包下的
+//	而不是其他的包。我之前一直引用的SpringFramework包的那个注解。
+//	而且还需要注意的是这个注解要加在属性的get方法上。
+	@Transient
+	public String getName() {
+		return this.firstName + this.lastName;
+	}
+	
 	@Transient
 	public static String getEncryptPassword(String password) {
 		try {
@@ -140,5 +151,4 @@ public class User {
 		}
 		return "";
 	}
-
 }

@@ -7,11 +7,7 @@ import com.edeas.model.User;
 
 @Service(value="userService")
 @Transactional
-public class UserServiceImpl extends BasicService {
-
-	public void testUser() {
-		this.userDao.findAll();
-	}
+public class UserServiceImpl extends BasicServiceImpl {
 
 	public User tryLogin(String userName, String password) {
 		try {			

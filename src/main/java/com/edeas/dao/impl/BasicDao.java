@@ -25,7 +25,7 @@ public class BasicDao<T> implements IBasicDao<T> {
 	private SessionFactory sessionFactory;
 	private Class<?> clz;	
 	
-	private Class<?> getClz() {
+	protected Class<?> getClz() {
 		if (clz == null) {
 			clz = (Class<?>)(((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
 		}

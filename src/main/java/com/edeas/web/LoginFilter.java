@@ -11,10 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.edeas.controller.AuthController;
-import com.edeas.controller.CmsController;
+import com.edeas.controller.cmsadmin.AuthController;
+import com.edeas.controller.cmsadmin.CmsController;
 import com.edeas.model.User;
 
 public class LoginFilter implements Filter {
@@ -24,10 +22,8 @@ public class LoginFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest _request = (HttpServletRequest) request;   
 		HttpServletResponse _response = (HttpServletResponse) response;
-		
-		RequestMapping rm = CmsController.class.getAnnotation(RequestMapping.class);
-		String cmsurl = rm.value()[0];
-		
+				
+		String cmsurl = CmsController.getCMSUrl();
 		User user = (User)_request.getSession().getAttribute(AuthController.LOGIN_USER);
 		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
 			_response.sendRedirect(_request.getContextPath() + cmsurl);
