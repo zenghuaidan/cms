@@ -7,13 +7,18 @@ var gPopLayerWidthPerc=0.9;
 var gPopLayerHeightPerc=0.75;
 var refreshonclose = false;
 var webroot = "/";
-var cmsroot = webroot+"cmsadmin/"; //>/<subdir>/
+var cmsroot = "";
+$(function() {
+	dwrService.getCMSUrl(function(url) {
+		cmsroot = (url.lastIndexOf("/") == url.length + 1) ? url : (url + "/");
+	});	
+})
 var msgdelwconfirm = "You are going to DELETE a widget which cannot be undo.  Do you want to proceed?";
 var msgdelpgconfirm = "You are going to DELETE a page which cannot be undo.  Do you want to proceed?";
 
 
 function E$(e) { return document.getElementById(e); }
-function U$(u) { return "/cmsadmin/" + u; }
+function U$(u) { return cmsroot + u; }
 function RU$(u) { return "/" + u; }
 function goUrl(u) { location.href=u; }
 function popUrl(u) { window.open(u); }
