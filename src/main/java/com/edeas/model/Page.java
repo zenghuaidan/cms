@@ -13,20 +13,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
+import com.edeas.controller.cmsadmin.CmsProperties;
+
 @MappedSuperclass
 public class Page<T, E> {
-	private int id;
+	private long id;
 	private T parent;
 	private int rootId;
 	private int pageLevel;
 	private int release;
-	private boolean edit;
+	private int edit;
 	private String template;
 	private PageStatus status;
 	private boolean active;
@@ -45,13 +49,14 @@ public class Page<T, E> {
 	private Date createTime;
 	private Date updateTime;
 	private Set<E> contents = new HashSet<E>();
+	private Set<T> children = new HashSet<T>();
 
 	@Id
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}	
 
@@ -93,11 +98,11 @@ public class Page<T, E> {
 	}
 
 	@Column(nullable=false)
-	public boolean isEdit() {
+	public int getEdit() {
 		return edit;
 	}
 
-	public void setEdit(boolean edit) {
+	public void setEdit(int edit) {
 		this.edit = edit;
 	}
 
@@ -266,4 +271,34 @@ public class Page<T, E> {
 		this.contents = contents;
 	}
 
+	@OneToMany(mappedBy="parent")
+	@OrderBy("pageOrder asc")
+	public Set<T> getChildren() {
+		return children;
+	}
+
+	public void setChildren(Set<T> children) {
+		this.children = children;
+	}
+
+	@Transient
+	public Set<T> getChildren(boolean isDelete) {
+		Set<T> elements = new HashSet<T>();
+		for(T page : this.children) {
+			if(((Page)page).isDelete()== isDelete) {
+				elements.add(page);
+			}
+		}
+		return elements;
+	}
+	
+	@Transient
+	public boolean isHideSubTpl() {
+		return CmsProperties.getHideSubTpls().contains(this.template);
+	}
+	
+	@Transient
+	public boolean isExcTpl() {
+		return CmsProperties.getExcTpls().contains(this.template);
+	}
 }

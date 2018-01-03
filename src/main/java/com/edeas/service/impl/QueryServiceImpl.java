@@ -17,13 +17,25 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	}
 	
 	public Page getHomePage(boolean iscms) {
-		List<Page> pages = getPageDao(iscms).findByParentId(-1);
+		List<Page> pages = findPagesByParentId(-1, iscms);
 		return pages.size() > 0 ? pages.get(0) : null;
 	}
 	
 	public Page getMasterPage(boolean iscms) {
-		List<Page> pages = getPageDao(iscms).findByParentId(-2);
+		List<Page> pages = findPagesByParentId(-2, iscms);
 		return pages.size() > 0 ? pages.get(0) : null;
+	}
+	
+	public List<Page> getOtherPages(boolean iscms) {
+		return getPageDao(iscms).findByParentId(-3);
+	}
+	
+	public List<Page> findPagesByParentId(long parentId, boolean iscms) {
+		return getPageDao(iscms).findByParentId(parentId);
+	}
+	
+	public Page findPageById(long id, boolean iscms) {
+		return (Page)getPageDao(iscms).getById(id);
 	}
 	
 }

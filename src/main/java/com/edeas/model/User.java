@@ -20,7 +20,7 @@ import com.edeas.utils.MessageDigestUtils;
 @Entity
 @Table(name = "CmsUser")
 public class User {
-	private int id;
+	private long id;
 	private String login;
 	private String password;
 	private String email;
@@ -33,11 +33,11 @@ public class User {
 	private Date updateTime;
 
 	@Id
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
