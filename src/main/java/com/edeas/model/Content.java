@@ -9,18 +9,18 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Content<T> {
-	private long id;
+	private Long id;
 	private T page;
 	private String lang;
 	private String propertyXml;
 	private String contentXm;
 
 	@Id
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

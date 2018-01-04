@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.persistence.Entity;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -30,6 +31,11 @@ public class BasicDao<T> implements IBasicDao<T> {
 			clz = (Class<?>)(((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
 		}
 		return clz;
+	}
+	
+	protected String getTableName() {
+		Entity e = clz.getAnnotation(Entity.class);
+		return e.name();
 	}
 	
 	public SessionFactory getSessionFactory() {

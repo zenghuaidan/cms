@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TemplateList limitotherpg="yes">
+  <Template id="Masterpage" name="Masterpage" isunique="yes" fixpid="-2" />
+  <Template id="Homepage" name="Homepage" isunique="yes" fixpid="-1" />  
+  <Template id="General" name="General" />
+  <Template id="FullGeneral" name="Full General" />
+  <!--Template id="TopSector" name="頂級網站部門" top="yes" /-->
+  <Template id="Sector" name="Sector" top="yes"/>     
+  <Template id="Link" name="Link" top="yes"  />
+  <Template id="SiteMap" name="SiteMap" />
+  <Template id="Video" name="Video" />
+  <Template id="Audio" name="Audio" />
+  <Template id="Photo" name="Photo" />
+  <Template id="PastEvent" name="Past Event"  top="yes"/>
+  <Template id="ComingEvent" name="Coming Event" top="yes"/>
+  <Template id="AllArtistSpeaker" name="All Artist Speaker" top="yes"/>
+  <Template id="ArtistIdx" name="Artist Index"  isunique="yes">
+    <AcceptChildList>
+      <RefTemplate refid="ArtistInside" name="Artist" />
+    </AcceptChildList>
+  </Template>
+  <Template id="ConcertIdx" name="Concert Index">
+    <AcceptChildList>
+      <RefTemplate refid="ConcertInside" name="Concert" />
+    </AcceptChildList>
+  </Template>
+  <Template id="NewsIdx" name="News Index">
+    <AcceptChildList>
+      <RefTemplate refid="NewsInside" name="News" />
+    </AcceptChildList>
+  </Template>
+  <Template id="NewWorksIdx" name="New Works Index" top="yes">
+    <AcceptChildList>
+      <RefTemplate refid="NewWorksInside" name="New Works" />
+    </AcceptChildList>
+  </Template>
+  <Template id="StoryIdx" name="Story Index">
+    <AcceptChildList>
+      <RefTemplate refid="StoryInside" name="Story" />
+    </AcceptChildList>
+  </Template>
+  <Template id="MemberIdx" name="Member Index">
+    <AcceptChildList>
+      <RefTemplate refid="MemberInside" name="Member" />
+    </AcceptChildList>
+  </Template>
+  <Template id="Support" name="Support" top="yes">
+    <AcceptChildList>
+      <RefTemplate refid="SupportInside" name="Support Inside" />
+    </AcceptChildList>
+  </Template>
+  <Template  id="SubInspires" name="Sub Inspires">
+    <AcceptChildList>
+      <RefTemplate refid="InspiresDetail" name="Inspires Detail" />
+      <RefTemplate refid="Sector" name="Sector" />
+      <RefTemplate refid="ConcertIdx" name="Concert" />
+    </AcceptChildList>
+  </Template>
+  <Template id="Inspires" name="Inspires">
+    <AcceptChildList>
+      <RefTemplate refid="SubInspires" name="Sub Inspires" />
+    </AcceptChildList>
+  </Template>
+  <Template id="ArtistSpeakerIndex" name="Artist Speaker Index">
+    <AcceptChildList>
+      <RefTemplate refid="ArtistSpeaker" name="Artist Speaker" />
+    </AcceptChildList>
+  </Template>
+  <Template id="ContactUs" name="Contact Us" top="yes"/>
+  <Template id="SearchResult" name="Search Result" isunique="yes" />
+</TemplateList>

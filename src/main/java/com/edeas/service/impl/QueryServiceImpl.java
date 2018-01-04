@@ -38,4 +38,8 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		return (Page)getPageDao(iscms).getById(id);
 	}
 	
+	public List<String> findActiveTemplates(boolean iscms) {
+		return getPageDao(iscms).findActiveTemplates();
+	}
+	
 }

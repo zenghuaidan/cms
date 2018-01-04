@@ -6,11 +6,14 @@ var gWidgetFormHeight=500;
 var gPopLayerWidthPerc=0.9;
 var gPopLayerHeightPerc=0.75;
 var refreshonclose = false;
-var webroot = "/";
+var webroot = "";
 var cmsroot = "";
-$(function() {
-	dwrService.getCMSUrl(function(url) {
-		cmsroot = (url.lastIndexOf("/") == url.length + 1) ? url : (url + "/");
+$(function() {	
+	dwrService.getContextPath(function(path) {
+		webroot = path;
+		dwrService.getCMSUrl(function(url) {
+			cmsroot = webroot + ((url.lastIndexOf("/") == url.length + 1) ? url : (url + "/"));
+		});
 	});	
 })
 var msgdelwconfirm = "You are going to DELETE a widget which cannot be undo.  Do you want to proceed?";
@@ -454,7 +457,7 @@ function setSelPages() {
     $(".selpages").each( function() {
 		var attr = $(this).attr("attr");
 		//console.log("setSelPages: "+cmsroot+"/PageAdmin/getPageOptions?pgid="+pgid+"&attr="+attr);
-		$(this).load(cmsroot+"/PageAdmin/getPageOptions?pgid="+pgid+"&attr="+attr,function() {	
+		$(this).load(cmsroot+"PageAdmin/getPageOptions?pgid="+pgid+"&attr="+attr,function() {	
 			$(this).val($(this).attr("val"));
 		});
 	})
@@ -471,14 +474,14 @@ function clrVal(d) { $("#"+d).val(''); }
 
 /* Page Setup */
 function configPg(pageid,caller) {
-  TINY.box.show({iframe:cmsroot+'/PageAdmin/Config?pageid='+pageid,
+  TINY.box.show({iframe:cmsroot+'PageAdmin/Config?pageid='+pageid,
                   width:gAjaxFormWidth,height:gPgConfigFormHeight,
                   closejs: function() {  if (refreshonclose) refresh(); }
   });
 }
 
 function openNewPage(parentid,beforeid) {
-  TINY.box.show({iframe:cmsroot+'/PageAdmin/New?parentid='+parentid+'&beforeid='+beforeid,
+  TINY.box.show({iframe:cmsroot+'PageAdmin/New?parentid='+parentid+'&beforeid='+beforeid,
                   width:gAjaxFormWidth,height:gPgConfigFormHeight,
                   closejs: function() { if (refreshonclose) refreshSiteTree(); }
   });

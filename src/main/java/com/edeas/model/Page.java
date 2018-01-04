@@ -25,7 +25,7 @@ import com.edeas.controller.cmsadmin.CmsProperties;
 
 @MappedSuperclass
 public class Page<T, E> {
-	private long id;
+	private Long id;
 	private T parent;
 	private int rootId;
 	private int pageLevel;
@@ -52,11 +52,11 @@ public class Page<T, E> {
 	private Set<T> children = new HashSet<T>();
 
 	@Id
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}	
 
@@ -300,5 +300,26 @@ public class Page<T, E> {
 	@Transient
 	public boolean isExcTpl() {
 		return CmsProperties.getExcTpls().contains(this.template);
+	}
+	
+	@Transient
+	public boolean isNew() {
+		return this.getId() == null;
+	}
+	
+	@Transient
+	public String getUrlPath() {
+		StringBuffer sb = new StringBuffer("/");
+		Long pid = this.getParent() == null ? null : ((Page)this.getParent()).getId();
+		if (pid != null) {
+			if(pid == -2) return "/Footer/";
+			if(pid == -3) return "/Others/";
+			while(pid > 0) {
+				Page page = (Page)this.getParent();
+				sb.insert(0, "/" + page.getUrl());
+				pid = page.getParent() == null ? 0 : ((Page)this.getParent()).getId();
+			}
+		}
+		return sb.toString();
 	}
 }

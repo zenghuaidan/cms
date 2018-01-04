@@ -8,9 +8,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+@SuppressWarnings("serial")
 public class CmsProperties {
 
 	private static Properties properties;
+	public static final Map<String, Map<String, String>> enableAutoNameParentTpls = new HashMap<String, Map<String, String>>() {		
+		{
+			put("TrainIdx", new HashMap<String, String>(){ {put("namealg", "daterange");} });
+			put("GrantIdx", new HashMap<String, String>(){ {put("namealg", "pgorder");} });
+		}
+    };
+    
+	public static final Map<String, Map<String, String>> enableDTimeParentTpls = new HashMap<String, Map<String, String>>() {		
+		{
+			put("ConcertIdx", new HashMap<String, String>(){ {put("format", "dat tim");put("labeldate", "Date");put("labeltime", "Time");} });
+			put("NewsIdx", new HashMap<String, String>(){ {put("format", "dat");put("labeldate", "Date");} });
+			put("NewWorksIdx", new HashMap<String, String>(){ {put("format", "dat tim");put("labeldate", "Date");put("labeltime", "Time");} });
+		}
+    };
+    
+    public static final Map<String, Map<String, String>> enableDTimeTpls = new HashMap<String, Map<String, String>>() {		
+		{
+			put("ArtistSpeakerIndex", new HashMap<String, String>(){ {put("format", "yr");put("labeldate", "Date");put("pastyr", "10");put("upcomingyr", "5");} });			
+		}
+    };
+    
+    public static final Map<String, Map<String, String>> customPgOrderParentTpls = new HashMap<String, Map<String, String>>() {		
+		{
+			put("GrantIdx", new HashMap<String, String>(){ {put("label", "資助篇號");} });			
+		}
+    };
 	
 	static {
 		properties = new Properties();
