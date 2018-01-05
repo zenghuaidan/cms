@@ -112,7 +112,7 @@
 <div id="langpg" class="pgw">
     <!-- PROPERTY BOX -->
     <div id="propertybox">
- 
+ 		<jsp:include page="/WEB-INF/PageAdmin/PropertyForm.jsp" />
     </div >
 
     <!--PAGE-->
@@ -134,7 +134,7 @@
 <%
 	Document txml = XmlUtils.getTemplateDocument(currentPage.getTemplate());
     List<Element> wlist = (List<Element>)txml.selectNodes("/Template/Widgets/Widget");    
-    Document cxml = (currentContent == null) ? null : XmlUtils.getStringDocument(currentContent.getContentXml());
+    Document cxml = (currentContent == null) ? null : currentContent.getContentXmlDoc();
 
     int holderc = 0; 
     String tab = "    ";

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Template id="Homepage" haspgtime="no">
   <Properties excludestd="">
-    <Field name="HeadTitle" type="txtfield" label="Header title" />
-    <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
-    <Field name="SeoDesc" type="txtfield" label="SEO Description" />
-    <Field name="MenuName" type="txtfield" label="Menu name" />
+    <Field name="HeadTitle" type="chkfield" label="Header title" />    
   </Properties>
   <WidgetBox />
   <Widgets>

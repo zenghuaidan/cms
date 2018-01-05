@@ -11,6 +11,11 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Document;
+
+import com.edeas.utils.XmlUtils;
+
 @MappedSuperclass
 public class Content<T> {
 	private Long id;
@@ -68,5 +73,15 @@ public class Content<T> {
 	@Transient
 	public boolean isNew() {
 		return this.getId() == null || this.getId() <= 0;
+	}
+	
+	@Transient
+	public Document getPropertyXmlDoc() {
+		return StringUtils.isBlank(this.propertyXml) ? null : XmlUtils.loadFromString(this.propertyXml);
+	}
+	
+	@Transient
+	public Document getContentXmlDoc() {
+		return StringUtils.isBlank(this.contentXml) ? null : XmlUtils.loadFromString(this.contentXml);
 	}
 }
