@@ -14,4 +14,8 @@ public class UserDaoImpl extends BasicDao<User> {
 //		List<User> users = listBySQL("select * from CmsUser where login=? and password=?", new String[]{userName, password}, User.class, true);
 		return users.size() > 0 ? users.get(0) : null;
 	}
+
+	public void updatePassword(String userName, String oldPassword, String newPassword) {
+		updateBySQL("update " + getTableName() + " set password=? where login=? and password=?", new String[]{newPassword, userName, oldPassword});
+	}
 }

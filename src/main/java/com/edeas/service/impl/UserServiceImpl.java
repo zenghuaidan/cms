@@ -17,4 +17,8 @@ public class UserServiceImpl extends BasicServiceImpl {
 		return null;
 	}
 	
+	public void updatePassword(String userName, String oldPassword, String newPassword) {
+		userDao.updatePassword(userName, User.getEncryptPassword(oldPassword), User.getEncryptPassword(newPassword));
+	}
+	
 }

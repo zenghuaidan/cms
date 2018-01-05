@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -34,7 +34,7 @@ public class BasicDao<T> implements IBasicDao<T> {
 	}
 	
 	protected String getTableName() {
-		Entity e = clz.getAnnotation(Entity.class);
+		Table e = getClz().getAnnotation(Table.class);
 		return e.name();
 	}
 	

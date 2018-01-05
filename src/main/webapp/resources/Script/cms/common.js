@@ -84,7 +84,7 @@ function validatechgpwdfm() {
 
 function submitchgpwd() {
   if (validatechgpwdfm()) { 
-    var u = cmsroot + "Auth/ChgPwd";
+    var u = cmsroot + "ChgPwd";
     $.post(u,$("#chgpwdfm").serialize(),function(data) {
       if (data.success) {
         closechgpwd();
