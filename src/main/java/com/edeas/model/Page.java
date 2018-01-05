@@ -339,8 +339,7 @@ public class Page<T, E> {
 	}
 	
 	public void initNewPage(CmsPage parent, boolean newAtFront) {		
-		Long parentId = parent.getId();
-		this.parentId = parentId;
+		Long parentId = parent.getId();		
         if (parentId == -1) {
             this.rootId = -1l;            
             this.template = "Homepage";

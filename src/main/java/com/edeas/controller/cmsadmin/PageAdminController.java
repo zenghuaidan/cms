@@ -113,6 +113,8 @@ public class PageAdminController extends CmsController {
              {
                  page.initNewPage(parent, newAtFront);
              } 
+             page.setParentId(parentId);
+             page.setParent(parent);
              page.setName(name);
              page.setUrl(url);
              page.setActive(isActive);

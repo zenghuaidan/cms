@@ -249,11 +249,11 @@
 	            	if (parentid == 0) q += "[@top='yes']";
 	            	else if(document.selectNodes("/TemplateList/Template[@fixpid='" + parentid + "']").size() > 0) q += "[@fixpid='" + parentid + "']";
 	            	else if(parentid > 0) {
-	            		if(!currentPage.isNew()) {
-	            			String ptq = "/TemplateList/Template[@id='" + currentPage.getTemplate() + "' and AcceptChildList]";
+	            		if(!parentPage.isNew()) {
+	            			String ptq = "/TemplateList/Template[@id='" + parentPage.getTemplate() + "' and AcceptChildList]";
 	            			if (document.selectNodes(ptq).size() > 0) {
 	            				reftpl = true;
-	            				q += "[@id='" + currentPage.getTemplate() + "']/AcceptChildList/RefTemplate";
+	            				q += "[@id='" + parentPage.getTemplate() + "']/AcceptChildList/RefTemplate";
 	            			}
 	            		}
 	            	}
