@@ -63,6 +63,10 @@ public class CmsProperties {
 		return getValue("CmsSiteName");		
 	}
 	
+	public static String getDefaultLanguage() {
+		return getValue("DefaultLanguage");		
+	}
+	
 	public static int getMaxTopgs() {
 		try {
 			return Integer.parseInt(getValue("MaxTopgs"));			
@@ -79,20 +83,42 @@ public class CmsProperties {
 		return -1;		
 	}
 	
-	public static List<String> getHideSubTpls() {
-		String hideSubTplsStr = getValue("SAHideSubTpls");
-		String[] hideSubTpls = hideSubTplsStr.split(",");
-		return Arrays.asList(hideSubTpls);
+	public static List<String> getHideSubTpls() {		
+		return toList("SAHideSubTpls");
 	}
 	
-	public static List<String> getExcTpls() {
-		String hideSubTplsStr = getValue("SAExcTpls");
-		String[] hideSubTpls = hideSubTplsStr.split(",");
-		return Arrays.asList(hideSubTpls);
+	public static List<String> getExcTpls() {		
+		return toList("SAExcTpls");
 	}
 	
-	public static boolean isHideSubTpls(String template) {		
+	public static List<String> getNoPreviewTpls() {		
+		return toList("NoPreviewTpls");
+	}
+	
+	public static List<String> getNoContentTpls() {
+		return toList("NoContentTpls");
+	}
+
+	private static List<String> toList(String key) {
+		String templateStr = getValue(key);
+		String[] templates = templateStr.split(",");
+		return Arrays.asList(templates);
+	}
+	
+	public static boolean isExcTpl(String template) {		
+		return getExcTpls().contains(template);
+	}
+	
+	public static boolean isHideSubTpl(String template) {		
 		return getHideSubTpls().contains(template);
+	}
+	
+	public static boolean isNoPreviewTpl(String template) {		
+		return getNoPreviewTpls().contains(template);
+	}
+	
+	public static boolean isNoContentTpl(String template) {		
+		return getNoContentTpls().contains(template);
 	}
 	
 	// default level is -1, if incorrect level no is set, -1 will be set, if same template occur, the first will be used

@@ -25,4 +25,18 @@ public class XmlUtils {
 		String filePath = XmlUtils.class.getClassLoader().getResource("TemplateList.xml").getPath();
 		return toDocument(filePath);
 	}
+	
+	public static Document getTemplateDocument(String template) {
+		String filePath = XmlUtils.class.getClassLoader().getResource("Templates/" + template + ".xml").getPath();
+		return toDocument(filePath);
+	}
+	
+	public static Document getStringDocument(String xml) {
+		try {
+			SAXReader saxReader = new SAXReader();    
+			return saxReader.read(xml);
+		} catch (DocumentException e) {			
+		}		
+		return null;
+	}
 }

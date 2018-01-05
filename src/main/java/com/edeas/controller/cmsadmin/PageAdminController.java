@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.model.CmsPage;
 import com.edeas.model.Page;
@@ -22,7 +23,7 @@ import com.edeas.utils.DateUtils;
 @Controller
 public class PageAdminController extends CmsController {
 	@RequestMapping(path = {"PageAdmin/New"}, method={RequestMethod.GET})
-	public String index(Model model, long parentid, HttpServletRequest request) {
+	public String newPage(Model model, long parentid, HttpServletRequest request) {
 		CmsPage parentPage = parentid <= 0 ? null : (CmsPage)queryService.findPageById(parentid, true);
 		CmsPage page = new CmsPage();
 		page.setParent(parentPage);
@@ -33,7 +34,35 @@ public class PageAdminController extends CmsController {
 		model.addAttribute("parentid", parentid);
 		model.addAttribute("newatfront", false);
 		return "PageAdmin/ConfigForm";
-	}	
+	}
+	
+	@RequestMapping(path = {"PageAdmin/Index"}, method={RequestMethod.GET})
+	public String index(Model model, long id, String lang, HttpServletRequest request) {
+		lang = StringUtils.isBlank(lang) ? CmsProperties.getDefaultLanguage() : lang;
+		Page page;
+		if(id == Page.HOME_PAGE_PARENT_ID || id == Page.MASTER_PAGE_PARENT_ID) {
+			page = id == Page.HOME_PAGE_PARENT_ID ? queryService.getHomePage(true) : queryService.getMasterPage(true);
+			if(page.isNew()) {
+				CmsPage parent = new CmsPage();
+				parent.setId(id);
+				page.initNewPage(parent);
+				page.setParent(parent);
+				queryService.addOrUpdate(page, true);
+			}
+			id = page.getId();
+		} else {
+			page = queryService.findPageById(id, true);
+		}
+		
+		if(page == null || page.isNew() || page.isDelete()) return "redirect:" + Global.getCMSUrl() + "/SiteAdmin";
+		
+		model.addAttribute("lang", lang);
+		model.addAttribute("isCms", true);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("referAction", "PageAdmin");
+		model.addAttribute("newatfront", false);
+		return "PageAdmin/Index";
+	}
 	
 	@ResponseBody
 	@RequestMapping(path = {"PageAdmin/UrlRender"}, method={RequestMethod.GET})
@@ -113,7 +142,6 @@ public class PageAdminController extends CmsController {
              {
                  page.initNewPage(parent, newAtFront);
              } 
-             page.setParentId(parentId);
              page.setParent(parent);
              page.setName(name);
              page.setUrl(url);

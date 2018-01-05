@@ -11,8 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.AuthController;
-import com.edeas.controller.cmsadmin.CmsController;
 import com.edeas.model.User;
 
 public class LoginFilter implements Filter {
@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest _request = (HttpServletRequest) request;   
 		HttpServletResponse _response = (HttpServletResponse) response;
 				
-		String cmsurl = CmsController.getCMSUrl();
+		String cmsurl = Global.getCMSUrl();
 		User user = (User)_request.getSession().getAttribute(AuthController.LOGIN_USER);
 		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
 			_response.sendRedirect(_request.getContextPath() + cmsurl);

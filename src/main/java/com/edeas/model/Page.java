@@ -73,7 +73,10 @@ public class Page<T, E> {
 	}
 
 	public void setParent(T parent) {
-		this.parent = parent;
+		if (parent != null && !((Page)parent).isNew())
+			this.parent = parent;
+		if(parent != null)
+			this.parentId = ((Page)parent).getId();
 	}	
 	
 	@Column(nullable=false)
@@ -238,7 +241,6 @@ public class Page<T, E> {
 		this.name = name;
 	}
 
-	@Column(nullable=false)
 	public String getUrl() {
 		return url;
 	}
@@ -308,13 +310,23 @@ public class Page<T, E> {
 	}
 	
 	@Transient
-	public boolean isHideSubTpls() {
-		return CmsProperties.getHideSubTpls().contains(this.template);
+	public boolean isHideSubTpl() {
+		return CmsProperties.isHideSubTpl(this.template);
 	}
 	
 	@Transient
-	public boolean isExcTpls() {
-		return CmsProperties.getExcTpls().contains(this.template);
+	public boolean isExcTpl() {
+		return CmsProperties.isExcTpl(this.template);
+	}
+	
+	@Transient
+	public boolean isNoPreviewTpl() {
+		return CmsProperties.isNoPreviewTpl(this.template);
+	}
+	
+	@Transient
+	public boolean isNoContentTpl() {
+		return CmsProperties.isNoContentTpl(this.template);
 	}
 	
 	@Transient
@@ -323,12 +335,22 @@ public class Page<T, E> {
 	}
 	
 	@Transient
+	public boolean isHomePage() {
+		return this.getTemplate().equals(HOME_PAGE_TEMPLATE);
+	}
+	
+	@Transient
+	public boolean isMasterPage() {
+		return this.getTemplate().equals(MASTER_PAGE_TEMPLATE);
+	}
+	
+	@Transient
 	public String getUrlPath() {
 		StringBuffer sb = new StringBuffer("/");
 		Long pid = this.getParent() == null ? null : ((Page)this.getParent()).getId();
 		if (pid != null) {
-			if(pid == -2) return "/Footer/";
-			if(pid == -3) return "/Others/";
+			if(pid == MASTER_PAGE_PARENT_ID) return "/Footer/";
+			if(pid == OTHER_PAGE_PARENT_ID) return "/Others/";
 			while(pid > 0) {
 				Page page = (Page)this.getParent();
 				sb.insert(0, "/" + page.getUrl());
@@ -338,17 +360,35 @@ public class Page<T, E> {
 		return sb.toString();
 	}
 	
+	public E getContent(String lang) {
+		for(E c : this.getContents()) {
+			if(((Content)c).getLang().equals(lang))
+				return c;
+		}
+		return null;
+	}
+	
+	public static final long MASTER_PAGE_PARENT_ID = -2;
+	public static final long HOME_PAGE_PARENT_ID = -1;
+	public static final long OTHER_PAGE_PARENT_ID = -3;
+	
+	public static final String MASTER_PAGE_TEMPLATE = "Masterpage";
+	public static final String HOME_PAGE_TEMPLATE = "Homepage";	
+	
+	public void initNewPage(CmsPage parent) {
+		this.initNewPage(parent, false);
+	}
 	public void initNewPage(CmsPage parent, boolean newAtFront) {		
 		Long parentId = parent.getId();		
-        if (parentId == -1) {
-            this.rootId = -1l;            
-            this.template = "Homepage";
-            this.name = "Homepage";
+        if (parentId == HOME_PAGE_PARENT_ID) {
+            this.rootId = HOME_PAGE_PARENT_ID;            
+            this.template = HOME_PAGE_TEMPLATE;
+            this.name = HOME_PAGE_TEMPLATE;
             this.url = "index";
-        } else if (parentId == -2) {
-            this.rootId = -2l;
-            this.template = "Masterpage";
-            this.name = "Masterpage";
+        } else if (parentId == MASTER_PAGE_PARENT_ID) {
+            this.rootId = MASTER_PAGE_PARENT_ID;
+            this.template = MASTER_PAGE_TEMPLATE;
+            this.name = MASTER_PAGE_TEMPLATE;
         } else if (parentId < 0) {
             this.rootId = parentId;
         } else if (!parent.isNew()) {

@@ -21,18 +21,18 @@
 	        case "live": label = "Live"; break;
 	        case "declined": label = "Declined"; break;
 	    }	    	    
-		return "<img class='pgsdot " + pgsc + "' src='" + Global.getContentPath() + "/images/spacer.gif" + "' alt='" + label + "' title='" + label + "' />";
+		return "<img class='pgsdot " + pgsc + "' src='" + Global.getContentPath() + "/images/spacer.gif' alt='" + label + "' title='" + label + "' />";
 	} 
 
 	public String icoimg(String icoc, String label) {
-		return "<img class='ico " + icoc + "' src='" + Global.getContentPath() + "/images/spacer.gif" + "' alt='" + label + "' title='" + label + "' />";
+		return "<img class='ico " + icoc + "' src='" + Global.getContentPath() + "/images/spacer.gif' alt='" + label + "' title='" + label + "' />";
 	}
 	
 	public String qamenuitm(String icoc, String label) {
 		return     
 		"<div class='itm' blkid='" + icoc + "'>" + 
         	icoimg(icoc + " qamico", label) +  "<span>" + label + "</span>" +
-        	"<img class='arrow' src='" + Global.getContentPath() + "/images/spacer.gif" + "' alt='Expand' title='Expand' />" +
+        	"<img class='arrow' src='" + Global.getContentPath() + "/images/spacer.gif' alt='Expand' title='Expand' />" +
     	"</div>";
 	}
 	
@@ -56,7 +56,7 @@
 		html.append(pgsimg(status));
 		html.append(icoimg(ico, icolb));
 		html.append("<span status='" + roleval + "'>" + label + "</span>");
-        if (!page.isHideSubTpls())
+        if (!page.isHideSubTpl())
         {
             String nspc = "newsubpg";
             if (numsubpg > 0) { 
@@ -75,10 +75,10 @@
             }
         }                         
 		html.append("</div>");
-        if (numsubpg > 0 && !page.isHideSubTpls())
+        if (numsubpg > 0 && !page.isHideSubTpl())
         {            
         	html.append("<div class='grp newpgdrop " + drpc + "' lv='" + nxtlv + "' style='display:none'>");
-             if (!CmsProperties.getExcTpls().contains(template))                    
+             if (!page.isExcTpl())                    
              {
 	            for (Page children : (Set<Page>)page.getChildren())
 	            {
@@ -155,15 +155,15 @@
 	         	<c:out escapeXml="false" value='<%=pgsimg(topPage.getStatus().getName()) %>'></c:out>
 	         	<c:out escapeXml="false" value='<%=icoimg(ico, icolb) %>'></c:out>                          
 	            <span status="allow"><%=topPage.getName() %></span>
-	            <c:if test="${!topPage.hideSubTpls}">
+	            <c:if test="${!topPage.hideSubTpl}">
 	            	<c:out escapeXml="false" value='<%=icoimg("newsubpg", "New Subpage") %>'></c:out>
 	            </c:if>                        
 	         </div>
-	         <c:if test="${!topPage.hideSubTpls}">
+	         <c:if test="${!topPage.hideSubTpl}">
 		         <div class='sectionpglist newpgdrop lv2drop' lv='2'>
 		         	<%
 		         		for(Page subPage : subPages) {
-		         			if(!subPage.isHideSubTpls()) {
+		         			if(!subPage.isHideSubTpl()) {
 		         				out.print(pgdiv(2, subPage.getId(), subPage.getStatus().getName(), subPage.isActive(), subPage.getName()));
 		         			}
 	         			} 

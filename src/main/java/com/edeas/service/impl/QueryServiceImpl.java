@@ -19,17 +19,17 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	}
 	
 	public Page getHomePage(boolean iscms) {
-		List<Page> pages = findPagesByParentId(-1, iscms);
-		return pages.size() > 0 ? pages.get(0) : null;
+		List<Page> pages = findPagesByParentId(Page.HOME_PAGE_PARENT_ID, iscms);
+		return pages.size() > 0 ? pages.get(0) : (iscms ? new CmsPage() : new LivePage());
 	}
 	
 	public Page getMasterPage(boolean iscms) {
-		List<Page> pages = findPagesByParentId(-2, iscms);
-		return pages.size() > 0 ? pages.get(0) : null;
+		List<Page> pages = findPagesByParentId(Page.MASTER_PAGE_PARENT_ID, iscms);
+		return pages.size() > 0 ? pages.get(0) : (iscms ? new CmsPage() : new LivePage());
 	}
 	
 	public List<Page> getOtherPages(boolean iscms) {
-		return getPageDao(iscms).findByParentId(-3);
+		return getPageDao(iscms).findByParentId(Page.OTHER_PAGE_PARENT_ID);
 	}
 	
 	public List<Page> findPagesByParentId(long parentId, boolean iscms) {

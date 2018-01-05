@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 @MappedSuperclass
 public class Content<T> {
@@ -16,7 +17,7 @@ public class Content<T> {
 	private T page;
 	private String lang;
 	private String propertyXml;
-	private String contentXm;
+	private String contentXml;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="contentTableGenerator")
@@ -56,12 +57,16 @@ public class Content<T> {
 		this.propertyXml = propertyXml;
 	}
 
-	public String getContentXm() {
-		return contentXm;
+	public String getContentXml() {
+		return contentXml;
 	}
 
-	public void setContentXm(String contentXm) {
-		this.contentXm = contentXm;
+	public void setContentXml(String contentXml) {
+		this.contentXml = contentXml;
 	}
 
+	@Transient
+	public boolean isNew() {
+		return this.getId() == null || this.getId() <= 0;
+	}
 }

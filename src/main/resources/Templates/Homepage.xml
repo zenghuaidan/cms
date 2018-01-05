@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Template id="Homepage" haspgtime="no">
+  <Properties excludestd="">
+    <Field name="HeadTitle" type="txtfield" label="Header title" />
+    <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
+    <Field name="SeoDesc" type="txtfield" label="SEO Description" />
+    <Field name="MenuName" type="txtfield" label="Menu name" />
+  </Properties>
+  <WidgetBox />
+  <Widgets>
+    <Widget ename="HomepageBanners" wid="WidgetListMgr" label="Banner Images" jsel=".bannerList" mgrtype="gallery" mgrattr="Banner:Image" cols="Image">
+      <Widget ename="Banner" wid="ImgTxtLnkBlock" ImageAttr="cmgrw:114,fix:1440x405" AddFront="yes" />
+    </Widget>
+    <!--Widget ename="SectionTitle1" wid="TextBlock" label="Title" jsel=".section-title:eq(0)" />
+    <Widget ename="SectionTitle2" wid="TextBlock" label="Title" jsel=".section-title:eq(1)" />
+    <Widget ename="SectionTitle3" wid="TextBlock" label="Title" jsel=".section-title:eq(2)" />
+  
+    <Widget ename="Box1" wid="ImgTxtTtaLnkBlock" ImageAttr="fix:400x400" label="Title" jsel=".box:eq(0) .square:eq(0)" />
+    <Widget ename="Box2" wid="ImgTxtTtaVideoLnkBlock" ImageAttr="fix:500x248" label="Title" jsel=".box:eq(1) .square:eq(0)" />
+    <Widget ename="Box3" wid="ImgTxtTtaLnkBlock" ImageAttr="fix:500x248" label="Title" jsel=".box:eq(2) .square:eq(0)" />
+    <Widget ename="Box4" wid="ImgTxtTtaLnkBlock" ImageAttr="fix:400x400" label="Title" jsel=".box:eq(3) .square:eq(0)" />
+    <Widget ename="Box5" wid="ImgTxtTtaLnkBlock" ImageAttr="fix:500x248" label="Title" jsel=".box:eq(4) .square:eq(0)" />
+    <Widget ename="Box6" wid="ImgTxtTtaLnkBlock" ImageAttr="fix:500x248" label="Title" jsel=".box:eq(5) .square:eq(0)" />
+    <Widget ename="Box7" wid="TxtTtaLnkBlock" label="Title" jsel=".box:eq(6) .square:eq(0)" />
+    <Widget ename="Box8" wid="TxtTtaLnkBlock" label="Title" jsel=".box:eq(7) .square:eq(0)" />
+    <Widget ename="Box9" wid="TxtTtaLnkBlock" label="Title" jsel=".box:eq(8) .square:eq(0)" />       
+    <Widget ename="Box10" wid="ImgLinkBlock" label="Title" jsel=".box:eq(9) .square:eq(0)" />           
+  
+    <Widget ename="BannerDM1" wid="TwinImage" Image1Attr="fix:1400x226" Image2Attr="fix:700x226" Image1Label="Desktop Banner" Image2Label="Mobile Banner" jsel="#banner-dm1" />
+    <Widget ename="BannerDM2" wid="TwinImage" Image1Attr="fix:1400x226" Image2Attr="fix:700x226" Image1Label="Desktop Banner" Image2Label="Mobile Banner" jsel="#banner-dm2" /-->
+
+    <Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel=".index-square-wrapper" htagid="wholder">
+      <AcceptWidget wid="TwinImage" ename="HomeBanner" label="Banner" Image1Attr="fix:1400x226" Image2Attr="fix:700x226" Image1Label="Desktop Banner" Image2Label="Mobile Banner" />
+      <!--<AcceptWidget wid="TextAreaBlock" ename="HomePressAndNews" label="Press and News" />-->
+      <AcceptWidget wid="HomeInspires" ename="HomeInspires" label="Inspires" SessionOpts="MusicusFest^Musicus Fest,Heritage^Heritage,MasterClasses^Master Classes,MainlandOverseas^Mainland &amp; Overseas" Concert1Attr="Parent:TemplateAfterSpecifyYears=ConcertInside^-2" Concert2Attr="Parent:TemplateAfterSpecifyYears=ConcertInside^-2" />
+      <AcceptWidget wid="HomeNewsWorks" ename="HomeNewsWorks" label="News Works" SessionOpts="MusicusFest^Musicus Fest,Heritage^Heritage,MasterClasses^Master Classes,MainlandOverseas^Mainland &amp; Overseas" Concert1Attr="Parent:TemplateAfterSpecifyYears=ConcertInside^-2,TopOpt:----Please Select----^" Concert2Attr="Parent:TemplateAfterSpecifyYears=ConcertInside^-2,TopOpt:----Please Select----^" Concert3Attr="Parent:TemplateAfterSpecifyYears=ConcertInside^-2,TopOpt:----Please Select----^" Concert4Attr="Parent:TemplateAfterSpecifyYears=ConcertInside^-2,TopOpt:----Please Select----^" />
+    </Widget>
+  </Widgets>
+</Template>
