@@ -1,5 +1,6 @@
 package com.edeas.controller.cmsadmin;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edeas.dto.Result;
 import com.edeas.model.CmsPage;
 import com.edeas.model.Page;
+import com.edeas.utils.DateUtils;
 
 @Controller
 public class PageAdminController extends CmsController {
@@ -35,6 +38,10 @@ public class PageAdminController extends CmsController {
 	@ResponseBody
 	@RequestMapping(path = {"PageAdmin/UrlRender"}, method={RequestMethod.GET})
 	public String urlRender(long parentid, String txt) {
+		return renderUrl(parentid, txt);
+	}
+
+	private String renderUrl(long parentid, String txt) {
 		if (StringUtils.isBlank(txt))
 			return "";
         StringBuilder sb = new StringBuilder("");
@@ -58,4 +65,101 @@ public class PageAdminController extends CmsController {
             u = sb.append("-").append(i + "").toString();
         return u;
 	}	
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageAdmin/Save"}, method={RequestMethod.POST})
+	public Result Save(HttpServletRequest request) throws ParseException {
+		Long pageId = Long.parseLong(request.getParameter("pageid"));
+		Page page = queryService.findPageById(pageId, true);
+		if(loadConfigForm(page, request)) {
+			queryService.addOrUpdate(page, true);
+			return new Result("Congraduation! Page is saved successfully.");
+		} else {
+			
+			return new Result("Failed", "Invalid config form. Some field empty?");
+		}
+	}
+	
+	 public boolean loadConfigForm(Page page, HttpServletRequest request) throws ParseException
+     {
+         boolean v = true;
+         String template = request.getParameter("template");
+         String name = request.getParameter("name");
+         String url = request.getParameter("url");
+         String namealg = request.getParameter("namealg");
+         boolean isActive = !StringUtils.isBlank(request.getParameter("isActive"));
+         Long parentId = Long.parseLong(request.getParameter("parentid"));
+         boolean newAtFront = Boolean.parseBoolean(request.getParameter("newatfront"));
+         String pageTimeFrom = request.getParameter("pgtimei");
+         String pageTimeFromHour = request.getParameter("pgtimeihr");
+         String pageTimeFromMinute = request.getParameter("pgtimeimin");
+         
+         String pageTimeTo = request.getParameter("pgtimef");
+         String pageTimeToHour = request.getParameter("pgtimefhr");
+         String pageTimeToMinute = request.getParameter("pgtimefmin");
+         
+         String pageTimeDisplay = request.getParameter("pgtimedisplay");
+         
+         String customPageOrder = request.getParameter("custompgorder");
+         
+         CmsPage parent = (CmsPage)queryService.findPageById(parentId, true);
+         if(parent.isNew()) parent.setId(parentId);
+         //check valid form
+         if (StringUtils.isBlank(template) || ((StringUtils.isBlank(name) || StringUtils.isBlank(url)) && StringUtils.isBlank(namealg)))
+         { v = false; }
+         if (v)
+         {
+             if (page.isNew())  //if new page load new properties
+             {
+                 page.initNewPage(parent, newAtFront);
+             } 
+             page.setName(name);
+             page.setUrl(url);
+             page.setActive(isActive);
+             page.setTemplate(template);
+
+             //pgtimei / pgtimef
+             if (!StringUtils.isBlank(pageTimeFrom))
+             {
+                 boolean hasTime = !StringUtils.isBlank(pageTimeFromHour);
+                 String dtstri = pageTimeFrom + " ";
+                 dtstri += (hasTime) ? (pageTimeFromHour.length() == 2 ? pageTimeFromHour : "0" + pageTimeFromHour) + ":" + (pageTimeFromMinute.length() == 2 ? pageTimeFromMinute : "0" + pageTimeFromMinute) + ":01" : "00:00:01";
+                 page.setPageTimeFrom(DateUtils.yyyyMMddHHmmss().parse(dtstri));
+             }
+             if (!StringUtils.isBlank(pageTimeTo))
+             {
+            	 boolean hasTime = !StringUtils.isBlank(pageTimeToHour);
+            	 String dtstrf = pageTimeTo + " ";
+                 dtstrf += (hasTime) ? (pageTimeToHour.length() == 2 ? pageTimeToHour : "0" + pageTimeToHour) + ":" + (pageTimeToMinute.length() == 2 ? pageTimeToMinute : "0" + pageTimeToMinute) + ":01" : "00:00:01";
+                 page.setPageTimeTo(DateUtils.yyyyMMddHHmmss().parse(dtstrf));
+             }
+             page.setPageTimeDisplay((!StringUtils.isBlank(pageTimeDisplay)) ? pageTimeDisplay : "");
+
+             //Try custom pg order
+             if (!StringUtils.isBlank(customPageOrder))
+             {	
+            	 try {
+            		 page.setPageOrder(Integer.parseInt(customPageOrder));            		 
+            	 } catch (Exception e) {
+				}
+             }
+
+             //Try auto name and url
+             if (StringUtils.isBlank(page.getName()) && !StringUtils.isBlank(namealg))
+             {
+                 switch (namealg)
+                 {
+                     case "daterange":
+                    	 page.setName(DateUtils.yyyyMMdd().format(page.getPageTimeFrom()) + "-" + DateUtils.yyyyMMdd().format(page.getPageTimeTo()));
+                         break;
+                     case "pgorder":
+                         page.setName(page.getPageOrder() + "");
+                         break;
+                 }
+                 page.setUrl(renderUrl(parentId, page.getName()));
+             }
+             //TODO: publish / expire
+         }
+         return v;
+     }
 }

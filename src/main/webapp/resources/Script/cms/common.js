@@ -46,9 +46,9 @@ function switchcms() {
 	var chgto="www";
 	if ($("body").hasClass("wwwcms")) { chgto="lan"; } 
 	$.post(cmsroot+"SiteAdmin/SwitchCms",{"chgto":chgto},function(data) {
-		//if (data.Success=="True") location.reload();
-		if (data.Success=="True") location.href=cmsroot+"SiteAdmin/Index";
-		else alert(data.Message); 
+		//if (data.success) location.reload();
+		if (data.success) location.href=cmsroot+"SiteAdmin/Index";
+		else alert(data.errorMsg); 
 	},"json");
 }
 
@@ -86,9 +86,9 @@ function submitchgpwd() {
   if (validatechgpwdfm()) { 
     var u = cmsroot + "Auth/ChgPwd";
     $.post(u,$("#chgpwdfm").serialize(),function(data) {
-      if (data.Success=="True") {
+      if (data.success) {
         closechgpwd();
-      } else alert(data.Message);
+      } else alert(data.errorMsg);
     },"json");
   }
 }
@@ -289,7 +289,7 @@ function setImgResize() {
   $("#btnresize").click(function() {
     var dbid=$("#fileid").val();
     $.post("/PageContentAdmin/ResizeImg?dbid="+dbid+"&w="+$("#rszw").val()+"&h="+$("#rszh").val(),function(data) {
-      if (data.Success=="True") {
+      if (data.success) {
         ImgMgrLoadImg(dbid);
       } else {
         //console.log("ResizeImg: Failure");
@@ -404,12 +404,12 @@ function clearDocField(fid) {
 function deleteWidget(pgid,lang,xid,closing,cfn) {
     var u=cmsroot+"PageContentAdmin/DeleteWidget?pgid="+pgid+"&lang="+lang+"&xid="+xid;
     $.getJSON(u,function (data) { 
-        if (data.Success=="True") { 
+        if (data.success) { 
           switch (closing) {
             case "function": cfn(); break;
             default: refresh(); break;
           }          
-        } else { alert(data.Message); } 
+        } else { alert(data.errorMsg); } 
     } );
 }
 
@@ -444,10 +444,10 @@ function openWidgetFormWin(pgid,lang,wxid,wid,wname,parentxid,close) {
 function chgWidgetOrder(pgid,lang,xid,beforeid) {
 var u=cmsroot+"PageContentAdmin/ChangeWidgetOrder?pgid="+pgid+"&lang="+lang+"&xid="+xid+"&beforeid="+beforeid;
     $.getJSON(u,function (data) { 
-        if (data.Success=="True") { 
+        if (data.success) { 
             //alert('Order changed success!');
             location.reload();
-        } else { alert(data.Message); } 
+        } else { alert(data.errorMsg); } 
     } );  
 }
 
@@ -489,13 +489,13 @@ function openNewPage(parentid,beforeid) {
 
 function deletePg(pgid) {
   $.getJSON(cmsroot+"/PageAdmin/Delete?id="+pgid,function(data) {
-    if (data.Success=="True") { 
+    if (data.success) { 
       switch(data.Message) {      
         case "backsiteadmin": goUrl(cmsroot+'/SiteAdmin'); break;
         case "refresh": refresh(); break;
         default: refresh(); break;
       }  
-    } else { alert(data.Message); }
+    } else { alert(data.errorMsg); }
   });
 }
 

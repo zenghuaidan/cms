@@ -31,9 +31,9 @@ function delcat(cid) {
 		var pms = ""; //"?catid="+cid
 		var u = cmsroot+"/CategoryAdmin/Delete"+pms;
 		$.post(u,{"catid":cid},function(data) {
-		  if (data.Success=="True") {
+		  if (data.success) {
 			location.reload(); 
-		  } else alert(data.Message);
+		  } else alert(data.errorMsg);
 		},"json");	
 	}
 }
@@ -44,9 +44,9 @@ function submitcat() {
 	var u = cmsroot+"/CategoryAdmin/Save"+pms;
 	//fm.attr("action",u);	
     $.post(u,fm.serialize(),function(data) {
-      if (data.Success=="True") {
+      if (data.success) {
 		location.reload(); 
-      } else alert(data.Message);
+      } else alert(data.errorMsg);
     },"json");	
 }
 
@@ -58,9 +58,9 @@ function chgCatOrder(catid,beforeid) {
 	//console.log('u='+u);
  
 	$.post(u,{"catid":catid,"beforeid":beforeid,"kind":c.attr('kind'),"pid":c.attr('parentid')},function(data) {
-	  if (data.Success=="True") {
+	  if (data.success) {
 		location.reload(); 
-	  } else alert(data.Message);
+	  } else alert(data.errorMsg);
 	},"json");	  
 }	
 

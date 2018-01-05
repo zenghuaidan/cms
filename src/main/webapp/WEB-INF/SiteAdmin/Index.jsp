@@ -56,7 +56,7 @@
 		html.append(pgsimg(status));
 		html.append(icoimg(ico, icolb));
 		html.append("<span status='" + roleval + "'>" + label + "</span>");
-        if (!page.isHideSubTpl())
+        if (!page.isHideSubTpls())
         {
             String nspc = "newsubpg";
             if (numsubpg > 0) { 
@@ -75,7 +75,7 @@
             }
         }                         
 		html.append("</div>");
-        if (numsubpg > 0 && !page.isHideSubTpl())
+        if (numsubpg > 0 && !page.isHideSubTpls())
         {            
         	html.append("<div class='grp newpgdrop " + drpc + "' lv='" + nxtlv + "' style='display:none'>");
              if (!CmsProperties.getExcTpls().contains(template))                    
@@ -155,7 +155,7 @@
 	         	<c:out escapeXml="false" value='<%=pgsimg(topPage.getStatus().getName()) %>'></c:out>
 	         	<c:out escapeXml="false" value='<%=icoimg(ico, icolb) %>'></c:out>                          
 	            <span status="allow"><%=topPage.getName() %></span>
-	            <c:if test="${!topPage.hideSubTpl}">
+	            <c:if test="${!topPage.hideSubTpls}">
 	            	<c:out escapeXml="false" value='<%=icoimg("newsubpg", "New Subpage") %>'></c:out>
 	            </c:if>                        
 	         </div>
@@ -163,7 +163,7 @@
 		         <div class='sectionpglist newpgdrop lv2drop' lv='2'>
 		         	<%
 		         		for(Page subPage : subPages) {
-		         			if(!subPage.isHideSubTpl()) {
+		         			if(!subPage.isHideSubTpls()) {
 		         				out.print(pgdiv(2, subPage.getId(), subPage.getStatus().getName(), subPage.isActive(), subPage.getName()));
 		         			}
 	         			} 

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.edeas.model.CmsPage;
+import com.edeas.model.LivePage;
 import com.edeas.model.Page;
 
 @Service(value="queryService")
@@ -35,11 +37,17 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	}
 	
 	public Page findPageById(long id, boolean iscms) {
-		return (Page)getPageDao(iscms).getById(id);
+		Page page = (Page)getPageDao(iscms).getById(id);
+		return page == null ? (iscms ? new CmsPage() : new LivePage()) : page;
 	}
 	
 	public List<String> findActiveTemplates(boolean iscms) {
 		return getPageDao(iscms).findActiveTemplates();
+	}
+	
+	public void addOrUpdate(Page page, boolean iscms) {
+		if(page.isNew()) getPageDao(iscms).add(page);
+		else getPageDao(iscms).update(page);
 	}
 	
 }

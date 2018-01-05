@@ -8,12 +8,15 @@ import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -27,31 +30,34 @@ import com.edeas.controller.cmsadmin.CmsProperties;
 public class Page<T, E> {
 	private Long id;
 	private T parent;
-	private int rootId;
+	private Long parentId = 0l;
+	private Long rootId = 0l;
 	private int pageLevel;
 	private int release;
 	private int edit;
 	private String template;
-	private PageStatus status;
-	private boolean active;
+	private PageStatus status = PageStatus.NEW;
+	private boolean active = true;
 	private boolean delete;
 	private boolean reqDelete;
-	private Date publishTime;
-	private Date expireTime;
-	private boolean neverExpire;
-	private Date pageTimeFrom;
-	private Date pageTimeTo;
+	private Date publishTime = new Date();
+	private Date expireTime = new Date();
+	private boolean neverExpire = true;
+	private Date pageTimeFrom = new Date();
+	private Date pageTimeTo = new Date();
 	private String pageTimeDisplay;
 	private int pageOrder;
 	private String name;
 	private String url;
 	private String commonxml;
-	private Date createTime;
+	private Date createTime = new Date();;
 	private Date updateTime;
 	private Set<E> contents = new HashSet<E>();
 	private Set<T> children = new HashSet<T>();
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="pageTableGenerator")
+	@TableGenerator(name="pageTableGenerator",initialValue=1,allocationSize=1)
 	public Long getId() {
 		return id;
 	}
@@ -68,14 +74,23 @@ public class Page<T, E> {
 
 	public void setParent(T parent) {
 		this.parent = parent;
+	}	
+	
+	@Column(nullable=false)
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 	@Column(nullable=false)
-	public int getRootId() {
+	public Long getRootId() {
 		return rootId;
 	}
 
-	public void setRootId(int rootId) {
+	public void setRootId(Long rootId) {
 		this.rootId = rootId;
 	}
 
@@ -293,18 +308,18 @@ public class Page<T, E> {
 	}
 	
 	@Transient
-	public boolean isHideSubTpl() {
+	public boolean isHideSubTpls() {
 		return CmsProperties.getHideSubTpls().contains(this.template);
 	}
 	
 	@Transient
-	public boolean isExcTpl() {
+	public boolean isExcTpls() {
 		return CmsProperties.getExcTpls().contains(this.template);
 	}
 	
 	@Transient
 	public boolean isNew() {
-		return this.getId() == null;
+		return this.getId() == null || this.getId() <= 0;
 	}
 	
 	@Transient
@@ -321,5 +336,36 @@ public class Page<T, E> {
 			}
 		}
 		return sb.toString();
+	}
+	
+	public void initNewPage(CmsPage parent, boolean newAtFront) {		
+		Long parentId = parent.getId();
+		this.parentId = parentId;
+        if (parentId == -1) {
+            this.rootId = -1l;            
+            this.template = "Homepage";
+            this.name = "Homepage";
+            this.url = "index";
+        } else if (parentId == -2) {
+            this.rootId = -2l;
+            this.template = "Masterpage";
+            this.name = "Masterpage";
+        } else if (parentId < 0) {
+            this.rootId = parentId;
+        } else if (!parent.isNew()) {
+            this.rootId = parent.getRootId();
+            this.pageLevel = parent.getPageLevel() + 1;
+        } else {
+            this.pageLevel = 1;
+        }
+        if (newAtFront || parent.isNew()) {
+        	this.pageOrder = 1;
+        } else {
+        	int max = 0;
+        	for(Page page : parent.getChildren()) {
+        		max = Math.max(max, page.getPageOrder());
+        	}
+        	this.pageOrder = max + 1;
+        }
 	}
 }

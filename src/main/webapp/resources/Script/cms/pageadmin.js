@@ -126,9 +126,9 @@ function widgetDropped(t,e,ui) {
     //console.log("TextBlock is dropped");
     var u=cmsroot+"PageContentAdmin/AddWidget?pgid="+pgid+"&lang="+lang;    
     $.post(u,{ hxid:holderxid,hwname:holderwname,wid:newwid,wname:newwname },function(data) { 
-      if (data.success=="true") {
+      if (data.success) {
         refresh();
-      } else { var emsg=(data.message===undefined)?data:data.message; alert("Error:"+emsg); }
+      } else { alert("Error:"+data.errorMsg); }
     },"json");
   } else {
     //console.log("Non TextBlock is dropped");
@@ -177,9 +177,9 @@ function movWidget(pgid,lang,xid,beforeid,mfn) {
 	var pms = "?pgid="+pgid+"&lang="+lang+"&xid="+xid+"&beforeid="+beforeid;
 	var u = cmsroot+"/PageContentAdmin/ChangeWidgetOrder"+pms;
     $.getJSON(u,function (data) { 
-        if (data.Success=="True") { 
+        if (data.success) { 
 		  mfn();
-        } else { alert(data.Message); } 
+        } else { alert(data.errorMsg); } 
     } );  
 }
 
@@ -189,9 +189,9 @@ function movupWidget(pgid,lang,xid,mfn) {
 	var pms = "?pgid="+pgid+"&lang="+lang+"&xid="+xid;
 	var u = cmsroot+"/PageContentAdmin/MovWidgetUp"+pms;
     $.getJSON(u,function (data) { 
-        if (data.Success=="True") { 
+        if (data.success) { 
 		  mfn();
-        } else { alert(data.Message); } 
+        } else { alert(data.errorMsg); } 
     } );  
 }
 
@@ -201,9 +201,9 @@ function movdownWidget(pgid,lang,xid,mfn) {
 	var pms = "?pgid="+pgid+"&lang="+lang+"&xid="+xid;
 	var u = cmsroot+"/PageContentAdmin/MovWidgetDown"+pms;
     $.getJSON(u,function (data) { 
-        if (data.Success=="True") { 
+        if (data.success) { 
 		  mfn();
-        } else { alert(data.Message); } 
+        } else { alert(data.errorMsg); } 
     } );  
 }
 
@@ -383,9 +383,9 @@ function doWorkflow(pgid,action) {
 function doAjaxWFAct(pgid,action) {
     var u=cmsroot+"PageAdmin/"+action;
     $.post(u,{ "pgid":pgid },function(data) { 
-      if (data.Success=="True") {
+      if (data.success) {
         refresh();
-      } else { var emsg=(data.Message===undefined)?data:data.Message; alert("Error:"+emsg); }
+      } else { alert("Error:"+data.errorMsg); }
     },"json");
 }
 
@@ -406,9 +406,9 @@ function applyLangContent(srclang) {
   var pglang=$("#cmspage").attr("lang");
   var u=cmsroot+"PageContentAdmin/ApplyLang?pageid="+pgid+"&pglang="+pglang+"&applylang="+srclang;
   $.getJSON(u,function(data) {
-    if (data.Success=="True") {
+    if (data.success) {
       refresh();
-    } else { var emsg=(data.Message===undefined)?data:data.Message; alert("Error:"+emsg); }
+    } else { alert("Error:"+data.errorMsg); }
   });
 }
 
@@ -416,9 +416,9 @@ function applyVer(v) {
   var pgid=$("#cmspage").attr("pgid");
   var u=cmsroot+"PageAdmin/ApplyVer?pageid="+pgid+"&ver="+v;
   $.getJSON(u,function(data) {
-    if (data.Success=="True") {
+    if (data.success) {
       refresh();
-    } else { var emsg=(data.Message===undefined)?data:data.Message; alert("Error:"+emsg); }
+    } else { alert("Error:"+data.errorMsg); }
   });
 }
 

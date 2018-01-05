@@ -40,10 +40,10 @@
         function submitPgConfigForm() {
             var u = cmsroot + "PageAdmin/Save";
             $.post(u, $("#pgconfigform").serialize(), function (data) {
-                if (data.Success == "True") {
+                if (data.success) {
                     parent.refreshonclose = true;
                     parent.TINY.box.hide();
-                } else alert(data.Message);
+                } else alert(data.errorMsg);
             }, "json");
             //E$("pgconfigform").submit();
         }

@@ -30,8 +30,8 @@ function setPtyFormSubmission() {
     $("#propertyform").submit(); //standard post to support file uploads
     /* AJAX Submit Not Support File Uploads
     $.post("/PageContentAdmin/UpdateProperty",$("#propertyform").serialize(),function(data) {
-      if (data.Success=="true") { enterPtyFormSave(); refresh(); }
-      else alert('Unable to update the properties: '+data.Message);
+      if (data.success) { enterPtyFormSave(); refresh(); }
+      else alert('Unable to update the properties: '+data.errorMsg);
     });
     */
   });

@@ -2,10 +2,13 @@ package com.edeas.model;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.TableGenerator;
 
 @MappedSuperclass
 public class Content<T> {
@@ -16,6 +19,8 @@ public class Content<T> {
 	private String contentXm;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="contentTableGenerator")
+	@TableGenerator(name="contentTableGenerator",initialValue=1,allocationSize=1)
 	public Long getId() {
 		return id;
 	}

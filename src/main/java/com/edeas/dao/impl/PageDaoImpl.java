@@ -6,11 +6,11 @@ import org.hibernate.SQLQuery;
 
 public abstract class PageDaoImpl<T> extends BasicDao<T> {
 	public List<T> findByParentId(long parentId) {
-		return listByHQL("from " + getClz().getName() + " where parent.id=? order by pageOrder asc", new Long[]{ parentId });
+		return listByHQL("from " + getClz().getName() + " where parentId=? order by pageOrder asc", new Long[]{ parentId });
 	} 
 	
 	public List<T> findAllTopPage() {
-		return listByHQL("from " + getClz().getName() + " where parent.id=0 order by pageOrder asc");
+		return listByHQL("from " + getClz().getName() + " where parentId=0 order by pageOrder asc");
 	}
 
 	public List<String> findActiveTemplates() {
