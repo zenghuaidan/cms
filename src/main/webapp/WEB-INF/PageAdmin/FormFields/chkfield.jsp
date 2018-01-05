@@ -7,9 +7,9 @@
 <%@page import="org.dom4j.Document"%>
 
 <%
-	Element dataw = (Element)request.getAttribute("dataw");
-	Element wdef = (Element)request.getAttribute("wdef");
-	Element model = (Element)request.getAttribute("model");
+	Element dataw = (Element)request.getAttribute("dataw");//data
+	Element wdef = (Element)request.getAttribute("wdef");//widget define
+	Element model = (Element)request.getAttribute("model");//file schema
 	Map<String, String> fpm = XmlUtils.getFieldCommon(model, wdef);
     String chkval = (dataw == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(dataw, fpm.get("fname"));
     boolean isChk = !StringUtils.isBlank(chkval) && Boolean.getBoolean(chkval.toLowerCase());

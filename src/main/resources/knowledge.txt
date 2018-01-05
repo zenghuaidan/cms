@@ -1,3 +1,5 @@
 1. 在Controler通过Model传递过来的参数在JSP 页面的<%%>的script中可以通过request.getAttribute("test")获得对应的参数值
 2. ${ currentPage.active ? " checked" : "" } : 此种写法在jsp中能获得active的值 
    ${ currentPage.new ? " checked" : "" } ： 此种写法则不能获得new的值，可能是new为关键字的原因
+   
+3. JSP include是，如果path是变量需要将整个path作为一个变量<jsp:include page="<%=path%>" /> 

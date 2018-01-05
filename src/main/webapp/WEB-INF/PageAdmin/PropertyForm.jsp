@@ -36,9 +36,9 @@
 	Page currentPage = (Page)request.getAttribute("currentPage");
 	Content currentContent = (Content)currentPage.getContent(lang);
 	Document tx = XmlUtils.getTemplateDocument(currentPage.getTemplate());
-	List<Element> flist = (List<Element>)tx.selectNodes("/Template/Properties/Field");
+	List<Element> fieldList = (List<Element>)tx.selectNodes("/Template/Properties/Field");
 	Document propDocument = currentContent == null ? null : currentContent.getPropertyXmlDoc();
-	Element dataw = (propDocument == null) ? null : (Element)propDocument.selectSingleNode("/Properties");
+	Element dataWidget = (propDocument == null) ? null : (Element)propDocument.selectSingleNode("/Properties");
 	String ptyerr = (String)request.getAttribute("ptyError");
 %>
 <form action="PageContentAdmin/UpdateProperty" method="post" id="propertyform" name="propertyform" enctype="multipart/form-data">	
@@ -51,16 +51,14 @@
        <div class="content">
         <table id="propertyformtbl">
         	<% 
-	            for (Element fn : flist)
+	            for (Element fieldSchema : fieldList)
 	            {
-	                String path = "/WEB-INF/PageAdmin/FormFields/" + fn.attributeValue("type") + ".jsp";
-	                request.setAttribute("dataw", dataw);
-	                request.setAttribute("model", fn);
+	                String path = "/WEB-INF/PageAdmin/FormFields/" + fieldSchema.attributeValue("type") + ".jsp";
+	                request.setAttribute("dataw", dataWidget);
+	                request.setAttribute("model", fieldSchema);
             %>            		
                 	<jsp:include page="<%=path%>" /> 
-            <% 
-	            }
-        	%>
+            <% 	} %>
         </table>
         <div class="btns">
             <div class="url"><span class="hlbg">URL</span>${url}</div>
