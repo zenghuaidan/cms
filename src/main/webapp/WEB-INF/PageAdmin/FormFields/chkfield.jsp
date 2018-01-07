@@ -2,16 +2,14 @@
 <%@page import="com.edeas.utils.XmlUtils"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.dom4j.Element"%>
-<%@page import="org.dom4j.Node"%>
 <%@page import="java.util.*"%>
-<%@page import="org.dom4j.Document"%>
 
 <%
-	Element dataw = (Element)request.getAttribute("dataw");//data
-	Element wdef = (Element)request.getAttribute("wdef");//widget define
-	Element model = (Element)request.getAttribute("model");//file schema
-	Map<String, String> fpm = XmlUtils.getFieldCommon(model, wdef);
-    String chkval = (dataw == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(dataw, fpm.get("fname"));
+	Element fieldData = (Element)request.getAttribute("fieldData");//data
+	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
+	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
+	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
+    String chkval = (fieldData == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));
     boolean isChk = !StringUtils.isBlank(chkval) && Boolean.getBoolean(chkval.toLowerCase());
     String sel = isChk ? "checked" : "";
 %>

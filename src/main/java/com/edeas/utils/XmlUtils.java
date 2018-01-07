@@ -45,31 +45,31 @@ public class XmlUtils {
 		return null;
 	}
 	
-	public static Map<String, String> getFieldCommon(Element fdef, Element wdef)
+	public static Map<String, String> getSchemaInfo(Element fieldSchema, Element widgetSchema)
     {
         Map<String, String> r = new HashMap<String, String>();
-        String fname = fdef.attributeValue("name");
+        String fname = fieldSchema.attributeValue("name");
         r.put("fname",fname);
-        r.put("ftype", fdef.attributeValue("type"));
+        r.put("ftype", fieldSchema.attributeValue("type"));
         
-        String label = fdef.attributeValue("label", "");
-        if (wdef != null && !StringUtils.isBlank(wdef.attributeValue(fname + "Label"))) { label = wdef.attributeValue(fname + "Label"); }
+        String label = fieldSchema.attributeValue("label", "");
+        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Label"))) { label = widgetSchema.attributeValue(fname + "Label"); }
         r.put("flabel", label);
         
-        String style = fdef.attributeValue("style", "");
-        if (wdef != null && !StringUtils.isBlank(wdef.attributeValue(fname + "Style"))) { style = wdef.attributeValue(fname + "Style"); }        
+        String style = fieldSchema.attributeValue("style", "");
+        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Style"))) { style = widgetSchema.attributeValue(fname + "Style"); }        
         r.put("fstyle", style);
         
-        String attr = fdef.attributeValue("attr", "");
-        if (wdef != null && !StringUtils.isBlank(wdef.attributeValue(fname + "Attr"))) { attr = wdef.attributeValue(fname + "Attr"); }        
+        String attr = fieldSchema.attributeValue("attr", "");
+        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Attr"))) { attr = widgetSchema.attributeValue(fname + "Attr"); }        
         r.put("fattr", attr);
         
-        String defval = fdef.attributeValue("default", "");
-        if (wdef != null && !StringUtils.isBlank(wdef.attributeValue(fname + "Default"))) { defval = wdef.attributeValue(fname + "Default"); }        
+        String defval = fieldSchema.attributeValue("default", "");
+        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Default"))) { defval = widgetSchema.attributeValue(fname + "Default"); }        
         r.put("fdefval", defval);
         
-        String remark = fdef.attributeValue("remark", "");
-        if (wdef != null && !StringUtils.isBlank(wdef.attributeValue(fname + "Remark"))) { remark = wdef.attributeValue(fname + "Remark"); }
+        String remark = fieldSchema.attributeValue("remark", "");
+        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Remark"))) { remark = widgetSchema.attributeValue(fname + "Remark"); }
         r.put("fremark", remark);
         return r;
     }

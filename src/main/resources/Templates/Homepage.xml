@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Template id="Homepage" haspgtime="no">
   <Properties excludestd="">
-    <Field name="HeadTitle" type="chkfield" label="Header title" />    
+    <Field name="HeadTitle" type="chkfield" label="Header title" />
+    <Field name="HeadTitle1" type="datetimefield" label="Header title" />    
   </Properties>
   <WidgetBox />
   <Widgets>

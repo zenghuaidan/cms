@@ -1,24 +1,29 @@
-﻿@model System.Xml.XmlNode
-@{
-    Layout = null;
-    System.Xml.XmlNode dataw = (System.Xml.XmlNode)ViewData["dataw"];
-    System.Xml.XmlNode wdef = (System.Xml.XmlNode)ViewData["wdef"];
-    Dictionary<string, string> fpm = CmsWebCore.Cms.LogicCms.getFieldCommon(Model,wdef);    
-    string val = (dataw == null) ? fpm["fdefval"] : CmsWebCore.Common.Helper.getFieldRaw(dataw, fpm["fname"]);
-}
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.edeas.utils.XmlUtils"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.dom4j.Element"%>
+<%@page import="java.util.*"%>
+<%@page import="com.edeas.controller.*"%>
+
+<%
+	Element fieldData = (Element)request.getAttribute("fieldData");//data
+	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
+	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
+	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
+	String val = (fieldData == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));
+%>
 <tr class="datafield">
-    <td class="label" style="vertical-align:top;">@fpm["flabel"]: </td>
-    <td class="field @fpm["ftype"]" fid="@fpm["fname"]">
-        <input type='hidden' id="@fpm["fname"]" name="@fpm["fname"]" class='docvalfield' value="@val" />
-        <input type='file' id="@(fpm["fname"])_file" name="@(fpm["fname"])_file" style="@fpm["fstyle"]"  />
-        @if (val.Trim() != "")
-        {
-            <div id="@(fpm["fname"])_view">
-                File: @val
-                <input type="button" value="View" onclick="window.open('@vhelp.udoc(Url,val)');" />
-                <input type="button" value="Clear" onclick="clrVal('@fpm["fname"]'); $('#@(fpm["fname"])_view').hide();" />
+    <td class="label" style="vertical-align:top;"><%=fpm.get("flabel") %>: </td>
+    <td class="field <%=fpm.get("ftype") %>" fid="<%=fpm.get("fname") %>">
+        <input type='hidden' id="<%=fpm.get("fname") %>" name="<%=fpm.get("fname") %>" class='docvalfield' value="<%=val %>" />
+        <input type='file' id="<%=fpm.get("fname") %>_file" name="<%=fpm.get("fname") %>_file" style="<%=fpm.get("fstyle") %>"  />
+        <% if (!StringUtils.isBlank(val)) { %>
+            <div id="<%=fpm.get("fname") %>_view">
+                File: <%=val %>
+                <input type="button" value="View" onclick="window.open('<%=Global.getDocUploadPath() + "/" + val %>');" />
+                <input type="button" value="Clear" onclick="clrVal('<%=fpm.get("fname") %>'); $('#<%=fpm.get("fname") %>)_view').hide();" />
             </div>
-        }
-        @Html.Raw(fpm["fremark"])
+        <% } %>
+        <%=fpm.get("fremark") %>
     </td>
 </tr>

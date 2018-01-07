@@ -1,38 +1,34 @@
-﻿@model System.Xml.XmlNode
-@{
-    Layout = null;
-    System.Xml.XmlNode dataw = (System.Xml.XmlNode)ViewData["dataw"];
-    System.Xml.XmlNode wdef = (System.Xml.XmlNode)ViewData["wdef"];
-    Dictionary<string, string> fpm = CmsWebCore.Cms.LogicCms.getFieldCommon(Model,wdef);
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.edeas.utils.XmlUtils"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.dom4j.Element"%>
+<%@page import="java.util.*"%>
+<%@page import="com.edeas.controller.*"%>
 
-    string val = (dataw == null) ? fpm["fdefval"] : CmsWebCore.Common.Helper.getFieldRaw(dataw, fpm["fname"]);
-
-    string fopts = (Model.Attributes["opts"] == null) ? "" : Model.Attributes["opts"].Value;
-    if (wdef != null && wdef.Attributes[fpm["fname"] + "Opts"] != null) { fopts = wdef.Attributes[fpm["fname"] + "Opts"].Value; }
-    fopts = !String.IsNullOrEmpty((String)ViewData["dbFieldAttr"]) ? ViewData["dbFieldAttr"].ToString() : fopts;
-    string[] opts = String.IsNullOrEmpty(fopts) ? new string[] { } : fopts.Split(',');
-
-    List<String> _opts = opts.ToList();
-    _opts.Sort((x, y) =>
-    {
-        if (x.Contains("--Please Select--"))
-            return -1;
-        if (y.Contains("--Please Select--"))
-            return 1;
-        return x.Split('^')[1].CompareTo(y.Split('^')[1]);
-    });
-}
+<%
+	Element fieldData = (Element)request.getAttribute("fieldData");//data
+	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
+	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
+	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
+	String val = (fieldData == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));
+	
+    String fopts = fieldSchema == null ? "" : fieldSchema.attributeValue("opts");
+    if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fpm.get("fname") + "Opts", ""))) { fopts = widgetSchema.attributeValue(fpm.get("fname") + "Opts"); }
+    String[] opts = fopts.split(",");
+%>
 <tr class="datafield">
-    <td class="label" style="vertical-align:top;">@fpm["flabel"]: </td>
-    <td class="field @fpm["ftype"]" fid="@fpm["fname"]">
-        <select id="@fpm["fname"]" name="@fpm["fname"]" style="@fpm["fstyle"]">
-        @foreach (string ot in _opts)
-        {
-            string[] o = ot.Split('^');
-            string sel = (val == o[0]) ? " selected" : "";
-            <option value="@o[0]" @sel>@o[1]</option>
-        }
+    <td class="label" style="vertical-align:top;"><%=fpm.get("flabel") %>: </td>
+    <td class="field <%=fpm.get("ftype") %>" fid="<%=fpm.get("fname") %>">
+        <select id="<%=fpm.get("fname") %>" name="<%=fpm.get("fname") %>" style="<%=fpm.get("ftype") %>">
+        <%
+        	for(String opt : opts) {
+	            String[] o = opt.split("^");
+	            String sel = val.equals(o[0]) ? " selected" : "";
+	            out.print("<option value='" + o[0] + "' @sel>" + o[1] + "</option>");
+        		
+        	}
+        %>
         </select>
-        @Html.Raw(fpm["fremark"])
+        <%=fpm.get("fremark") %>
     </td>
 </tr>

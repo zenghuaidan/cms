@@ -32,7 +32,7 @@ public class User {
 	private Date createTime = new Date();
 	private Date updateTime;
 	
-//INSERT INTO `db_larry_java_cms`.`CmsUser` (`active`, `createTime`, `email`, `firstName`, `lastFailTime`, `lastName`, `login`, `numFail`, `password`, `updateTime`) VALUES ('1', '2018-01-05', 'larry.zeng@edeas.hk', 'larry', '0', 'zeng', 'larry', '0', '3HJK8Y+91OWRifX+dopfgxFScFA=', '2018-01-05');
+//INSERT INTO `db_larry_java_cms`.`CmsUser` (`id`, `active`, `createTime`, `email`, `firstName`, `lastFailTime`, `lastName`, `login`, `numFail`, `password`, `updateTime`) VALUES (1, '1', '2018-01-05', 'larry.zeng@edeas.hk', 'larry', '2018-01-05', 'zeng', 'larry', '0', '3HJK8Y+91OWRifX+dopfgxFScFA=', '2018-01-05');
 	@Id
 	public Long getId() {
 		return id;

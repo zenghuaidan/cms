@@ -24,6 +24,14 @@ public class Global {
 		return InitServlet.getWc().getServletContext().getContextPath() + "/resources/Script";
 	} 
 	
+	public static String getDocUploadPath() {
+		return getContentPath() + "/uploads/docs";
+	}
+	
+	public static String getImagesUploadPath() {
+		return getContentPath() + "/uploads/images";
+	}
+	
 	public static String getCMSUrl() {		
 		return CmsController.getCMSUrl();
 	}
