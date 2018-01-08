@@ -15,7 +15,7 @@
     String fopts = XmlUtils.getFieldAttr(fieldSchema, "opts");
     String wopts = XmlUtils.getFieldAttr(widgetSchema, fpm.get("fname") + "Opts");
     if (!StringUtils.isBlank(wopts)) { fopts = wopts; }
-    String[] opts = fopts.split(",");
+    String[] opts = StringUtils.isBlank(fopts) ? new String[]{} :  fopts.split(",");
 %>
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.get("flabel") %>: </td>
@@ -24,7 +24,7 @@
         <%
         	for(String opt : opts) {
 	            String[] o = opt.split("^");
-	            String sel = val.equals(o[0]) ? " selected" : "";
+	            String sel = o[0].equals(val) ? " selected" : "";
 	            out.print("<option value='" + o[0] + "' @sel>" + o[1] + "</option>");
         		
         	}

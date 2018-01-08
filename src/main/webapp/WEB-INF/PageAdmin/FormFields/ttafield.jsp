@@ -1,15 +1,21 @@
-﻿@model System.Xml.XmlNode
-@{
-    Layout = null;
-    System.Xml.XmlNode dataw = (System.Xml.XmlNode)ViewData["dataw"];
-    System.Xml.XmlNode wdef = (System.Xml.XmlNode)ViewData["wdef"];
-    Dictionary<string, string> fpm = CmsWebCore.Cms.LogicCms.getFieldCommon(Model,wdef);
-    string txtval = (dataw == null) ? fpm["fdefval"] : CmsWebCore.Common.Helper.getFieldRaw(dataw, fpm["fname"]);
-}
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.edeas.utils.XmlUtils"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.dom4j.Element"%>
+<%@page import="java.util.*"%>
+<%@page import="com.edeas.controller.*"%>
+
+<%
+	Element fieldData = (Element)request.getAttribute("fieldData");//data
+	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
+	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
+	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
+	String txtval = (fieldData == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));	
+%>
 <tr class="datafield">
-    <td class="label" style="vertical-align:top;">@fpm["flabel"]: </td>
-    <td class="field @fpm["ftype"]" fid="@fpm["fname"]">
-        <textarea id="@fpm["fname"]" name="@fpm["fname"]" style="@fpm["fstyle"]">@Html.Raw(txtval)</textarea>
-        @Html.Raw(fpm["fremark"])
+    <td class="label" style="vertical-align:top;"><%=fpm.get("flabel") %>: </td>
+    <td class="field <%=fpm.get("ftype") %>" fid="<%=fpm.get("fname") %>">
+        <textarea id="<%=fpm.get("fname") %>" name="<%=fpm.get("fname") %>" style="<%=fpm.get("ftype") %>"><%=txtval %></textarea>
+        <%=fpm.get("fremark") %>
     </td>
 </tr>

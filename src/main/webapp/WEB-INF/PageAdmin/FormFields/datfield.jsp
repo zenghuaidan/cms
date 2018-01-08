@@ -11,7 +11,7 @@
 	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
     String fid = fpm.get("fname");
     String txtval = (fieldData == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));
-    if (txtval.equals("today")) {
+    if ("today".equals(txtval)) {
     	txtval = com.edeas.utils.DateUtils.yyyyMMdd().format(new Date());
     }
 %>
