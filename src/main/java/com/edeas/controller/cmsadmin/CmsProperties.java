@@ -67,20 +67,25 @@ public class CmsProperties {
 		return getValue("DefaultLanguage");		
 	}
 	
-	public static int getMaxTopgs() {
-		try {
-			return Integer.parseInt(getValue("MaxTopgs"));			
-		} catch (Exception e) {
-		}
-		return -1;		
+	public static int getMaxTopgs() {		
+		return getIntValue("MaxTopgs");
 	}
 	
-	public static int getMaxLevel() {
+	public static int getMaxLevel() {		
+		return getIntValue("MaxLevel");
+	}
+	
+	// size in M unit
+	public static int getImageMaxUploadSize() {
+		return getIntValue("ImageMaxUploadSize");		
+	}
+
+	private static int getIntValue(String key) {
 		try {
-			return Integer.parseInt(getValue("MaxLevel"));			
+			return Integer.parseInt(getValue(key));			
 		} catch (Exception e) {
 		}
-		return -1;		
+		return -1;
 	}
 	
 	public static List<String> getHideSubTpls() {		

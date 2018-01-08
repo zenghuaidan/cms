@@ -28,6 +28,14 @@ public class Global {
 		return getContentPath() + "/uploads/docs";
 	}
 	
+	public static String getDocUploadPath(String val) {
+		return getContentPath() + "/uploads/docs/" + val;
+	}
+	
+	public static String getImagesUploadPath(String type, String val) {
+		return getContentPath() + "/uploads/images/" + type + "/" + val;
+	}
+	
 	public static String getImagesUploadPath() {
 		return getContentPath() + "/uploads/images";
 	}

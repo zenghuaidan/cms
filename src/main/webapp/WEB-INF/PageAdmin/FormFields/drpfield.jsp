@@ -12,8 +12,9 @@
 	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
 	String val = (fieldData == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));
 	
-    String fopts = fieldSchema == null ? "" : fieldSchema.attributeValue("opts");
-    if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fpm.get("fname") + "Opts", ""))) { fopts = widgetSchema.attributeValue(fpm.get("fname") + "Opts"); }
+    String fopts = XmlUtils.getFieldAttr(fieldSchema, "opts");
+    String wopts = XmlUtils.getFieldAttr(widgetSchema, fpm.get("fname") + "Opts");
+    if (!StringUtils.isBlank(wopts)) { fopts = wopts; }
     String[] opts = fopts.split(",");
 %>
 <tr class="datafield">

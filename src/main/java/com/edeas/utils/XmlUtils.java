@@ -48,29 +48,16 @@ public class XmlUtils {
 	public static Map<String, String> getSchemaInfo(Element fieldSchema, Element widgetSchema)
     {
         Map<String, String> r = new HashMap<String, String>();
-        String fname = fieldSchema.attributeValue("name");
-        r.put("fname",fname);
-        r.put("ftype", fieldSchema.attributeValue("type"));
+        String fname = getFieldAttr(fieldSchema, "name");
+        r.put("fname", fname);
+        r.put("ftype", getFieldAttr(fieldSchema, "type"));                   
         
-        String label = fieldSchema.attributeValue("label", "");
-        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Label"))) { label = widgetSchema.attributeValue(fname + "Label"); }
-        r.put("flabel", label);
+        for(String tag : new String[]{"label","style","attr","default","remark"}) {
+        	String value = getFieldAttr(fieldSchema, tag);
+        	String wValue = XmlUtils.getFieldAttr(widgetSchema, fname + tag.substring(0, 1).toUpperCase() + tag.substring(1));
+        	r.put("f" + tag, StringUtils.isBlank(wValue) ? value : wValue);        
+        }
         
-        String style = fieldSchema.attributeValue("style", "");
-        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Style"))) { style = widgetSchema.attributeValue(fname + "Style"); }        
-        r.put("fstyle", style);
-        
-        String attr = fieldSchema.attributeValue("attr", "");
-        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Attr"))) { attr = widgetSchema.attributeValue(fname + "Attr"); }        
-        r.put("fattr", attr);
-        
-        String defval = fieldSchema.attributeValue("default", "");
-        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Default"))) { defval = widgetSchema.attributeValue(fname + "Default"); }        
-        r.put("fdefval", defval);
-        
-        String remark = fieldSchema.attributeValue("remark", "");
-        if (widgetSchema != null && !StringUtils.isBlank(widgetSchema.attributeValue(fname + "Remark"))) { remark = widgetSchema.attributeValue(fname + "Remark"); }
-        r.put("fremark", remark);
         return r;
     }
 	
@@ -78,5 +65,16 @@ public class XmlUtils {
     {
 		Element fnode = (w == null) ? null : (Element)w.selectSingleNode("Field[@name='" + fieldname + "']");
         return (fnode == null) ? "" : fnode.getTextTrim();
+    }
+	
+	public static String getWidgetFieldAttr(Element w, String fieldname, String attrname)
+    {
+		Element fnode = (w == null) ? null : (Element)w.selectSingleNode("Field[@name='" + fieldname + "']");
+        return getFieldAttr(fnode, attrname);
+    }
+	
+	public static String getFieldAttr(Element fnode, String attrname)
+    {
+        return (fnode == null) ? "" : fnode.attributeValue(attrname, "");
     }
 }

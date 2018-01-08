@@ -1,21 +1,27 @@
-﻿@model System.Xml.XmlNode
-@{
-    Layout = null;
-    System.Xml.XmlNode dataw = (System.Xml.XmlNode)ViewData["dataw"];
-    System.Xml.XmlNode wdef = (System.Xml.XmlNode)ViewData["wdef"];
-    Dictionary<string, string> fpm = CmsWebCore.Cms.LogicCms.getFieldCommon(Model,wdef);
-    string val = CmsWebCore.Common.Helper.getFieldRaw(dataw, fpm["fname"]);
-    string alt = CmsWebCore.Common.Helper.getWidgetFieldAttr(dataw, fpm["fname"],"alt");
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.edeas.utils.XmlUtils"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.dom4j.Element"%>
+<%@page import="java.util.*"%>
+<%@page import="com.edeas.controller.*"%>
+<%@page import="com.edeas.controller.cmsadmin.CmsProperties"%>
 
-    System.Text.StringBuilder imgdesc = new System.Text.StringBuilder("<span style='text-transform:none;'>");
-    if (fpm["fattr"].Trim()!="")
-    {
-        string[] alist = fpm["fattr"].Split(',');
-        foreach (string a in alist)
+<%
+	Element fieldData = (Element)request.getAttribute("fieldData");//data
+	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
+	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
+	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
+	String val = XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));
+	String alt = XmlUtils.getWidgetFieldAttr(fieldData, fpm.get("fname"), "alt");
+	
+    StringBuffer imgdesc = new StringBuffer("<span style='text-transform:none;'>");
+    if(!StringUtils.isBlank(fpm.get("fattr"))) {
+        String[] alist = fpm.get("fattr").split(",");
+        for (String a : alist)
         {
-            imgdesc.Append("<br />[ ");
-            string[] b = a.Split(':');
-            string l = b[0];
+        	imgdesc.append("<br />[ ");
+            String[] b = a.split(":");
+            String l = b[0];
             switch (l)
             {
                 case "fix": l = "Fix dimenaion"; break;
@@ -26,27 +32,27 @@
                 case "maxh": l = "Max height"; break;
                 case "samewh": l = "Same width and height"; break;
             }
-            imgdesc.Append(l + (b.Length < 2 ? "" :  " : " + b[1]) + " ]");
+            imgdesc.append(l + (b.length < 2 ? "" :  " : " + b[1]) + " ]");
         }
     }
-    imgdesc.Append("<br />[ " + CmsWebCore.Common.GlobalLibrary.getResourceByKey(Server.MapPath("~/"), "ImageSizeNotMoreThan") + " " + CmsWebCore.Common.GlobalVars.IMAGE_MAX_UPLOAD_SIZE + "M ]</span>");
-}
+    if(CmsProperties.getImageMaxUploadSize() > 0) {
+    	imgdesc.append("<br />[ Size not more than" + CmsProperties.getImageMaxUploadSize() + "M ]</span>");    	
+    }
+%>
 <tr class="datafield">
-    <td class="label" style="vertical-align:top;">@fpm["flabel"] @Html.Raw(imgdesc.ToString()): </td>
-    <td class="field @fpm["ftype"]" fid="@fpm["fname"]">
-        <input type='hidden' id="@fpm["fname"]" name="@fpm["fname"]" value="@val" />
-        <input type='file' id="@(fpm["fname"])_file" name="@(fpm["fname"])_file" class='imgfield' value="@val" />
-        @if (val.Trim() != "")
-        {
-            <span id="@(fpm["fname"])_view">
-                <input type="button" value="View" onclick="popUrl('@Url.Content("~/Content/uploads/images/source/"+val)');" />
-                <input type="button" value="Clear" onclick="clrVal('@(fpm["fname"])'); $('#@(fpm["fname"])_view').hide();" />
+    <td class="label" style="vertical-align:top;"><%=fpm.get("flabel") %> <%=imgdesc %>: </td>
+    <td class="field <%=fpm.get("ftype") %>" fid="<%=fpm.get("fname") %>">
+        <input type='hidden' id="<%=fpm.get("fname") %>" name="<%=fpm.get("fname") %>" value="<%=val %>" />
+        <input type='file' id="<%=fpm.get("fname") %>_file" name="<%=fpm.get("fname") %>_file" class='imgfield' value="<%=val %>" />
+        <% if(!StringUtils.isBlank(val)) { %>
+            <span id="<%=fpm.get("fname") %>_view">
+                <input type="button" value="View" onclick="popUrl('<%=Global.getImagesUploadPath("source", val) %>');" />
+                <input type="button" value="Clear" onclick="clrVal('<%=fpm.get("fname") %>'); $('#<%=fpm.get("fname") %>_view').hide();" />
             </span>
-        }                
+        <% } %>                       
         <div>
-            @vhelp.renderResource(Html, "AltText"): <input type="text" class="altxt" id="@(fpm["fname"])_alt" name="@(fpm["fname"])_alt"
-                             fid="@fpm["fname"]" value="@alt" />
+            Alt Text: <input type="text" class="altxt" id="<%=fpm.get("fname") %>_alt" name="<%=fpm.get("fname") %>_alt" fid="<%=fpm.get("fname") %>" value="<%=alt %>" />
         </div>
-        @Html.Raw(fpm["fremark"])
+        <%=fpm.get("fremark") %>
     </td>
 </tr>

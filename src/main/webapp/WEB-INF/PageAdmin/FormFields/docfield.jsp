@@ -20,7 +20,7 @@
         <% if (!StringUtils.isBlank(val)) { %>
             <div id="<%=fpm.get("fname") %>_view">
                 File: <%=val %>
-                <input type="button" value="View" onclick="window.open('<%=Global.getDocUploadPath() + "/" + val %>');" />
+                <input type="button" value="View" onclick="window.open('<%=Global.getDocUploadPath(val) %>');" />
                 <input type="button" value="Clear" onclick="clrVal('<%=fpm.get("fname") %>'); $('#<%=fpm.get("fname") %>)_view').hide();" />
             </div>
         <% } %>
