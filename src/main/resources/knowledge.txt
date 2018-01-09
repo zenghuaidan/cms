@@ -16,3 +16,9 @@
 	    <artifactId>c3p0</artifactId>
 	    <version>0.9.5.2</version>
 	</dependency>
+	
+5. 当使用<%=url%>时，有时候url的斜杠会变成空格，此时请检查单双引号的嵌套问题
+String a = (lang == labbr) ? "" : "goUrl('" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() + "&lang=" + labbr + "');";//这样url会有问题
+String a = (lang == labbr) ? "" : "goUrl(\"" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() + "&lang=" + labbr + "\");";//用双引号就不会有问题
+
+应该是使用out.print的时候，如果是单引号的话里面的斜杠会有问题

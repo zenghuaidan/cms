@@ -101,7 +101,7 @@
 	<%
 		for(String labbr : Global.LANGS.keySet()) {
 	        String c = (lang == labbr) ? "selcmstab" : "cmstab";
-	        String a = (lang == labbr) ? "" : "goUrl('" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() + "&lang=" + labbr + "');";
+	        String a = (lang == labbr) ? "" : "goUrl(\"" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() + "&lang=" + labbr + "\");";	        
 	        out.print("<div class='" + c + "' onclick='" + a + "'>" + Global.LANGS.get(labbr) + "<img class='arrow' src='" + Global.getContentPath() + "/images/spacer.gif' alt='Selected' /></div>");			
 		}
 	%>

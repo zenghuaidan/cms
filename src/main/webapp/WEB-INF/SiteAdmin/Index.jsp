@@ -125,7 +125,7 @@
             </div>
         </div>
         <div id="sitebtnblk">
-            <div id="masterpgbtn" class="cmsbtn" onclick="goUrl('@Url.Content("~/cmsadmin/PageAdmin/Index?id=-2")');">
+            <div id="masterpgbtn" class="cmsbtn" onclick="goUrl('<%=Global.getCMSUrl() + "/PageAdmin/Index?id=-2" %>');">
                 <c:out escapeXml="false" value='<%=pgsimg(masterpgstatus) %>'></c:out>             
                 <span status="allow">Masterpage</span>
             </div> 
