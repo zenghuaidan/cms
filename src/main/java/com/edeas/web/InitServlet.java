@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.edeas.service.impl.ContentServiceImpl;
-import com.edeas.service.impl.PageServiceImpl;
 import com.edeas.service.impl.QueryServiceImpl;
-import com.edeas.service.impl.UserServiceImpl;
 
 public class InitServlet extends HttpServlet {
 

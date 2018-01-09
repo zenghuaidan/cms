@@ -15,31 +15,35 @@ import com.edeas.model.Page;
 @SuppressWarnings(value = {"rawtypes", "unchecked"})
 public class QueryServiceImpl extends BasicServiceImpl {
 	
-	public List<? extends Page> getAllTopPage(boolean iscms) {
-		return getPageDao(iscms).findAllTopPage();
+	public List<? extends Page> getAllTopPage(boolean iscms, boolean checkActive) {
+		return getPageDao(iscms).findAllTopPage(checkActive);
 	}
 	
 	public Page getHomePage(boolean iscms) {
-		List<Page> pages = findPagesByParentId(Page.HOME_PAGE_PARENT_ID, iscms);
+		List<Page> pages = findPagesByParentId(Page.HOME_PAGE_PARENT_ID, iscms, false); // don't check active for homepage
 		return pages.size() > 0 ? pages.get(0) : (iscms ? new CmsPage() : new LivePage());
 	}
 	
 	public Page getMasterPage(boolean iscms) {
-		List<Page> pages = findPagesByParentId(Page.MASTER_PAGE_PARENT_ID, iscms);
+		List<Page> pages = findPagesByParentId(Page.MASTER_PAGE_PARENT_ID, iscms, false); // don't check active for masterpage
 		return pages.size() > 0 ? pages.get(0) : (iscms ? new CmsPage() : new LivePage());
 	}
 	
 	public List<Page> getOtherPages(boolean iscms) {
-		return getPageDao(iscms).findByParentId(Page.OTHER_PAGE_PARENT_ID);
+		return getPageDao(iscms).findByParentId(Page.OTHER_PAGE_PARENT_ID, true);
 	}
 	
-	public List<Page> findPagesByParentId(long parentId, boolean iscms) {
-		return getPageDao(iscms).findByParentId(parentId);
+	public List<Page> findPagesByParentId(long parentId, boolean iscms, boolean checkActive) {
+		return getPageDao(iscms).findByParentId(parentId, true);
 	}
 	
 	public Page findPageById(long id, boolean iscms) {
 		Page page = (Page)getPageDao(iscms).getById(id);
 		return page == null ? (iscms ? new CmsPage() : new LivePage()) : page;
+	}
+	
+	public List<Page> findPageByTemplate(String template, boolean iscms, boolean checkActive) {
+		return getPageDao(iscms).findByTemplate(template, checkActive);
 	}
 	
 	public List<String> findActiveTemplates(boolean iscms) {

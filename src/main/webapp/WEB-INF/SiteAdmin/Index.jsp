@@ -103,7 +103,7 @@
 	Page masterPage = queryService.getMasterPage(true);
 	String masterpgstatus = (masterPage == null) ? "new" : masterPage.getStatus().toString();
 	
-	List<? extends Page> topPages = queryService.getAllTopPage(true);
+	List<? extends Page> topPages = queryService.getAllTopPage(true, true);
 	
 	List<? extends Page> otherPages = queryService.getOtherPages(true);
 	

@@ -85,7 +85,7 @@ public class PageAdminController extends CmsController {
         }
         String u = sb.toString(); 
         int i = 1;
-        List<Page> pages = queryService.findPagesByParentId(parentid, true);
+        List<Page> pages = queryService.findPagesByParentId(parentid, true, false);// don't check active for geting url
         List<String> urls = new ArrayList<String>();
         for(Page page : pages) {
         	urls.add(page.getUrl());
