@@ -1,16 +1,25 @@
 package com.edeas.utils;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.util.Dictionary;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
+
+import com.edeas.dwr.SchemaInfo;
 
 public class XmlUtils {
 	public static Node selectNodes(Document doc, String xpath) {
@@ -39,26 +48,38 @@ public class XmlUtils {
 	public static Document loadFromString(String xml) {
 		try {
 			SAXReader saxReader = new SAXReader();    
-			return saxReader.read(xml);
+			return saxReader.read(new ByteArrayInputStream(xml.getBytes("UTF-8")));
 		} catch (DocumentException e) {			
+		} catch (UnsupportedEncodingException e) {
 		}		
 		return null;
 	}
 	
-	public static Map<String, String> getSchemaInfo(Element fieldSchema, Element widgetSchema)
+	public static SchemaInfo getSchemaInfo(Element fieldSchema, Element widgetSchema)
     {
-        Map<String, String> r = new HashMap<String, String>();
-        String fname = getFieldAttr(fieldSchema, "name");
-        r.put("fname", fname);
-        r.put("ftype", getFieldAttr(fieldSchema, "type"));                   
+		SchemaInfo schemaInfo = new SchemaInfo();
         
-        for(String tag : new String[]{"label","style","attr","default","remark"}) {
-        	String value = getFieldAttr(fieldSchema, tag);
-        	String wValue = XmlUtils.getFieldAttr(widgetSchema, fname + tag.substring(0, 1).toUpperCase() + tag.substring(1));
-        	r.put("f" + tag, StringUtils.isBlank(wValue) ? value : wValue);        
+        // attribute set on field
+        schemaInfo.setName(getFieldAttr(fieldSchema, "name"));
+        schemaInfo.setType(getFieldAttr(fieldSchema, "type"));
+        
+        //attribute set on widget
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("label", "label");
+        map.put("style", "style");
+        map.put("attr", "attribute");
+        map.put("default", "defaultValue");
+        map.put("remark", "remark");
+        try {
+	        for(String tag : map.keySet()) {
+	        	String value = getFieldAttr(fieldSchema, tag);
+	        	String wValue = XmlUtils.getFieldAttr(widgetSchema, schemaInfo.getName() + tag.substring(0, 1).toUpperCase() + tag.substring(1));
+					BeanUtils.setProperty(schemaInfo, map.get(tag), StringUtils.isBlank(wValue) ? value : wValue);
+	        }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+        	return null;
         }
-        
-        return r;
+        return schemaInfo;
     }
 	
 	public static String getFieldRaw(Element w, String fieldname)
@@ -77,4 +98,23 @@ public class XmlUtils {
     {
         return (fnode == null) ? "" : fnode.attributeValue(attrname, "");
     }
+	
+	public static String formatXml(Document document) {
+		OutputFormat format = OutputFormat.createPrettyPrint();
+		format.setEncoding("utf-8");
+		StringWriter sw = new StringWriter();
+		XMLWriter xw = new XMLWriter(sw, format);
+		xw.setEscapeText(false);
+		try {
+			xw.write(document);
+			xw.flush();
+			xw.close();
+		} catch (IOException e) {			
+		}
+		return sw.toString();
+	}
+	
+	public static String toCDATA(String src) {
+		return "<![CDATA[" + src + "]]>";
+	}
 }

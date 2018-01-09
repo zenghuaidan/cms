@@ -10,8 +10,8 @@ import com.edeas.web.InitServlet;
 public class DwrService {
 	
 	@RemoteMethod
-	public String getCMSUrl() {		
-		return Global.getCMSUrl();
+	public String getCMSURI() {		
+		return Global.getCMSURI();
 	}
 	
 	@RemoteMethod

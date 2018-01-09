@@ -3,3 +3,16 @@
    ${ currentPage.new ? " checked" : "" } ： 此种写法则不能获得new的值，可能是new为关键字的原因
    
 3. JSP include是，如果path是变量需要将整个path作为一个变量<jsp:include page="<%=path%>" /> 
+
+4.
+	<dependency>
+	    <groupId>c3p0</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.1.2</version>		    
+	</dependency>
+	以上c3p0对Lob的支持不行改用下面的
+	<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.5.2</version>
+	</dependency>

@@ -30,7 +30,7 @@ public class AuthController extends CmsController {
 			return "Auth/Login";	
 		}
 		session.setAttribute(LOGIN_USER, user);
-		return "redirect:" + Global.getCMSUrl() + "/SiteAdmin";
+		return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 	}
 	
 	@RequestMapping(path = {"Logout"}, method={RequestMethod.GET})

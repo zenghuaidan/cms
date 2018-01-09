@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.hibernate.SQLQuery;
 
-public abstract class PageDaoImpl<T> extends BasicDao<T> {
+import com.edeas.model.Page;
+
+public abstract class PageDaoImpl<T extends Page> extends BasicDao<T> {
 	public List<T> findByParentId(long parentId) {
 		return listByHQL("from " + getClz().getName() + " where parentId=? order by pageOrder asc", new Long[]{ parentId });
 	} 

@@ -27,7 +27,7 @@ import org.hibernate.annotations.GenerationTime;
 import com.edeas.controller.cmsadmin.CmsProperties;
 
 @MappedSuperclass
-public class Page<T, E> {
+public class Page<T extends Page, E extends Content> {
 	private Long id;
 	private T parent;
 	private Long parentId = 0l;

@@ -41,7 +41,7 @@
 	Element fieldData = (propDocument == null) ? null : (Element)propDocument.selectSingleNode("/Properties");
 	String ptyerr = (String)request.getAttribute("ptyError");
 %>
-<form action="PageContentAdmin/UpdateProperty" method="post" id="propertyform" name="propertyform" enctype="multipart/form-data">	
+<form action="<%=Global.getCMSUrl() %>/PageContentAdmin/UpdateProperty" method="post" id="propertyform" name="propertyform" enctype="multipart/form-data">	
 	<input type="hidden" name="pageid" value="${ currentPage.id }" />
 	<input type="hidden" name="lang" value="${ lang }" />
 	    <h2>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edeas.model.CmsPage;
+import com.edeas.model.Content;
 import com.edeas.model.LivePage;
 import com.edeas.model.Page;
 
@@ -48,6 +49,11 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	public void addOrUpdate(Page page, boolean iscms) {
 		if(page.isNew()) getPageDao(iscms).add(page);
 		else getPageDao(iscms).update(page);
+	}
+	
+	public void addOrUpdate(Content content, boolean iscms) {
+		if(content.isNew()) getContentDao(iscms).add(content);
+		else getContentDao(iscms).update(content);
 	}
 	
 }

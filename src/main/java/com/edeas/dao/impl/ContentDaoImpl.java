@@ -1,5 +1,7 @@
 package com.edeas.dao.impl;
 
-public abstract class ContentDaoImpl<T> extends BasicDao<T> {
+import com.edeas.model.Content;
+
+public abstract class ContentDaoImpl<T extends Content> extends BasicDao<T> {
 	
 }

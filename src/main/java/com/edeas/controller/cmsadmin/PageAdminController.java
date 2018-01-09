@@ -54,7 +54,7 @@ public class PageAdminController extends CmsController {
 			page = queryService.findPageById(id, true);
 		}
 		
-		if(page == null || page.isNew() || page.isDelete()) return "redirect:" + Global.getCMSUrl() + "/SiteAdmin";
+		if(page == null || page.isNew() || page.isDelete()) return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 		
 		model.addAttribute("lang", lang);
 		model.addAttribute("isCms", true);

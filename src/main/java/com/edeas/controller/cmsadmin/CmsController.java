@@ -7,7 +7,7 @@ import com.edeas.controller.BaseController;
 @RequestMapping("/cmsadmin")
 public abstract class CmsController extends BaseController {	
 	
-	public static String getCMSUrl() {
+	public static String getCMSURI() {
 		RequestMapping rm = CmsController.class.getAnnotation(RequestMapping.class);
 		return rm.value().length > 0 ? rm.value()[0] : "";
 	}

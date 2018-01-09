@@ -1,3 +1,4 @@
+<%@page import="com.edeas.dwr.SchemaInfo"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
 <%@page import="java.util.Map"%>
@@ -9,21 +10,21 @@
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
-	Map<String, String> fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String val = (fieldData == null) ? fpm.get("fdefval") : XmlUtils.getFieldRaw(fieldData, fpm.get("fname"));
+	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
+	String val = (fieldData == null) ? fpm.getDefaultValue() : XmlUtils.getFieldRaw(fieldData, fpm.getName());
 %>
 <tr class="datafield">
-    <td class="label" style="vertical-align:top;"><%=fpm.get("flabel") %>: </td>
-    <td class="field <%=fpm.get("ftype") %>" fid="<%=fpm.get("fname") %>">
-        <input type='hidden' id="<%=fpm.get("fname") %>" name="<%=fpm.get("fname") %>" class='docvalfield' value="<%=val %>" />
-        <input type='file' id="<%=fpm.get("fname") %>_file" name="<%=fpm.get("fname") %>_file" style="<%=fpm.get("fstyle") %>"  />
+    <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
+    <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
+        <input type='hidden' id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" class='docvalfield' value="<%=val %>" />
+        <input type='file' id="<%=fpm.getName() %>_file" name="<%=fpm.getName() %>_file" style="<%=fpm.getStyle() %>"  />
         <% if (!StringUtils.isBlank(val)) { %>
-            <div id="<%=fpm.get("fname") %>_view">
+            <div id="<%=fpm.getName() %>_view">
                 File: <%=val %>
                 <input type="button" value="View" onclick="window.open('<%=Global.getDocUploadPath(val) %>');" />
-                <input type="button" value="Clear" onclick="clrVal('<%=fpm.get("fname") %>'); $('#<%=fpm.get("fname") %>)_view').hide();" />
+                <input type="button" value="Clear" onclick="clrVal('<%=fpm.getName() %>'); $('#<%=fpm.getName() %>)_view').hide();" />
             </div>
         <% } %>
-        <%=fpm.get("fremark") %>
+        <%=fpm.getRemark() %>
     </td>
 </tr>

@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest _request = (HttpServletRequest) request;   
 		HttpServletResponse _response = (HttpServletResponse) response;
 				
-		String cmsurl = Global.getCMSUrl();
+		String cmsurl = Global.getCMSURI();
 		User user = (User)_request.getSession().getAttribute(AuthController.LOGIN_USER);
 		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
 			_response.sendRedirect(_request.getContextPath() + cmsurl);

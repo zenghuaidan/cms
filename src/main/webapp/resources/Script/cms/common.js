@@ -11,7 +11,7 @@ var cmsroot = "";
 $(function() {	
 	dwrService.getContextPath(function(path) {
 		webroot = path;
-		dwrService.getCMSUrl(function(url) {
+		dwrService.getCMSURI(function(url) {
 			cmsroot = webroot + ((url.lastIndexOf("/") == url.length + 1) ? url : (url + "/"));
 		});
 	});	

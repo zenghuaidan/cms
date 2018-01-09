@@ -22,7 +22,7 @@
 	            <div class='top cmslightgreybg'>
 	                <span class="txtlnk" onclick="openchgpwd();">Change Password</span>
 	                |
-	                <span class="txtlnk" onclick="goUrl('${context}<%=Global.getCMSUrl() %>/Logout');">Logout</span>
+	                <span class="txtlnk" onclick="goUrl('<%=Global.getCMSUrl() %>/Logout');">Logout</span>
 	            </div>
 	            <div class='bottom hlcolor'>
 	                ${user.name}
