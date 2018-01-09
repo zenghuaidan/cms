@@ -1,7 +1,9 @@
 package com.edeas.controller.cmsadmin;
 
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -43,15 +45,21 @@ public class PageContentAdminController extends CmsController {
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		String lang = request.getParameter("lang");
 		Page page = queryService.findPageById(pageId, true);
-		if(!page.isNew() && Global.LANGS.containsKey(lang) && updateProperty(page, lang, request)) {
-			queryService.addOrUpdate(page, true);
-			return new Result("Congraduation! Page is saved successfully.");
+		if(!page.isNew() && Global.LANGS.containsKey(lang)) {
+			String errors = updateProperty(page, lang, request);
+			if (StringUtils.isBlank(errors)) {
+				queryService.addOrUpdate(page, true);
+				return new Result("Congraduation! Page is saved successfully.");				
+			} else {
+				return new Result("Failed", errors);
+			}
 		} else {
-			return new Result("Failed", "Invalid config form. Some field empty?");
+			return new Result("Failed", "Invalid config form. Invalidate page id or empty lang?");
 		}
 	}
 	
-	private boolean updateProperty(Page page, String lang, HttpServletRequest request) {
+	private String updateProperty(Page page, String lang, HttpServletRequest request) {
+		StringBuffer errors = new StringBuffer();
 		Content content = (Content)page.getContent(lang);
 		Document template = XmlUtils.getTemplateDocument(page.getTemplate());
 		List<Element> fieldList = template.selectNodes("/Template/Properties/Field");
@@ -81,11 +89,11 @@ public class PageContentAdminController extends CmsController {
 				dataField.addAttribute("ftype", fpm.getType());
 				dataField.addText(XmlUtils.toCDATA(value));
 			}
-			setSpecialField(fpm, dataField, request);
+			errors.append(setSpecialField(fpm, dataField, request) + System.lineSeparator());
 		}
 		content.setPropertyXml(XmlUtils.formatXml(propDocument));
 		queryService.addOrUpdate(content, true);
-		return true;
+		return errors.toString().trim();
 	}
 	
 	private String setSpecialField(SchemaInfo fpm, Element dataField, HttpServletRequest request)
@@ -94,12 +102,81 @@ public class PageContentAdminController extends CmsController {
 		switch (fpm.getType())
 		{
 			case "imgfield": err = setImageElement(fpm, dataField, request); break;
-//			case "lnkfield": setLinkElement(fpm, dataField, request); break;
-//			case "docfield": setDocElement(fpm, dataField, request); break;
-//			case "spgfield": setSubpageElement(fpm, dataField, request); break;
+			case "lnkfield": err = setLinkElement(fpm, dataField, request); break;
+			case "docfield": setDocElement(fpm, dataField, request); break;
+			case "spgfield": setSubpageElement(fpm, dataField, request); break;
 			default: break;
 		}
 		return err;
+	}
+	
+	private void setSubpageElement(SchemaInfo fpm, Element dataField, HttpServletRequest request) { 
+        String fid = fpm.getName();
+        int selpgid = 0;
+        try {
+        	selpgid = Integer.parseInt(request.getParameter(fid));
+        } catch (Exception e) {
+		}
+        Page page = queryService.findPageById(selpgid, true);        
+        dataField.setText(XmlUtils.toCDATA(page.getName()));
+        dataField.addAttribute("pgid", selpgid + "");
+	}
+	
+	private String setDocElement(SchemaInfo fpm, Element dataField, HttpServletRequest request) {
+		try {
+			String fid = fpm.getName();
+			String fname = fid + "_file";
+			CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+			if(multipartResolver.isMultipart(request))
+			{
+				MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+				if(multiRequest.getMultiFileMap().containsKey(fname)) {
+					List<MultipartFile> list = multiRequest.getMultiFileMap().get(fname);
+					String newFileName = newRandomFilename(Global.getDocUploadPhysicalPath(), list.get(0).getOriginalFilename());	
+					String size = (int)(list.get(0).getSize() / 1024) + "";
+					list.get(0).transferTo(new File(Global.getDocUploadPhysicalPath(newFileName)));
+					dataField.setText(XmlUtils.toCDATA(newFileName));
+					dataField.addAttribute("size", size);
+				}
+			}
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		return "";
+	}
+	
+	private String setLinkElement(SchemaInfo fpm, Element dataField, HttpServletRequest request) {
+		try {
+			String fid = fpm.getName();
+			String lnktype = request.getParameter(fid + "_type");
+			dataField.addAttribute("lnktype", lnktype);
+			dataField.addAttribute("target", request.getParameter(fid + "_target"));
+			dataField.addAttribute("anchor", request.getParameter(fid + "_anchor"));
+			switch (lnktype)
+			{
+			case "internal": dataField.setText(XmlUtils.toCDATA(request.getParameter(fid + "_internal_page"))); break;
+			case "external": dataField.setText(XmlUtils.toCDATA(request.getParameter(fid + "_external_link"))); break;
+			case "document":
+				String fname = fid + "_document_link";
+				CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+				if(multipartResolver.isMultipart(request))
+				{
+					MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+					if(multiRequest.getMultiFileMap().containsKey(fname)) {
+						List<MultipartFile> list = multiRequest.getMultiFileMap().get(fname);
+						String newFileName = newRandomFilename(Global.getDocUploadPhysicalPath(), list.get(0).getOriginalFilename());	
+						String size = (int)(list.get(0).getSize() / 1024) + "";
+						list.get(0).transferTo(new File(Global.getDocUploadPhysicalPath(newFileName)));
+						dataField.setText(XmlUtils.toCDATA(newFileName));
+						dataField.addAttribute("size", size);
+					}
+				}                
+				break;
+			}
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		return "";
 	}
 	
     public static String newRandomFilename(String savepath, String filename)
