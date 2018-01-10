@@ -360,12 +360,16 @@ public class Page<T extends Page, E extends Content> {
 		return sb.toString();
 	}
 	
-	public E getContent(String lang) {
+	public E getContent(Lang lang) {
 		for(E c : this.getContents()) {
 			if(((Content)c).getLang().equals(lang))
 				return c;
 		}
 		return null;
+	}
+	
+	public E getContent(String lang) {		
+		return getContent(Lang.getByName(lang));
 	}
 	
 	public static final long MASTER_PAGE_PARENT_ID = -2;

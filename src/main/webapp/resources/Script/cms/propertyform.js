@@ -26,8 +26,20 @@ function hidePtyFormBtns() { $("#propertyform .btns").hide(); }
 //setup property form ajax submission
 function setPtyFormSubmission() {
   //when save button clicked
-  $("#propertyform .savebtn").click(function() {
-    $("#propertyform").submit(); //standard post to support file uploads
+	$("#propertyform .savebtn").click(function() {
+	var options = {
+		success: function (data) {
+			if(data.success){
+				window.location.reload();	        		
+			} else {
+				alert(data.errorMsg)
+			}
+		}
+	};
+   
+	$("#propertyform").ajaxForm(options);
+   	$("#propertyform").ajaxSubmit(options); 
+//    $("#propertyform").submit(); //standard post to support file uploads
     /* AJAX Submit Not Support File Uploads
     $.post("/PageContentAdmin/UpdateProperty",$("#propertyform").serialize(),function(data) {
       if (data.success) { enterPtyFormSave(); refresh(); }

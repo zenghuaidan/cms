@@ -265,12 +265,12 @@
 	                    String l = t.attributeValue("name");
 	                    boolean inctpl = true;
 	                    
-	                    if (t.attributeValue("isunique", "")=="yes" && !currentPage.getTemplate().equals(v)) {
+	                    if (t.attributeValue("isunique", "").equals("yes") && !currentPage.getTemplate().equals(v)) {
 	                        if (activeTemplates.contains(v)) {
 	                            inctpl=false;
 	                        }
 	                    }
-	                    if (!t.attributeValue("fixpid", "").equals("") && t.attributeValue("fixpid", "").equals(parentid + "")) {
+	                    if (!t.attributeValue("fixpid", "").equals("") && !t.attributeValue("fixpid", "").equals(parentid + "")) {
 	                        inctpl = false;
 	                    }
 	                    if (inctpl) {

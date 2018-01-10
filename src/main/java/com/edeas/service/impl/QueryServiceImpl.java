@@ -34,7 +34,7 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	}
 	
 	public List<Page> findPagesByParentId(long parentId, boolean iscms, boolean checkActive) {
-		return getPageDao(iscms).findByParentId(parentId, true);
+		return getPageDao(iscms).findByParentId(parentId, checkActive);
 	}
 	
 	public Page findPageById(long id, boolean iscms) {

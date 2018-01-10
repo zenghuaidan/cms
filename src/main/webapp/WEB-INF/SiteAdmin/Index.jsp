@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.edeas.controller.cmsadmin.CmsProperties"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.springframework.ui.Model"%>
@@ -10,7 +11,7 @@
 <%!	
 	QueryServiceImpl queryService = InitServlet.getQueryService();
 	private String pgsimg(String status) {
-    	if (status == "") { status = "new"; }
+    	if (StringUtils.isBlank(status)) { status = "new"; }
 	    String pgsc = "pgs" + status;
 	    String label = "";
 	    switch (status)
@@ -101,7 +102,7 @@
 	String hpstatus = (homePage == null) ? "new" : homePage.getStatus().getName();
 	
 	Page masterPage = queryService.getMasterPage(true);
-	String masterpgstatus = (masterPage == null) ? "new" : masterPage.getStatus().toString();
+	String masterpgstatus = (masterPage == null) ? "new" : masterPage.getStatus().getName();
 	
 	List<? extends Page> topPages = queryService.getAllTopPage(true, true);
 	

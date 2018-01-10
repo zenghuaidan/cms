@@ -36,6 +36,16 @@ public class PageAdminController extends CmsController {
 		return "PageAdmin/ConfigForm";
 	}
 	
+	@RequestMapping(path = {"PageAdmin/Config"}, method={RequestMethod.GET})
+	public String Config(Model model, long pageid, HttpServletRequest request) {
+		CmsPage page = (CmsPage)queryService.findPageById(pageid, true);		
+		model.addAttribute("currentPage", page);
+		model.addAttribute("parentPage", page.getParent());
+		model.addAttribute("parentid", page.getParentId());
+		model.addAttribute("newatfront", false);
+		return "PageAdmin/ConfigForm";
+	}
+	
 	@RequestMapping(path = {"PageAdmin/Index"}, method={RequestMethod.GET})
 	public String index(Model model, long id, String lang, HttpServletRequest request) {
 		lang = StringUtils.isBlank(lang) ? CmsProperties.getDefaultLanguage() : lang;

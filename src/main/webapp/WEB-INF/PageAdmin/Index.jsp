@@ -20,6 +20,7 @@
     #propertybox h2 { font-size: 12px !important; }
 </style>
 <!-- Javascripts -->
+<script src="${Script}/jquery.form.min.js"></script>
 <script src="${Script}/cms/pageadmin.js" type="text/javascript"></script>
 <script type="text/javascript">
     var pageid = "${currentPage.id}";

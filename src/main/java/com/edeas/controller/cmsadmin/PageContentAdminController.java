@@ -45,7 +45,7 @@ public class PageContentAdminController extends CmsController {
 		String lang = request.getParameter("lang");
 		Page page = queryService.findPageById(pageId, true);
 		if(!page.isNew() && Lang.exists(lang)) {
-			String errors = updateProperty(page, lang, request);
+			String errors = updateProperty(page, Lang.getByName(lang), request);
 			if (StringUtils.isBlank(errors)) {
 				queryService.addOrUpdate(page, true);
 				return new Result("Congraduation! Page is saved successfully.");				
@@ -57,14 +57,14 @@ public class PageContentAdminController extends CmsController {
 		}
 	}
 	
-	private String updateProperty(Page page, String lang, HttpServletRequest request) {
+	private String updateProperty(Page page, Lang lang, HttpServletRequest request) {
 		StringBuffer errors = new StringBuffer();
 		Content content = (Content)page.getContent(lang);
 		Document template = XmlUtils.getTemplateDocument(page.getTemplate());
 		List<Element> fieldList = template.selectNodes("/Template/Properties/Field");
 		if (content == null) {
 			content = new CmsContent();
-			content.initPropertyXml(page, Lang.getByName(lang));
+			content.initPropertyXml(page, lang);
 		}
 		
 		Document propDocument = XmlUtils.loadFromString(content.getPropertyXml());
@@ -206,7 +206,7 @@ public class PageContentAdminController extends CmsController {
             MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
 			if(multiRequest.getMultiFileMap().containsKey(fileidx)) {
 				List<MultipartFile> list = multiRequest.getMultiFileMap().get(fileidx);
-				if (CmsProperties.getImageMaxUploadSize() > 0 && list.size() == 1) {
+				if (CmsProperties.getImageMaxUploadSize() > 0 && list.size() == 1 && !StringUtils.isBlank(list.get(0).getOriginalFilename())) {
 					if(list.get(0).getSize() < CmsProperties.getImageMaxUploadSize() * 1024 * 1024) {
 						String newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE), list.get(0).getOriginalFilename());											
 						Map<String, String> result = mgnCmsImg(list.get(0), newFileName, imageAttribute);
