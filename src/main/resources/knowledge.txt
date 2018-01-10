@@ -22,3 +22,13 @@ String a = (lang == labbr) ? "" : "goUrl('" + Global.getCMSUrl() + "/PageAdmin/I
 String a = (lang == labbr) ? "" : "goUrl(\"" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() + "&lang=" + labbr + "\");";//用双引号就不会有问题
 
 应该是使用out.print的时候，如果是单引号的话里面的斜杠会有问题
+
+6. UniqueConstraint is not generated in DDL export:@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"user", "thread"})})
+hibernate.hbm2ddl.auto and Hibernate version
+--------------------------------------------
+
+Test always runs fine with hibernate.hbm2ddl.auto=create
+
+Test runs fine with Hibernate 4.1.9.Final AND hibernate.hbm2ddl.auto=update
+
+Test fails with Hibernate 4.2.0.Final AND hibernate.hbm2ddl.auto=update

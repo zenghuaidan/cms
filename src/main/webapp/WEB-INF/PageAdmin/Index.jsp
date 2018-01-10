@@ -1,3 +1,4 @@
+<%@page import="com.edeas.model.Lang"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
 <%@page import="org.dom4j.Document"%>
 <%@page import="org.dom4j.Node"%>
@@ -99,10 +100,10 @@
 <!-- LANGUAGE TABS -->
 <div id="langtabhdr" class="pgw cmstabhdr" template="${currentPage.template}">
 	<%
-		for(String labbr : Global.LANGS.keySet()) {
-	        String c = (lang == labbr) ? "selcmstab" : "cmstab";
-	        String a = (lang == labbr) ? "" : "goUrl(\"" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() + "&lang=" + labbr + "\");";	        
-	        out.print("<div class='" + c + "' onclick='" + a + "'>" + Global.LANGS.get(labbr) + "<img class='arrow' src='" + Global.getContentPath() + "/images/spacer.gif' alt='Selected' /></div>");			
+		for(Lang labbr : Lang.orderList()) {
+	        String c = (lang.equals(labbr.getName())) ? "selcmstab" : "cmstab";
+	        String a = (lang.equals(labbr.getName())) ? "" : "goUrl(\"" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() + "&lang=" + labbr + "\");";	        
+	        out.print("<div class='" + c + "' onclick='" + a + "'>" + labbr.getDescription() + "<img class='arrow' src='" + Global.getContentPath() + "/images/spacer.gif' alt='Selected' /></div>");			
 		}
 	%>
     <div class="clear"></div>

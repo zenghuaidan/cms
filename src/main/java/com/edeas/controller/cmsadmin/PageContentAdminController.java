@@ -1,9 +1,7 @@
 package com.edeas.controller.cmsadmin;
 
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +28,7 @@ import com.edeas.dto.Result;
 import com.edeas.dwr.SchemaInfo;
 import com.edeas.model.CmsContent;
 import com.edeas.model.Content;
+import com.edeas.model.Lang;
 import com.edeas.model.Page;
 import com.edeas.utils.XmlUtils;
 
@@ -45,7 +44,7 @@ public class PageContentAdminController extends CmsController {
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		String lang = request.getParameter("lang");
 		Page page = queryService.findPageById(pageId, true);
-		if(!page.isNew() && Global.LANGS.containsKey(lang)) {
+		if(!page.isNew() && Lang.exists(lang)) {
 			String errors = updateProperty(page, lang, request);
 			if (StringUtils.isBlank(errors)) {
 				queryService.addOrUpdate(page, true);
@@ -65,7 +64,7 @@ public class PageContentAdminController extends CmsController {
 		List<Element> fieldList = template.selectNodes("/Template/Properties/Field");
 		if (content == null) {
 			content = new CmsContent();
-			content.initPropertyXml(page, lang);
+			content.initPropertyXml(page, Lang.getByName(lang));
 		}
 		
 		Document propDocument = XmlUtils.loadFromString(content.getPropertyXml());

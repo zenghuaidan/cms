@@ -2,6 +2,8 @@ package com.edeas.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +24,7 @@ import com.edeas.utils.XmlUtils;
 public class Content<T extends Page> {
 	private Long id;
 	private T page;
-	private String lang;
+	private Lang lang;
 	private String propertyXml;
 	private String contentXml;
 
@@ -47,12 +49,13 @@ public class Content<T extends Page> {
 		this.page = page;
 	}
 
+	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
-	public String getLang() {
+	public Lang getLang() {
 		return lang;
 	}
 
-	public void setLang(String lang) {
+	public void setLang(Lang lang) {
 		this.lang = lang;
 	}
 	
@@ -96,7 +99,7 @@ public class Content<T extends Page> {
 		return StringUtils.isBlank(this.contentXml) ? null : XmlUtils.loadFromString(this.contentXml);
 	}
 	
-	public void initPropertyXml(T page, String lang) {
+	public void initPropertyXml(T page, Lang lang) {
 		if(this.isNew()) {
 			this.page = page;
 			this.lang = lang;

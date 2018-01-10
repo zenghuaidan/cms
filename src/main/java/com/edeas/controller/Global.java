@@ -1,8 +1,5 @@
 package com.edeas.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.io.FilenameUtils;
 
 import com.edeas.controller.cmsadmin.CmsController;
@@ -14,14 +11,6 @@ public class Global {
 	public static final String IMAGE_RESIZE = "resize";
 	public static final String IMAGE_CMGR = "cmgr";
 	public static final String IMAGE_THUMB = "thumb";
-	
-	public static final Map<String, String> LANGS = new HashMap<String, String>() {		
-		{
-			put("en", "English");
-			put("tc", "繁體");
-			put("sc", "简体");
-		}
-    };
     
 	public static String getContentPath() {
 		return InitServlet.getWc().getServletContext().getContextPath() + "/resources/Content";
