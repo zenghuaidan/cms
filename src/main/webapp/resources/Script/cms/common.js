@@ -488,10 +488,10 @@ function openNewPage(parentid,beforeid) {
 }
 
 function deletePg(pgid) {
-  $.getJSON(cmsroot+"/PageAdmin/Delete?id="+pgid,function(data) {
+  $.getJSON(cmsroot+"PageAdmin/Delete?id="+pgid,function(data) {
     if (data.success) { 
-      switch(data.Message) {      
-        case "backsiteadmin": goUrl(cmsroot+'/SiteAdmin'); break;
+      switch(data.successMsg) {      
+        case "backsiteadmin": goUrl(cmsroot+'SiteAdmin'); break;
         case "refresh": refresh(); break;
         default: refresh(); break;
       }  

@@ -8,15 +8,11 @@ import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -28,7 +24,6 @@ import com.edeas.controller.cmsadmin.CmsProperties;
 
 @MappedSuperclass
 public class Page<T extends Page, E extends Content> {
-	private Long id;
 	private T parent;
 	private Long parentId = 0l;
 	private Long rootId = 0l;
@@ -55,16 +50,17 @@ public class Page<T extends Page, E extends Content> {
 	private Set<E> contents = new HashSet<E>();
 	private Set<T> children = new HashSet<T>();
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE,generator="pageTableGenerator")
-	@TableGenerator(name="pageTableGenerator",initialValue=1,allocationSize=1)
+	@Transient
 	public Long getId() {
-		return id;
+		return this instanceof CmsPage ? ((CmsPage)this).getId() : ((LivePage)this).getId();
 	}
-
+	
 	public void setId(Long id) {
-		this.id = id;
-	}	
+		if(this instanceof CmsPage)
+			((CmsPage)this).setId(id);
+		if(this instanceof LivePage)
+			((LivePage)this).setId(id);
+	}
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pid")
@@ -73,10 +69,10 @@ public class Page<T extends Page, E extends Content> {
 	}
 
 	public void setParent(T parent) {
-		if (parent != null && !((Page)parent).isNew())
+		if (parent != null && !((Page)parent).isNew()) {
 			this.parent = parent;
-		if(parent != null)
-			this.parentId = ((Page)parent).getId();
+			this.parentId = ((Page)parent).getId();			
+		}
 	}	
 	
 	@Column(nullable=false)
@@ -372,6 +368,10 @@ public class Page<T extends Page, E extends Content> {
 		return getContent(Lang.getByName(lang));
 	}
 	
+	public boolean hasPublished() {
+		return this.release > 0;
+	}
+	
 	public static final long MASTER_PAGE_PARENT_ID = -2;
 	public static final long HOME_PAGE_PARENT_ID = -1;
 	public static final long OTHER_PAGE_PARENT_ID = -3;
@@ -410,5 +410,27 @@ public class Page<T extends Page, E extends Content> {
         	}
         	this.pageOrder = max + 1;
         }
+	}
+	
+	public void copyFrom(Page o) {
+		this.parentId = o.getParentId();
+		this.rootId = o.getRootId();
+		this.pageLevel = o.getPageLevel();
+		this.release = o.getRelease();
+		this.edit = o.getEdit();
+		this.template = o.getTemplate();
+		this.status = o.getStatus();
+		this.active = o.isActive();
+		this.delete = o.isDelete();
+		this.publishTime = o.getPublishTime();
+		this.expireTime = o.getExpireTime();
+		this.neverExpire = o.isNeverExpire();
+		this.pageTimeFrom = o.getPageTimeFrom();
+		this.pageTimeTo = o.getPageTimeTo();
+		this.pageTimeDisplay = o.getPageTimeDisplay();
+		this.pageOrder = o.getPageOrder();
+		this.name = o.getName();
+		this.url = o.getUrl();
+		this.commonxml = o.getCommonxml();
 	}
 }

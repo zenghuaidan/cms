@@ -7,6 +7,7 @@ public class Result {
 	private String errorMsg;
 
 	public Result() {
+		this(true, "", "", "");
 	}
 	
 	public Result(String successMsg) {		

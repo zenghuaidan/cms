@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.model.CmsPage;
+import com.edeas.model.LivePage;
 import com.edeas.model.Page;
+import com.edeas.model.PageStatus;
 import com.edeas.utils.DateUtils;
 
 @Controller
@@ -37,13 +39,64 @@ public class PageAdminController extends CmsController {
 	}
 	
 	@RequestMapping(path = {"PageAdmin/Config"}, method={RequestMethod.GET})
-	public String Config(Model model, long pageid, HttpServletRequest request) {
+	public String config(Model model, long pageid, HttpServletRequest request) {
 		CmsPage page = (CmsPage)queryService.findPageById(pageid, true);		
 		model.addAttribute("currentPage", page);
 		model.addAttribute("parentPage", page.getParent());
 		model.addAttribute("parentid", page.getParentId());
 		model.addAttribute("newatfront", false);
 		return "PageAdmin/ConfigForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageAdmin/Delete"}, method={RequestMethod.GET})
+	public Result delete(Model model, long id, HttpServletRequest request) {
+		CmsPage page = (CmsPage)queryService.findPageById(id, true);
+		if (!page.isNew()) {
+			if(page.getChildren(false).size() > 0) {
+				return new Result("Failed", "This page cannot be deleted because there are pages under this page");
+			} else {
+				if(page.hasPublished()) {
+					page.setDelete(true);
+					page.setEdit(page.getEdit() + 1);
+					queryService.addOrUpdate(page, true);
+					return new Result("refresh");					
+				} else {
+					queryService.delete(page, true);
+					return new Result("backsiteadmin");
+				}
+			}			
+		} else {
+			return new Result("Failed", "Can not find this page for delection");
+		}		
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageAdmin/DoPublish"}, method={RequestMethod.POST})
+	public Result doPublish(Model model, long pgid, HttpServletRequest request) {
+		CmsPage cmsPage = (CmsPage)queryService.findPageById(pgid, true);
+		if (!cmsPage.isNew()) {
+			
+			cmsPage.setRelease(cmsPage.getRelease() + 1);
+			cmsPage.setEdit(0);
+			cmsPage.setStatus(PageStatus.LIVE);
+			cmsPage.setPublishTime(new Date());
+			if(cmsPage.isReqDelete()) {
+				cmsPage.setDelete(true);
+			}
+			
+			LivePage livePageParent = (LivePage)queryService.findPageById(cmsPage.getParentId(), false);
+			LivePage livePage = (LivePage)queryService.findPageById(pgid, false);
+			livePage.copyFrom(cmsPage);
+			livePage.setParent(livePageParent);
+			livePage.setCmsPage(cmsPage);
+			
+			queryService.addOrUpdate(livePage, false);
+			
+			return new Result("backsiteadmin");
+		} else {
+			return new Result("Failed", "Can not find this page for publish");
+		}		
 	}
 	
 	@RequestMapping(path = {"PageAdmin/Index"}, method={RequestMethod.GET})
@@ -107,7 +160,7 @@ public class PageAdminController extends CmsController {
 	
 	@ResponseBody
 	@RequestMapping(path = {"PageAdmin/Save"}, method={RequestMethod.POST})
-	public Result Save(HttpServletRequest request) throws ParseException {
+	public Result save(HttpServletRequest request) throws ParseException {
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		Page page = queryService.findPageById(pageId, true);
 		if(loadConfigForm(page, request)) {
