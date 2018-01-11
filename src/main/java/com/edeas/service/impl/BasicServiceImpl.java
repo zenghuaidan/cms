@@ -2,6 +2,9 @@ package com.edeas.service.impl;
 
 import javax.inject.Inject;
 
+import org.apache.log4j.Logger;
+
+import com.edeas.controller.cmsadmin.CmsController;
 import com.edeas.dao.impl.CmsContentDaoImpl;
 import com.edeas.dao.impl.CmsPageDaoImpl;
 import com.edeas.dao.impl.ContentDaoImpl;
@@ -11,6 +14,7 @@ import com.edeas.dao.impl.PageDaoImpl;
 import com.edeas.dao.impl.UserDaoImpl;
 
 public abstract class BasicServiceImpl {
+	protected final Logger logger = Logger.getLogger(CmsController.class);
 	protected UserDaoImpl userDao;
 	protected LivePageDaoImpl livePageDao;
 	protected LiveContentDaoImpl liveContentDao;

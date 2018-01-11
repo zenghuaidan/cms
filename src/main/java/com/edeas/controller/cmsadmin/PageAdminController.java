@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
+import com.edeas.model.CmsContent;
 import com.edeas.model.CmsPage;
+import com.edeas.model.LiveContent;
 import com.edeas.model.LivePage;
 import com.edeas.model.Page;
 import com.edeas.model.PageStatus;
@@ -92,7 +95,15 @@ public class PageAdminController extends CmsController {
 			livePage.setCmsPage(cmsPage);
 			
 			queryService.addOrUpdate(livePage, false);
-			
+			for (CmsContent cmsContent : (Set<CmsContent>)cmsPage.getContents()) {
+				LiveContent liveContent = livePage.getContent(cmsContent.getLang());
+				if (liveContent == null) {
+					liveContent = new LiveContent();
+				}
+				liveContent.copyFrom(cmsContent);
+				liveContent.setPage(livePage);
+				queryService.addOrUpdate(liveContent, false);
+			}						
 			return new Result("backsiteadmin");
 		} else {
 			return new Result("Failed", "Can not find this page for publish");

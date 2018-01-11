@@ -3,3 +3,4 @@
 /src/main/*_data/*
 src/main/resources/jdbc.properties
 src/main/webapp/resources/Content/uploads/**
+logs/*.log

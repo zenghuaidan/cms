@@ -106,4 +106,10 @@ public class Content<T extends Page> {
 			this.propertyXml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><Properties pageid='"+((Page)page).getId()+"' lang='"+lang+"' />";
 		}
 	}
+	
+	public void copyFrom(Content content) {
+		this.lang = content.getLang();
+		this.propertyXml = content.getPropertyXml();
+		this.contentXml = content.getContentXml();
+	}
 }

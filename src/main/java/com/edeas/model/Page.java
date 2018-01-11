@@ -52,7 +52,9 @@ public class Page<T extends Page, E extends Content> {
 
 	@Transient
 	public Long getId() {
-		return this instanceof CmsPage ? ((CmsPage)this).getId() : ((LivePage)this).getId();
+		if(this instanceof CmsPage) return ((CmsPage)this).getId();
+		if(this instanceof LivePage) return ((LivePage)this).getId();
+		return -1l;
 	}
 	
 	public void setId(Long id) {
