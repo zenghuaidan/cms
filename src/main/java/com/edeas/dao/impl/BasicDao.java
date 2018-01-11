@@ -18,14 +18,13 @@ import org.hibernate.transform.Transformers;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import com.edeas.controller.cmsadmin.CmsController;
 import com.edeas.model.Pager;
 import com.edeas.model.SystemContext;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class BasicDao<T> implements IBasicDao<T> {
 	
-	protected final Logger logger = Logger.getLogger(CmsController.class);
+	protected final Logger logger = Logger.getLogger(BasicDao.class);
 	
 	private SessionFactory sessionFactory;
 	private Class<?> clz;	

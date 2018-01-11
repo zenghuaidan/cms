@@ -57,19 +57,23 @@ public class PageAdminController extends CmsController {
 		CmsPage page = (CmsPage)queryService.findPageById(id, true);
 		if (!page.isNew()) {
 			if(page.getChildren(false).size() > 0) {
+				logger.warn("Trying to delete page=" + id + ", but failed with the page contains children");
 				return new Result("Failed", "This page cannot be deleted because there are pages under this page");
 			} else {
 				if(page.hasPublished()) {
 					page.setDelete(true);
 					page.setEdit(page.getEdit() + 1);
 					queryService.addOrUpdate(page, true);
+					logger.info("Soft delete success, the page=" + id + " has been marked as deleted");
 					return new Result("refresh");					
 				} else {
-					queryService.delete(page, true);
+					queryService.delete(page.getId());
+					logger.info("Hard delete success, the page=" + id + " has been deleted from database");
 					return new Result("backsiteadmin");
 				}
 			}			
 		} else {
+			logger.warn("Can not find this page=" + id + " for delection");
 			return new Result("Failed", "Can not find this page for delection");
 		}		
 	}
@@ -103,9 +107,11 @@ public class PageAdminController extends CmsController {
 				liveContent.copyFrom(cmsContent);
 				liveContent.setPage(livePage);
 				queryService.addOrUpdate(liveContent, false);
-			}						
+			}			
+			logger.info("Page=" + pgid + " has been published successfully");
 			return new Result("backsiteadmin");
 		} else {
+			logger.warn("Can not find this page=" + pgid + " for publish");
 			return new Result("Failed", "Can not find this page for publish");
 		}		
 	}
@@ -177,8 +183,7 @@ public class PageAdminController extends CmsController {
 		if(loadConfigForm(page, request)) {
 			queryService.addOrUpdate(page, true);
 			return new Result("Congraduation! Page is saved successfully.");
-		} else {
-			
+		} else {			
 			return new Result("Failed", "Invalid config form. Some field empty?");
 		}
 	}

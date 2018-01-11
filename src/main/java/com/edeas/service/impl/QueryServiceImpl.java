@@ -6,7 +6,6 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.edeas.model.CmsContent;
 import com.edeas.model.CmsPage;
 import com.edeas.model.Content;
 import com.edeas.model.LivePage;
@@ -62,14 +61,21 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		else getContentDao(iscms).update(content);
 	}
 	
-	public void delete(Page page, boolean iscms) {
-		for(CmsContent content : (Set<CmsContent>)page.getContents()) {
+	public void delete(long pageId) {
+		Page cmsPage = findPageById(pageId, true);
+		Page livePage = findPageById(pageId, false);
+		delete(cmsPage, true);
+		delete(livePage, false);
+	}
+	
+	private void delete(Page page, boolean iscms) {
+		for(Content content : (Set<Content>)page.getContents()) {
 			delete(content, iscms);
 		}
 		getPageDao(iscms).delete(page.getId());
 	}
 	
-	public void delete(Content content, boolean iscms) {
+	private void delete(Content content, boolean iscms) {
 		getContentDao(iscms).delete(content.getId());
 	}
 }

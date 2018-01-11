@@ -4,13 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -19,9 +19,12 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import com.edeas.controller.cmsadmin.CmsController;
 import com.edeas.dwr.SchemaInfo;
 
 public class XmlUtils {
+	protected static final Logger logger = Logger.getLogger(CmsController.class);
+	
 	public static Node selectNodes(Document doc, String xpath) {
 		return doc.selectSingleNode(xpath);		
 	}
@@ -41,16 +44,21 @@ public class XmlUtils {
 	}
 	
 	public static Document getTemplateDocument(String template) {
-		String filePath = XmlUtils.class.getClassLoader().getResource("Templates/" + template + ".xml").getPath();
-		return toDocument(filePath);
+		try {
+			String filePath = XmlUtils.class.getClassLoader().getResource("Templates/" + template + ".xml").getPath();
+			return toDocument(filePath);			
+		} catch (Exception e) {
+			String templatePath = XmlUtils.class.getClassLoader().getResource("Templates").getPath();
+			logger.error("Can not find template=" + template + " under path=" + templatePath);
+		}
+		return null;
 	}
 	
 	public static Document loadFromString(String xml) {
 		try {
 			SAXReader saxReader = new SAXReader();    
 			return saxReader.read(new ByteArrayInputStream(xml.getBytes("UTF-8")));
-		} catch (DocumentException e) {			
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 		}		
 		return null;
 	}
