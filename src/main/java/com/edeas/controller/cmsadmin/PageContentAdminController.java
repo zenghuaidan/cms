@@ -15,6 +15,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,7 @@ import com.edeas.model.Content;
 import com.edeas.model.Lang;
 import com.edeas.model.Page;
 import com.edeas.utils.XmlUtils;
+import com.hankcs.hanlp.HanLP;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.Thumbnails.Builder;
@@ -39,8 +41,61 @@ import net.coobird.thumbnailator.Thumbnails.Builder;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PageContentAdminController extends CmsController {	
 	@ResponseBody
+	@RequestMapping(path = {"PageContentAdmin/ApplyLang"}, method={RequestMethod.GET})
+	public Result applyLang(int pageid, String pglang, String applylang, HttpServletRequest request) throws ParseException {
+		Page page = queryService.findPageById(pageid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pageid + " to apply content with");
+		}
+		Lang applyLang = Lang.getByName(applylang);
+		Lang pageLang = Lang.getByName(pglang);
+		Content applyLangContent = page.getContent(applyLang);
+		if (applyLangContent != null && (!StringUtils.isBlank(applyLangContent.getPropertyXml()) || !StringUtils.isBlank(applyLangContent.getContentXml()))) {
+			String propertyXml = applyLangContent.getPropertyXml();
+			String contentXml = applyLangContent.getContentXml();
+			Content content = page.getContent(pageLang);
+			if(content == null) {
+				content = new CmsContent();
+				content.setLang(pageLang);
+				content.setPage(page);
+			}
+			if (applyLang.equals(Lang.tc) && pageLang.equals(Lang.sc)) {
+				propertyXml = HanLP.t2s(propertyXml);
+				contentXml = HanLP.t2s(contentXml);
+			}
+			if (applyLang.equals(Lang.sc) && pageLang.equals(Lang.tc)) {
+				propertyXml = HanLP.s2t(propertyXml);
+				contentXml = HanLP.s2t(contentXml);
+			}
+			
+			if(!StringUtils.isBlank(propertyXml)) {
+				Document propertyDocument = XmlUtils.loadFromString(propertyXml);
+				Element element = (Element)propertyDocument.selectSingleNode("/Properties");
+				if(element != null) {
+					element.addAttribute("lang", pageLang.getName());
+					propertyXml = XmlUtils.formatXml(propertyDocument);
+				}
+			}
+			
+			if(!StringUtils.isBlank(contentXml)) {
+				Document contentDocument = XmlUtils.loadFromString(contentXml);
+				Element element = (Element)contentDocument.selectSingleNode("/PageContent");
+				if(element != null) {
+					element.addAttribute("lang", pageLang.getName());
+					contentXml = XmlUtils.formatXml(contentDocument);
+				}
+			}
+			
+			content.setPropertyXml(propertyXml);
+			content.setContentXml(contentXml);
+			queryService.addOrUpdate(content, true);
+		}
+		return new Result();
+	}
+	
+	@ResponseBody
 	@RequestMapping(path = {"PageContentAdmin/UpdateProperty"}, method={RequestMethod.POST})
-	public Result UpdateProperty(HttpServletRequest request) throws ParseException {
+	public Result updateProperty(HttpServletRequest request) throws ParseException {
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		String lang = request.getParameter("lang");
 		Page page = queryService.findPageById(pageId, true);

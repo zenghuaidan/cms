@@ -28,6 +28,7 @@ public class Page<T extends Page, E extends Content> {
 	private Long parentId = 0l;
 	private Long rootId = 0l;
 	private int pageLevel;
+	private int approveLevel;
 	private int release;
 	private int edit;
 	private String template;
@@ -102,6 +103,15 @@ public class Page<T extends Page, E extends Content> {
 
 	public void setPageLevel(int pageLevel) {
 		this.pageLevel = pageLevel;
+	}
+
+	@Column(nullable=false)
+	public int getApproveLevel() {
+		return approveLevel;
+	}
+
+	public void setApproveLevel(int approveLevel) {
+		this.approveLevel = approveLevel;
 	}
 
 	@Column(nullable=false, name="rel")//must rename the column name form 'release' to 'rel', as 'release' is mysql keyword
@@ -342,6 +352,14 @@ public class Page<T extends Page, E extends Content> {
 		return this.getTemplate().equals(MASTER_PAGE_TEMPLATE);
 	}
 	
+	public void increateEdit() {
+		this.edit++;
+	}
+	
+	public void increateRelease() {
+		this.release++;
+	}
+	
 	@Transient
 	public String getUrlPath() {
 		StringBuffer sb = new StringBuffer("/");
@@ -391,10 +409,12 @@ public class Page<T extends Page, E extends Content> {
             this.template = HOME_PAGE_TEMPLATE;
             this.name = HOME_PAGE_TEMPLATE;
             this.url = "index";
+            this.parentId = HOME_PAGE_PARENT_ID;
         } else if (parentId == MASTER_PAGE_PARENT_ID) {
             this.rootId = MASTER_PAGE_PARENT_ID;
             this.template = MASTER_PAGE_TEMPLATE;
             this.name = MASTER_PAGE_TEMPLATE;
+            this.parentId = MASTER_PAGE_PARENT_ID;
         } else if (parentId < 0) {
             this.rootId = parentId;
         } else if (!parent.isNew()) {

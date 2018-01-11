@@ -54,6 +54,7 @@ public class PageAdminController extends CmsController {
 	@ResponseBody
 	@RequestMapping(path = {"PageAdmin/Delete"}, method={RequestMethod.GET})
 	public Result delete(Model model, long id, HttpServletRequest request) {
+		// only newly created page without any publish could be deleted from database, others only will be marked as delete in database
 		CmsPage page = (CmsPage)queryService.findPageById(id, true);
 		if (!page.isNew()) {
 			if(page.getChildren(false).size() > 0) {
@@ -62,7 +63,7 @@ public class PageAdminController extends CmsController {
 			} else {
 				if(page.hasPublished()) {
 					page.setDelete(true);
-					page.setEdit(page.getEdit() + 1);
+					page.increateEdit();
 					queryService.addOrUpdate(page, true);
 					logger.info("Soft delete success, the page=" + id + " has been marked as deleted");
 					return new Result("refresh");					
@@ -79,12 +80,42 @@ public class PageAdminController extends CmsController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(path = {"PageAdmin/markDelete"}, method={RequestMethod.POST})
+	public Result markDelete(Model model, long pgid, HttpServletRequest request) {		
+		Page page = queryService.findPageById(pgid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pgid + " to mark delete with");
+		}
+		page.increateEdit();
+		page.setStatus(PageStatus.EDIT);
+		page.setApproveLevel(0);
+		page.setReqDelete(true);
+		queryService.addOrUpdate(page, true);
+		return new Result();
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageAdmin/unMarkDelete"}, method={RequestMethod.POST})
+	public Result unMarkDelete(Model model, long pgid, HttpServletRequest request) {		
+		Page page = queryService.findPageById(pgid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pgid + " to unmark delete with");
+		}
+		page.increateEdit();
+		page.setStatus(PageStatus.EDIT);
+		page.setApproveLevel(0);
+		page.setReqDelete(false);
+		queryService.addOrUpdate(page, true);
+		return new Result();
+	}
+	
+	@ResponseBody
 	@RequestMapping(path = {"PageAdmin/DoPublish"}, method={RequestMethod.POST})
 	public Result doPublish(Model model, long pgid, HttpServletRequest request) {
 		CmsPage cmsPage = (CmsPage)queryService.findPageById(pgid, true);
 		if (!cmsPage.isNew()) {
 			
-			cmsPage.setRelease(cmsPage.getRelease() + 1);
+			cmsPage.increateRelease();
 			cmsPage.setEdit(0);
 			cmsPage.setStatus(PageStatus.LIVE);
 			cmsPage.setPublishTime(new Date());

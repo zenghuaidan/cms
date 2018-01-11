@@ -260,6 +260,11 @@
 	    <groupId>net.coobird</groupId>
 	    <artifactId>thumbnailator</artifactId>
 	    <version>0.4.8</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.hankcs</groupId>
+	    <artifactId>hanlp</artifactId>
+	    <version>portable-1.5.3</version>
 	</dependency>	
   </dependencies>
   <build>
