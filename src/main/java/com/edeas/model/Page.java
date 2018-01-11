@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
+import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.CmsProperties;
 
 @MappedSuperclass
@@ -391,6 +392,33 @@ public class Page<T extends Page, E extends Content> {
 	public boolean hasPublished() {
 		return this.release > 0;
 	}
+	
+	@Transient
+	public String getPageUrlForRouteMap()
+    {
+        if (!this.isNew())
+        {
+            StringBuilder sb = new StringBuilder(this.url);
+            if ("Sector".equals(this.template) || "TopSector".equals(this.template)) sb.append("/");
+            
+            if (Global.fixUrlPrefix.containsKey(this.parentId))
+            {
+                sb.insert(0, Global.fixUrlPrefix.get(this.parentId));
+                return sb.toString();
+            }
+            else
+            {
+            	Page page = this;
+            	while(page.getParent() != null) {
+            		page = page.getParent();
+            		sb.insert(0, page.getUrl() + "/");
+            	}                
+                return sb.toString();
+            }
+
+        }
+        return "";
+    }
 	
 	public static final long MASTER_PAGE_PARENT_ID = -2;
 	public static final long HOME_PAGE_PARENT_ID = -1;

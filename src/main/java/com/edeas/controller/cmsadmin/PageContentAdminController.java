@@ -39,6 +39,7 @@ import net.coobird.thumbnailator.Thumbnails.Builder;
 @Controller
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PageContentAdminController extends CmsController {	
+	
 	@ResponseBody
 	@RequestMapping(path = {"PageContentAdmin/ApplyLang"}, method={RequestMethod.GET})
 	public Result applyLang(int pageid, String pglang, String applylang, HttpServletRequest request) throws ParseException {

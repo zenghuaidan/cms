@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.model.User;
+import com.edeas.web.SystemSessionContext;
 
 @Controller
 public class AuthController extends CmsController {
@@ -30,6 +31,7 @@ public class AuthController extends CmsController {
 			return "Auth/Login";	
 		}
 		session.setAttribute(LOGIN_USER, user);
+		SystemSessionContext.addSession(session);
 		return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 	}
 	

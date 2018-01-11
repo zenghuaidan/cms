@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Template id="Homepage" haspgtime="no">
   <Properties excludestd="">
-    <Field name="HeadTitle" type="chkfield" label="Header title" />
-    <Field name="HeadTitle1" type="datetimefield" label="Header title" />    
+    <!--Field name="Test1" type="chkfield" label="Test1" />
+    <Field name="Test2" type="datetimefield" label="Test2" />
+    <Field name="Test3" type="datfield" label="Test3" />
+    <Field name="Test4" type="docfield" label="Test4" />
+    <Field name="Test5" type="drpfield" label="Test5" />
+    <Field name="Test7" type="lnkfield" label="Test7" />
+    <Field name="Test8" type="mckfield" label="Test8" />
+    <Field name="Test9" type="mtxtfield" label="Test9" />
+    <Field name="Test10" type="redfield" label="Test10" />
+    <Field name="Test11" type="spgfield" label="Test11" />
+    <Field name="Test12" type="ttafield" label="Test12" />
+    <Field name="Test14" type="uedfield" label="Test14" /-->    
+    <Field name="Test6" type="imgfield" attr="resize:50x20" label="Test6" />
+    <Field name="Test13" type="txtfield" label="Test13" />
   </Properties>
   <WidgetBox />
   <Widgets>

@@ -2,5 +2,21 @@
 <sitemesh>
     <mapping path="/cmsadmin/SiteAdmin" decorator="/WEB-INF/Shared/CmsLayout.jspf" />
     <mapping path="/cmsadmin/PageAdmin/Index" decorator="/WEB-INF/Shared/CmsLayout.jspf" />
-    <!--mapping path="/el.jsp*" exclue="true" /-->
+    
+    <mapping>
+      	<path>/cmsadmin/en/viewPage/*</path>
+      	<path>/cmsadmin/tc/viewPage/*</path>
+      	<path>/cmsadmin/sc/viewPage/*</path>
+      	<decorator>/WEB-INF/Shared/PageLayout.jspf</decorator>
+	</mapping>
+    
+    <mapping>
+      	<path>/en/**.html</path>
+      	<path>/tc/**.html</path>
+      	<path>/sc/**.html</path>
+      	<decorator>/WEB-INF/Shared/PageLayout.jspf</decorator>
+      	<decorator>/WEB-INF/Shared/MasterLayout.jspf</decorator>
+	</mapping>
+
+    <mapping path="/resources" exclue="true" />
 </sitemesh>

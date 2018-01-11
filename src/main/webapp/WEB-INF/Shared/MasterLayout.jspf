@@ -1,0 +1,2 @@
+masterlayout
+	        <sitemesh:write property='body'/> 

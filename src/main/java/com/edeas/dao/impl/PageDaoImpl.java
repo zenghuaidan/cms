@@ -22,5 +22,9 @@ public abstract class PageDaoImpl<T extends Page> extends BasicDao<T> {
 
 	public List<T> findByTemplate(String template, boolean checkActive) {
 		return listByHQL("from " + getClz().getName() + " where template=? " + (checkActive ? " and del=0 and active=1 " : "") + " order by pageOrder asc", new String[]{ template });
+	}
+
+	public List<T> findPageByUrl(String url, boolean checkActive) {
+		return listByHQL("from " + getClz().getName() + " where url=? " + (checkActive ? " and del=0 and active=1 " : "") + " order by pageOrder asc", new String[]{ url });
 	} 
 }

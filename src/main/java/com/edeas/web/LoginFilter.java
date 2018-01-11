@@ -10,6 +10,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.AuthController;
@@ -24,12 +27,23 @@ public class LoginFilter implements Filter {
 		HttpServletResponse _response = (HttpServletResponse) response;
 				
 		String cmsurl = Global.getCMSURI();
-		User user = (User)_request.getSession().getAttribute(AuthController.LOGIN_USER);
+		HttpSession session = getSession(_request);
+		User user = (User)session.getAttribute(AuthController.LOGIN_USER);
 		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
 			_response.sendRedirect(_request.getContextPath() + cmsurl);
 		} else {
 			chain.doFilter(request, response);
 		}
+	}
+	
+	private HttpSession getSession(HttpServletRequest request) {
+		String sessionId = (String)request.getParameter("sessionId");
+		HttpSession session = request.getSession();
+		//if has sessionId, the request is come from c:import, need to obtain the original session
+		if (!StringUtils.isBlank(sessionId)) {
+			session = SystemSessionContext.getSession(sessionId);
+		}
+		return session;
 	}
 	
 	public boolean isCmsLoginPage(String cmsurl, HttpServletRequest request) {

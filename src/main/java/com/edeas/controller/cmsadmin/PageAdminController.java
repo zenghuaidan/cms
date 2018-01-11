@@ -8,9 +8,11 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,14 +21,31 @@ import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.model.CmsContent;
 import com.edeas.model.CmsPage;
+import com.edeas.model.Lang;
 import com.edeas.model.LiveContent;
 import com.edeas.model.LivePage;
 import com.edeas.model.Page;
 import com.edeas.model.PageStatus;
 import com.edeas.utils.DateUtils;
+import com.edeas.web.InitServlet;
 
 @Controller
 public class PageAdminController extends CmsController {
+	
+	@RequestMapping(path = {"{lang}/viewPage/{pageId}"}, method={RequestMethod.GET})
+	public String viewPage(Model model, @PathVariable("lang") String lang, @PathVariable("pageId") Long pageId, HttpServletRequest request) {
+		if(Lang.exists(lang)) {			
+			Page page = queryService.findPageById(pageId, true);
+			if(!page.isNew()) {
+				model.addAttribute("iscms", true);
+				model.addAttribute("lang", lang);
+				model.addAttribute("currentPage", page);
+				return "Templates/" + page.getTemplate();
+			}
+		}
+		return "redirect:/SiteAdmin";
+	}
+	
 	@RequestMapping(path = {"PageAdmin/New"}, method={RequestMethod.GET})
 	public String newPage(Model model, long parentid, HttpServletRequest request) {
 		CmsPage parentPage = parentid <= 0 ? null : (CmsPage)queryService.findPageById(parentid, true);

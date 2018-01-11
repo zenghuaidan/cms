@@ -47,6 +47,10 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		return getPageDao(iscms).findByTemplate(template, checkActive);
 	}
 	
+	public List<Page> findPageByUrl(String url, boolean iscms, boolean checkActive) {
+		return getPageDao(iscms).findPageByUrl(url, checkActive);
+	}
+	
 	public List<String> findActiveTemplates(boolean iscms) {
 		return getPageDao(iscms).findActiveTemplates();
 	}

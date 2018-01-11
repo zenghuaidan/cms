@@ -1,3 +1,4 @@
+<%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.Lang"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
 <%@page import="org.dom4j.Document"%>
@@ -49,6 +50,7 @@
         case "sc": applybtn1 = "btnapplyen"; applylbl1 = apply + " English"; applybtn2 = "btnapplytc"; applylbl2 = apply + " 繁體"; break;
     }
 	Page currentPage = (Page)request.getAttribute("currentPage");
+	String templatePath = request.getRequestURL().toString().replaceAll(request.getRequestURI(), "") + Global.getCMSUrl() + "/" + lang + "/viewPage/" + currentPage.getId();	
 	Content currentContent = (Content)currentPage.getContent(lang);
 %>
 <%!
@@ -124,8 +126,10 @@
 	                <div style = "width: 100%-6px; padding: 80px 0; font-size: 16px; border:dashed 3px #ccc; color:#999; text-align: center; " > NO CONTENT FOR THIS TEMPLATE</div>
 	    	</c:when>
 	    	<c:otherwise>
-                <div id="body">
-                    
+                <div id="body">                                	
+                	<c:import url="<%=templatePath%>">
+                		<c:param name="sessionId" value="<%=request.getSession().getId() %>"/>
+                	</c:import> 
                 </div>
 	    	</c:otherwise>
     	</c:choose>        
