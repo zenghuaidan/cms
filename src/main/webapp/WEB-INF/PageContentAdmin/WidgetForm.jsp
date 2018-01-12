@@ -113,8 +113,8 @@
             	}
             %>            
             <div class="actionbtns">
-                <div class="cmsbtn" onclick="submitWidgetForm();">@vhelp.renderResource(Html, "Save")</div>
-                <div class="cmsbtn" onclick="closeWidgetForm();">@vhelp.renderResource(Html, "Cancel")</div>
+                <div class="cmsbtn" onclick="submitWidgetForm();">Save</div>
+                <div class="cmsbtn" onclick="closeWidgetForm();">Cancel</div>
             </div>
         </div>
     </form>   

@@ -290,7 +290,7 @@ function openWidgetMgr(t,xid) {
     if (xid=="new" || xid=="") {    
       var gnxu=$(t).attr('gnxu');
       $.getJSON(gnxu,function(data) {
-          var wxid=data.WidgetXid;        
+          var wxid=data.successMsg;        
           var popu=mgru+"&mgrxid="+wxid;
           TINY.box.show({iframe:popu,width:gAjaxFormWidth,height:gPgConfigFormHeight,
                           closejs: function() { refresh(); }
@@ -558,7 +558,7 @@ function newHoldWidget(t) {
 	  //var getxidu = getYiiUrl(cmsroot+"PageContentAdmin/GetOrNewWidgetXid",pms);
       var getxidu = cmsroot + "PageContentAdmin/GetOrNewWidgetXid?pageid="+pgid+"&lang="+lang+"&wname="+holderwname+"&wid="+holderwid;
       $.getJSON(getxidu,function(data) {
-        holderxid=data.WidgetXid;
+        holderxid=data.successMsg;
         openWidgetForm(pgid,lang,"new",newwid,newwname,holderxid,"refresh");
       });
     } else {

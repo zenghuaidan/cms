@@ -104,9 +104,9 @@ public class Content<T extends Page> {
 			this.page = page;
 			this.lang = lang;
 		}
-		if (StringUtils.isBlank(this.getPropertyXml()))
+		if (StringUtils.isBlank(this.propertyXml))
 			this.propertyXml = getDefaultPropertyXml();
-		if(StringUtils.isBlank(this.getContentXml()))
+		if(StringUtils.isBlank(this.contentXml))
 			this.contentXml = getDefaultContentXml();
 	}
 	

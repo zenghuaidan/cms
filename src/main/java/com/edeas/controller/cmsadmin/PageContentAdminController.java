@@ -17,6 +17,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.dom.DOMElement;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,37 @@ import net.coobird.thumbnailator.Thumbnails.Builder;
 @Controller
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PageContentAdminController extends CmsController {	
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageContentAdmin/GetOrNewWidgetXid"}, method={RequestMethod.GET})
+	public Result getOrNewWidgetXid(int pageid, String lang, String wname, String wid, String pwxid, HttpServletRequest request) throws ParseException {
+		Page page = queryService.findPageById(pageid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pageid + " to apply content with");
+		}
+		if (!Lang.exists(lang)) {
+			return new Result("Failed", "Invalidate language");
+		}
+		
+		Content content = page.getContent(lang);
+		if (content == null) {
+			content = new CmsContent();
+			content.init(page, Lang.getByName(lang));
+		}
+		Document contentDocument = content.getContentXmlDoc();
+		Element parentNode = (StringUtils.isBlank(pwxid)) ? (Element)contentDocument.selectSingleNode("/PageContent") : (Element)contentDocument.selectSingleNode("//Widget[@id='" + pwxid + "']");
+		Element widgetNode = (Element)parentNode.selectSingleNode("Widget[@name='" + wname + "' and @wid='" + wid + "']");
+		String wxid = "";
+		if (widgetNode == null) {
+			widgetNode = new DOMElement("Widget");
+			wxid = createWidgetNode(contentDocument, parentNode, widgetNode, wid, wname, "", false);
+			content.setContentXml(XmlUtils.formatXml(contentDocument));
+			queryService.addOrUpdate(page, true);
+		} else {
+			wxid = XmlUtils.getFieldAttr(widgetNode, "id");
+		}
+		return new Result(wxid);
+	}
 	
 	@RequestMapping(path = {"PageContentAdmin/WListMgr"}, method={RequestMethod.GET})
 	public String widgetListMgr(Model model, long pageid, String lang, String mgrname, String mgrtype, String mgrattr, String mgrxid, HttpServletRequest request) throws ParseException {
@@ -95,6 +127,7 @@ public class PageContentAdminController extends CmsController {
 		if(content == null) {
 			content = new CmsContent();
 			content.init(page, Lang.getByName(lang));
+			page.getContents().add(content);
 		}
 		if (!page.isNew()) {
 			Document contentDocument = content.getContentXmlDoc();
@@ -108,7 +141,7 @@ public class PageContentAdminController extends CmsController {
 			if (widgetNode == null) {
 				Element parentNode = StringUtils.isBlank(parentxid) ? null : (Element)contentDocument.selectSingleNode("//Widget[@id='" + parentxid + "']");
 				if (parentNode == null) parentNode = (Element)contentDocument.selectSingleNode("/PageContent");
-				widgetNode = contentDocument.addElement("Widget");
+				widgetNode = new DOMElement("Widget");
 				wxid = createWidgetNode(contentDocument, parentNode, widgetNode, wid, wname, wxid, addToFront);
 			}
 			List<Element> fields = (List<Element>)widgetDefine.selectNodes("Field");
@@ -132,8 +165,8 @@ public class PageContentAdminController extends CmsController {
 				}
 				error = setSpecialField(fpm, dataField, request);
 				if(StringUtils.isBlank(error)) {
-					content.setPropertyXml(XmlUtils.formatXml(contentDocument));
-					queryService.addOrUpdate(content, true);
+					content.setContentXml(XmlUtils.formatXml(contentDocument));
+					queryService.addOrUpdate(page, true);
 				}
 			}
 		}
@@ -181,6 +214,9 @@ public class PageContentAdminController extends CmsController {
 		if (page.isNew()) {
 			return new Result("Failed", "Can not find this page=" + pageid + " to apply content with");
 		}
+		if (!Lang.exists(pglang) || !Lang.exists(applylang)) {
+			return new Result("Failed", "Invalidate language");
+		}
 		Lang applyLang = Lang.getByName(applylang);
 		Lang pageLang = Lang.getByName(pglang);
 		Content applyLangContent = page.getContent(applyLang);
@@ -192,6 +228,7 @@ public class PageContentAdminController extends CmsController {
 				content = new CmsContent();
 				content.setLang(pageLang);
 				content.setPage(page);
+				page.getContents().add(content);
 			}
 			if (applyLang.equals(Lang.tc) && pageLang.equals(Lang.sc)) {
 				propertyXml = HanLP.t2s(propertyXml);
@@ -203,7 +240,7 @@ public class PageContentAdminController extends CmsController {
 			}
 			
 			if(!StringUtils.isBlank(propertyXml)) {
-				Document propertyDocument = applyLangContent.getPropertyXmlDoc();
+				Document propertyDocument = XmlUtils.loadFromString(propertyXml);
 				Element element = (Element)propertyDocument.selectSingleNode("/Properties");
 				if(element != null) {
 					element.addAttribute("lang", pageLang.getName());
@@ -212,7 +249,7 @@ public class PageContentAdminController extends CmsController {
 			}
 			
 			if(!StringUtils.isBlank(contentXml)) {
-				Document contentDocument = applyLangContent.getContentXmlDoc();
+				Document contentDocument = XmlUtils.loadFromString(contentXml);
 				Element element = (Element)contentDocument.selectSingleNode("/PageContent");
 				if(element != null) {
 					element.addAttribute("lang", pageLang.getName());
@@ -222,7 +259,7 @@ public class PageContentAdminController extends CmsController {
 			
 			content.setPropertyXml(propertyXml);
 			content.setContentXml(contentXml);
-			queryService.addOrUpdate(content, true);
+			queryService.addOrUpdate(page, true);
 		}
 		return new Result();
 	}
@@ -279,9 +316,9 @@ public class PageContentAdminController extends CmsController {
 			}
 			errors.append(setSpecialField(fpm, dataField, request) + System.lineSeparator());
 		}
-		if (errors.length() == 0) {
+		if (StringUtils.isBlank(errors.toString())) {
 			content.setPropertyXml(XmlUtils.formatXml(propDocument));		
-			queryService.addOrUpdate(content, true);
+			queryService.addOrUpdate(page, true);
 		}
 		return errors.toString().trim();
 	}

@@ -164,6 +164,7 @@ public class PageAdminController extends CmsController {
 				LiveContent liveContent = livePage.getContent(cmsContent.getLang());
 				if (liveContent == null) {
 					liveContent = new LiveContent();
+					livePage.getContents().add(liveContent);
 				}
 				liveContent.copyFrom(cmsContent);
 				liveContent.setPage(livePage);				

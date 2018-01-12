@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.Lang"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
@@ -151,25 +152,25 @@
         String wname = w.attributeValue("ename");
         String wid = w.attributeValue("wid");        
         Element wgt = (cxml == null) ? null : (Element)cxml.selectSingleNode("/PageContent/Widget[@name='" + wname + "']");
-        String wxid = (wgt == null) ? "new" : wgt.attributeValue("id");
-        String newlb = (wgt == null) ? "null" : "'" + wgt.attributeValue("newlb") + "'";
+        String wxid = XmlUtils.getFieldAttr(wgt, "id", "new");
+        String newlb = (w == null) ? "null" : "'" + w.attributeValue("newlb") + "'";
         String mgrtype = ""; 
         String mgrattr = "";
-        if (wid == "WidgetListMgr")
+        if ("WidgetListMgr".equals(wid))
         {
             mgrtype = w.attributeValue("mgrtype");
             mgrattr = w.attributeValue("mgrattr");
             jsb.append(tab + "setWysWidgetListBtn('" + jsel + "','" + wxid + "','" + wname + "','" + mgrtype + "','" + mgrattr + "'," + newlb + ");\r\n");
         }
-        else if (w.attributeValue("isDynLst", "").toLowerCase() == "yes")
+        else if ("yes".equals(XmlUtils.getFieldAttr(w, "isDynLst").toLowerCase()))
         {
         	mgrtype = w.attributeValue("mgrtype");
             mgrattr = w.attributeValue("mgrattr");
             jsb.append(tab + "setDynWysWidgetListBtn('" + jsel + "','" + wid + "','" + wxid + "','" + wname + "','" + mgrtype + "','" + mgrattr + "'," + newlb + ");\r\n");
         }
-        else if (wid == "WidgetHolder")
+        else if ("WidgetHolder".equals(wid))
         {
-            String pid = (wgt == null || wgt.getParent() == null || wgt.getParent().attributeValue("id", "").equals("")) ? "root" : wgt.getParent().attributeValue("id", "");
+            String pid = (wgt == null || StringUtils.isBlank(XmlUtils.getFieldAttr(wgt.getParent(), "id"))) ? "root" : XmlUtils.getFieldAttr(wgt.getParent(), "id");
             String widclass = "wholder-" + wname;
             List<Element> achilds = (List<Element>)w.selectNodes("AcceptWidget");
             StringBuilder acj = new StringBuilder("[");

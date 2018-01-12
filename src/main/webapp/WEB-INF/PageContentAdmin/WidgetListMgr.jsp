@@ -108,8 +108,9 @@
         		for(Element w : wlist) {
                     Element tbgnode = (Element)w.selectSingleNode("Field[@name='" + a[1] + "']");
                     if (i > 0 && i % 5 == 0) {
-                    	%>
-                    	<div class="clear"></div> }
+                    	out.print("<div class='clear'></div>");
+                    }
+                   	%>
 	                    <div class="mgrgallerytb oitem" xid="<%=XmlUtils.getFieldAttr(w, "id") %>">
 	                        <div class="tbframe">	                        
 	                        	<%=XmlUtils.tagimg(tbgnode, "cmgr", true, "", null) %>
@@ -120,8 +121,8 @@
 	                            <img class="edit" src="${Content}/cms/core/images/icon-pen.png" onclick="editw('<%=XmlUtils.getFieldAttr(w, "id") %>');" />
 	                        </div>
 	                    </div>
-                    	<%
-                    }
+                   	<%
+        			i++;
         		}
         		out.print("</div>");
         	} else if("txtlist".equals(mgrtype)) {
