@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +26,6 @@ import com.edeas.model.LivePage;
 import com.edeas.model.Page;
 import com.edeas.model.PageStatus;
 import com.edeas.utils.DateUtils;
-import com.edeas.web.InitServlet;
 
 @Controller
 public class PageAdminController extends CmsController {
@@ -36,6 +34,20 @@ public class PageAdminController extends CmsController {
 	public String viewPage(Model model, @PathVariable("lang") String lang, @PathVariable("pageId") Long pageId, HttpServletRequest request) {
 		if(Lang.exists(lang)) {			
 			Page page = queryService.findPageById(pageId, true);
+			if(!page.isNew()) {
+				model.addAttribute("iscms", true);
+				model.addAttribute("lang", lang);
+				model.addAttribute("currentPage", page);
+				return "Templates/" + page.getTemplate();
+			}
+		}
+		return "redirect:/SiteAdmin";
+	}
+	
+	@RequestMapping(path = {"PageAdmin/Preview"}, method={RequestMethod.GET})
+	public String previewPage(Model model, String lang, Long pgid, HttpServletRequest request) {
+		if(Lang.exists(lang)) {			
+			Page page = queryService.findPageById(pgid, true);
 			if(!page.isNew()) {
 				model.addAttribute("iscms", true);
 				model.addAttribute("lang", lang);

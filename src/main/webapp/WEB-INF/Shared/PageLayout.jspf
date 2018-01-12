@@ -1,2 +1,186 @@
-pagelayout
-	        <sitemesh:write property='body'/> 
+	<%@include file="/WEB-INF/Shared/commons.jspf" %>
+    <style>
+        @@media only screen and (max-width: 1250px) { header ul.nav-d {display:block;} }
+        ul.menu-desktop {display:block !important;} ul.menu-mobile {display:none !important;}
+        @@media only screen and (max-width: 1250px) { ul.menu-desktop {display:none !important;} ul.menu-mobile {display:block !important;} }
+        /*.btn-blk-d .f-btn3,#btn-s-subscribe-m { display:none; }
+        .btn-blk-d .f-btn2, #fboxsupport-m { display:none; }*/
+        #body header .nav-smaller  { width:300px; }
+    </style>
+    <nav class="pushy pushy-right">
+        <ul class="menu-desktop">        
+	        <li class="pushy-submenu blue">
+	            <a href="" class="no-arrow level1">Inspires!</a>                        
+	        </li>
+	        <li class="pushy-submenu red">
+	            <a href="" class="level1">Musicus Fest</a>                        
+	        </li>  
+	        <li class="pushy-submenu green">
+	            <a href="" class="no-arrow level1">Heritage</a>                        
+	        </li>  
+	        <li class="pushy-submenu yellow">
+	            <a href="" class="level1">New Works</a>                        
+	        </li>  
+	        <li class="pushy-submenu cyan">
+	            <a href="" class="no-arrow level1">Mainland Overseas</a>                        
+	        </li>                    
+        </ul>       
+    </nav>
+    <!-- Site Overlay -->
+    <div class="site-overlay"></div>
+    <header>
+        <div class="container clearfix">
+            <div class="row1">
+                <div id="logo">
+                    <a href="/en/index.html"><img src="${ Content }/images/logo.png" class="img-scale" alt="Musicus Society"/></a>
+                </div>
+                <nav>
+                    <div class="square-menu">
+                        <div class="pos">
+                            <div class="menu size bg-gray corner-top-right menu-btn">
+                                <i class="fa fa-bars pos-menu"></i>
+                                <div class="txt-pos">Menu</div>
+                            </div>
+                            <div class="square-section">
+                            	<a href="" style='color:#fff'><div class='size bg-yellow corner-top-right'><div class="txt-pos">Inspires</div></div></a>
+                            	<a href="" style='color:#fff'><div class='size bg-cyan corner-top-right'><div class="txt-pos">Musicus Fest</div></div></a>
+                            	<a href="" style='color:#fff'><div class='size bg-red corner-top-right'><div class="txt-pos">Heritage</div></div></a>
+                            	<a href="" style='color:#fff'><div class='size bg-blue corner-top-right'><div class="txt-pos">New Works</div></div></a>
+                            	<a href="" style='color:#fff'><div class='size bg-green corner-top-right'><div class="txt-pos">Mainland Overseas</div></div></a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="nav-smaller">
+                    <ul class="nav-d">
+						<li id="btn-search2" class="btn"><i class="fa fa-search color"></i></li>
+                        <li class="m-hidden-media"><a href="https://www.facebook.com/musicussociety/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li class="m-hidden-media"><a href="https://www.youtube.com/user/musicussociety" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                        <li class="m-hidden-media"><a href="https://plus.google.com/110011886205598509110" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="m-hidden-media"><a href="https://www.instagram.com/musicussociety/" target="_blank"><i class="fa fa-instagram"></i></a></li>                        
+                         <li class="language"><a href="javascript:switchlang('en','tc');">繁</a></li>                          
+                         <li class="last language"><a href="javascript:switchlang('en','sc');">简</a></li>                         
+                         <li class="menu-smaller-m menu-btn">
+                            <div class="icon"><i class="fa fa-bars"></i></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="row2 nav-blk">
+                <div class="tagline">Promoting Music through Cross-cultural Collaboration</div>
+                <ul class="nav-d">
+					<li id="btn-search" class="btn btn--search"><i class="fa fa-search color"></i></li>
+                   	<li class="m-hidden-media"><a href="https://www.facebook.com/musicussociety/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                   	<li class="m-hidden-media"><a href="https://www.youtube.com/user/musicussociety" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                   	<li class="m-hidden-media"><a href="https://plus.google.com/110011886205598509110" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                   	<li class="m-hidden-media"><a href="https://www.instagram.com/musicussociety/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                   	<li class="language"><a href="javascript:switchlang('en','tc');">繁</a></li>                      
+                   	<li class="language"><a href="javascript:switchlang('en','sc');">简</a></li>                 
+                </ul>
+            </div>
+        </div>
+    </header><!-- /header -->
+
+    <sitemesh:write property='body'/>    
+
+	<footer>
+        <div class="container bg-lightgrey">
+            <div class="full-wrapper">
+                <div class="footer-pos">
+
+                    <div class="div-table">
+                        <div class="bottom left-col">
+                            <a href="/en/index.html"> <img src="${Content }/uploads/images/source/logo.png" alt="Musicus Society" title="Musicus Society" class="footer-logo-d"> </a>
+                        </div>
+
+                        <div class="top right-col">
+                            <!-- 4 btn for desktop & tablet !-->
+                            <div class="btn-blk-d">
+                                    <a target="" href="/en/About-Us/Artistic-Director.html"><div class="square-sm corner-top-right f-btn1">
+                                        <img src="/Content/uploads/docs/img-trey.jpg" alt="Musicus Society">
+                                        <div class="content-sm">
+                                            <div class="div-table">
+                                                <div class="bottom">
+                                                    <div class="font-body four-btn-txtpos">
+ 														<div class="txt-middlegrey job-title">Artistic Director</div>                                                         Trey Lee
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div></a>                                    
+                                    <a target="" href="/en/Support/Support.html"><div class="square-sm corner-top-right f-btn2">
+                                        <img src="${Content }/uploads/docs/icon-donation.svg" alt="Musicus Society">
+                                        <div id="fboxsupport-d" class="content-sm">
+                                            <div class="div-table">
+                                                <div class="bottom">
+                                                    <div class="font-body four-btn-txtpos">
+                                                        Support Us
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div></a>                                    
+                                    <a target="" href="/en/Others/Contact-Us.html"><div class="square-sm corner-top-right f-btn4">
+                                        <img src="${Content }/uploads/docs/icon-pin.svg" alt="Musicus Society">
+                                        <div class="content-sm">
+                                            <div class="div-table">
+                                                <div class="bottom">
+                                                    <div class="font-body four-btn-txtpos">
+                                                        Contact Us
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div></a>                                    
+                                    <a style="display:none" target=""><div class="square-sm corner-top-right f-btn3">
+                                        <img src="${Content }/uploads/docs/icon-subscribe.svg" alt="Musicus Society">
+                                        <div id="btn-s-subscribe" class="content-sm">
+                                            <div class="div-table">
+                                                <div class="bottom">
+                                                    <div class="font-body four-btn-txtpos">
+                                                        Subscribe to our Newsletter
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div></a>                                    
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>                            
+                            <div class="clear"></div>
+                            <a href="/en/index.html"> <img src="${Content }/uploads/images/source/logo.png" alt="Musicus Society" title="Musicus Society" class="logo-for1200"> </a>
+                            <table cellspacing="0" cellpadding="0" class="logo-blk-m">
+                                <!-- for mobile only!-->
+                                <tbody><tr>
+                                    <td class="logo-blk-col-left">
+                                        <a href="/en/index.html"> <img src="${Content }/uploads/images/source/logo.png" alt="Musicus Society" title="Musicus Society" class="img-scale"> </a>
+                                    </td>
+                                    <td class="logo-blk-col-right bg-red">
+                                        <a href="https://www.facebook.com/musicussociety/" target="_blank"><i class="fa fa-facebook"></i></a>
+                                        <a href="https://www.youtube.com/user/musicussociety" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                                        <a href="https://plus.google.com/110011886205598509110" target="_blank"><i class="fa fa-google-plus"></i></a>
+                                        <a href="https://www.instagram.com/musicussociety/" target="_blank"><i class="fa fa-instagram"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+
+                            <div class="font-s">
+                                <div id="fmenu"><ul class="legal-link">
+                                            <li><a target="" href="/en/Others/Privacy-Policy.html">Privacy Policy</a></li>
+                                            <li><a target="" href="/en/Others/Disclaimer.html">Disclaimer</a></li>
+                                            <li><a target="" href="/en/Others/Copyright.html">Copyright</a></li>
+
+                                </ul></div>
+                                <div class="copyright">Copyright©2018 Musicus Society. All Rights Reserved.<br>Musicus Society is financially supported by the Springboard Grant under the Arts Capacity Development Funding Scheme of the Government of the Hong Kong Special Administrative Region.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#0" class="cd-top"></a>
+    <script type="text/javascript" src="${ Script }/main.js"></script>
+    <script type="text/javascript" src="${ Script }/pushy.js"></script> <!-- Modernizr -->

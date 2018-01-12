@@ -11,6 +11,7 @@
 	</mapping>
     
     <mapping>
+    	<path>/cmsadmin/PageAdmin/Preview</path>
       	<path>/en/**.html</path>
       	<path>/tc/**.html</path>
       	<path>/sc/**.html</path>

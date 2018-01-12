@@ -1,2 +1,70 @@
-masterlayout
-	        <sitemesh:write property='body'/> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Musicus</title>    
+	<%@include file="/WEB-INF/Shared/commons.jspf" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />
+    <meta name="format-detection" content="telephone=no" />
+
+	<!-- can refer to bookfair -->
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="@image" />
+    <meta property="og:title" content="Ttile" />
+    <meta property="og:description" content="Title" />
+    <meta itemscope=itemscope itemtype="http://schema.org/Article" />
+    <meta itemprop="name" content="Title" />
+    <meta itemprop="description" content="Title" />
+    <meta itemprop="image" content="imageurl" />
+    <!-- ICO -->
+    <link rel="shortcut icon" href="${Content }/images/favicon.png" />
+    <link rel="apple-touch-icon" href="${Content }/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="${Content }/images/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="${Content }/images/apple-touch-icon-114x114.png" />
+
+    <!-- CSS -->
+    <%@include file="/WEB-INF/Shared/MasterCss.jspf" %>
+
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+        function init() {
+            window.addEventListener('scroll', function (e) {
+                var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+                    shrinkOn = 300,
+                    header = document.querySelector("header");
+                if (distanceY > shrinkOn) {
+                    classie.add(header, "smaller");
+                } else {
+                    if (classie.has(header, "smaller")) {
+                        classie.remove(header, "smaller");
+                    }
+                }
+            });
+        }
+        window.onload = init();
+    </script>
+
+    <!-- JS -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="${Script}/classie.js"></script>
+    <script type="text/javascript" src="${Script}/modernizr.js"></script>
+</head>
+<body id="body" class="en en">    
+
+	<sitemesh:write property='body'/>
+   
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        $(function () {
+            try {
+                pageTracker = _gat._getTracker("");
+                pageTracker._trackPageview();             
+            } catch (err) { }
+        });
+    </script>
+</body>
+</html>	        
