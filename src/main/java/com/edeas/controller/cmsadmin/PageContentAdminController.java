@@ -45,6 +45,153 @@ import net.coobird.thumbnailator.Thumbnails.Builder;
 public class PageContentAdminController extends CmsController {	
 	
 	@ResponseBody
+	@RequestMapping(path = {"PageContentAdmin/MovWidgetDown"}, method={RequestMethod.GET})
+	public Result movWidgetDown(int pgid, String lang, String xid, HttpServletRequest request) throws ParseException {
+		Page page = queryService.findPageById(pgid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pgid + " to apply content with");
+		}
+		if (!Lang.exists(lang)) {
+			return new Result("Failed", "Invalidate language");
+		}
+		
+		Content content = page.getContent(lang);
+		if (content == null) {
+			return new Result("Failed", "Widget not existis");
+		}
+
+		Document contentDocument = content.getContentXmlDoc();
+		Element moven = (Element)contentDocument.selectSingleNode("//Widget[@id='" + xid + "']");
+		if(moven != null) {
+			Element parent = moven.getParent();
+			List<Element> elements = parent.elements();
+			int index = 0;
+			for(Element element : elements) {
+				if(element.attributeValue("id").equals(xid)) {
+					break;
+				}
+				index++;
+			}
+			if(index < elements.size() - 1) {
+				Element clonen = (Element)moven.clone();			
+				parent.remove(moven);
+				elements.add(index + 2, clonen);
+			}
+		}
+		
+		content.setContentXml(XmlUtils.formatXml(contentDocument));
+		queryService.addOrUpdate(content, true);
+		return new Result();
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageContentAdmin/MovWidgetUp"}, method={RequestMethod.GET})
+	public Result movWidgetUp(int pgid, String lang, String xid, HttpServletRequest request) throws ParseException {
+		Page page = queryService.findPageById(pgid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pgid + " to apply content with");
+		}
+		if (!Lang.exists(lang)) {
+			return new Result("Failed", "Invalidate language");
+		}
+		
+		Content content = page.getContent(lang);
+		if (content == null) {
+			return new Result("Failed", "Widget not existis");
+		}
+
+		Document contentDocument = content.getContentXmlDoc();
+		Element moven = (Element)contentDocument.selectSingleNode("//Widget[@id='" + xid + "']");
+		if(moven != null) {
+			Element parent = moven.getParent();
+			List<Element> elements = parent.elements();
+			int index = 0;
+			for(Element element : elements) {
+				if(element.attributeValue("id").equals(xid)) {
+					break;
+				}
+				index++;
+			}
+			if(index > 0) {
+				Element clonen = (Element)moven.clone();			
+				parent.remove(moven);
+				elements.add(index - 1, clonen);
+			}
+		}
+		
+		content.setContentXml(XmlUtils.formatXml(contentDocument));
+		queryService.addOrUpdate(content, true);
+		return new Result();
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageContentAdmin/ChangeWidgetOrder"}, method={RequestMethod.GET})
+	public Result changeWidgetOrder(int pgid, String lang, String xid, String beforeid, HttpServletRequest request) throws ParseException {
+		Page page = queryService.findPageById(pgid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pgid + " to apply content with");
+		}
+		if (!Lang.exists(lang)) {
+			return new Result("Failed", "Invalidate language");
+		}
+		
+		Content content = page.getContent(lang);
+		if (content == null) {
+			return new Result("Failed", "Widget not existis");
+		}
+
+		Document contentDocument = content.getContentXmlDoc();
+		Element moven = (Element)contentDocument.selectSingleNode("//Widget[@id='" + xid + "']");
+		Element beforen = (Element)contentDocument.selectSingleNode("//Widget[@id='" + beforeid + "']");
+		if(moven != null) {
+			Element parent = moven.getParent();
+			Element clonen = (Element)moven.clone();
+			parent.remove(moven);
+			if (beforen == null) {
+				parent.add(clonen);
+			} else {
+				List<Element> elements = parent.elements();
+				int index = 0;
+				for(Element element : elements) {
+					if(element.attributeValue("id").equals(beforeid)) {
+						elements.add(index, clonen);
+						break;
+					}
+					index++;
+				}
+			}
+		}
+		
+		content.setContentXml(XmlUtils.formatXml(contentDocument));
+		queryService.addOrUpdate(content, true);
+		return new Result();
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageContentAdmin/DeleteWidget"}, method={RequestMethod.GET})
+	public Result deleteWidget(int pgid, String lang, String xid, HttpServletRequest request) throws ParseException {
+		Page page = queryService.findPageById(pgid, true);
+		if (page.isNew()) {
+			return new Result("Failed", "Can not find this page=" + pgid + " to apply content with");
+		}
+		if (!Lang.exists(lang)) {
+			return new Result("Failed", "Invalidate language");
+		}
+		
+		Content content = page.getContent(lang);
+		if (content == null) {
+			return new Result("Failed", "Widget not existis");
+		}
+
+		Document contentDocument = content.getContentXmlDoc();
+		Element widget = (Element)contentDocument.selectSingleNode("//Widget[@id='" + xid + "']");
+		if(widget != null) widget.getParent().remove(widget);
+		content.setContentXml(XmlUtils.formatXml(contentDocument));
+		queryService.addOrUpdate(content, true);
+		return new Result();
+	}
+	
+	@ResponseBody
 	@RequestMapping(path = {"PageContentAdmin/GetOrNewWidgetXid"}, method={RequestMethod.GET})
 	public Result getOrNewWidgetXid(int pageid, String lang, String wname, String wid, String pwxid, HttpServletRequest request) throws ParseException {
 		Page page = queryService.findPageById(pageid, true);
@@ -114,7 +261,7 @@ public class PageContentAdminController extends CmsController {
 	
 	@RequestMapping(path = {"PageContentAdmin/UpdateWidget"}, method={RequestMethod.POST})
 	public void updateWidget(HttpServletResponse response, HttpServletRequest request) throws ParseException, IOException {
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		String lang = request.getParameter("lang");
 		String wname = request.getParameter("wname");
@@ -163,11 +310,11 @@ public class PageContentAdminController extends CmsController {
                     dataField.addAttribute("ftype", fpm.getType());
                     dataField.addText(XmlUtils.toCDATA(value));
 				}
-				error = setSpecialField(fpm, dataField, request);
-				if(StringUtils.isBlank(error)) {
-					content.setContentXml(XmlUtils.formatXml(contentDocument));
-					queryService.addOrUpdate(page, true);
-				}
+				error.append(setSpecialField(fpm, dataField, request));
+			}
+			if(StringUtils.isBlank(error.toString())) {
+				content.setContentXml(XmlUtils.formatXml(contentDocument));
+				queryService.addOrUpdate(page, true);
 			}
 		}
 		if(StringUtils.isBlank(error)) {
@@ -186,6 +333,7 @@ public class PageContentAdminController extends CmsController {
             eh.append("<a href=\"javascript:window.history.back();\">Click here to go back</a>");
             eh.append("</div>");
             eh.append("</body></html>");
+            response.getWriter().write(eh.toString());
 		}
 		response.flushBuffer();
 	}

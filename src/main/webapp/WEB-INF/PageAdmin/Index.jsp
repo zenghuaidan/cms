@@ -153,7 +153,7 @@
         String wid = w.attributeValue("wid");        
         Element wgt = (cxml == null) ? null : (Element)cxml.selectSingleNode("/PageContent/Widget[@name='" + wname + "']");
         String wxid = XmlUtils.getFieldAttr(wgt, "id", "new");
-        String newlb = (w == null) ? "null" : "'" + w.attributeValue("newlb") + "'";
+        String newlb = (StringUtils.isBlank(XmlUtils.getFieldAttr(w, "newlb"))) ? "null" : "'" + XmlUtils.getFieldAttr(w, "newlb") + "'";
         String mgrtype = ""; 
         String mgrattr = "";
         if ("WidgetListMgr".equals(wid))

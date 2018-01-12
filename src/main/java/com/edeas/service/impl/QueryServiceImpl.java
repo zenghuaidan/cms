@@ -63,7 +63,7 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		}
 	}
 	
-	private void addOrUpdate(Content content, boolean iscms) {
+	public void addOrUpdate(Content content, boolean iscms) {
 		if(content.isNew()) getContentDao(iscms).add(content);
 		else getContentDao(iscms).update(content);
 	}

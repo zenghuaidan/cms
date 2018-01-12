@@ -116,7 +116,7 @@ public class XmlUtils {
 	
 	public static String getFieldAttr(Element fnode, String attrname, String defaultValue)
     {
-        return (fnode == null) ? "" : fnode.attributeValue(attrname, defaultValue);
+        return (fnode == null) ? defaultValue : fnode.attributeValue(attrname, defaultValue);
     }
 	
 	public static String formatXml(Document document) {
