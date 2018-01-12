@@ -18,7 +18,9 @@ import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.hibernate.loader.custom.Return;
 
+import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.CmsController;
 import com.edeas.dwr.SchemaInfo;
 
@@ -40,6 +42,11 @@ public class XmlUtils {
 	
 	public static Document getTemplateListDocument() {
 		String filePath = XmlUtils.class.getClassLoader().getResource("TemplateList.xml").getPath();
+		return toDocument(filePath);
+	}
+	
+	public static Document getWidgetListDocument() {
+		String filePath = XmlUtils.class.getClassLoader().getResource("WidgetList.xml").getPath();
 		return toDocument(filePath);
 	}
 	
@@ -104,7 +111,12 @@ public class XmlUtils {
 	
 	public static String getFieldAttr(Element fnode, String attrname)
     {
-        return (fnode == null) ? "" : fnode.attributeValue(attrname, "");
+        return getFieldAttr(fnode, attrname, "");
+    }
+	
+	public static String getFieldAttr(Element fnode, String attrname, String defaultValue)
+    {
+        return (fnode == null) ? "" : fnode.attributeValue(attrname, defaultValue);
     }
 	
 	public static String formatXml(Document document) {
@@ -124,5 +136,35 @@ public class XmlUtils {
 	
 	public static String toCDATA(String src) {
 		return "<![CDATA[" + src + "]]>";
+	}
+	
+	public static String tagimg(Element imgNode, String subdir, boolean setWH, String defaultAlt, Map<String, String> otherAttrs) {
+		if (imgNode != null && !StringUtils.isBlank(imgNode.getText())) {
+			String alt = getFieldAttr(imgNode, "alt", defaultAlt);
+			StringBuilder sb = new StringBuilder("<img src=\"");
+			sb.append(Global.getContentPath() + "/uploads/images/" + subdir + "/" + imgNode.getTextTrim() + "\"");
+			if (setWH) {
+				String pw = "srcw";
+				String ph = "srch";
+				if (!"source".equals(subdir)) {
+					pw = subdir + "w";
+					ph = subdir + "h";
+				}
+				sb.append(" width=\"" + getFieldAttr(imgNode, pw) + "\"");
+				sb.append(" height=\"" + getFieldAttr(imgNode, ph) + "\"");
+			}
+
+			sb.append(" alt=\"" + alt + "\"");
+			sb.append(" title=\"" + alt + "\"");
+
+			if (otherAttrs != null) {
+				for (String k : otherAttrs.keySet()) {
+					sb.append(" " + k + "=\"" + otherAttrs.get(k) + "\"");
+				}
+			}
+			sb.append(" />");
+			return sb.toString();
+		} else
+			return "";
 	}
 }

@@ -58,6 +58,9 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	public void addOrUpdate(Page page, boolean iscms) {
 		if(page.isNew()) getPageDao(iscms).add(page);
 		else getPageDao(iscms).update(page);
+		for(Content content : (Set<Content>)page.getContents()) {
+			addOrUpdate(content, iscms);
+		}
 	}
 	
 	public void addOrUpdate(Content content, boolean iscms) {

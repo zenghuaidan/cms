@@ -2,6 +2,7 @@ package com.edeas.controller.cmsadmin;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,12 +11,14 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,6 +42,137 @@ import net.coobird.thumbnailator.Thumbnails.Builder;
 @Controller
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PageContentAdminController extends CmsController {	
+	
+	@RequestMapping(path = {"PageContentAdmin/WListMgr"}, method={RequestMethod.GET})
+	public String widgetListMgr(Model model, long pageid, String lang, String mgrname, String mgrtype, String mgrattr, String mgrxid, HttpServletRequest request) throws ParseException {
+		if (Lang.exists(lang)) {
+			Page currentPage = queryService.findPageById(pageid, true);
+			if (!currentPage.isNew()) {
+				model.addAttribute("pageid", pageid);
+				model.addAttribute("lang", lang);
+				model.addAttribute("mgrname", mgrname);
+				model.addAttribute("mgrtype", mgrtype);
+				model.addAttribute("mgrattr", mgrattr);
+				model.addAttribute("mgrxid", mgrxid);
+				model.addAttribute("currentPage", currentPage);			
+				return "PageContentAdmin/WidgetListMgr";
+			}
+		}
+		return "404";
+	}
+	
+	@RequestMapping(path = {"PageContentAdmin/WidgetForm"}, method={RequestMethod.GET})
+	public String widgetForm(Model model, long pageid, String lang, String wid, String wname, String wxid, String parentxid, String caller, HttpServletRequest request) throws ParseException {
+		if (Lang.exists(lang)) {
+			Page currentPage = queryService.findPageById(pageid, true);
+			if (!currentPage.isNew()) {
+				model.addAttribute("pageid", pageid);
+				model.addAttribute("lang", lang);
+				model.addAttribute("wid", wid);
+				model.addAttribute("wname", wname);
+				model.addAttribute("wxid", wxid);
+				model.addAttribute("parentxid", parentxid);
+				model.addAttribute("caller", caller);
+				model.addAttribute("currentPage", currentPage);			
+				return "PageContentAdmin/WidgetForm";
+			}
+		}
+		return "404";
+	}
+	
+	@RequestMapping(path = {"PageContentAdmin/UpdateWidget"}, method={RequestMethod.POST})
+	public void updateWidget(HttpServletResponse response, HttpServletRequest request) throws ParseException, IOException {
+		String error = "";
+		Long pageId = Long.parseLong(request.getParameter("pageid"));
+		String lang = request.getParameter("lang");
+		String wname = request.getParameter("wname");
+		String wid = request.getParameter("wid");
+		String wxid = request.getParameter("wxid");
+		String parentxid = request.getParameter("parentxid");
+		String caller = request.getParameter("caller");
+		Page page = queryService.findPageById(pageId, true);
+		Content content = page.getContent(lang);
+		if(content == null) {
+			content = new CmsContent();
+			content.init(page, Lang.getByName(lang));
+		}
+		if (!page.isNew()) {
+			Document contentDocument = content.getContentXmlDoc();
+			Document tempateDocument = XmlUtils.getTemplateDocument(page.getTemplate());
+			Document widgetListDocument = XmlUtils.getWidgetListDocument();
+			Element widgetDefine = (Element)widgetListDocument.selectSingleNode("//Widget[@id='" + wid + "']");
+			Element templateDefine = (Element)tempateDocument.selectSingleNode("//Widget[@ename='" + wname + "']");
+			if(templateDefine == null) templateDefine = (Element)tempateDocument.selectSingleNode("//AcceptWidget[@ename='" + wname + "']");
+			boolean addToFront = "yes".equals(XmlUtils.getFieldAttr(templateDefine, "AddFront").toLowerCase());
+			Element widgetNode = (Element)contentDocument.selectSingleNode("//Widget[@id='" + wxid + "']");
+			if (widgetNode == null) {
+				Element parentNode = StringUtils.isBlank(parentxid) ? null : (Element)contentDocument.selectSingleNode("//Widget[@id='" + parentxid + "']");
+				if (parentNode == null) parentNode = (Element)contentDocument.selectSingleNode("/PageContent");
+				widgetNode = contentDocument.addElement("Widget");
+				wxid = createWidgetNode(contentDocument, parentNode, widgetNode, wid, wname, wxid, addToFront);
+			}
+			List<Element> fields = (List<Element>)widgetDefine.selectNodes("Field");
+			for(Element field : fields) {
+				SchemaInfo fpm = XmlUtils.getSchemaInfo(field, templateDefine);
+				Element dataField = (Element)widgetNode.selectSingleNode("Field[@name='" + fpm.getName() + "']");
+				String value = request.getParameter(fpm.getName());
+				if (Lang.en.equals(Lang.getByName(lang))) value = value.replaceAll("<br /><br />", "<br />&nbsp;<br />");
+				if (dataField != null) {
+					dataField.addAttribute("ftype", fpm.getType());
+					dataField.setText(XmlUtils.toCDATA(value));
+				} else {
+					dataField = widgetNode.addElement("Field");
+					int i = 1;
+                    while (contentDocument.selectSingleNode("//*[@id='" + wxid + "-" + fpm.getName() + "-" + i + "']") != null) i++;
+                    String fxid = wxid + "-" + fpm.getName() + "-" + i;
+                    dataField.addAttribute("name", fpm.getName());
+                    dataField.addAttribute("id", fxid);
+                    dataField.addAttribute("ftype", fpm.getType());
+                    dataField.addText(XmlUtils.toCDATA(value));
+				}
+				error = setSpecialField(fpm, dataField, request);
+				if(StringUtils.isBlank(error)) {
+					content.setPropertyXml(XmlUtils.formatXml(contentDocument));
+					queryService.addOrUpdate(content, true);
+				}
+			}
+		}
+		if(StringUtils.isBlank(error)) {
+            StringBuffer jb = new StringBuffer("<script type='text/javascript'>");
+            if ("win".equals(caller))
+                jb.append("window.opener.refresh(); window.close();");
+            else
+                jb.append("parent.refresh();");
+            jb.append("</script>");
+			response.getWriter().write(jb.toString());
+		} else {
+			StringBuffer eh = new StringBuffer("<html><body>");               
+            eh.append("<link href='"+ Global.getContentPath() + "/cms/cms.css' rel='stylesheet' type='text/css' />");
+            eh.append("<div class='widgeterr'>Sorry! Widget is unable to be saved. Please try again.<br />");
+            eh.append("Message: " + error + "<br />");
+            eh.append("<a href=\"javascript:window.history.back();\">Click here to go back</a>");
+            eh.append("</div>");
+            eh.append("</body></html>");
+		}
+		response.flushBuffer();
+	}
+	
+	private String createWidgetNode(Document contentDocument, Element parentNode, Element widgetNode, String wid, String wname, String wxid, boolean addToFront)
+    {
+        int i = 1;
+        while (contentDocument.selectSingleNode("//*[@id='" + wname + "-" + i + "']") != null) i++;
+        wxid = wname + "-" + i;
+        widgetNode.addAttribute("name", wname);
+        widgetNode.addAttribute("id", wxid);
+        widgetNode.addAttribute("wid", wid);
+        List<Element> children = parentNode.elements();
+        if (addToFront && !children.isEmpty()) {
+            children.add(0, widgetNode);
+        } else {
+        	children.add(widgetNode);
+        }
+        return wxid;
+    }
 	
 	@ResponseBody
 	@RequestMapping(path = {"PageContentAdmin/ApplyLang"}, method={RequestMethod.GET})
@@ -69,7 +203,7 @@ public class PageContentAdminController extends CmsController {
 			}
 			
 			if(!StringUtils.isBlank(propertyXml)) {
-				Document propertyDocument = XmlUtils.loadFromString(propertyXml);
+				Document propertyDocument = applyLangContent.getPropertyXmlDoc();
 				Element element = (Element)propertyDocument.selectSingleNode("/Properties");
 				if(element != null) {
 					element.addAttribute("lang", pageLang.getName());
@@ -78,7 +212,7 @@ public class PageContentAdminController extends CmsController {
 			}
 			
 			if(!StringUtils.isBlank(contentXml)) {
-				Document contentDocument = XmlUtils.loadFromString(contentXml);
+				Document contentDocument = applyLangContent.getContentXmlDoc();
 				Element element = (Element)contentDocument.selectSingleNode("/PageContent");
 				if(element != null) {
 					element.addAttribute("lang", pageLang.getName());
@@ -101,8 +235,7 @@ public class PageContentAdminController extends CmsController {
 		Page page = queryService.findPageById(pageId, true);
 		if(!page.isNew() && Lang.exists(lang)) {
 			String errors = updateProperty(page, Lang.getByName(lang), request);
-			if (StringUtils.isBlank(errors)) {
-				queryService.addOrUpdate(page, true);
+			if (StringUtils.isBlank(errors)) {				
 				return new Result("Congraduation! Page is saved successfully.");				
 			} else {
 				return new Result("Failed", errors);
@@ -119,10 +252,11 @@ public class PageContentAdminController extends CmsController {
 		List<Element> fieldList = template.selectNodes("/Template/Properties/Field");
 		if (content == null) {
 			content = new CmsContent();
-			content.initPropertyXml(page, lang);
+			content.init(page, lang);
+			page.getContents().add(content);
 		}
 		
-		Document propDocument = XmlUtils.loadFromString(content.getPropertyXml());
+		Document propDocument = content.getPropertyXmlDoc();
 		Element propDataXml = (Element)propDocument.selectSingleNode("/Properties");
 		for(Element field : fieldList) {
 			SchemaInfo fpm = XmlUtils.getSchemaInfo(field, null);
@@ -145,8 +279,10 @@ public class PageContentAdminController extends CmsController {
 			}
 			errors.append(setSpecialField(fpm, dataField, request) + System.lineSeparator());
 		}
-		content.setPropertyXml(XmlUtils.formatXml(propDocument));
-		queryService.addOrUpdate(content, true);
+		if (errors.length() == 0) {
+			content.setPropertyXml(XmlUtils.formatXml(propDocument));		
+			queryService.addOrUpdate(content, true);
+		}
 		return errors.toString().trim();
 	}
 	

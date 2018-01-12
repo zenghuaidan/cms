@@ -44,11 +44,11 @@
 <form action="<%=Global.getCMSUrl() %>/PageContentAdmin/UpdateProperty" method="post" id="propertyform" name="propertyform" enctype="multipart/form-data">	
 	<input type="hidden" name="pageid" value="${ currentPage.id }" />
 	<input type="hidden" name="lang" value="${ lang }" />
-	    <h2>
+   	<h2>
         <span>Properties</span>
         <div class="ico ec collapse gradbtn" ec="c" style="display:none;"><img class="ec" src="${Content}/images/spacer.gif" alt="Collapse" title="Collapse" /></div>
     </h2>
-       <div class="content">
+    <div class="content">
         <table id="propertyformtbl">
         	<% 
 	            for (Element fieldSchema : fieldList)

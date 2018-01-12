@@ -66,7 +66,7 @@ public class Content<T extends Page> {
 	//@Column(length = 2147483647) //Hibernate会对应到MySQL的LongText上去。LongText最大2147483647字节
 	//以上三个注释点不起左右，而是用了LONGTEXT
 	public String getPropertyXml() {
-		return propertyXml == null ? "" : propertyXml;
+		return StringUtils.isBlank(propertyXml) ? getDefaultContentXml() : propertyXml;
 	}
 
 	public void setPropertyXml(String propertyXml) {
@@ -77,7 +77,7 @@ public class Content<T extends Page> {
 	@Basic(fetch = FetchType.LAZY)
 	@Column(length=65535)//不起左右，而是用了LONGTEXT
 	public String getContentXml() {
-		return contentXml == null ? "" : contentXml;
+		return StringUtils.isBlank(contentXml) ? getDefaultContentXml() : contentXml;
 	}
 
 	public void setContentXml(String contentXml) {
@@ -91,20 +91,33 @@ public class Content<T extends Page> {
 	
 	@Transient
 	public Document getPropertyXmlDoc() {
-		return StringUtils.isBlank(this.propertyXml) ? null : XmlUtils.loadFromString(this.propertyXml);
+		return XmlUtils.loadFromString(getPropertyXml());
 	}
 	
 	@Transient
 	public Document getContentXmlDoc() {
-		return StringUtils.isBlank(this.contentXml) ? null : XmlUtils.loadFromString(this.contentXml);
+		return XmlUtils.loadFromString(getContentXml());
 	}
 	
-	public void initPropertyXml(T page, Lang lang) {
+	public void init(T page, Lang lang) {
 		if(this.isNew()) {
 			this.page = page;
 			this.lang = lang;
-			this.propertyXml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><Properties pageid='"+((Page)page).getId()+"' lang='"+lang+"' />";
 		}
+		if (StringUtils.isBlank(this.getPropertyXml()))
+			this.propertyXml = getDefaultPropertyXml();
+		if(StringUtils.isBlank(this.getContentXml()))
+			this.contentXml = getDefaultContentXml();
+	}
+	
+	@Transient
+	public String getDefaultPropertyXml() {
+		return "<?xml version=\"1.0\" encoding=\"utf-8\" ?><Properties pageid='" + ((Page)page).getId() + "' lang='" + lang + "' />";
+	}
+	
+	@Transient
+	public String getDefaultContentXml() {
+		return "<?xml version=\"1.0\" encoding=\"utf-8\" ?><PageContent pageid='" + ((Page)page).getId() + "' lang='" + lang + "' template='" + page.getTemplate() + "' />";
 	}
 	
 	public void copyFrom(Content content) {

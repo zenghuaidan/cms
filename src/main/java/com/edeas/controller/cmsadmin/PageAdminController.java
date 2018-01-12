@@ -160,16 +160,15 @@ public class PageAdminController extends CmsController {
 			livePage.setParent(livePageParent);
 			livePage.setCmsPage(cmsPage);
 			
-			queryService.addOrUpdate(livePage, false);
 			for (CmsContent cmsContent : (Set<CmsContent>)cmsPage.getContents()) {
 				LiveContent liveContent = livePage.getContent(cmsContent.getLang());
 				if (liveContent == null) {
 					liveContent = new LiveContent();
 				}
 				liveContent.copyFrom(cmsContent);
-				liveContent.setPage(livePage);
-				queryService.addOrUpdate(liveContent, false);
+				liveContent.setPage(livePage);				
 			}			
+			queryService.addOrUpdate(livePage, false);
 			logger.info("Page=" + pgid + " has been published successfully");
 			return new Result("backsiteadmin");
 		} else {
