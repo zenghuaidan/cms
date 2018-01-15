@@ -1,6 +1,8 @@
 package com.edeas.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SQLQuery;
 
@@ -22,6 +24,12 @@ public abstract class PageDaoImpl<T extends Page> extends BasicDao<T> {
 
 	public List<T> findByTemplate(String template, boolean checkActive) {
 		return listByHQL("from " + getClz().getName() + " where template=? and del=0  " + (checkActive ? " and active=1 " : "") + " order by pageOrder asc", new String[]{ template });
+	}
+	
+	public List<T> findByTemplates(String[] templates, boolean checkActive) {
+		Map<String, Object> alias = new HashMap<String, Object>();
+		alias.put("templates", templates);
+		return listByHQL("from " + getClz().getName() + " where template in (:templates) and del=0  " + (checkActive ? " and active=1 " : "") + " order by pageOrder asc", alias);
 	}
 
 	public List<T> findPageByUrl(String url, boolean checkActive) {

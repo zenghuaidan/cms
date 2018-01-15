@@ -53,12 +53,10 @@
 	    %>
 	    	<c:out escapeXml="false" value='<%=top("Website", Global.getCMSUrl() + "/SiteAdmin", "Website", navigation) %>'></c:out>
 	    	<%
-	    		for(String template : CmsProperties.articleBaseTpls.keySet()) {
-	    			List<Page> pages = queryService.findPageByTemplate(template, true, true);
-	    			if(pages.size() == 0) continue;
-	    			if(pages.size() > 1) throw new Exception(template + " have more than one active pages, could not set it as article base page");
+	    		List<Page> pages = queryService.findPageByTemplates(CmsProperties.articleBaseTpls.keySet().toArray(new String[]{}), true, true);
+	    		for(Page _page : pages) {	    			
 	    	%>
-	    		<c:out escapeXml="false" value='<%=top(pages.get(0).getName(), Global.getCMSUrl() + "/PageAdmin/FixPIDArticles?fixpid=" + pages.get(0).getId(), "FixPIDArticles-" + template, navigation) %>'></c:out>
+	    		<c:out escapeXml="false" value='<%=top(_page.getName(), Global.getCMSUrl() + "/PageAdmin/FixPIDArticles?fixpid=" + _page.getId(), "FixPIDArticles-" + _page.getId(), navigation) %>'></c:out>
 	    	<%		
 	    		}
 	    	%>

@@ -45,7 +45,7 @@
         <div id="newbtn" onclick="openNewPage(${currentPage.id},0);">New</div>
         <div class="sep"></div>
         <div id="configbtn" class="btn"
-             onclick="goUrl('<%=Global.getCMSUrl() + "/PageAdmin/Index?id=${currentPage.id}" %>');">Modify Index Page</div>       
+             onclick="goUrl('<%=Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() %>');">Modify Index Page</div>       
         <%
         	if(!"nodate".equals(configMap.get("datefield"))) {
         		%>

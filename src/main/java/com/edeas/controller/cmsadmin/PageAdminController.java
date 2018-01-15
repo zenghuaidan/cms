@@ -64,7 +64,7 @@ public class PageAdminController extends CmsController {
 		if (currentPage.isNew() || !CmsProperties.articleBaseTpls.containsKey(currentPage.getTemplate())) {
 			return "redirect:/SiteAdmin";
 		}
-		model.addAttribute("navigation", "FixPIDArticles-" + currentPage.getTemplate());
+		model.addAttribute("navigation", "FixPIDArticles-" + currentPage.getId());
 		model.addAttribute("currentPage", currentPage);		
 		return "PageAdmin/FixPIDArticles";
 	}
