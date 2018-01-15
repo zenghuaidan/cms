@@ -12,6 +12,28 @@ import java.util.Properties;
 public class CmsProperties {
 
 	private static Properties properties;
+	
+	public static final Map<String, Map<String, String>> articleBaseTpls = new HashMap<String, Map<String, String>>() {		
+		{
+			put("MemberIdx", new HashMap<String, String>(){ 
+				{
+					put("order", "pgtimei");
+					put("datefield", "singledate");
+					put("datelabel", "日期");
+					put("itmlabel", "Member");
+				} 
+			});
+			put("ArtistIdx", new HashMap<String, String>(){ 
+				{
+					put("order", "pgtimei");
+					put("datefield", "nodate");
+					put("datelabel", "日期");
+					put("itmlabel", "Member");
+				} 
+			});
+		}
+    };
+	
 	public static final Map<String, Map<String, String>> enableAutoNameParentTpls = new HashMap<String, Map<String, String>>() {		
 		{
 			put("TrainIdx", new HashMap<String, String>(){ {put("namealg", "daterange");} });

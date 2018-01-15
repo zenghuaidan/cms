@@ -243,7 +243,7 @@
 	            <div id="templatefield" class="editor-field">
 	            <%
 	            	String q = "/TemplateList/Template";
-	            	List<String> activeTemplates = queryService.findActiveTemplates(true);
+	            	List<String> activeTemplates = queryService.findAvailableTemplates(true);
 	            	boolean reftpl = false;
 	            	Document document = XmlUtils.getTemplateListDocument();
 	            	if (parentid == 0) q += "[@top='yes']";
@@ -265,7 +265,7 @@
 	                    String l = t.attributeValue("name");
 	                    boolean inctpl = true;
 	                    
-	                    if (t.attributeValue("isunique", "").equals("yes") && !currentPage.getTemplate().equals(v)) {
+	                    if (t.attributeValue("isunique", "").equals("yes") && !v.equals(currentPage.getTemplate())) {
 	                        if (activeTemplates.contains(v)) {
 	                            inctpl=false;
 	                        }

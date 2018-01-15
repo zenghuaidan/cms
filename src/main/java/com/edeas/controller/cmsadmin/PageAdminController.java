@@ -58,6 +58,17 @@ public class PageAdminController extends CmsController {
 		return "redirect:/SiteAdmin";
 	}
 	
+	@RequestMapping(path = {"PageAdmin/FixPIDArticles"}, method={RequestMethod.GET})
+	public String fixPIDArticles(Model model, long fixpid, HttpServletRequest request) {
+		Page currentPage = queryService.findPageById(fixpid, true);
+		if (currentPage.isNew() || !CmsProperties.articleBaseTpls.containsKey(currentPage.getTemplate())) {
+			return "redirect:/SiteAdmin";
+		}
+		model.addAttribute("navigation", "FixPIDArticles-" + currentPage.getTemplate());
+		model.addAttribute("currentPage", currentPage);		
+		return "PageAdmin/FixPIDArticles";
+	}
+	
 	@RequestMapping(path = {"PageAdmin/New"}, method={RequestMethod.GET})
 	public String newPage(Model model, long parentid, HttpServletRequest request) {
 		CmsPage parentPage = parentid <= 0 ? null : (CmsPage)queryService.findPageById(parentid, true);

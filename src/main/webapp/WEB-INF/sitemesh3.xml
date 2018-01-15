@@ -2,6 +2,7 @@
 <sitemesh>
     <mapping path="/cmsadmin/SiteAdmin" decorator="/WEB-INF/Shared/CmsLayout.jspf" />
     <mapping path="/cmsadmin/PageAdmin/Index" decorator="/WEB-INF/Shared/CmsLayout.jspf" />
+    <mapping path="/cmsadmin/PageAdmin/FixPIDArticles" decorator="/WEB-INF/Shared/CmsLayout.jspf" />
     
     <mapping>
       	<path>/cmsadmin/en/viewPage/*</path>
