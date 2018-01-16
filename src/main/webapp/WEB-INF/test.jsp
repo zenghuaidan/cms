@@ -1,3 +1,6 @@
+<%@page import="com.edeas.service.impl.QueryServiceImpl"%>
+<%@page import="com.edeas.model.*"%>
+<%@page import="com.edeas.web.InitServlet"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -23,11 +26,16 @@
 <%
 	Map<String, String> map = new HashMap<String, String>();
 	//map.put("abc", "123456");
+	QueryServiceImpl queryServiceImpl = InitServlet.getQueryService();
+	Page _page = queryServiceImpl.getHomePage(true);
+	String lang = "en";
 %>
 <c:set var="map" value="<%=map %>"></c:set>
 <c:out value="${map['abc'] }"></c:out>
 <c:if test="${empty map['abc'] }">
-	sdfsdfdsfdsf
+	hello
 </c:if>
+<x:parse xml="<%=_page.getContent(lang).getContentXml() %>" var="contentXml"></x:parse>
+<x:out select="$contentXml/PageContent/Widget[@name='SectionTitle']/Field" escapeXml="false" />
 </body>
 </html>

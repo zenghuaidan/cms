@@ -22,23 +22,24 @@
     <link rel="stylesheet" type="text/css" href="${Content}/css/cms-cover.css" />    
 
     <style>
-		html #body.cms-cover .header 		{ background-color:#fff}
-		html #body.cms-cover .login-blk		{ background: #ececec url("${Content}/images/bg-cms-cover-musicus.jpg") center center no-repeat; background-size:cover;}
-		.input__label--ruri::after,
-		.input--filled .input__label--ruri::after  { background-color:#b20838}
-		html #body.cms-cover .btn-login .login-bg  { background-color:#b20838}
-		html #body.cms-cover .btn-login:hover      { background-color:#5a021b; }
+		html #body.cms-cover .header 		{ background-color:#333}
+		html #body.cms-cover .login-blk		{ background: #ececec url("${Content}/images/bg-cms-cover-edeas.jpg") center center no-repeat; background-size:cover;}
+		.input__label--ruri::after, 
+		.input--filled .input__label--ruri::after  { background-color:#ba2950}
+		html #body.cms-cover .btn-login .login-bg  { background-color:#ba2950}
+		html #body.cms-cover .btn-login:hover      { background-color:#740c2c}
 
 		html #body.cms-cover footer { color:#ececec}
-		html #body .error 			{ background-color:#ed7b35; border-top:2px solid #fb995e; display:none;
+		html #body .error 			{ background-color:#ececec; border-top:1px solid #fff; color:#666; display:none;
 									-webkit-box-shadow: 3px 3px 0px 0px rgba(20, 20, 20, 0.10);
 									   -moz-box-shadow: 3px 3px 0px 0px rgba(20, 20, 20, 0.10);
 											box-shadow: 3px 3px 0px 0px rgba(20, 20, 20, 0.10);}
-		html #body.cms-cover .header img  { width:auto; height:70px}
 
-		@@media only screen and (max-width:667px) {
-		html #body .header .div-table .row2 .r2-pos { background-color:#ececec; color: #666}
-		html #body.cms-cover .header img  { width:auto; height:70px;}
+
+		@media only screen and (max-width:667px) {
+			html #body .header .div-table .row2 .r2-pos { background-color:#ececec; color: #666; }
+			html #body .header .div-table .row1 .r1-pos { width:100%; padding:0;}
+			html #body.cms-cover .header img  { width:auto; height:30px; padding:15px}	
 		}
     </style>
 
@@ -49,7 +50,7 @@
         <div class="div-table">
             <div class="row1">
                 <div class="r1-pos">
-                    <img src="${Content}/cms/core/images/logo-musicus.png" class="img-scale" />
+                    <img src="${Content}/cms/core/images/logo-edeas.svg" class="img-scale" />
                 </div>
             </div>
             <div class="row2"><div class="r2-pos">Content Management System</div></div>
