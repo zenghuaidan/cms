@@ -5,7 +5,7 @@
 <%@page import="org.dom4j.Element"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.*"%>
-
+<%@include file="/WEB-INF/Shared/commons.jspf" %>
 <%
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
@@ -35,12 +35,14 @@
 %>
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %> : 
-        <br /><select id="<%=fpm.getName() %>_target" name="<%=fpm.getName() %>_target">
+        <br />
+        <select id="<%=fpm.getName() %>_target" name="<%=fpm.getName() %>_target">
                 <option value="">Standard</option>
                 <option value="_blank" <%=nwsel %> >New Window</option>
         </select>
         <br />Anchor:
-        <br /><input type="text" id="<%=fpm.getName() %>_anchor" name="<%=fpm.getName() %>_anchor"
+        <br />
+        <input type="text" id="<%=fpm.getName() %>_anchor" name="<%=fpm.getName() %>_anchor"
                      value="<%=lnkanchor %>" style="width:100px;" />
     </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
@@ -64,11 +66,10 @@
         <span>
             Document: <input class="document_link" type="file" id="<%=fpm.getName() %>_document_link" name="<%=fpm.getName() %>_document_link" style="width:200px;" /> 
         </span>
-        <%
-        	if(!StringUtils.isBlank(docval)) {
-        		out.print("<input type='button' value='View' onclick='window.open('" + Global.getDocUploadPath(docval) + "');' />");
-        	}
-        %>        
+        <c:set var="docval" value="<%=docval %>"></c:set>
+        <c:if test="${not empty docval}">
+        	<input type='button' value='View' onclick='window.open('<%=Global.getDocUploadPath(docval)%>');' />
+        </c:if>
         <%=fpm.getRemark() %>
     </td>
 </tr>

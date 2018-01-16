@@ -5,7 +5,7 @@
 <%@page import="org.dom4j.Element"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.*"%>
-
+<%@include file="/WEB-INF/Shared/commons.jspf" %>
 <%
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
@@ -18,18 +18,15 @@
     if (!StringUtils.isBlank(wopts)) { fopts = wopts; }
     String[] opts = StringUtils.isBlank(fopts) ? new String[]{} :  fopts.split(",");
 %>
+<c:set var="opts" value="<%=opts %>"></c:set>
+<c:set var="val" value="<%=val %>"></c:set>
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
         <select id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" style="<%=fpm.getType() %>">
-        <%
-        	for(String opt : opts) {
-	            String[] o = opt.split("^");
-	            String sel = o[0].equals(val) ? " selected" : "";
-	            out.print("<option value='" + o[0] + "' @sel>" + o[1] + "</option>");
-        		
-        	}
-        %>
+	        <c:forEach items="${opts }" var="opt">
+	        	<option value="${fn:split(opt, '^')[0]}" ${fn:split(opt, '^')[0] eq val ? ' selected' : ''}>${fn:split(opt, '^')[1]}</option>
+	        </c:forEach>        
         </select>
         <%=fpm.getRemark() %>
     </td>

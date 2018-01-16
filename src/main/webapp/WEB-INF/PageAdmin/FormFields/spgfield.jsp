@@ -8,6 +8,7 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
+<%@include file="/WEB-INF/Shared/commons.jspf" %>
 <%
 	QueryServiceImpl queryService = InitServlet.getQueryService();
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
@@ -41,19 +42,16 @@
 		}
 	}
 %>
+<c:set var="pages" value="<%=pages %>"></c:set>
+<c:set var="selPageId" value="<%=selPageId %>"></c:set>
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
         <select id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" class="spgsel">
             <%=topOption %>
-            <%
-            	if(pages != null) {
-            		for(Page _page : pages) {
-            			String sel = _page.getId().toString().equals(selPageId) ? " selected" : "";
-            			out.print("<option value='" + _page.getId() + "' " + sel + ">" + _page.getName() + "</option>");
-            		}
-            	}
-            %>            
+            <c:forEach items="${pages}" var="_page">
+            	<option value='${_page.id}' ${_page.id eq selPageId ? ' selected' : '' }>${_page.name}</option>
+            </c:forEach>         
         </select>
     </td>
 </tr>
