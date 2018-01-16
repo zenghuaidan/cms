@@ -39,72 +39,64 @@
 	List<Page> children = queryService.findPagesByParentId(currentPage.getId(), true, false);
 	Map<String, String> configMap = CmsProperties.articleBaseTpls.get(currentPage.getTemplate());
 %>
+<c:set var="configMap" value="<%=configMap %>"></c:set>
+<c:set var="children" value="<%=children %>"></c:set>
 <!-- TOP FUNC BAR -->
 <div id="admintopheader" class="cmspgw hlgradbg">
     <div id="leftuserfnbar" class="leftblock">
         <div id="newbtn" onclick="openNewPage(${currentPage.id},0);">New</div>
         <div class="sep"></div>
-        <div id="configbtn" class="btn"
-             onclick="goUrl('<%=Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() %>');">Modify Index Page</div>       
-        <%
-        	if(!"nodate".equals(configMap.get("datefield"))) {
-        		%>
-		        <div id="rightuserfnbar" class="rightblock">
-		            Year: <select id="selarticleyr"></select>
-		        </div>
-        		<%
-        	}
-        %>         
+        <div id="configbtn" class="btn" onclick="goUrl('<%=Global.getCMSUrl() + "/PageAdmin/Index?id=" + currentPage.getId() %>');">Modify Index Page</div>               
+        <c:if test="${not 'nodate' eq configMap['datefield']}">
+			<div id="rightuserfnbar" class="rightblock">
+	            Year: <select id="selarticleyr"></select>
+	        </div>	
+		</c:if>         
     </div>
 </div>
 
 <!-- ARTICLE LISTING -->
 <div id="articlelist" class="cmspgw">
-	<%
-		out.print("<table id='articlestbl' cellpadding='0' cellspacing='0'>");
-		out.print("<tr>");
-		out.print("<th class='colico'></th>");
-		out.print("<th class='colid'>ID</th>");
-		if (configMap.containsKey("pgorderlabel") || !StringUtils.isBlank(configMap.get("pgorderlabel"))) {
-			out.print("<th class='colpgo'>" + configMap.get("pgorderlabel") + "</th>");
-		}
-		if(!"nodate".equals(configMap.get("datefield"))) {
-			out.print("<th class='coldate' datype='daterange'>" + configMap.get("datelabel") + "</th>");	
-		}
-		out.print("<th class='coltitle'>" + configMap.get("itmlabel") + "</th>");
-		out.print("<th class='colfns'></th>");
-		out.print("</tr>");
-		for(Page child : children) {			
-			String yearFrom = DateUtils.yyyy().format(child.getPageTimeFrom());
-			String yearTo = DateUtils.yyyy().format(child.getPageTimeTo());
-			String dateStr = DateUtils.yyyyMMdd().format(child.getPageTimeFrom());
-			if("daterange".equals(configMap.get("datefield"))) {
-				dateStr += "-" + DateUtils.yyyyMMdd().format(child.getPageTimeTo());
-			} else if("singleyear".equals(configMap.get("datefield"))) {
-				dateStr = DateUtils.yyyy().format(child.getPageTimeFrom());
-			}
-			String status = child.getStatus().getName();
-			String activeStr = child.isActive() ? "active" : "inactive";
-			out.print("<tr class='data' yri='" + yearFrom + "' yrf='" + yearTo + "'>");
-			out.print("<td class='colico'>");
-			out.print("<img class='pgsdot pgs" + status + "' src='" + Global.getContentPath() + "/images/spacer.gif' alt='" + status + "' title='" + status + "'>");
-			out.print("<img class='ico " + activeStr + "' src='" + Global.getContentPath() + "/images/spacer.gif' alt='" + activeStr + "' title='" + activeStr + "'>");
-			out.print("</td>");
-			out.print("<td class='colid'>" + child.getId() + "</td>");
-			if (configMap.containsKey("pgorderlabel") || !StringUtils.isBlank(configMap.get("pgorderlabel"))) {
-				out.print("<td class='colpgo'>" + child.getPageOrder() + "</td>");				
-			}
-			if(!"nodate".equals(configMap.get("datefield"))) {
-				out.print("<td class='coldate'>" + dateStr + "</td>");	
-			}
-			out.print("<td class='coltitle'>" + child.getName() + "</td>");
-			out.print("<td class='colfns'>");
-			out.print("<div class='cmsbtn' onclick=\"goUrl('" + Global.getCMSUrl() + "/PageAdmin/Index?id=" + child.getId() + "')\">Edit</div>");
-			out.print("</td>");
-			out.print("</tr>");
-		}
-		out.print("</table>");
-	%>       
+	<table id='articlestbl' cellpadding='0' cellspacing='0'>
+		<tr>
+			<th class='colico'></th>
+			<th class='colid'>ID</th>
+			<c:if test="${not empty configMap['pgorderlabel']}">
+				<th class='colpgo'>${configMap['pgorderlabel']}</th>
+			</c:if>
+			<c:if test="${not 'nodate' eq configMap['datefield']}">
+				<th class='coldate' datype='daterange'>${configMap['datelabel']}</th>	
+			</c:if>
+			<th class='coltitle'>${configMap['itmlabel']}</th>
+			<th class='colfns'></th>
+		</tr>
+		<c:forEach items="${children }" var="child">
+			<c:set var="dateStr" value=""></c:set>
+			<c:if test="${'daterange' eq configMap['datefield']}">
+				<c:set var="dateStr" value="<fmt:formatDate value='${ child.pageTimeFrom }' pattern='yyyy-MM-dd' />-<fmt:formatDate value='${ child.pageTimeTo }' pattern='yyyy-MM-dd' />"></c:set>	
+			</c:if>
+			<c:if test="${'singleyear' eq configMap['datefield']}">
+				<c:set var="dateStr" value="<fmt:formatDate value='${ child.pageTimeFrom }' pattern='yyyy' />"></c:set>
+			</c:if> 			
+			<tr class='data' yri='<fmt:formatDate value="${ child.pageTimeFrom }" pattern="yyyy" />' yrf='<fmt:formatDate value="${ child.pageTimeTo }" pattern="yyyy" />'>
+				<td class='colico'>
+					<img class='pgsdot pgs${child.status.name }' src='${Content}/images/spacer.gif' alt='${child.status.name }' title='${child.status.name }' />
+					<img class='ico ${child.active ? 'active' : 'inactive' }' src='${Content}/images/spacer.gif' alt='${child.active ? 'active' : 'inactive' }' title='${child.active ? 'active' : 'inactive' }' />
+				</td>
+				<td class='colid'>${child.id }</td>			
+				<c:if test="${not empty configMap['pgorderlabel']}">
+					<td class='colpgo'>${child.pageOrder}</td>
+				</c:if>
+				<c:if test="${not 'nodate' eq configMap['datefield']}">
+					<td class='coldate'>${dateStr}</td>	
+				</c:if>
+				<td class='coltitle'>${child.name}</td>
+				<td class='colfns'>
+					<div class="cmsbtn" onclick="goUrl('<%=Global.getCMSUrl() + "/PageAdmin/Index?id=" %>${child.id}');">Edit</div>    
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
 </div>
 
 <script type="text/javascript">

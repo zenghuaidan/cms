@@ -49,5 +49,10 @@ public class SiteController extends FrontController {
 	@RequestMapping(path = {"PageNotFound"}, method={RequestMethod.GET})
 	public String pageNotFound() {
 		return "404";		
+	}
+	
+	@RequestMapping(path = {"/test"}, method={RequestMethod.GET})
+	public String test() {
+		return "test";		
 	}	
 }

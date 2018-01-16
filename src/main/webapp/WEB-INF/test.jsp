@@ -1,9 +1,11 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="/WEB-INF/Shared/commons.jspf" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${ title }</title>
 <script type="text/javascript">
@@ -18,6 +20,14 @@
 <script src="<%=request.getContextPath()%>/resources/script/jquery.form.min.js"></script>
 </head>
 <body>
-homepage	
+<%
+	Map<String, String> map = new HashMap<String, String>();
+	//map.put("abc", "123456");
+%>
+<c:set var="map" value="<%=map %>"></c:set>
+<c:out value="${map['abc'] }"></c:out>
+<c:if test="${empty map['abc'] }">
+	sdfsdfdsfdsf
+</c:if>
 </body>
 </html>
