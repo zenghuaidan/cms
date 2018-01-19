@@ -1,0 +1,33 @@
+
+    .fa { display:inline-block; vertical-align:middle; font-style:normal; font-weight:normal; line-height:normal;}
+
+    .accordion {}
+    .accordion .accordion_wrapper {}
+    .accordion .question { margin-bottom:5px; overflow:hidden; border:1px solid #ececec }
+    .accordion .question:last-child { margin-bottom:0; }
+    .accordion .question .title     { padding:14px 14px 14px 60px; position:relative; border-width:0; border-style:solid;
+                                      cursor:pointer; font-weight:bold; line-height:normal;}
+    .accordion .question .title:before { content: ""; width:49px; height:100%; border-width:0 1px 0 0;
+                                         border-style:solid; border-color:#ececec; position:absolute; left:0; top:0; z-index:1;}
+
+    .accordion .question .title > .acc-icon-plus,.accordion .question .title > .acc-icon-minus {
+        display:block; position:absolute; left:15px; top:15px;
+        width:20px; height:20px; text-align:center; color:rgba(0,0,0,.15);}
+
+    .accordion .question .title > .acc-icon-plus:before,.accordion .question .title > .acc-icon-minus:before { margin:0}
+    .accordion .question .title > .acc-icon-plus  { display:none;}
+    .accordion .question .title > .acc-icon-minus { display:block;}
+
+    .accordion .question .answer { padding:15px 20px 20px; overflow:hidden; display:none;}
+    .accordion .question .answer .wpb_content_element:last-child { margin-bottom:0; }
+
+    .accordion .question.active .title { border-width:0 0 1px; border-color:#ececec}
+    .accordion .question.active .title > .acc-icon-plus  { display:block;}
+    .accordion .question.active .title > .acc-icon-minus { display:none;}
+    .accordion .question.active p:last-child { margin-bottom:0;}
+
+    .accordion .question.active .title,
+    .accordion .question.active .title > .acc-icon-minus,.accordion .question.active .title > .acc-icon-plus { color: #124b98;}
+
+
+

@@ -1,0 +1,72 @@
+  
+/*  Masonry
+================================================== */
+    .masonry { width:100%; margin:0 auto; margin-left:-8px}
+    .masonry img { width:100%; height:auto;}
+
+    .masonry .post-item { width:32%; margin:0 0 20px 1.3%; background:#fff; background-color:#ececec;}
+    .masonry .post-desc-wrapper { width:100%; float:none;}
+    .masonry .post-desc-wrapper .post-desc { padding:20px 20px 0 20px;}
+    /*.masonry .post-footer { margin:0 -20px;  
+                            -webkit-box-sizing: border-box;
+                               -moz-box-sizing: border-box;
+                                    box-sizing: border-box;}*/
+
+
+    .posts_group {margin-bottom:50px}                               
+    .post-item { margin-bottom:40px; position:relative; float:left; width:100%;}
+
+    .post-desc-wrapper { width:63%; float:left; color:#333}
+    .post-desc   { padding:15px 0 0 20px;}
+ 
+    a .post-desc-wrapper, .post-desc a { color:#333; transition: all 0.3s ease-out;}
+    a:hover .post-desc-wrapper, .post-desc a:hover { color:#666}
+
+    .post-date    { text-transform:uppercase; color:#666;}
+    .post-content { margin-bottom:30px}
+    .post-footer  { background-color:#ccc; overflow:hidden; height:55px; margin:0 -20px;  }
+    .post-footer .box { width:55px; height:55px; background-color:#ba2950; text-align:center; float:right; border-left:1px solid #fff;
+                        transition: all 0.3s ease-out; cursor:pointer;}
+    .post-footer .box:hover { background-color:#333; }
+    .gi-more,
+    .fa-download,
+    .fa-external-link  { color:#fff; line-height:52px; font-size:22px}
+    .fa-external-link { margin-top:2px}
+
+    .masonry .slider img { width:100%!important; height:auto;}
+
+
+    .masonry .withlink-blk { position:relative; line-height:0; margin:0; padding:0; overflow:hidden; background-color:#000; width:100%;}
+    .masonry .withlink-blk .box-row { position:absolute; width:100%; height:55px; background:url(images/bg-black-opacity60.png) repeat;}
+    .masonry .withlink-blk .box-row .box     { position:absolute; right:0; width:55px; height:55px; background-color:#ba2950; text-align:center; color:#fff;}
+
+    a .withlink-blk .box-row         { bottom:-55px; transition: all 0.3s ease-out;}
+    a:hover .withlink-blk .box-row   { bottom:0}
+
+    .link-blk-m { display:none}
+
+
+
+
+
+
+/* =====================================================================================================
+     Media 
+===================================================================================================== */
+
+    @media only screen and (max-width: 1024px) {
+    .masonry .post-item { width:48%; margin-left:2% }
+    .link-blk-m { display:block;}
+    .masonry .withlink-blk .box-row  {display:none}
+    }
+
+    @media only screen and (max-width: 745px) {
+    .masonry { margin-left:-3px}
+    .masonry .post-item { width:100%; }
+    
+    }
+
+
+/* Template Style
+================================================== */
+    .post-desc h3 { padding:10px 0 10px 0; margin:0}

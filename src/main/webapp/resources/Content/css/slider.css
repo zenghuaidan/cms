@@ -1,0 +1,119 @@
+
+
+	.content_slider { padding: 0 140px 42px; position: relative; margin:0 auto; }
+	.content_slider img { border:none; width:100%; height:auto; background-color:#ebebeb; }
+
+	.content_slider .caroufredsel_wrapper { /*border:5px solid #ebebeb;
+									    -webkit-box-sizing: border-box;
+									       -moz-box-sizing: border-box;
+									            box-sizing: border-box;*/}
+
+	.content_slider ul 		{ line-height:0; margin:0; padding:0; list-style:none}
+
+	.content_slider ul li 	{ display:block; float:left; margin:0; padding:0; line-height:0}
+
+	.content_slider a.slider_prev,.content_slider a.slider_next { position:absolute; top:50%; margin:-43px 0 0;}
+
+	.content_slider a.slider_prev { left:60px;}
+	.content_slider a.slider_next { right:60px;}
+
+	.content_slider .slider_pagination { position:absolute; left:0; bottom:0; width:100%;}
+
+
+	.slider_caption { position:absolute; bottom:0px; min-height:10%; width:600px;  
+					  color:#fff; background:rgba(0,0,0,.8); line-height:2; 
+					  border-right:5px solid #124b98;}
+
+	.slider_caption .caption-pos { padding:10px 15px }
+
+	/* Animation */
+	.content_slider.flat a.button .button_icon { 
+	    -webkit-transition: all .3s ease-in-out;
+	       -moz-transition: all .3s ease-in-out;
+	         -o-transition: all .3s ease-in-out;
+	            transition: all .3s ease-in-out; }
+
+
+
+	/* arrow left and right
+	================================================== */
+
+	a.button { display:inline-block; cursor:pointer; border:0; position:relative; overflow:hidden;
+	    	-webkit-border-radius: 5px;
+	    			border-radius: 5px;
+	  		   -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+	                   box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+	            background-repeat: repeat-x;}
+
+
+	a.button_js { padding: 0;}
+
+	a.button.button_left .button_icon  { float:left;}
+	a.button.button_right .button_icon { float:right;}
+
+	a.button .button_icon { width:60px; height:60px; cursor:pointer;}
+
+	.fa-angle-left, .fa-angle-right { font-size:40px; text-align:center; line-height:normal; margin-top:9px; width:60px; height:60px;}
+	a.button .fa-angle-left, a.button .fa-angle-right { color:#fff; transition: all 0.3s ease-out;}
+	a.button:hover .fa-angle-left, a.button:hover .fa-angle-right { color:#124b98}
+
+	a.button .button_icon { display:block; float:left; background-color:#ccc; line-height:0; transition: all 0.3s ease-out;}
+	a.button:hover .button_icon   { background-color:#ececec}
+
+
+	/* Slider | Pagination
+	================================================== */
+	
+	.slider_pagination { text-align:center; line-height:0;}
+
+	.slider_pagination a { display:inline-block; width:12px; height:12px; text-indent:-9999px; margin: 0 9px; position:relative;
+							background: rgba(0,0,0,.15);
+	  			 -webkit-border-radius: 100%;
+	                     border-radius: 100%; }
+
+	.slider_pagination a:hover 	  { background: rgba(0,0,0,.25);}
+	.slider_pagination a.selected { position:relative; background-color:#124b98;}
+
+
+	/* Animation */
+	.offer_thumb .slider_pagination a img {
+	    -webkit-transition: all .4s ease-in-out;
+	       -moz-transition: all .4s ease-in-out;
+	         -o-transition: all .4s ease-in-out;
+	            transition: all .4s ease-in-out; }
+
+	.offer_thumb .slider_pagination a:before,.offer_thumb .slider_pagination a:after {
+	    -webkit-transition: all .2s ease-in-out;
+	       -moz-transition: all .2s ease-in-out;
+	         -o-transition: all .2s ease-in-out;
+	            transition: all .2s ease-in-out; }
+
+
+/* ==========================================================================
+  = Media Style
+============================================================================= */
+
+ 	@media only screen and (max-width: 1024px) {
+		.content_slider { padding: 0 0 42px 0; position: relative; margin:0}
+ 		.content_slider img { width:100%; height:auto;}
+		.content_slider a.slider_prev { left:-25px;}
+		.content_slider a.slider_next { right:-25px;}
+		a.button .button_icon { width:50px; height:50px;}
+
+		.slider_caption { font-size:11px}
+  		.fa-angle-left, .fa-angle-right { margin-top:2px; width:50px; height:50px;}
+
+  	}
+
+	@media only screen and (max-width: 745px) {
+		.content_slider { padding: 0 35px 42px 35px;}
+
+		.content_slider a.slider_prev { left:0px;}
+		.content_slider a.slider_next { right:0px;}
+		a.button .button_icon { width:25px; height:25px;}
+  		.fa-angle-left, .fa-angle-right { margin-top:3px; width:25px; height:25px; font-size:20px}
+
+
+	}
+
+

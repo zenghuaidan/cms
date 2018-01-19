@@ -8,6 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.print.Doc;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -116,6 +118,19 @@ public class XmlUtils {
 	public static String getFieldAttr(Element fnode, String attrname, String defaultValue)
     {
         return (fnode == null) ? defaultValue : fnode.attributeValue(attrname, defaultValue);
+    }
+	
+    public static Element getPtyField(Document document, String fieldeName)
+    {
+        return (document == null) ? null : (Element)document.selectSingleNode("/Properties/Field[@name='" + fieldeName + "']");
+    }
+    
+    public static String getPtyFieldVal(Document document, String fieldeName, Boolean isTta)
+    {
+        Element fieldNode = getPtyField(document, fieldeName);
+        String val = (fieldNode == null) ? "" : fieldNode.getTextTrim();
+        if (isTta) { val = val.replaceAll("\r\n", "<br />"); }
+        return val;
     }
 	
 	public static String formatXml(Document document) {

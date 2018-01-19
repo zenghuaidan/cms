@@ -18,7 +18,7 @@
 
     <!-- FONTS -->
     <link rel="stylesheet" type="text/css" href="${Content}/css/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="${Content}/css/glyphicons/style.min.css" />
+    <link rel="stylesheet" type="text/css" href="${Content}/css/icons/glyphicons/style.min.css" />
     <link rel="stylesheet" type="text/css" href="${Content}/css/cms-cover.css" />    
 
     <style>

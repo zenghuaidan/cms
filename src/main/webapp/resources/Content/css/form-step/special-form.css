@@ -1,0 +1,21 @@
+
+
+	.bg { background: #ba2950}
+	.form .inner-wrapper.pos { padding:50px 0}
+	.form hr { height:1px; background-color:#fff; border:none; margin:2% 0;}
+	section.pos { padding:50px 0; overflow: hidden;}
+
+
+    /* for form 2 style only */
+	.form2-style { color:#fff; font-size:25px; 	font-family:'Raleway', sans-serif;  }
+
+
+    /* ==========================================================================
+        Media Styles
+    ============================================================================= */
+    @media only screen and (max-width: 767px) {
+    section.pos { padding:20px 0}
+
+	.form2-style { color:#fff; font-size:18px }
+
+	}

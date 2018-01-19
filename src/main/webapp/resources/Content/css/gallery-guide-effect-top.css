@@ -1,0 +1,22 @@
+	
+	
+	.top-bg-photo { padding-top:0px; padding-bottom:0px; background-color:#1d1813; background-repeat:no-repeat;
+                        background-position:center; background-attachment:fixed; background-size:cover; -webkit-background-size:cover}	
+	h2.gallery { color: #fff; border-bottom: 4px solid #ba2950; display:inline-block; 
+			     padding: 0 0 10px 0; }
+
+	h3.gallery-sub { color:#fff;  margin:20px 0 90px 0}
+
+
+	/* ==========================================================================
+        Media Styles
+    ============================================================================= */
+  
+    @media only screen and (max-width:1024px) {
+    .top-bg-photo {background-attachment:fixed; background-attachment:scroll}
+    }
+
+    @media only screen and (max-width: 767px) {
+   	h3.gallery-sub { color:#fff;  margin:20px 0 0px 0}
+
+    }

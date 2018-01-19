@@ -1,0 +1,138 @@
+
+
+	input.form       { background:#e9e9e9; height:25px; padding:5px 0; border:none; outline:none; color:#333;
+					   transition:all 0.3s ease; font-size:14px; width:82%; text-indent:20px }
+	input.form:focus { background:#666; color:#fff}
+	
+	.error 		{ padding-top:10px; color:#cc3333; font-style:italic; line-height:normal; display:none;}
+	.error-star { font-weight:bold; color:#cc3333;}
+
+	.row-height    { width:100%; height:100%; display:table; table-layout:fixed; color:#666; border-bottom:1px dotted #ebebeb}
+	.col-sm-height { display:table-cell; float:none; height:100%; vertical-align:top; padding:15px 0}
+
+	.col-sm-height.col-left   			{ width:23%; padding-left:5%; text-align:right; font-weight:bold; }
+	.col-sm-height.col-left:after 		{ content:":"; padding-left:5px}
+	.col-sm-height.col-right  			{ width:70%; padding-left:2%}
+
+
+	/* check box */
+	input.checkbox { position:absolute; top:4px; left:0px;}
+	.checkbox-blk  { position: relative; padding-left:25px; display: block; width:82%;}
+
+
+	/* radio */
+	.radio-blk  { position: relative; display: block;}
+
+	/* textarea */
+	textarea#field { background:#e9e9e9; height:100px; padding:10px 10px; border:none; outline:none; color:#333;
+					  transition:all 0.3s ease; font-size:14px; width:calc(82% - 20px); line-height:1.8}
+
+	/* Count characters in textarea */
+	#charNum { display:inline-block; color:#ba2950; font-weight:bold;}
+
+	/* Quantity Table */
+	table.quantity .input-quantity-blk 	{ width:50px; float:left;}
+	table.quantity input.input      	{ background:#e9e9e9; height:25px; }
+	table.quantity input.input-quantity	{ background:#fff; height:20px; width:25px; padding:0; margin:0}
+	table.quantity input.input, 
+	table.quantity input.input-quantity	{ padding:5px 10px; color:#333; border:none; outline:none; font-size:14px; transition:all 0.3s ease; }
+
+	table.quantity input.input:focus,
+	table.quantity input.input-quantity:focus	{ background:#666; color:#fff }
+
+
+	table.quantity { width:100%; border-collapse:collapse; }
+	table.quantity tr:nth-of-type(odd)   { background:#e7e7e7}
+	table.quantity tr:nth-of-type(even)  { background:#dedede}
+	table.quantity th, table.quantity td { padding:10px 15px; text-align:left; line-height:normal; vertical-align:middle;}
+
+	table.quantity th { background:#124b98; color:#fff; border:1px solid #124b98; }
+	table.quantity td { border:1px solid #ccc; }
+	
+	table.quantity th.quantity-col { width:110px}
+	table.quantity td .fqtytdbf{ display:none;}
+	
+	.btn-add, .btn-minus { width:25px; height:30px; background-color:#124b98; float:left;
+				           text-align:center; vertical-align: middle; cursor:pointer; transition:all 0.3s ease-out;}
+	.btn-add:hover, .btn-minus:hover { background-color:#333;}
+
+	.btn-minus 	{ margin-right:1px;
+				 -webkit-border-top-left-radius: 5px;
+			  -webkit-border-bottom-left-radius: 5px;
+			         -moz-border-radius-topleft: 5px;
+			      -moz-border-radius-bottomleft: 5px;
+			             border-top-left-radius: 5px;
+			          border-bottom-left-radius: 5px; }
+
+    .btn-minus:before { content:url('images/btn-minus.svg')  }
+
+	.btn-add  	{ margin-left:-4px; 
+					-webkit-border-top-right-radius: 5px;
+				 -webkit-border-bottom-right-radius: 5px;
+				        -moz-border-radius-topright: 5px;
+				     -moz-border-radius-bottomright: 5px;
+				            border-top-right-radius: 5px;
+				         border-bottom-right-radius: 5px;}
+    .btn-add:before { content:url('images/btn-add.svg')}
+	.total-blk { width:calc(100% - 100px);  text-transform:uppercase; padding:10px 50px; background-color:#ccc; }
+	.total-blk .total-pos { float:right;} 
+
+	.total:before { content:url('images/icon-basket.svg'); height:20px}
+	.total:after {  content:" ";}
+
+
+
+
+	/* ==========================================================================
+		Media Style
+	============================================================================= */
+  	
+  	@media only screen and (max-width: 1024px) {  
+	.col-sm-height.col-left   			{ width:30%;}
+	.col-sm-height.col-right  			{ width:68%; padding-left:2%}
+
+	/* widget: Quantity Table */	
+	table.quantity th, table.quantity td { padding:6px 15px;}
+	.total-blk { width:calc(100% - 50px); padding:10px 25px; }
+	}
+
+
+
+    @media only screen and (max-width:745px) {
+  	input.form       { width:100%;}
+	textarea#field { width:calc(100% - 20px);}
+	.checkbox-blk  { width:calc(100% - 25px);}
+
+
+	/* widget: Quantity Table */	
+	table.quantity, table.quantity thead, table.quantity tbody, table.quantity th, table.quantity td, table.quantity tr, table.quantity th.quantity-col { display: block; }
+	table.quantity tr.fqtytbtrhead, table.quantity thead tr { position:absolute; top:-9999px; left:-9999px;}
+	table.quantity tr { border:none; }
+	table.quantity td { border:none; position:relative; padding-left:0; }
+	table.quantity td:first-child { border:none; position:relative; padding-left:0; background-color:#124b98;
+									width:calc(100% - 40px); padding:8px 20px; color:#fff;}
+	
+	table.quantity th.quantity-col { width: auto;}
+
+	table.quantity td { border:none; border-bottom:1px solid #eee; position: relative; width:calc(100% - 40px); padding:8px 20px }
+	table.quantity td:before {width:45%; float: left; top:6; position: relative; }
+	table.quantity td .fqtytdbf{ display:block;width: 45%;float: left;position: relative; }
+	table.quantity td .fqtytdaf{ display:block;width: 55%;float: left;position: relative; }
+	.btn-add, .btn-minus { line-height:2.5;}
+	.total-blk { width:calc(100% - 40px);  padding:10px 20px;}
+	.total-blk .total-pos { float:left; /*font-size:15px; line-height:normal;*/} 
+    }
+
+
+  	@media only screen and (max-width: 479px) {
+	input.form       { width:100%;}
+
+ 	.row-height    { width:100%; height:auto; display:inline-block; table-layout:inherit;}
+	.col-sm-height { display:inline-block; float:left; height:auto; vertical-align:top; border-bottom:none; padding:10px 0 0 0}
+
+  	.col-sm-height.col-left   			{ width:100%; padding:10px 0 0 0; text-align:left; }
+	.col-sm-height.col-right  			{ width:100%; padding:0 0 15px 0; border-bottom:1px solid #ececec;}
+
+	textarea#field { width:calc(100% - 20px);}
+
+  	}

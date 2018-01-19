@@ -1,40 +1,41 @@
 
 
-	.cd-top 	{ display:inline-block; height:50px; width:50px;
-	                  position:fixed; bottom:20px; right:40px;
-					  /* right:90px; */
-	                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-	                  overflow:hidden; text-indent:100%; white-space:nowrap; z-index: 900;
-	                  background:rgba(0, 0, 0, 0.8) url(images/icon-arrow-top.svg) no-repeat center 50%;
-	                  visibility:hidden;
-	                  opacity:0; 
-	                  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
-	                     -moz-transition: opacity .3s 0s, visibility 0s .3s;
-	                          transition: opacity .3s 0s, visibility 0s .3s;
-	                      	  transition: all 0.3s ease-out;}
-
-  	.cd-top.cd-is-visible, 
-  	.cd-top.cd-fade-out,
-  	.no-touch .cd-top:hover { -webkit-transition: opacity .3s 0s, visibility 0s 0s;
-									   -moz-transition: opacity .3s 0s, visibility 0s 0s;
-										    transition: opacity .3s 0s, visibility 0s 0s; }
-
-  	.cd-top.cd-is-visible { visibility:visible; opacity:1; }
-
- 	.cd-top.cd-fade-out 		{ opacity:.5; }
-
-  	.no-touch .cd-top:hover 	{ background-color:#000; opacity:0.5;}
+  .cd-top { display:inline-block; height:60px; width:60px;
+            position:fixed; bottom:80px; right:40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            overflow:hidden; text-indent:100%; white-space:nowrap; z-index: 999;
+            background:rgba(0, 0, 0, 0.8) url(images/icon-arrow-top.svg) no-repeat center 50%;
+            visibility:hidden;
+            opacity:0;
+            -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+               -moz-transition: opacity .3s 0s, visibility 0s .3s;
+                    transition: opacity .3s 0s, visibility 0s .3s;}
 
 
-  	@media only screen and (max-width: 1024px) {
-	#body.info .cd-top { bottom:100px; right:20px  }
-	.cd-top { right:20px}
-  	}
+  .cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+            -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+               -moz-transition: opacity .3s 0s, visibility 0s 0s;
+                    transition: opacity .3s 0s, visibility 0s 0s; }
 
-	@media only screen and (max-width:667px) {
-	.cd-top { width:45px; height:45px; bottom:10px; right:20px }
-	#body.info .cd-top { bottom:60px; right:20px  }
+  .cd-top.cd-is-visible {
+    visibility: visible;
+       opacity: 1; }
+
+  .cd-top.cd-fade-out {
+    /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+    opacity: .5; }
+
+  .no-touch .cd-top:hover {
+    background-color: #e86256;
+             opacity: 1;
+  }
 
 
-	}
-	  
+@media only screen and (max-width:1024px) {
+  .cd-top { width:50px; height:50px; right:20px; bottom:10px;}
+  }
+
+@media only screen and (max-width: 745px) {
+  .cd-top { width:50px; height:50px; right:20px; bottom: 10px;}
+  }
+  

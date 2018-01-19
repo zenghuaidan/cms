@@ -1,115 +1,89 @@
 
-	/*.content-blk	{ margin-top:205px; z-index:10}*/
 
-	.square				{ position:relative; width:16.16%; float:left; margin-right:0.6%; margin-bottom:0.6%; overflow:hidden; }
-	.square:after 		{ content: ""; display:block; padding-bottom:100%; }
-	.square.rt:after 	{ /*padding-bottom:49.4%*/padding-bottom:49% }
-	.square.full:after 	{ padding-bottom:16.16% }
-	.content 			{ position:absolute; width:100%; height:100%;}
-	.square2 			{ width:32.92%; overflow: hidden;}
-	.square6 			{ width:100%}
-	.square-last		{ margin-right:0}
-	.square.rt:after 		{ background-color:#000; opacity:0 }
-	.square.rt:hover:after 		{ background-color:#000; opacity:0.5 }
+	.index .metis .tp-tab-title  		{ width:100%; }
+    .index .metis .tp-tab-title-mask 	{ width:600px;}
+    .index .metis .tp-tab-mask 		{ max-height:300px; width:400px!important;}
 
 
-	.section 			{ color:#fff; text-align:center; font-size:28px; line-height:1}
-	.banner-d-txt 		{ color:#fff; font-size:28px; padding:0 50px;  width:calc(100% - 100%); }
-	.banner-d 			{ background-image: url(images/demo-003.jpg); background-size:100%; background-repeat:no-repeat; display:block;}
-	.banner-m			{ display:none}
-
-	.event { background-color:#eee; transition: all 0.3s ease-out;}
-	.event .event-pos			{ padding:0 15px;}
-	.event .event-pos .title	{ line-height:1.4; padding-bottom:5px}
-	.event .event-pos .detail   { display:block;}
-	.event:hover 				{ background-color: #666; color:#fff;  cursor:pointer;}
-
-	.video-d 								{ display:block;}
-	.video-d .video-cover 					{ background-image: url(images/demo-002.jpg); background-size:100%; background-position:center;
-						  			  		  text-align:center; transition: all 0.3s ease-out; z-index:8}
-	.video-d .play-btn						{ position:absolute; z-index:9; width:100%; height:100%; text-align:center; cursor:pointer }
-	.video-d .play-btn .fa-play-circle 		{ color:#fff; font-size:80px; opacity:0.8; z-index:8;}
-	.video-d:hover .video-cover 				{ opacity:0.5; background-size:110%;}
-	.video-d:hover .play-btn .fa-play-circle 	{ opacity:1; }
-	.video-m									{ display:none;}
-	.video-m-clear								{ display:none;}
-
-	.square2-bg { background-image: url(images/demo-002.jpg); background-size:100%; background-repeat:no-repeat;  background-position:center;
-				  transition: all 0.3s ease-out;}
-	.section-title { padding:0 20px}
+	/* bottom 3 col (Common) =======================================================*/
+	#promo { padding:40px 0; background-color:#333}
+ 	#promo h2 { color:#ba2950; }
+ 
+ 	#promo .intro,
+ 	#promo .news,
+ 	#promo .links  { width:30.66%; margin-left:4%; display: block; float:left;}
+	#promo .intro  { margin-left:0}
+ 	
+ 		/* Intro (bottom 1st col) */
+ 		.intro { color:#fff}
 
 
-	a.box:hover .event 			{ background-color: #666; color:#fff;  cursor:pointer;}
-	a.box .content img 			{ transition: all 0.3s ease-out;}
-	a.box:hover .content img 	{ opacity:0.5; transform: scale(1.1);}
-	a.box:hover .video-cover  	{ opacity:0.5; background-size:110%; }
-	a.box:hover .square2-bg 	{ opacity:1; background-size:110%;}
+		/* Recent posts (bottom 2nd col) */
+
+		.recent-posts {}
+		.recent-posts ul {}
+		.recent-posts ul li 			{ margin-bottom:30px;}
+		.recent-posts ul li:last-child  { margin-bottom:0;}
+		.recent-posts ul li a 			{ text-decoration:none; color:#fff}
+		.recent-posts ul li .desc 		{ margin-right:80px; padding:5px 15px; position:relative; min-height:70px;
+										  background: rgba(0,0,0,.1);}
+		.recent-posts ul li .desc:after { content: ""; display:block; position:absolute; right:0; top:0;
+										  width:4px; height:100%;}
+
+		.recent-posts ul li .desc .post-intro { position:relative; z-index:2; margin-bottom:3px; padding:10px 0;
+									   border-bottom-width:1px; border-style:solid;}
+		.recent-posts ul li .desc .date { position:relative; z-index:2;  padding:5px 0; color:#fff;}
+		.recent-posts ul li .photo { width:80px; height:80px; line-height:0; text-align:center; float:right; position: relative;}
+		.recent-posts ul li a:hover .post-intro,
+		.recent-posts ul li a:hover .desc .date { color: #fff }
+		.recent-posts ul li a:hover .desc:after { width: 100%; }
+		.recent-posts ul li .desc:after {background-color: #ba2950;}
+
+		/* Recent posts Animation */
+		.recent-posts ul li a:hover .post-intro,
+		.recent-posts ul li a:hover .desc .date,
+		.recent-posts ul li a:hover .desc:after {
+		    -webkit-transition: all .3s ease-in-out;
+		    -moz-transition: all .3s ease-in-out;
+		    -o-transition: all .3s ease-in-out;
+		    transition: all .3s ease-in-out;}
+
+		/* END Recent posts */
+
+		/* Quick Link (bottom 3rd col) */
+		.links-pos ul li 	{  position:relative; list-style:none; padding:0 0 15px 0; margin:0 0 15px 0; border-bottom:1px solid #3e3e3e;}
+		.links-pos ul a li 	{ text-decoration:none}
+		.links-pos ul a li 	{ padding-left:0; color:#fff; transition: all 0.3s ease-out;}
+		.links-pos ul a:hover li { padding-left:10px; color:#ba2950; border-bottom:1px solid #ba2950;}
+	
+	/* END bottom 3 col =======================================================*/
 
 
-	/* ==========================================================================
-		Media Style
-	============================================================================= */
+/* ========================================================================
+	Media (max-width:1024px)
+=========================================================================== */
 
-	@media only screen and (max-width: 1300px) {
-	#body.en.index .font-body { font-size:12px}
-	}
+    @media only screen and (max-width:1024px) {
+ 	#promo .intro  { width:100%; border-bottom: 1px solid #ba2950; margin-bottom:30px; padding-bottom:30px;}
+ 	#promo .news   { width:47%; margin-left:0}
+ 	#promo .links  { width:47%; margin-left:6%}
 
+	/* Recent posts */
+    .news-pos  { padding:0}
+    .recent-posts ul li .desc   { margin-right:100px;}
+    .recent-posts ul li .photo  { width:100px; height:100px;}
+	.links-pos ul a:hover li     { padding-left:0}
 
-	@media only screen and (max-width: 1200px) {
-	#body.en.index .font-large { font-size:18px}
-	.banner-d-txt 	{ padding:0 20px;  width:calc(100% - 40%);}
-	}
-
-
-	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { 	
-	#body.en.index .font-large { font-size:22px}
-	.banner-d-txt  { padding:0 30px;  width:calc(100% - 60%); }
-	}
-
-	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
-	#body.en.index .font-large { font-size:16px}
-	}
-
-	@media only screen and (max-width: 1024px) {
-	.video-d .play-btn .fa-play-circle 		{ font-size:60px}
-	.event .event-pos						{ padding:0 10px}
-	.event .event-pos .title				{ line-height:1.2; padding-bottom:0}
-	.event .event-pos .detail   			{ display:none;}
-
-	/*.content-blk	{ margin-top:180px; z-index:10}*/
-	}
+    }
 
 
+/* ========================================================================
+	Media (max-width: 767px)
+=========================================================================== */
 
-	@media only screen and (max-width:667px) {
-	/*.content-blk	{ margin-top:200px; z-index:10}*/
-
-	#body.en.index .font-body { font-size:14px}
-
-	.square, .banner-m .txt, .video-m { margin-bottom:5px; }
-	.square				{ position:relative; width:100%; float:left; margin-right:0;}
-	.square:after 		{ content: ""; display:list-item; padding-bottom:inherit; list-style:none; }
-	.square.rt:after 	{ padding-bottom:49% }
-	.square.full:after 	{ padding-bottom:16.16% }
-	.content 			{ position:relative; width:100%; height:auto;}
-	.content-mpos		{ padding:10px 0;} /*edit 20171219*/
-	.square2 			{ width:100%; overflow: hidden;}
-	.square6 			{ width:100%}
-	.square-last		{ margin-right:0}
-
-	.event .event-pos			{ padding:0 15px}
-	.event .event-pos .detail   { display:block;}
-
-	.banner-d 			{ display:none; }
-	.banner-m			{ display:block;}
-	.banner-m .banner-m-bg	{ width:calc(100% - 30px); padding:10px 15px; background-color:#000; color:#fff;}
-
-	.video-d 			{ display:none;}
-	.video-m			{ display:block; width:100%;}
-	.video-m img 		{ z-index:8}
-	.video-m .play-btn.btn-pos 	{ position:absolute; top:30%; z-index:9; text-align:center}
-	.video-m .fa-play-circle 	{ color:#fff; font-size:60px; opacity:0.6}
-	.video-m-clear		{ clear:both; display:block;}
-
-	.row-last-m 	{ margin-bottom:5px}
-	}
+    @media only screen and (max-width: 767px){
+ 	#promo .intro  { width:100%; border-bottom: 1px solid #ba2950; margin-bottom:30px; padding-bottom:30px}
+ 	#promo .news   { width:100%; padding-bottom:60px; border-bottom: 1px solid #ba2950;}
+ 	#promo .links  { width:100%; padding-top:40px; margin-left:0}
+	
+    }

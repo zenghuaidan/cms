@@ -1,164 +1,132 @@
-	
 
-	#body      {  font-family:"robotoregular", "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
-
-	#body.en	{ font-weight:normal; letter-spacing:normal; font-size:15px; line-height:1.4;
-					-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none; }
-	#body.cn	{ font-size:16px; font-weight:normal; letter-spacing:1.4px;
-				-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none;   }
-
-
-	h1 	{ font-family: 'robotobold',"robotoregular", "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;} 
    
-    #body.en h1 	    { font-size:40px; 
-    					  letter-spacing:-0.8px; line-height:1; }
-    #body.cn h1 	    { font-size:40px;
-    					  letter-spacing:normal; line-height:1.4; }
 
-    #body.en .adj-sp-title       { font-size:24px!important; }
-    #body.cn .adj-sp-title       { font-size:24px!important}
+    body { color:#333; font-weight:normal; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;}
 
-    #body.en .adj-concert-title       { font-size:20px!important; line-height: 1.6}
-    #body.cn .adj-concert-title       { font-size:24px!important}
-    .sp-txt-pos 	{ padding-top:5px}
+    html #body.en { font-family:"Lucida Grande", "Myriad Set Pro", Verdana, Arial, Helvetica, sans-serif; font-size:13px; line-height:2; }
+    html #body.tc,
+    html #body.sc { font-family: 微軟正黑體, "Lucida Grande", "Myriad Set Pro", Arial, Helvetica, Verdana, sans-serif; font-size:15px; line-height:2; letter-spacing:1.2px}
 
-    .section-name		{ font-size:20px; line-height:1}
-    .corner-bar 		{ font-size:20px; line-height:normal; color:#fff;  font-family: 'robotomedium', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
-    .landing-section    { font-size:20px; line-height:normal; }
+    h1 { font-size:40px; line-height:normal; text-transform:uppercase;}
+    h2 { font-size:28px; line-height:1.4;}
+    h3 { font-size:19px; line-height:1.6;;}
+    h4 { font-size:16px; line-height:25px;}
 
-	#body.en .sm-section-name { font-size:16px!important}
-	#body.cn .sm-section-name { font-size:20px!important}
+    .index h2 { margin-bottom:20px}
+    .index h3 { margin-bottom:10px}
 
+    html #body.en #Top_bar { font-size:12px}
+    html #body.en #Top_bar .menu > li > a span:not(.description)  { font-size:12px}
 
-    h2, .font-l 			{ font-size:24px;}
-    .general h2 			{ margin-bottom:15px; line-height:1.4}
-	h3, .font-m 			{ font-size:18px}
-	.font-s 			    { font-size:12px}
+    html #body.tc #Top_bar,
+    html #body.tc #Top_bar .menu > li > a span:not(.description),
+    html #body.sc #Top_bar,
+    html #body.sc #Top_bar .menu > li > a span:not(.description)  { font-size:15px}
 
+    .general h1 { margin-bottom:10px; font-weight:200; color:#666x}
+    .general h2, .general h3, .general h4 { margin-bottom:10px; color:#666;}
+    .bold       { font-weight:bold}
 
-	@media only screen and (max-width:667px) {
-	#body.cn	{ font-size:14px; font-weight:normal; letter-spacing:1.4px;
-				-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none;   }  /*edit 20171219*/
-	#body.en    { font-size:14px}
-
-    #body.en h1 	    { font-size:22px; 
-    					  letter-spacing:-0.8px; line-height:1.2; } /*edit 20171219*/
-    #body.cn h1 	    { font-size:28px;
-    					  letter-spacing:normal; line-height:normal; } /*edit 20171219*/
-    .section-name		{ font-size:20px; line-height:1; }
-	.square-box .section-name {font-size: 14px} /*edit 20171219*/
-    h2, .font-l 			{ font-size:18px;} /*edit 20171219*/
-
-	#body.en .sm-section-name { font-size:16px!important}
-	#body.cn .sm-section-name { font-size:16px!important}
-
-    #body.en .adj-sp-title       { font-size:16px!important} /*edit 20171219*/
-    #body.cn .adj-sp-title       { font-size:18px!important} /*edit 20171219*/
-
-    #body.en .adj-concert-title       { font-size:16px!important; }
-    #body.cn .adj-concert-title       { font-size:18px!important}
-
-	#body.en .font-s  { font-size:12px}
-	#body.cn .font-s  { font-size:14px}
-
-	.corner-title .sp-txt-pos { font-size:12px}
-
-	}	
-
-	@media only screen and (max-width:667px) {
-	#body.en footer table { font-size:10px}
-	#body.cn footer table { font-size:11px}
-    .landing-section    { font-size:16px; line-height:normal; } /*edit 20171219*/
-
-	}
+    html #body.en h2.gallery { font-size:40px; line-height:normal;}
+    html #body.tc h2.gallery { font-size:40px; line-height:normal;}
+    html #body.sc h2.gallery { font-size:40px; line-height:normal;}
 
 
-	@media only screen and (max-width:500px) {
-    .corner-bar 		{ font-size:13px;  line-height:1.2; }
-	#body.en .sm-section-name { font-size:14px!important}
-	#body.cn .sm-section-name { font-size:18px!important}
+    html #body.en .font-s      { font-size:11px; letter-spacing:0.5px }
+    html #body.en .font-normal { font-size:13px; line-height:2 }
+    html #body.tc .font-s,
+    html #body.sc .font-s      { font-size:13px; letter-spacing:1px }
+    html #body.tc .font-normal,
+    html #body.sc .font-normal { font-size:15px; line-height:2 }
 
-	}
-	/* ==========================================================================
-		Global :: Font Roboto
-	============================================================================= */
+    html #body.en h2.no-marg-top { font-size:13px; font-family:"Lucida Grande", "Myriad Set Pro", Verdana, Arial, Helvetica, sans-serif!important;
+                                    line-height:2; font-weight:normal;}
+    html #body.tc h2.no-marg-top { font-size:15px; font-family: 微軟正黑體, "Lucida Grande", "Myriad Set Pro", Arial, Helvetica, Verdana, sans-serif!important;
+                                   line-height:2; font-weight:normal;}
 
-	.robotothin 	{ font-family: 'robotothin', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
-	.robotolight 	{ font-family: 'robotolight', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
-	.robotoregular 	{ font-family: 'robotoregular', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
-	.robotobold 	{ font-family: 'robotobold', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
-	.robotoblack 	{ font-family: 'robotoblack', "Lucida Grande", "Myriad Set Pro",  Arial, Helvetica, 微軟正黑體, sans-serif;}
+/* ========================================================================
+	Ralwey
+=========================================================================== */
 
-
-
-	@font-face {
-	    font-family: 'robotothin';
-	    src: url('roboto/Roboto-Thin-webfont.eot');
-	    src: url('roboto/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'),
-	         url('roboto/Roboto-Thin-webfont.woff') format('woff'),
-	         url('roboto/Roboto-Thin-webfont.ttf') format('truetype'),
-	         url('roboto/Roboto-Thin-webfont.svg#robotothin') format('svg');
-	    font-weight: normal;
-	    font-style: normal;
-	}
-
-
-	@font-face {
-	    font-family: 'robotolight';
-	    src: url('roboto/Roboto-Light-webfont.eot');
-	    src: url('roboto/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
-	         url('roboto/Roboto-Light-webfont.woff') format('woff'),
-	         url('roboto/Roboto-Light-webfont.ttf') format('truetype'),
-	         url('roboto/Roboto-Light-webfont.svg#robotolight') format('svg');
-	    font-weight: normal;
-	    font-style: normal;
-	}
-
-
-	@font-face {
-	    font-family: 'robotoregular';
-	    src: url('roboto/Roboto-Regular-webfont.eot');
-	    src: url('roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-	         url('roboto/Roboto-Regular-webfont.woff') format('woff'),
-	         url('roboto/Roboto-Regular-webfont.ttf') format('truetype'),
-	         url('roboto/Roboto-Regular-webfont.svg#robotoregular') format('svg');
-	    font-weight: normal;
-	    font-style: normal;
-	}
+    html #body.en h1, html #body.en h2, html #body.en h3, html #body.en h4,
+    .metis .tp-tab-title,
+    .metis .tp-tab-number,
+    .news-list-date,
+    .news-list-month,
+    .news-list-week,
+    .post-title,
+    select.news,
+    .no-ph,  
+    html #body.en .news-list-title,
+    .fa-expand:hover:after,
+html #body.en #theForm label,
+html #body.en #theForm .final-message, 
+    #theForm .questions input,
+    #theForm .number,
+    .year-blk,
+    .timelineFlat .item h2  { font-family:'Raleway', sans-serif;}
+   
+    html #body.tc h1, html #body.tc h2, html #body.tc h3, html #body.tc h4,
+    html #body.sc h1, html #body.sc h2, html #body.sc h3, html #body.sc h4,
+    html #body.tc .news-list-title, html #body.sc .news-list-title,
+html #body.tc #theForm label,
+html #body.tc #theForm .final-message   { font-family: 微軟正黑體, "Lucida Grande", "Myriad Set Pro", Arial, Helvetica, Verdana, sans-serif;}
 
 
-	@font-face {
-	    font-family: 'robotomedium';
-	    src: url('roboto/Roboto-Medium-webfont.eot');
-	    src: url('roboto/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
-	         url('roboto/Roboto-Medium-webfont.woff') format('woff'),
-	         url('roboto/Roboto-Medium-webfont.ttf') format('truetype'),
-	         url('roboto/Roboto-Medium-webfont.svg#robotomedium') format('svg');
-	    font-weight: normal;
-	    font-style: normal;
+    /*  Extra-Light 200 */
+    h1,
+    .metis .tp-tab-number,
+html #body.en .top-bg-photo h2  { font-weight:200 }
 
-	}
+    /*  Light 300 */
+    h2  { font-weight:300 }
 
-	@font-face {
-	    font-family: 'robotobold';
-	    src: url('roboto/Roboto-Bold-webfont.eot');
-	    src: url('roboto/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-	         url('roboto/Roboto-Bold-webfont.woff') format('woff'),
-	         url('roboto/Roboto-Bold-webfont.ttf') format('truetype'),
-	         url('roboto/Roboto-Bold-webfont.svg#robotobold') format('svg');
-	    font-weight: normal;
-	    font-style: normal;
-	}
+    /*  Normal 400 */
+    h3, h4, 
+    .text-logo #logo,
+    .no-ph     { font-weight:400}
 
-	@font-face {
-    font-family: 'robotoblack';
-    src: url('roboto/Roboto-Black-webfont.eot');
-    src: url('roboto/Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'),
-         url('roboto/Roboto-Black-webfont.woff') format('woff'),
-         url('roboto/Roboto-Black-webfont.ttf') format('truetype'),
-         url('roboto/Roboto-Black-webfont.svg#robotoblack') format('svg');
-    font-weight: normal;
-    font-style: normal;
+    /*  Medium 500 */
+    .metis .tp-tab-title,
+    .news-list-title,
+    select.news,
+    .fa-expand:hover:after    { font-weight:500}
 
-   }
+    .metis .tp-tab-title  { font-size:14px; line-height: 20px;} /* index left menu */
+	.metis .tp-tab-number { font-size:40px; line-height: 30px;} /* index left no */
 
+    /*  Semi-Bold 600  */
+    .news-list-week,
+    .timelineFlat .item h2       { font-weight:600}
+
+
+    /* ==========================================================================
+        Media Styles
+    ============================================================================= */
+
+    @media only screen and (max-width:1024px) {
+    h1 { font-size:36px; }
+    .gallery h2 { font-size:20px; }
+
+    }
+
+    @media only screen and (max-width:767px) {
+    h1 { font-size:24px; line-height:normal;}
+    h2 { font-size:20px; line-height:1.6}
+    h3 { font-size:16px; line-height:1.6}
+    h4 { font-size:12px; line-height:1.6}
+
+    .index h2 { font-size:22px; line-height:1.6}
+    .index h3 { font-size:18px; line-height:1.6;}
+    html #body.en.index h2  { font-weight:500}
+    html #body.tc.index h2, html #body.sc.index h2  { font-weight:normal}
+   
+    .general h1, .general h2, .general h3, .general h4  { font-weight:400 } { font-weight:400 }
+
+    html #body.en h2.gallery { font-size:28px; }
+    html #body.tc h2.gallery { font-size:25px; }
+    html #body.sc h2.gallery { font-size:25px; }
+
+
+
+    }

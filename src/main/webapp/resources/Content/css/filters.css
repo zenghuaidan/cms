@@ -1,0 +1,55 @@
+ 
+    #Filters { margin-bottom:30px; padding-bottom:30px}
+
+    #Filters .filters_buttons    { overflow:hidden; }
+    #Filters .filters_buttons li { float:left; margin-right:1px;}
+    #Filters .filters_buttons li.label { background-color:#ba2950;  padding:5px 30px 5px 10px; color:#fff; text-transform:uppercase;}
+    #Filters .filters_buttons li.label .fa-filter { padding-right:10px;}
+
+    #Filters .filters_buttons li.year,
+    #Filters .filters_buttons li.categories  { background-color:#ececec; padding:5px 20px;}
+
+    #Filters .filters_buttons li.year a,
+    #Filters .filters_buttons li.categories a  { color:#333;}
+
+    #Filters .filters_buttons li.reset { float:right; margin-right:20px; padding:5px 0;}
+    #Filters .filters_buttons li.reset a { color:#333; transition: all 0.3s ease-out;}
+    #Filters .filters_buttons li.reset a:hover { color:#ba2950}
+    #Filters .filters_buttons li.reset .gi-show-thumbnails { padding-right:10px}
+
+
+    #Filters .filters_wrapper    { display:none; margin-top:10px}
+    #Filters .filters_wrapper ul { display:none; overflow:hidden;}
+    #Filters .filters_wrapper ul li   { float:left; width:19%; margin:.5%;}
+    #Filters .filters_wrapper ul li a { display:block; padding:7px 10px; background:#fff; border:1px solid #ececec; color:#858585;}
+
+    #Filters .filters_wrapper ul li a:hover,#Filters .filters_wrapper ul li.current-cat a { text-decoration:none; color:#333;}
+
+    #Filters .filters_wrapper ul li.close a {   text-align:center; width:38px; padding:7px 0;
+                                                background:#8B8B8B; border:1px solid #F7F7F7 !important; color:#fff; }
+
+    #Filters .filters_wrapper ul li.close a:hover { background: #545454;}
+
+    /* Animations */
+    #Filters .filters_wrapper ul li a {
+        -webkit-transition: all .2s ease-in-out;
+           -moz-transition: all .2s ease-in-out;
+             -o-transition: all .2s ease-in-out;
+            -ms-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out; }
+
+
+/* =====================================================================================================
+     Media 
+===================================================================================================== */
+
+    @media only screen and (max-width: 1024px) {
+    #Filters .filters_wrapper ul li   { width:31%;}
+    }
+
+    @media only screen and (max-width: 745px) {
+     #Filters { padding-bottom:0}
+    #Filters .filters_wrapper ul li   { width:48.5%;}
+    #Filters .filters_buttons li.reset { float:left; margin:10px 0 0 0; padding:5px 0;}
+
+    }
