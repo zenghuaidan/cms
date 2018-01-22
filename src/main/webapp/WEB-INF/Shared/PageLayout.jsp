@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/Shared/commons.jspf" %>
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <div>
     <!-- Header Wrapper -->
     <div id="Header_wrapper">

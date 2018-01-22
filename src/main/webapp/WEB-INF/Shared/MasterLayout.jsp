@@ -36,7 +36,7 @@
 %>
 <head>
     <title><%=imageUrl%></title>    
-	<%@include file="/WEB-INF/Shared/commons.jspf" %>
+	<%@include file="/WEB-INF/Shared/commons.jsp" %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />
     <meta name="description" content="<%=seoDesc%>" />

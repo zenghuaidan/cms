@@ -9,7 +9,7 @@
 <%@page import="com.edeas.model.Content"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/Shared/commons.jspf" %>
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <!-- Styles -->
 <link href="${Content}/cms/core/pageadmin.css" rel="stylesheet" type="text/css" />
 <!-- App Web CSS -->

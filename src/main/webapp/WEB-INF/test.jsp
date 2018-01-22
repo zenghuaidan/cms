@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@include file="/WEB-INF/Shared/commons.jspf" %>
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${ title }</title>
 <script type="text/javascript">

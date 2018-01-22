@@ -8,7 +8,7 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
-<%@include file="/WEB-INF/Shared/commons.jspf" %>
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <%
 	QueryServiceImpl queryService = InitServlet.getQueryService();
 	Element fieldData = (Element)request.getAttribute("fieldData");//data

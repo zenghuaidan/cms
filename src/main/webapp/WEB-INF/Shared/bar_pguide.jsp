@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/Shared/commons.jspf" %>
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <div id="saguide" class="guideline">
     <div class="block cmsgreybg">
         <div class="lbl">Web Status </div>

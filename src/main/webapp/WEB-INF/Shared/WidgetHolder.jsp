@@ -10,7 +10,7 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
-<%@ include file="/WEB-INF/Shared/commons.jspf" %>
+<%@ include file="/WEB-INF/Shared/commons.jsp" %>
 <%
 	Page currentPage = (Page)request.getAttribute("currentPage");
 	boolean iscms = (Boolean)request.getAttribute("iscms");

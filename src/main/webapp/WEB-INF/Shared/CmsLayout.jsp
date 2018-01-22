@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>		
 		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@include file="/WEB-INF/Shared/commons.jspf" %>
+		<%@include file="/WEB-INF/Shared/commons.jsp" %>
 		
 	    <title><%=com.edeas.controller.cmsadmin.CmsProperties.getCMSSiteName() %> CMS : ${ title }</title>
     	<link href="${Content}/cms/core/cms.css" rel="stylesheet" type="text/css" />

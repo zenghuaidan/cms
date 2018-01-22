@@ -8,7 +8,7 @@
     <meta name="description" content="Edeas is an interactive agency in Hong Kong. We blend website strategy, design and technology innovations to create and sustain a successful digital experience." />
     <meta name="keywords" content="Hong Kong website design,corporate website,intranet,user experience,user interface,custom web application, interface" />
     
-    <%@ include file="/WEB-INF/Shared/commons.jspf" %>
+    <%@ include file="/WEB-INF/Shared/commons.jsp" %>
     
     <!-- Favicons -->
     <link rel="shortcut icon" href="${Content}/images/favicon.png" />

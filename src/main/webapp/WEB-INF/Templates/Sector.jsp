@@ -10,7 +10,7 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
-<%@ include file="/WEB-INF/Shared/commons.jspf" %>
+<%@ include file="/WEB-INF/Shared/commons.jsp" %>
 <link rel="stylesheet" type="text/css" href="${Content}/css/index.css" />
 <link rel="stylesheet" type="text/css" href="${Content}/css/jquery.simplebanner-edit.css" />
 <link rel="stylesheet" type="text/css" href="${Content}/css/lg-transitions.css" />

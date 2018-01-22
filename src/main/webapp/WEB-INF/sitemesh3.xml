@@ -8,7 +8,7 @@
       	<path>/cmsadmin/en/viewPage/*</path>
       	<path>/cmsadmin/tc/viewPage/*</path>
       	<path>/cmsadmin/sc/viewPage/*</path>
-      	<decorator>/WEB-INF/Shared/PageLayout.jspf</decorator>
+      	<decorator>/WEB-INF/Shared/PageLayout.jsp</decorator>
 	</mapping>
     
     <mapping>
@@ -16,8 +16,8 @@
       	<path>/en/**.html</path>
       	<path>/tc/**.html</path>
       	<path>/sc/**.html</path>
-      	<decorator>/WEB-INF/Shared/PageLayout.jspf</decorator>
-      	<decorator>/WEB-INF/Shared/MasterLayout.jspf</decorator>
+      	<decorator>/WEB-INF/Shared/PageLayout.jsp</decorator>
+      	<decorator>/WEB-INF/Shared/MasterLayout.jsp</decorator>
 	</mapping>
 
     <mapping path="/resources" exclue="true" />

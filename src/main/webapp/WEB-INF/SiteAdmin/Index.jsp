@@ -7,7 +7,7 @@
 <%@page import="com.edeas.model.*"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/Shared/commons.jspf" %>
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <%!	
 	QueryServiceImpl queryService = InitServlet.getQueryService();
 	private String pgsimg(String status) {

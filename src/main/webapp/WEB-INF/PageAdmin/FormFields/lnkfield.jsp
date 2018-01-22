@@ -5,7 +5,7 @@
 <%@page import="org.dom4j.Element"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.*"%>
-<%@include file="/WEB-INF/Shared/commons.jspf" %>
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <%
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define

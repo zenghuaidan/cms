@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>Config Form</title>
-    <%@ include file="/WEB-INF/Shared/commons.jspf" %>
+    <%@ include file="/WEB-INF/Shared/commons.jsp" %>
     <link href="${Content}/cms/core/cms.css" rel="stylesheet" type="text/css" />
     <link href="${Content}/cms/core/pageadmin.css" rel="stylesheet" type="text/css" />
     
