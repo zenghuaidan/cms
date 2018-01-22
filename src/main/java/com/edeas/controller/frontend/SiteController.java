@@ -31,9 +31,11 @@ public class SiteController extends FrontController {
 			for(Page page : pages) {
 				String url = request.getRequestURI().replaceAll(InitServlet.getWc().getServletContext().getContextPath(), "").replaceAll("/" + lang + "/", "").replaceAll(".html", "");
 				if(url.equals(page.getPageUrlForRouteMap())) {
+					Page masterPage = queryService.getMasterPage(false);
 					model.addAttribute("iscms", false);
 					model.addAttribute("lang", lang);
 					model.addAttribute("currentPage", page);
+					model.addAttribute("masterPage", masterPage);
 					return "Templates/" + page.getTemplate();
 				}
 			}

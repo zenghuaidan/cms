@@ -101,7 +101,7 @@ public class XmlUtils {
 	public static String getFieldRaw(Element w, String fieldname)
     {
 		Element fnode = (w == null) ? null : (Element)w.selectSingleNode("Field[@name='" + fieldname + "']");
-        return (fnode == null) ? "" : fnode.getTextTrim();
+        return (fnode == null) ? "" : fnode.getText();
     }
 	
 	public static String getWidgetFieldAttr(Element w, String fieldname, String attrname)
@@ -128,13 +128,13 @@ public class XmlUtils {
     public static String getPtyFieldVal(Document document, String fieldeName, Boolean isTta)
     {
         Element fieldNode = getPtyField(document, fieldeName);
-        String val = (fieldNode == null) ? "" : fieldNode.getTextTrim();
+        String val = (fieldNode == null) ? "" : fieldNode.getText();
         if (isTta) { val = val.replaceAll("\r\n", "<br />"); }
         return val;
     }
 	
 	public static String formatXml(Document document) {
-		OutputFormat format = OutputFormat.createPrettyPrint();
+		OutputFormat format = new OutputFormat();
 		format.setEncoding("utf-8");
 		StringWriter sw = new StringWriter();
 		XMLWriter xw = new XMLWriter(sw, format);

@@ -23,6 +23,8 @@ import org.hibernate.annotations.GenerationTime;
 import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.CmsProperties;
 
+import javassist.expr.NewArray;
+
 @MappedSuperclass
 public class Page<T extends Page, E extends Content> {
 	private T parent;
@@ -382,6 +384,8 @@ public class Page<T extends Page, E extends Content> {
 			if(((Content)c).getLang().equals(lang))
 				return c;
 		}
+		if(this instanceof CmsPage) return (E)new CmsContent();
+		if(this instanceof LivePage) return (E)new LiveContent();
 		return null;
 	}
 	

@@ -116,6 +116,16 @@ public class Content<T extends Page> {
 	}
 	
 	@Transient
+	public String getPropertyXmlWithoutCRLF() {
+		return getPropertyXml().replaceAll("\r\n", "</br>");
+	}
+	
+	@Transient
+	public String getContentXmlWithoutCRLF() {
+		return getContentXml().replaceAll("\r\n", "</br>");
+	}
+	
+	@Transient
 	public String getDefaultContentXml() {
 		return "<?xml version=\"1.0\" encoding=\"utf-8\" ?><PageContent pageid='" + ((Page)page).getId() + "' lang='" + lang + "' template='" + page.getTemplate() + "' />";
 	}

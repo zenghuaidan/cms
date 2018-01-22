@@ -1,6 +1,11 @@
 <%@include file="/WEB-INF/Shared/commons.jsp" %>
 <%@page contentType="text/html;charset=UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.edeas.utils.XmlUtils"%>
+<%@page import="org.dom4j.Document"%>
+<%@page import="com.edeas.service.impl.QueryServiceImpl"%>
+<%@page import="com.edeas.web.InitServlet"%>
+<%@page import="com.edeas.model.*"%>
 <div>
     <!-- Header Wrapper -->
     <div id="Header_wrapper">
@@ -88,10 +93,17 @@
 
 	<sitemesh:write property='body'/>
 
+	<%
+		boolean iscms = (Boolean)request.getAttribute("iscms");
+		String lang = (String)request.getAttribute("lang");
+		Page masterPage = (Page)request.getAttribute("masterPage");
+		Content masterContent = masterPage.getContent(lang);		
+	%>
+	<x:parse xml="<%=masterContent.getContentXmlWithoutCRLF() %>" var="contentXml"></x:parse>
     <!-- Footer-->
     <footer id="footer" class="font-s">
         <div class="inner-wrapper">
-            &copy; 2016 Edeas Limited. All rights reserved.
+            <x:out select="$contentXml/PageContent/Widget[@name='CopyRight']/Field" escapeXml="fasle" />            
         </div>
     </footer>
     <a href="#0" class="cd-top">Back to top</a>

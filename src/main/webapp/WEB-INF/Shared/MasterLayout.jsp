@@ -17,22 +17,20 @@
 	QueryServiceImpl queryServiceImpl =  InitServlet.getQueryService();
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");
-	Page masterPage = queryServiceImpl.getMasterPage(iscms);
+	Page masterPage = (Page)request.getAttribute("masterPage");
 	Content masterContent = masterPage.getContent(lang);
 	String imageUrl = "";
 	String headTitle = "";
 	String seoDesc = "";
 	String seoKeys = "";
-	if (masterContent != null) {
-		Document ptyDocument = masterContent.getPropertyXmlDoc();
-		headTitle = XmlUtils.getPtyFieldVal(ptyDocument, "HeadTitle", false);
-		String image = XmlUtils.getPtyFieldVal(ptyDocument, "Image", false);
-		seoDesc = XmlUtils.getPtyFieldVal(ptyDocument, "SeoDesc", false);
-		seoKeys = XmlUtils.getPtyFieldVal(ptyDocument, "SeoKeys", false);
-		if (!StringUtils.isBlank(image)) {
-			String host = request.getRequestURL().substring(0, request.getRequestURL().indexOf(request.getRequestURI()));
-			imageUrl = host + Global.getImagesUploadPath(Global.IMAGE_SOURCE, image);
-		}
+	Document ptyDocument = masterContent.getPropertyXmlDoc();
+	headTitle = XmlUtils.getPtyFieldVal(ptyDocument, "HeadTitle", false);
+	String image = XmlUtils.getPtyFieldVal(ptyDocument, "Image", false);
+	seoDesc = XmlUtils.getPtyFieldVal(ptyDocument, "SeoDesc", false);
+	seoKeys = XmlUtils.getPtyFieldVal(ptyDocument, "SeoKeys", false);
+	if (!StringUtils.isBlank(image)) {
+		String host = request.getRequestURL().substring(0, request.getRequestURL().indexOf(request.getRequestURI()));
+		imageUrl = host + Global.getImagesUploadPath(Global.IMAGE_SOURCE, image);
 	}
 %>
 <head>

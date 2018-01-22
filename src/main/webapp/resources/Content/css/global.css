@@ -12,7 +12,7 @@
     article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display: block;}
 
     ol,ul           { list-style:none; }
-    table           { border-collapse:collapse; border-spacing:0;}
+    #body table           { border-collapse:collapse; border-spacing:0;}
 
     img.img-scale   { max-width:100%; height:auto;}
 

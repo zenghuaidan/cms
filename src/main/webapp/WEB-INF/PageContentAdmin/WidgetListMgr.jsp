@@ -134,8 +134,8 @@
                     String txt = null;
                     for (int i = 0; i < b.length; i++) {
                         Element txtnode = (Element)w.selectSingleNode("Field[@name='" + b[i] + "']");
-                        if (txtnode != null && !StringUtils.isBlank(txtnode.getTextTrim())) {
-                            txt = txtnode.getTextTrim();
+                        if (txtnode != null && !StringUtils.isBlank(txtnode.getText())) {
+                            txt = txtnode.getText();
                             break;                       
                         }
                     }

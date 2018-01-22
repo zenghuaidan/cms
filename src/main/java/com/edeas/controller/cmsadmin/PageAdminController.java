@@ -34,10 +34,12 @@ public class PageAdminController extends CmsController {
 	public String viewPage(Model model, @PathVariable("lang") String lang, @PathVariable("pageId") Long pageId, HttpServletRequest request) {
 		if(Lang.exists(lang)) {			
 			Page page = queryService.findPageById(pageId, true);
-			if(!page.isNew()) {
+			if(!page.isNew()) {	
+				Page masterPage = queryService.getMasterPage(true);
 				model.addAttribute("iscms", true);
 				model.addAttribute("lang", lang);
-				model.addAttribute("currentPage", page);
+				model.addAttribute("masterPage", masterPage);
+				model.addAttribute("currentPage", page);				
 				return "Templates/" + page.getTemplate();
 			}
 		}
@@ -49,8 +51,10 @@ public class PageAdminController extends CmsController {
 		if(Lang.exists(lang)) {			
 			Page page = queryService.findPageById(pgid, true);
 			if(!page.isNew()) {
+				Page masterPage = queryService.getMasterPage(true);
 				model.addAttribute("iscms", true);
 				model.addAttribute("lang", lang);
+				model.addAttribute("masterPage", masterPage);
 				model.addAttribute("currentPage", page);
 				return "Templates/" + page.getTemplate();
 			}
@@ -209,9 +213,11 @@ public class PageAdminController extends CmsController {
 		
 		if(page == null || page.isNew() || page.isDelete()) return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 		
+		Page masterPage = queryService.getMasterPage(true);
 		model.addAttribute("lang", lang);
 		model.addAttribute("isCms", true);
 		model.addAttribute("currentPage", page);
+		model.addAttribute("masterPage", masterPage);
 		model.addAttribute("referAction", "PageAdmin");
 		model.addAttribute("newatfront", false);
 		return "PageAdmin/Index";
