@@ -143,14 +143,14 @@
 		                            for (int p=upyrs; p>0; p--) {
 		                                int y = currentYear + p;
 		                                String usel = (sely == y) ? " selected" : "";
-		                                out.print("<option value='" + y + "' @usel>" + y + "</option>");
+		                                out.print("<option value='" + y + "' " + usel + ">" + y + "</option>");
 		                            }                             
 	                             	String sel = (sely == currentYear) ? " selected" : "";
-	                             	out.print("<option value='" + currentYear +"' @sel>" + currentYear + "</option>");
+	                             	out.print("<option value='" + currentYear +"' " + sel + ">" + currentYear + "</option>");
 		                            for (int p = 1; p<=pastyrs; p++) {
 		                                int y = currentYear - p;
 		                                String psel = (sely == y) ? " selected" : "";
-		                                out.print("<option value='" + y + "' @usel>" + y + "</option>");
+		                                out.print("<option value='" + y + "' " + psel + ">" + y + "</option>");
 		                            }
 	                             
 		                            //display defined year if before selection range

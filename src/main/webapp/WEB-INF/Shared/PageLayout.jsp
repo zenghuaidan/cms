@@ -1,4 +1,6 @@
 <%@include file="/WEB-INF/Shared/commons.jsp" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <div>
     <!-- Header Wrapper -->
     <div id="Header_wrapper">

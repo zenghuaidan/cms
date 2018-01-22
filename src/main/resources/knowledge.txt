@@ -34,3 +34,5 @@ Test runs fine with Hibernate 4.1.9.Final AND hibernate.hbm2ddl.auto=update
 Test fails with Hibernate 4.2.0.Final AND hibernate.hbm2ddl.auto=update
 
 6. 注意在controller设置的model参数，在jsp页面需要通过getAttribute方法获取String navigation = (String)request.getAttribute("navigation");而不能通过getParameter获取
+
+7. 中文乱码，可以尝试在jsp页面中添加<%@page contentType="text/html;charset=UTF-8"%>
