@@ -316,6 +316,7 @@
 			          <maxIdleTime>60000</maxIdleTime>
 			       </connector>
 			     </connectors-->
+			     <encoding>utf8</encoding>
 			  </configuration>
 			</plugin>
 			
@@ -325,11 +326,11 @@
 		        <version>2.2</version>
 		        <configuration>		        
 		        	<contextReloadable>true</contextReloadable>
-		        	<finalName>v1</finalName>		        	
+		        	<finalName>cms</finalName>		        	
 		          	<url>http://localhost:8080/manager/text</url>
 		          	<username>tomcat</username>
-		          	<password>edeas^123</password>
-		          	<path>/v1</path>		          			          			          
+		          	<password>123456</password>
+		          	<path>/cms</path>		          			          			          
 		        </configuration>
 	      	</plugin>
       

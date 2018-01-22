@@ -1,6 +1,7 @@
 package com.edeas.model;
 
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Date;
 
@@ -19,7 +20,8 @@ import com.edeas.utils.MessageDigestUtils;
 
 @Entity
 @Table(name = "CmsUser")
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = -5051085506032468813L;
 	private Long id;
 	private String login;
 	private String password;
