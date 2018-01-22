@@ -18,7 +18,6 @@
 <link href="${Content}/cms/adminadjust.css" rel="stylesheet" type="text/css" />
 <style>
     .newWdropbox { margin-bottom:30px; }
-    #body header { position:absolute; }
     #propertybox h2 { font-size: 12px !important; }
 </style>
 <!-- Javascripts -->
@@ -30,9 +29,6 @@
     var isinactive = ${currentPage.active ? "false" : "true"}; 
 
     function refreshSiteTree() { refresh(); }
-    $(document).ready( function() {
-        $("body").addClass("fontM");
-    })
 </script>
 
 <!-- HTML -->
@@ -127,7 +123,7 @@
 	                <div style = "width: 100%-6px; padding: 80px 0; font-size: 16px; border:dashed 3px #ccc; color:#999; text-align: center; " > NO CONTENT FOR THIS TEMPLATE</div>
 	    	</c:when>
 	    	<c:otherwise>
-                <div id="body">                                	
+                <div id="body" class="${lang} <%=Global.langClass(lang) %> sticky-header nice-scroll-on">                                	
                 	<c:import url="<%=templatePath%>">
                 		<c:param name="sessionId" value="<%=request.getSession().getId() %>"/>
                 	</c:import> 

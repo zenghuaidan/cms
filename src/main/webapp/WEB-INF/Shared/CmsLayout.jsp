@@ -23,7 +23,7 @@
 	<body id="cmsbody" class="">		
 	    <div id="cmsheader" class="cmspgw cmstyle">
 	        <img id="cmslogo" src="${Content}/cms/core/images/logo-edeas.svg" alt="logo" />
-	        <h1 class="bigfont"><%=com.edeas.controller.cmsadmin.CmsProperties.getCMSSiteName() %> Musicus Society Content Management System</h1>
+	        <h1 class="bigfont"><%=com.edeas.controller.cmsadmin.CmsProperties.getCMSSiteName() %> Content Management System</h1>
 	        <div id="toprightbox">
 	            <div class='top cmslightgreybg'>
 	                <span class="txtlnk" onclick="openchgpwd();">Change Password</span>
