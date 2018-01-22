@@ -32,7 +32,7 @@
 </style>
 <div class="clear" style="height:10px;"></div>
 
-<%@include file="/WEB-INF/Shared/bar_pguide.jspf"%>
+<%@include file="/WEB-INF/Shared/bar_pguide.jsp"%>
 <%
 	QueryServiceImpl queryService = InitServlet.getQueryService();
 	Page currentPage = (Page)request.getAttribute("currentPage");

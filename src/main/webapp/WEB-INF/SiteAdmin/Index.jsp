@@ -115,7 +115,7 @@
 <script src="${Script}/cms/siteadmin.js" type="text/javascript"></script>
 <div class="clear" style="height:10px;"></div>
 <div id="siteadmin" class="cmspgw" >
-	<%@include file="/WEB-INF/Shared/bar_pguide.jspf"%>
+	<%@include file="/WEB-INF/Shared/bar_pguide.jsp"%>
 	<div class="clear" style="height:12px;"></div>
 	<!-- HEADER & HOMEPAGE -->
     <div id="saheader">

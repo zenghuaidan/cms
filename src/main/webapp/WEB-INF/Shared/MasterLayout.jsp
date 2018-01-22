@@ -64,7 +64,7 @@
     <link rel="apple-touch-icon" sizes="114x114" href="${Content }/images/apple-touch-icon-114x114.png" />
 
     <!-- CSS -->
-    <%@include file="/WEB-INF/Shared/MasterCss.jspf" %>
+    <%@include file="/WEB-INF/Shared/MasterCss.jsp" %>
     
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>

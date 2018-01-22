@@ -13,7 +13,7 @@
 <!-- Styles -->
 <link href="${Content}/cms/core/pageadmin.css" rel="stylesheet" type="text/css" />
 <!-- App Web CSS -->
-<%@include file="/WEB-INF/Shared/MasterCss.jspf" %>
+<%@include file="/WEB-INF/Shared/MasterCss.jsp" %>
 <!-- App Web Style Adjust -->
 <link href="${Content}/cms/adminadjust.css" rel="stylesheet" type="text/css" />
 <style>
