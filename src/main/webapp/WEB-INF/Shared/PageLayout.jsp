@@ -6,6 +6,22 @@
 <%@page import="com.edeas.service.impl.QueryServiceImpl"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
+<% 
+	boolean iscms = (Boolean)request.getAttribute("iscms");
+	String lang = (String)request.getAttribute("lang");		
+	
+	Page masterPage = (Page)request.getAttribute("masterPage");
+	Content masterContent = masterPage.getContent(lang);
+		
+%>
+
+<!-- JS -->
+<script type="text/javascript" src="${Script}/mfn.menu.js"></script>
+<script type="text/javascript" src="${Script}/jquery.plugins.js"></script>
+<script type="text/javascript" src="${Script}/animations/animations.js"></script>
+<script type="text/javascript" src="${Script}/scripts.js"></script>
+<script type="text/javascript" src="${Script}/back-to-top.js"></script>
+    
 <div>
     <!-- Header Wrapper -->
     <div id="Header_wrapper">
@@ -80,25 +96,12 @@
                 <span><a href="#">繁</a></span><span><a href="#">簡</a></span><!-- for mobile only -->
             </div>
 
-            <!-- Header Banner -->
-            <div class="hd-blk">
-                <div class="hd-wrapper">
-                    <div class="hd-pos">
-                        <h1>News</h1>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="/WEB-INF/Templates/Banner.jsp" />
         </header>
     </div>
 
 	<sitemesh:write property='body'/>
 
-	<%
-		boolean iscms = (Boolean)request.getAttribute("iscms");
-		String lang = (String)request.getAttribute("lang");
-		Page masterPage = (Page)request.getAttribute("masterPage");
-		Content masterContent = masterPage.getContent(lang);		
-	%>
 	<x:parse xml="<%=masterContent.getContentXmlWithoutCRLF() %>" var="contentXml"></x:parse>
     <!-- Footer-->
     <footer id="footer" class="font-s">

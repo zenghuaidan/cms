@@ -27,7 +27,11 @@ public class Global {
 	
 	public static String getScriptPath() {
 		return InitServlet.getWc().getServletContext().getContextPath() + "/resources/Script";
-	} 
+	}
+	
+	public static String getPluginsPath() {
+		return InitServlet.getWc().getServletContext().getContextPath() + "/resources/plugins";
+	}
 	
 	public static String getDocUploadPath() {
 		return getContentPath() + "/uploads/docs";
@@ -62,7 +66,7 @@ public class Global {
 	}
 
 	public static String getDocUploadPhysicalPath() {
-		return getPhysicalPath("/resources/Content/uploads/doc");
+		return getPhysicalPath("/resources/Content/uploads/docs");
 	}
 	
 	public static String getDocUploadPhysicalPath(String val) {

@@ -78,7 +78,7 @@ var gmapOldStyle = [
     featureType: "administrative.neighborhood", // Remove neighborhood labels
     stylers: [
     {
-        visibility: "on"
+        visibility: "off"
     }
     ]
 },
@@ -153,7 +153,7 @@ var gmapOldStyle = [
     stylers: [
                             
     {
-        visibility: "off"
+        visibility: "on"
     },
     {
         hue: "#ff1b00"
@@ -171,7 +171,7 @@ var gmapOldStyle = [
                         
     stylers: [
     {
-        visibility: "off"
+        visibility: "on"
     },
     {
         hue: "#ffbe00"
@@ -270,7 +270,7 @@ var gmapOldStyle = [
     elementType: "labels",
     stylers: [ 
     {
-        visibility: "on"
+        visibility: "off"
     }
                             
     ]
@@ -315,7 +315,7 @@ var gmapOldStyle = [
     featureType: "transit",
     stylers: [
     {
-        visibility: "on"
+        visibility: "off"
     }
     ]
 },
@@ -324,7 +324,7 @@ var gmapOldStyle = [
     elementType: "labels",
     stylers: [
     {
-        visibility: "on"
+        visibility: "off"
     }
     ]
 }

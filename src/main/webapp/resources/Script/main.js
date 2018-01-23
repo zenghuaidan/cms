@@ -1,34 +1,16 @@
-function goUrl(u) { location.href = u; }
-function popUrl(u) { window.open(u); }
-function switchlang(a, b) {
-    var c = window.location.toString().substr(0).replace("/" + a + "/", "/" + b + "/");
-    window.location = c;
+//browser mobile check
+function isiphone() { if ((navigator.userAgent.match(/iPhone/i))) return true; else return false; }
+function isipad() { if ((navigator.userAgent.match(/iPad/i))) return true; else return false; }
+function isiphoneipad() { if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i))) return true; else return false; }
+function isios(v) {	
+	var re = new RegExp("OS "+v,"i");
+	if ((navigator.userAgent.match(re)) ) return true;
+	else return false;
 }
-jQuery(document).ready(function ($) {
-	// browser window scroll (in pixels) after which the "back to top" link is shown
-	var offset = 300,
-		//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
-		offset_opacity = 1200,
-		//duration of the top scrolling animation (in ms)
-		scroll_top_duration = 700,
-		//grab the "back to top" link
-		$back_to_top = $('.cd-top');
+function isandroid() { 
+	var ua = navigator.userAgent.toLowerCase();
+	return (ua.indexOf("android") > -1); 
+}
 
-	//hide or show the "back to top" link
-	$(window).scroll(function(){
-		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
-		if( $(this).scrollTop() > offset_opacity ) { 
-			$back_to_top.addClass('cd-fade-out');
-		}
-	});
-
-	//smooth scroll to top
-	$back_to_top.on('click', function(event){
-		event.preventDefault();
-		$('body,html').animate({
-			scrollTop: 0 ,
-		 	}, scroll_top_duration
-		);
-	});
-
-});
+/*function ismobdev() { return (isipad()||isandroid()); }*/
+function ismobdev() { return (isiphone() || isandroid()); }

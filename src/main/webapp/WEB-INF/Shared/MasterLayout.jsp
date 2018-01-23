@@ -14,24 +14,25 @@
 <html class="no-js">
 <!--<![endif]-->
 <% 
-	QueryServiceImpl queryServiceImpl =  InitServlet.getQueryService();
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");
 	Page masterPage = (Page)request.getAttribute("masterPage");
 	Content masterContent = masterPage.getContent(lang);
-	String imageUrl = "";
-	String headTitle = "";
-	String seoDesc = "";
-	String seoKeys = "";
+	Page currentPage = (Page)request.getAttribute("currentPage");
+	Content pageContent = currentPage.getContent(lang);
+	
 	Document ptyDocument = masterContent.getPropertyXmlDoc();
-	headTitle = XmlUtils.getPtyFieldVal(ptyDocument, "HeadTitle", false);
+	String headTitle = XmlUtils.getPtyFieldVal(ptyDocument, "HeadTitle", false);
 	String image = XmlUtils.getPtyFieldVal(ptyDocument, "Image", false);
-	seoDesc = XmlUtils.getPtyFieldVal(ptyDocument, "SeoDesc", false);
-	seoKeys = XmlUtils.getPtyFieldVal(ptyDocument, "SeoKeys", false);
+	String imageUrl = "";	
 	if (!StringUtils.isBlank(image)) {
 		String host = request.getRequestURL().substring(0, request.getRequestURL().indexOf(request.getRequestURI()));
 		imageUrl = host + Global.getImagesUploadPath(Global.IMAGE_SOURCE, image);
 	}
+	
+	Document contentDocument = pageContent.getPropertyXmlDoc();
+	String seoDesc = XmlUtils.getPtyFieldVal(contentDocument, "SeoDesc", false);
+	String seoKeys = XmlUtils.getPtyFieldVal(contentDocument, "SeoKeys", false);
 %>
 <head>
     <title><%=imageUrl%></title>    

@@ -1,0 +1,51 @@
+
+
+	html #body.en .tp-caption.Creative-Title,  html #body.en .Creative-Title { font-family: 'Raleway', sans-serif; font-weight:200}
+	html #body.tc .tp-caption.Creative-Title,  html #body.tc .Creative-Title,
+	html #body.sc .tp-caption.Creative-Title,  html #body.sc .Creative-Title { font-family: 微軟正黑體, "Lucida Grande", "Myriad Set Pro", Arial, Helvetica, Verdana, sans-serif;}
+
+	html #body.tc .tp-caption.Creative-SubTitle, html #body.tc .Creative-SubTitle,
+	html #body.sc .tp-caption.Creative-Title,  html #body.sc .Creative-Title {font-size:18px!important}
+
+
+    .tp-caption.Creative-Title,
+    .Creative-Title 				{ color:#fff; /*font-size:70px; line-height:70px;*/ font-style:normal; text-decoration:none; text-align:center; padding:0; margin-top:10px }
+
+    .tp-caption.Creative-SubTitle,
+    .Creative-SubTitle 				{ color:#ba2950; /*line-height:14px; font-size:12px;*/ text-transform:uppercase; padding:0; text-align:center; letter-spacing:normal;}
+
+
+    .tp-caption.Creative-Button, 
+    .Creative-Button 				{ color:rgba(205, 176, 131, 1.00); font-size:12px; line-height:13px; font-weight:lighter; font-style:normal; 
+    								  letter-spacing:2px; padding: 15px 50px; background-color:rgba(0, 0, 0, 0); text-decoration:none;
+								      border-color: rgba(205, 176, 131, 0.25); border-style:solid; border-width:1px; border-radius: 0px 0px 0px 0px;}
+    .tp-caption.Creative-Button:hover,
+    .Creative-Button:hover 			{ color: rgba(205, 176, 131, 1.00); background-color:rgba(0, 0, 0, 0); border-color:rgba(205, 176, 131, 1.00); }
+
+    .slogan { margin-top:inherit;}
+   	.line 	{ display:block;} 
+
+
+    /* ==========================================================================
+        Media Styles
+    ============================================================================= */
+
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { 
+
+    .slogan		{ margin-top:-80px}
+    .line 	    { display:none;} 
+    }
+
+
+    @media only screen and (max-width:767px) {
+
+  	html #body.tc .tp-caption.Creative-SubTitle, html #body.tc .Creative-SubTitle,
+	html #body.sc .tp-caption.Creative-Title,  html #body.sc .Creative-Title {font-size:14px!important} 
+
+    .tp-caption.Creative-Title, .Creative-Title {margin-top:30px!important; letter-spacing:2px}
+    .Creative-SubTitle 				{ font-size:11px!important;}
+    .Creative-Button 				{ padding: 15px 20px!important; font-size:10px}
+    .slogan 	{ margin-top:-50px}
+    .line 	{ display:none!important;} 
+
+    }

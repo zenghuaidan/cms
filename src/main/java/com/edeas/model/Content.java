@@ -66,7 +66,7 @@ public class Content<T extends Page> {
 	//@Column(length = 2147483647) //Hibernate会对应到MySQL的LongText上去。LongText最大2147483647字节
 	//以上三个注释点不起左右，而是用了LONGTEXT
 	public String getPropertyXml() {
-		return StringUtils.isBlank(propertyXml) ? getDefaultContentXml() : propertyXml;
+		return StringUtils.isBlank(propertyXml) ? getDefaultPropertyXml() : propertyXml;
 	}
 
 	public void setPropertyXml(String propertyXml) {

@@ -135,7 +135,6 @@ public class XmlUtils {
 	
 	public static String formatXml(Document document) {
 		OutputFormat format = new OutputFormat();
-		format.setEncoding("utf-8");
 		StringWriter sw = new StringWriter();
 		XMLWriter xw = new XMLWriter(sw, format);
 		xw.setEscapeText(false);

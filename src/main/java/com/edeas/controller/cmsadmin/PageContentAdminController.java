@@ -507,11 +507,13 @@ public class PageContentAdminController extends CmsController {
 				MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
 				if(multiRequest.getMultiFileMap().containsKey(fname)) {
 					List<MultipartFile> list = multiRequest.getMultiFileMap().get(fname);
-					String newFileName = newRandomFilename(Global.getDocUploadPhysicalPath(), list.get(0).getOriginalFilename());	
-					String size = (int)(list.get(0).getSize() / 1024) + "";
-					list.get(0).transferTo(new File(Global.getDocUploadPhysicalPath(newFileName)));
-					dataField.setText(XmlUtils.toCDATA(newFileName));
-					dataField.addAttribute("size", size);
+					if(!StringUtils.isBlank(list.get(0).getOriginalFilename())) {
+						String newFileName = newRandomFilename(Global.getDocUploadPhysicalPath(), list.get(0).getOriginalFilename());	
+						String size = (int)(list.get(0).getSize() / 1024) + "";
+						list.get(0).transferTo(new File(Global.getDocUploadPhysicalPath(newFileName)));
+						dataField.setText(XmlUtils.toCDATA(newFileName));
+						dataField.addAttribute("size", size);
+					}
 				}
 			}
 		} catch (Exception e) {
