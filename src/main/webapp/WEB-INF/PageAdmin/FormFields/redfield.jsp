@@ -5,7 +5,7 @@
 <%@page import="org.dom4j.Element"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.*"%>
-
+<%@include file="/WEB-INF/Shared/commons.jsp" %>
 <%
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
@@ -18,6 +18,6 @@
 </tr>
 <tr class="datafield">
 	<td colspan="2" class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
-        <textarea id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" attrs="<%=fpm.getAttribute() %>" style="<%=fpm.getType() %>"><%=htmval %></textarea>
+        <textarea id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" attrs="<%=fpm.getAttribute() %>" style="<%=fpm.getType() %>"><c:out value="<%=htmval%>" escapeXml="true"></c:out></textarea>
 	</td>
 </tr>
