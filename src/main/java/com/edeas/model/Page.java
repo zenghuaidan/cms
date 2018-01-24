@@ -23,8 +23,6 @@ import org.hibernate.annotations.GenerationTime;
 import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.CmsProperties;
 
-import javassist.expr.NewArray;
-
 @MappedSuperclass
 public class Page<T extends Page, E extends Content> {
 	private T parent;
@@ -487,4 +485,5 @@ public class Page<T extends Page, E extends Content> {
 		this.url = o.getUrl();
 		this.commonxml = o.getCommonxml();
 	}
+	
 }

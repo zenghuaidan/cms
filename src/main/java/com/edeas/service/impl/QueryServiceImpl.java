@@ -1,6 +1,7 @@
 package com.edeas.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -88,5 +89,9 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	
 	private void delete(Content content, boolean iscms) {
 		getContentDao(iscms).delete(content.getId());
+	}
+	
+	public Page getFirstChild(long parentId, boolean iscms, boolean checkActive, Map<String, String> orderInfo) {
+		return getPageDao(iscms).getFirstChild(parentId, iscms, checkActive, orderInfo);
 	}
 }

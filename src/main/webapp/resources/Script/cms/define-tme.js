@@ -316,7 +316,7 @@ function setupRichEditorFields() {
 		//get width & height
 		var xhew = $(this).width(); var xheh = $(this).height();
 		//define specific attrs
-		var cssarr=[RU$('Content/cms/editorstyles.css')];
+		var cssarr=[RU$('/resources/Content/cms/editorstyles.css')];
 		var tool="default";  var styleset="default";	
 		var attrstr = $(this).attr("attrs");
 		if ($.trim(attrstr)!="") {var attra = attrstr.split(',');

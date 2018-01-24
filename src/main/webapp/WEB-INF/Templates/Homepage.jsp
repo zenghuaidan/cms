@@ -1,4 +1,12 @@
 <%@include file="/WEB-INF/Shared/commons.jsp" %>
+<%@page import="org.dom4j.Element"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.edeas.utils.XmlUtils"%>
+<%@page import="org.dom4j.Document"%>
+<%@page import="com.edeas.service.impl.QueryServiceImpl"%>
+<%@page import="com.edeas.web.InitServlet"%>
+<%@page import="com.edeas.model.*"%>
 <script type="text/javascript" src="${Plugin}/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="${Plugin}/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="${Plugin}/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
@@ -17,14 +25,22 @@
 <link rel="stylesheet" type="text/css" href="${Plugin}/rs-plugin/css/settings.css">
 <link rel="stylesheet" type="text/css" href="${Plugin}/rs-plugin/css/layers.css">
 <link rel="stylesheet" type="text/css" href="${Plugin}/rs-plugin/css/navigation.css">
-
+<% 
+	boolean iscms = (Boolean)request.getAttribute("iscms");
+	String lang = (String)request.getAttribute("lang");	
+	Page currentPage = (Page)request.getAttribute("currentPage");
+	Content pageContent = currentPage.getContent(lang);
+	Document contentDocument = pageContent.getContentXmlDoc();
+%>
+<c:set var="template" value="<%=currentPage.getTemplate() %>"></c:set>
+<x:parse xml="<%=pageContent.getContentXmlWithoutCRLF() %>" var="contentXml"></x:parse>
 <div id="promo" class="clearfix full-wrapper"> 
      <div class="inner-wrapper">
          <div class="main-index-pos">
              <div class="intro">
-                 <h2>Lorem ipsum dolor</h2>
-                 <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</h3>
-                 <div>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>
+                 <h2><x:out select="$contentXml/PageContent/Widget[@name='Introduction']/Field[@name='Title']" escapeXml="false" /></h2>
+                 <h3><x:out select="$contentXml/PageContent/Widget[@name='Introduction']/Field[@name='SubTitle']" escapeXml="false" /></h3>
+                 <div><x:out select="$contentXml/PageContent/Widget[@name='Introduction']/Field[@name='Content']" escapeXml="false" /></div>
              </div>
 
              <div class="news">
@@ -59,10 +75,13 @@
                  <div class="links-pos">
                      <h2>Quick Links</h2>
                      <ul>
-                         <a href="#"><li>Suspendisse a pellentesque dui</li></a>
-                         <a href="#"><li>Quisque lorem tortor fringilla sed</li></a>
-                         <a href="#"><li>Et harum quidem rerum facilis</li></a>
-                         <a href="#"><li>Nulla ipsum dolor lacus suscipit</li></a>
+                         <% int i = 1; %>
+                         <x:forEach select="$contentXml/PageContent/Widget[@name='HomepageQuickLinks']/Widget[@name='QuickLink']" var="quickLink" varStatus="status">
+                         	<%
+                         		Element quickLink = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='HomepageQuickLinks']/Widget[@name='QuickLink'][" + i++ + "]/Field[@name='Link']");
+                         	%>
+							<a <%=XmlUtils.getLinkAttr(quickLink, lang, iscms) %> ><li><x:out select="$quickLink/Field[@name='Text']" escapeXml="false" /></li></a>		                	
+						</x:forEach>
                      </ul>
                  </div>
              </div>

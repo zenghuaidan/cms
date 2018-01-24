@@ -1,5 +1,5 @@
-<%@page import="org.dom4j.Element"%>
 <%@include file="/WEB-INF/Shared/commons.jsp" %>
+<%@page import="org.dom4j.Element"%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
@@ -25,7 +25,7 @@
 	            <!-- START REVOLUTION SLIDER 5.1.1RC fullscreen mode -->
 	            <div id="rev_slider_206_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.1.1RC">
 	                <ul>	
-               			<x:forEach select="$contentXml/PageContent/Widget[@name='HomepageBanners']/Widget[@name='Banner']" var="banner"  varStatus="status">
+               			<x:forEach select="$contentXml/PageContent/Widget[@name='HomepageBanners']/Widget[@name='Banner']" var="banner" varStatus="status">
 		                     <li data-index="rs-${690+status.index}" data-transition="fadethroughdark" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="2000" 
 		                     	data-thumb="<%=Global.getImagesUploadPath() + "/" + Global.IMAGE_SOURCE + "/" %><x:out select="$banner/Field[@name='DesktopImage']" />" data-rotate="0" data-saveperformance="off" 
 		                     	data-title="<x:out select="$banner/Field[@name='Title']" escapeXml="fasle" />" 

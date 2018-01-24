@@ -8,8 +8,15 @@
   </Properties>
   <WidgetBox />
   <Widgets>
-    <Widget ename="HomepageBanners" wid="WidgetListMgr" label="Banner Images" jsel="article.content" mgrtype="gallery" mgrattr="Banner:DesktopImage" cols="Image">
+    <Widget ename="HomepageBanners" wid="WidgetListMgr" jsel="article.content" mgrtype="gallery" mgrattr="Banner:DesktopImage" cols="Image">
       <Widget ename="Banner" wid="Banner" DesktopImageAttr="cmgrw:114" AddFront="yes" />
     </Widget>
+    
+    <Widget ename="Introduction" wid="TwoTitleContentBlock" label="Title" jsel="div.intro" /> 
+    
+    <Widget ename="HomepageQuickLinks" wid="WidgetListMgr" jsel="div.links" mgrtype="txtlist" mgrattr="QuickLink:Text" cols="Text">
+      <Widget ename="QuickLink" wid="TextLinkBlock" AddFront="yes" />
+    </Widget> 
+    
   </Widgets>
 </Template>

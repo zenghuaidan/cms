@@ -34,5 +34,10 @@ public abstract class PageDaoImpl<T extends Page> extends BasicDao<T> {
 
 	public List<T> findPageByUrl(String url, boolean checkActive) {
 		return listByHQL("from " + getClz().getName() + " where url=? and del=0  " + (checkActive ? " and active=1 " : "") + " order by pageOrder asc", new String[]{ url });
+	}
+
+	public T getFirstChild(long parentId, boolean iscms, boolean checkActive, Map<String, String> orderInfo) {
+		List<T> results = listByHQL("from " + getClz().getName() + " where parentId=? and del=0  " + (checkActive ? " and active=1 " : "") + " order by " + orderInfo.get("column") + " " + orderInfo.get("order") + " limit 0,1", new Long[]{ parentId });		
+		return results.size() == 1 ? results.get(0) : null;
 	} 
 }

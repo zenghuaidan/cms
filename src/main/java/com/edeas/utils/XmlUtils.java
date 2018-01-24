@@ -8,8 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.print.Doc;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -23,7 +21,11 @@ import org.dom4j.io.XMLWriter;
 
 import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.CmsController;
+import com.edeas.dto.LinkInfo;
 import com.edeas.dwr.SchemaInfo;
+import com.edeas.model.Content;
+import com.edeas.model.Page;
+import com.edeas.web.InitServlet;
 
 public class XmlUtils {
 	protected static final Logger logger = Logger.getLogger(CmsController.class);
@@ -180,4 +182,103 @@ public class XmlUtils {
 		} else
 			return "";
 	}
+	
+	public static String getLinkAttr(Element lnk, String lang, boolean iscms) {
+		return getLinkAttr(lnk, lang, iscms, null);
+	}
+	
+	public static String getLinkAttr(Element lnk, String lang, boolean iscms, Map<String, String> othattrs) {
+		LinkInfo linkInfo = getLinkInfo(lnk, lang, iscms);
+		if (linkInfo != null) {
+			StringBuilder sb = new StringBuilder();
+			
+			if (!linkInfo.getType().equals("none"))
+			{
+				sb.append(" target='" + linkInfo.getTarget() + "'");
+			}
+			String ahref = linkInfo.getLink();
+			if (!StringUtils.isBlank(ahref) && !StringUtils.isBlank(linkInfo.getAnchor())) {
+				ahref += "#" + linkInfo.getAnchor();
+			}
+			if (!StringUtils.isBlank(ahref)) { sb.append(" href=\"" + ahref + "\""); }
+			
+			if (othattrs != null) {
+				for (String k : othattrs.keySet())
+				{
+					sb.append(" " + k + "=\"" + othattrs.get(k) + "\"");
+				}
+			}
+			return sb.toString();
+		}
+		return "";
+	}
+	
+	public static LinkInfo getLinkInfo(Element lnk, String lang, boolean iscms)
+	{
+		if (lnk != null) {
+			LinkInfo linkInfo = new LinkInfo();
+			linkInfo.setType(getFieldAttr(lnk, "lnktype"));
+			linkInfo.setTarget(getFieldAttr(lnk, "target"));			
+			linkInfo.setAnchor(getFieldAttr(lnk, "anchor"));
+			switch (linkInfo.getType()) {
+				case "external": linkInfo.setLink(lnk.getText()); break;
+				case "internal":
+					Page page = InitServlet.getQueryService().findPageById(Long.parseLong(lnk.getText()), iscms);
+					linkInfo.setLink(getPageLink(page, lang, iscms).getLink());
+					break;
+				case "document": linkInfo.setLink(Global.getDocUploadPath(lnk.getText())); break;
+			}					
+			return linkInfo;
+		}
+		return null;
+	}
+	
+	public static LinkInfo getPageLink(Page page, String lang, boolean iscms){
+		return getPageLink(page, lang, iscms, false);
+	}
+	
+	 public static LinkInfo getPageLink(Page page, String lang, boolean iscms, boolean isptyurl)
+     {
+		 LinkInfo linkInfo = new LinkInfo();
+         if (!page.isNew()) {
+             if (page.getTemplate().endsWith("Link")) {              
+                 Element lnk = XmlUtils.getPtyField(page.getContent(lang).getPropertyXmlDoc(), "Link");
+                 if (lnk != null) {
+                	 linkInfo = getLinkInfo(lnk, lang, iscms);
+                 }                 
+             } else if (iscms && !isptyurl) { //if cms and not getting the property url
+                 if (Global.goChildTemplates.containsKey(page.getTemplate())) {
+                     Page firstChild = InitServlet.getQueryService().getFirstChild(page.getId(), iscms, true, Global.goChildTemplates.get(page.getTemplate()));
+                     if (firstChild != null && !firstChild.isNew())
+                         linkInfo = getPageLink(firstChild, lang, iscms);
+                 } else {
+                     linkInfo.setLink(Global.getCMSUrl() + "/PageAdmin/Preview?lang=" + lang + "&pgid=" + page.getId());
+                 }
+             } else { // if not cms or gettting property url
+                 StringBuilder sb = new StringBuilder(page.getUrl());
+                 if (page.getTemplate().equals("Sector") || page.getTemplate().equals("TopSector")) sb.append("/");
+                 long parentId = page.getParentId();
+                 if (Global.fixUrlPrefix.containsKey(parentId))
+                 {
+                     sb.insert(0, Global.fixUrlPrefix.get(parentId));
+                     linkInfo.setLink(Global.getWebUrl() + "/" + lang + "/" + sb.toString() + Global.WEBPAGEEXT);
+                 } else {
+                     if (Global.goChildTemplates.containsKey(page.getTemplate())) {
+                         Page firstChild = InitServlet.getQueryService().getFirstChild(page.getId(), iscms, true, Global.goChildTemplates.get(page.getTemplate()));
+                         if (firstChild != null && !firstChild.isNew())
+                             linkInfo = getPageLink(firstChild, lang, iscms);
+                     } else {
+                    	 while (parentId > 0) {
+                    		 Page parent = InitServlet.getQueryService().findPageById(parentId, iscms);
+                    		 sb.insert(0, parent.getUrl() + "/");
+                    		 parentId = parent.getParentId();
+                    	 }
+                    	 linkInfo.setLink(Global.getWebUrl() + "/" + lang + "/" + sb.toString() + Global.WEBPAGEEXT); 
+                     }
+                 }
+             }
+         }
+         return linkInfo;
+     }
+	 
 }

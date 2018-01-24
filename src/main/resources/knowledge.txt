@@ -38,3 +38,5 @@ Test fails with Hibernate 4.2.0.Final AND hibernate.hbm2ddl.auto=update
 7. 中文乱码，可以尝试在jsp页面中添加<%@page contentType="text/html;charset=UTF-8"%>
 
 8. 将Document转成String进行数据库保存时，如果用OutputFormat.createPrettyPrint()创建的实例对document进行格式化时会导致\r\n被替换成空字符串，可以通过自己创建实例new OutputFormat()来避免\r\n被替换掉
+
+9. dwr 同步请求dwr.engine.setAsync(false);用完后记得将其重置为true

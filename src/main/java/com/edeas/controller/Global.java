@@ -14,10 +14,28 @@ public class Global {
 	public static final String IMAGE_RESIZE = "resize";
 	public static final String IMAGE_CMGR = "cmgr";
 	public static final String IMAGE_THUMB = "thumb";
+	public static final String WEBPAGEEXT = ".html";
 	
 	public static final Map<Long, String> fixUrlPrefix = new HashMap<Long, String>() {		
 		{
 			put(-3l, "Others");
+		}
+    };
+    
+	public static final Map<String, Map<String, String>> goChildTemplates = new HashMap<String, Map<String, String>>() {		
+		{
+			put("TopSector", new HashMap<String, String>(){ 
+				{
+					put("column", "pageOrder");
+					put("order", "asc");
+				} 
+			});
+			put("Sector", new HashMap<String, String>(){ 
+				{
+					put("column", "pageOrder");
+					put("order", "asc");
+				} 
+			});
 		}
     };
     
@@ -55,6 +73,10 @@ public class Global {
 	
 	public static String getCMSUrl() {		
 		return InitServlet.getWc().getServletContext().getContextPath() + CmsController.getCMSURI();
+	}
+	
+	public static String getWebUrl() {		
+		return InitServlet.getWc().getServletContext().getContextPath();
 	}
 	
 	public static String langClass(String lang) {

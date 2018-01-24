@@ -17,6 +17,18 @@
 	<Widget id="WidgetListMgr" />    
 	<Widget id="SubPagesMgr" />     
 
+	<Widget id="TextLinkBlock" noedit="yes">
+    	<Field name="Text" type="txtfield" label="Text" />
+    	<Field name="Link" type="lnkfield" label="Link" />
+  	</Widget>
+  	
+	<Widget id="TwoTitleContentBlock">		
+		<Field name="Title" type="txtfield" label="Title" />
+		<Field name="SubTitle" type="txtfield" label="Sub Title" />
+		<Field name="Content" type="redfield" label="Content" />
+	</Widget> 
+
+	<!-- Homepage -->
 	<Widget id="Banner">
 		<Field name="DesktopImage" type="imgfield" label="Desktop Image" />
 		<Field name="MobileImage" type="imgfield" label="Mobile Image" />
@@ -24,5 +36,5 @@
 		<Field name="Title" type="txtfield" label="Title" />
 		<Field name="Content" type="redfield" label="Content" />
 	</Widget>
-	
+		
 </WidgetList>

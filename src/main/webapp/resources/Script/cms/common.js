@@ -9,20 +9,27 @@ var refreshonclose = false;
 var webroot = "";
 var cmsroot = "";
 $(function() {	
+	initWebAndCmsRoot();	
+})
+
+function initWebAndCmsRoot() {
+	dwr.engine.setAsync(false);
 	dwrService.getContextPath(function(path) {
 		webroot = path;
 		dwrService.getCMSURI(function(url) {
 			cmsroot = webroot + ((url.lastIndexOf("/") == url.length + 1) ? url : (url + "/"));
 		});
-	});	
-})
+	});
+	dwr.engine.setAsync(true);
+}
+
 var msgdelwconfirm = "You are going to DELETE a widget which cannot be undo.  Do you want to proceed?";
 var msgdelpgconfirm = "You are going to DELETE a page which cannot be undo.  Do you want to proceed?";
 
 
 function E$(e) { return document.getElementById(e); }
-function U$(u) { return cmsroot + u; }
-function RU$(u) { return "/" + u; }
+function U$(u) { if(cmsroot == "") initWebAndCmsRoot(); return cmsroot + u; }
+function RU$(u) { if(webroot == "") initWebAndCmsRoot(); return webroot + u; }
 function goUrl(u) { location.href=u; }
 function popUrl(u) { window.open(u); }
 function refresh() { window.location.reload(); }
