@@ -29,7 +29,7 @@ function delcat(cid) {
 	
 	if (confirm("You are going to delete a category that cannot be rollback. Do you want to continue?")) {
 		var pms = ""; //"?catid="+cid
-		var u = cmsroot+"/CategoryAdmin/Delete"+pms;
+		var u = cmsroot+"CategoryAdmin/Delete"+pms;
 		$.post(u,{"catid":cid},function(data) {
 		  if (data.success) {
 			location.reload(); 
@@ -41,7 +41,7 @@ function delcat(cid) {
 function submitcat() {
 	var fm = $("#catfm");
 	var pms = ""; //"?catid="+pgid+"&lang="+lang+"&xid="+xid;
-	var u = cmsroot+"/CategoryAdmin/Save"+pms;
+	var u = cmsroot+"CategoryAdmin/Save"+pms;
 	//fm.attr("action",u);	
     $.post(u,fm.serialize(),function(data) {
       if (data.success) {
@@ -54,7 +54,7 @@ function submitcat() {
 function chgCatOrder(catid,beforeid) {
 	var c = $("#catlist");
 	var pms = ""; //?catid=catid&beforeid=beforeid
-	var u = cmsroot+"/CategoryAdmin/ChgOrder"+pms;
+	var u = cmsroot+"CategoryAdmin/ChgOrder"+pms;
 	//console.log('u='+u);
  
 	$.post(u,{"catid":catid,"beforeid":beforeid,"kind":c.attr('kind'),"pid":c.attr('parentid')},function(data) {

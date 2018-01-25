@@ -44,6 +44,10 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		return page == null ? (iscms ? new CmsPage() : new LivePage()) : page;
 	}
 	
+	public List<Page> findChildrenUnderTemplate(String template, boolean iscms, boolean checkActive) {
+		return getPageDao(iscms).findChildrenUnderTemplate(template, checkActive);
+	}
+	
 	public List<Page> findPageByTemplate(String template, boolean iscms, boolean checkActive) {
 		return getPageDao(iscms).findByTemplate(template, checkActive);
 	}

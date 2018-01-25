@@ -49,7 +49,7 @@
 	</section>
 </c:if>
 
-<c:if test="${ not template eq 'Homepage' }">
+<c:if test="${ template ne 'Homepage' }">
 	<div class="hd-blk">
 	    <div class="hd-wrapper">
 	        <div class="hd-pos">

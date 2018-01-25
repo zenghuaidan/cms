@@ -37,7 +37,7 @@ function xssclean(s) {  var r=s; r=r.replace(/['"<>\(\)]+/g,''); return r; }
 
 function isiphone() { if ((navigator.userAgent.match(/iPhone/i))) return true; else return false; }
 function isipad() { if ((navigator.userAgent.match(/iPad/i))) return true; else return false; }
-function isiphoneipad() { if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i)))                             return true; else return false; }
+function isiphoneipad() { if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i))) return true; else return false; }
 function isios() { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }
 function isandroid() { return navigator.userAgent.match(/Android/i); }
 function ismobile() { return (isios()||isandroid()); } 
@@ -463,7 +463,6 @@ function setSelPages() {
 	var pgid= $("#pageid").val();
     $(".selpages").each( function() {
 		var attr = $(this).attr("attr");
-		//console.log("setSelPages: "+cmsroot+"/PageAdmin/getPageOptions?pgid="+pgid+"&attr="+attr);
 		$(this).load(cmsroot+"PageAdmin/getPageOptions?pgid="+pgid+"&attr="+attr,function() {	
 			$(this).val($(this).attr("val"));
 		});

@@ -113,7 +113,7 @@
                    	%>
 	                    <div class="mgrgallerytb oitem" xid="<%=XmlUtils.getFieldAttr(w, "id") %>">
 	                        <div class="tbframe">	                        
-	                        	<%=XmlUtils.tagimg(tbgnode, "cmgr", true, "", null) %>
+	                        	<%=XmlUtils.tagimg(tbgnode, Global.IMAGE_CMGR, true, "", null) %>
 	                        </div>
 	                        <div class="fn lightgraybg">
 	                            <img class="del" src="${Content}/cms/core/images/icon-x.png" onclick="delw('<%=XmlUtils.getFieldAttr(w, "id") %>');" />

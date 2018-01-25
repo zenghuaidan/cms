@@ -112,7 +112,12 @@ public class Content<T extends Page> {
 	
 	@Transient
 	public String getDefaultPropertyXml() {
-		return "<?xml version=\"1.0\" encoding=\"utf-8\" ?><Properties pageid='" + ((Page)page).getId() + "' lang='" + lang + "' />";
+		String xml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
+		if (page != null)
+			xml += "<Properties pageid='" + ((Page)page).getId() + "' lang='" + lang + "' />";
+		else
+			xml += "<Properties pageid='' lang='' />";
+		return xml;
 	}
 	
 	@Transient
@@ -127,7 +132,12 @@ public class Content<T extends Page> {
 	
 	@Transient
 	public String getDefaultContentXml() {
-		return "<?xml version=\"1.0\" encoding=\"utf-8\" ?><PageContent pageid='" + ((Page)page).getId() + "' lang='" + lang + "' template='" + page.getTemplate() + "' />";
+		String xml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
+		if (page != null)
+			xml += "<PageContent pageid='" + ((Page)page).getId() + "' lang='" + lang + "' template='" + page.getTemplate() + "' />";
+		else 
+			xml += "<PageContent pageid='' lang='' template='' />";
+		return xml;
 	}
 	
 	public void copyFrom(Content content) {

@@ -154,7 +154,7 @@ public class XmlUtils {
 	}
 	
 	public static String tagimg(Element imgNode, String subdir, boolean setWH, String defaultAlt, Map<String, String> otherAttrs) {
-		if (imgNode != null && !StringUtils.isBlank(imgNode.getText())) {
+		if (imgNode != null && !StringUtils.isBlank(imgNode.getTextTrim())) {
 			String alt = getFieldAttr(imgNode, "alt", defaultAlt);
 			StringBuilder sb = new StringBuilder("<img src=\"");
 			sb.append(Global.getContentPath() + "/uploads/images/" + subdir + "/" + imgNode.getTextTrim() + "\"");

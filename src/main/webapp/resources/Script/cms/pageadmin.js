@@ -175,7 +175,7 @@ function movWidget(pgid,lang,xid,beforeid,mfn) {
 				,{name:"beforeid",value:beforeid}];
 	//var u = getYiiUrl("cmsadmin/PageContentAdmin/ChangeWidgetOrder",pms);*/
 	var pms = "?pgid="+pgid+"&lang="+lang+"&xid="+xid+"&beforeid="+beforeid;
-	var u = cmsroot+"/PageContentAdmin/ChangeWidgetOrder"+pms;
+	var u = cmsroot+"PageContentAdmin/ChangeWidgetOrder"+pms;
     $.getJSON(u,function (data) { 
         if (data.success) { 
 		  mfn();
@@ -187,7 +187,7 @@ function movupWidget(pgid,lang,xid,mfn) {
 	/*var pms = [ {name:"pgid",value:pgid},{name:"lang",value:lang},{name:"xid",value:xid} ];
 	var u = getYiiUrl("cmsadmin/PageContentAdmin/MovWidgetUp",pms);*/
 	var pms = "?pgid="+pgid+"&lang="+lang+"&xid="+xid;
-	var u = cmsroot+"/PageContentAdmin/MovWidgetUp"+pms;
+	var u = cmsroot+"PageContentAdmin/MovWidgetUp"+pms;
     $.getJSON(u,function (data) { 
         if (data.success) { 
 		  mfn();
@@ -199,7 +199,7 @@ function movdownWidget(pgid,lang,xid,mfn) {
 	/*var pms = [ {name:"pgid",value:pgid},{name:"lang",value:lang},{name:"xid",value:xid} ];
 	var u = getYiiUrl("cmsadmin/PageContentAdmin/MovWidgetDown",pms);*/
 	var pms = "?pgid="+pgid+"&lang="+lang+"&xid="+xid;
-	var u = cmsroot+"/PageContentAdmin/MovWidgetDown"+pms;
+	var u = cmsroot+"PageContentAdmin/MovWidgetDown"+pms;
     $.getJSON(u,function (data) { 
         if (data.success) { 
 		  mfn();
@@ -375,7 +375,7 @@ function setSubPagesMgr() {
 
 //Workflows & Page Functions
 function doWorkflow(pgid,action) {
-  TINY.box.show({iframe:cmsroot+'/PageAdmin/'+action+'?pageid='+pageid,
+  TINY.box.show({iframe:cmsroot+'PageAdmin/'+action+'?pageid='+pageid,
                   width:gAjaxFormWidth,height:gWorkflowFormHeight,
                   closejs: function() { if (refreshonclose) refresh(); }
   });
@@ -463,7 +463,7 @@ function setDisableIcon(c) {
   var tlpos=$("#propertybox").offset();
   var w = $("#propertybox").width();
   var h = $("#cmspage").offset().top+$("#cmspage").height()-tlpos.top;
-  var style="style='position:absolute;color:#fff;z-index:3000;background-image:url(/Content/images/spacer.gif);";  //IE transparent access via issue
+  var style="style='position:absolute;color:#fff;z-index:3000;background-image:url(" + webroot + "/resources/Content/images/spacer.gif);";  //IE transparent access via issue
   style+="top:"+tlpos.top+"px;left:"+tlpos.left+"px;width:"+w+"px;height:"+h+"px;'";
   var lbl=""; var icoh=0;
   switch (c) {
@@ -531,7 +531,7 @@ function setWysNewWidgetBoxBtn(jsel,wxid,wname,pid,widgets) {
 	for(var i=0; i<widgets.length; i++) {
 		var w = widgets[i];
 		nwh+="<div class='nwico nw"+w.wname+"' wid='"+w.wid+"' wname='"+w.wname+"' onclick='newHoldWidget(this);'>";
-		nwh+="		<img src='"+webroot+"Content/images/spacer.gif' />";
+		nwh+="		<img src='"+webroot+"/resources/Content/images/spacer.gif' />";
 		nwh+="		<div class='label'>"+w.label+"</div>";
 		nwh+="		<div class='plus'></div>";
 		nwh+="</div>";

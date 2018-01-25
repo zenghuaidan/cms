@@ -1,43 +1,4 @@
-﻿//---General
-//Datetime fields setup
-/* >>> Old Datetime field
-//add datetime picker
-function setupDatetimeFields() {
-  var datfmt="yy-mm-dd"; //dd/mm/yy
-  $(".datetimefield input").each( function() {
-    $(this).attr("readonly","true");
-    var d=$.datepicker.parseDate( datfmt, $(this).val().substr(0,10));
-    $(this).datetimepicker({ "dateFormat":datfmt,defaultDate:d });    
-  });
-}
-
-function setupDateFields() { 
-  var datfmt="yy-mm-dd"; //dd/mm/yy
-  //single date
-  $(".datefield input, .datfield input").each( function() {
-    $(this).attr("readonly","true");
-    var d=$.datepicker.parseDate( datfmt, $(this).val());
-    $(this).datepicker({ "dateFormat":datfmt,buttonImage:cmsroot+"/Content/cms/core/images/calendar.png"
-                          ,buttonImageOnly:true,showOn:"button",defaultDate:d });
-  });
-  //date range
-  $(".datrngfield input.date").each( function() {
-    $(this).attr("readonly","true");
-    var d=$.datepicker.parseDate( datfmt, $(this).val());
-    $(this).datepicker({ "dateFormat":datfmt,buttonImage:cmsroot+"/Content/cms/core/images/calendar.png"
-                          ,buttonImageOnly:true,showOn:"button",defaultDate:d									 
-						  ,onSelect: function(datxt,obj) {		
-							var f = $(this);
-							var ifdfclass = (f.hasClass("datefieldi"))?"datefieldf":"datefieldi";							
-							var d = f.siblings("input."+ifdfclass);
-							if (d.val()=="") d.val(datxt);
-						  }
-					   });
-  });
-}
-*/
-
-//Document fields
+﻿//Document fields
 function clearDocField (fid) {
   $("#"+fid).val(''); $("#"+fid+"_view").remove();
   $("#"+fid+"_span").html("<input type='file' id='"+fid+"_file' name='"+fid+"_file' style='width:200px;' />");

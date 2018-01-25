@@ -39,5 +39,11 @@ public abstract class PageDaoImpl<T extends Page> extends BasicDao<T> {
 	public T getFirstChild(long parentId, boolean iscms, boolean checkActive, Map<String, String> orderInfo) {
 		List<T> results = listByHQL("from " + getClz().getName() + " where parentId=? and del=0  " + (checkActive ? " and active=1 " : "") + " order by " + orderInfo.get("column") + " " + orderInfo.get("order") + " limit 0,1", new Long[]{ parentId });		
 		return results.size() == 1 ? results.get(0) : null;
+	}
+
+	public List<T> findChildrenUnderTemplate(String template, boolean checkActive) {
+		return listBySQL("select * from " + getTableName() + " where parentId in (" +
+				"select id from " + getTableName() + " where template=? and del = 0 and " + (checkActive ? " and active=1 " : "")
+				+ ") and del = 0 and " + (checkActive ? " and active=1 " : "") + " order by pageOrder asc", new String[]{ template }, getClz(), true);		
 	} 
 }

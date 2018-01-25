@@ -56,7 +56,7 @@ public class PageContentAdminController extends CmsController {
 		}
 		
 		Content content = page.getContent(lang);
-		if (content == null) {
+		if (content == null || content.isNew()) {
 			return new Result("Failed", "Widget not existis");
 		}
 
@@ -96,7 +96,7 @@ public class PageContentAdminController extends CmsController {
 		}
 		
 		Content content = page.getContent(lang);
-		if (content == null) {
+		if (content == null || content.isNew()) {
 			return new Result("Failed", "Widget not existis");
 		}
 
@@ -136,7 +136,7 @@ public class PageContentAdminController extends CmsController {
 		}
 		
 		Content content = page.getContent(lang);
-		if (content == null) {
+		if (content == null || content.isNew()) {
 			return new Result("Failed", "Widget not existis");
 		}
 
@@ -179,7 +179,7 @@ public class PageContentAdminController extends CmsController {
 		}
 		
 		Content content = page.getContent(lang);
-		if (content == null) {
+		if (content == null || content.isNew()) {
 			return new Result("Failed", "Widget not existis");
 		}
 
@@ -203,7 +203,7 @@ public class PageContentAdminController extends CmsController {
 		}
 		
 		Content content = page.getContent(lang);
-		if (content == null) {
+		if (content == null || content.isNew()) {
 			content = new CmsContent();
 			content.init(page, Lang.getByName(lang));
 		}
@@ -271,7 +271,7 @@ public class PageContentAdminController extends CmsController {
 		String caller = request.getParameter("caller");
 		Page page = queryService.findPageById(pageId, true);
 		Content content = page.getContent(lang);
-		if(content == null) {
+		if(content == null || content.isNew()) {
 			content = new CmsContent();
 			content.init(page, Lang.getByName(lang));
 			page.getContents().add(content);
@@ -287,7 +287,10 @@ public class PageContentAdminController extends CmsController {
 			Element widgetNode = (Element)contentDocument.selectSingleNode("//Widget[@id='" + wxid + "']");
 			if (widgetNode == null) {
 				Element parentNode = StringUtils.isBlank(parentxid) ? null : (Element)contentDocument.selectSingleNode("//Widget[@id='" + parentxid + "']");
-				if (parentNode == null) parentNode = (Element)contentDocument.selectSingleNode("/PageContent");
+				if (parentNode == null) {
+					parentNode = (Element)contentDocument.selectSingleNode("/PageContent");
+					((Element)contentDocument.selectSingleNode("/PageContent")).add(parentNode);
+				}
 				widgetNode = new DOMElement("Widget");
 				wxid = createWidgetNode(contentDocument, parentNode, widgetNode, wid, wname, wxid, addToFront);
 			}
@@ -372,7 +375,7 @@ public class PageContentAdminController extends CmsController {
 			String propertyXml = applyLangContent.getPropertyXml();
 			String contentXml = applyLangContent.getContentXml();
 			Content content = page.getContent(pageLang);
-			if(content == null) {
+			if(content == null || content.isNew()) {
 				content = new CmsContent();
 				content.setLang(pageLang);
 				content.setPage(page);
@@ -435,7 +438,7 @@ public class PageContentAdminController extends CmsController {
 		Content content = (Content)page.getContent(lang);
 		Document template = XmlUtils.getTemplateDocument(page.getTemplate());
 		List<Element> fieldList = template.selectNodes("/Template/Properties/Field");
-		if (content == null) {
+		if (content == null || content.isNew()) {
 			content = new CmsContent();
 			content.init(page, lang);
 			page.getContents().add(content);

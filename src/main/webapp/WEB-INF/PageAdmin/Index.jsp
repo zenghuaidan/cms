@@ -137,7 +137,7 @@
 <%
 	Document txml = XmlUtils.getTemplateDocument(currentPage.getTemplate());
     List<Element> wlist = (List<Element>)txml.selectNodes("/Template/Widgets/Widget");    
-    Document cxml = (currentContent == null) ? null : currentContent.getContentXmlDoc();
+    Document cxml = currentContent.getContentXmlDoc();
 
     int holderc = 0; 
     String tab = "    ";

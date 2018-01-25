@@ -16,18 +16,25 @@
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");
 	
-	Content content = currentPage.getContent(lang);
-	
-	Element wholder = content == null ? null : (Element)content.getContentXmlDoc().selectSingleNode("/PageContent/Widget[@name='WidgetHolder']");
-	List<Element> widgetList = wholder == null ? null : wholder.selectNodes("Widget");
-	
-	if (widgetList != null) {
-		for(Element widget : widgetList) {
-			String widgetName = widget.attributeValue("name");
-			String widgetId = widget.attributeValue("wid");
-			if("SpaceBlk".equals(widgetName)) {
-				out.print("<div class='widget clear' style='height:50px'>dsfdsfdsfsdfsdfsd</div>");
-			}
-		}
-	}
+	Content content = currentPage.getContent(lang);	
+	Document contentDocument = content.getContentXmlDoc();
 %>
+<x:parse xml="<%=content.getContentXmlWithoutCRLF() %>" var="contentXml"></x:parse>
+<% int i = 1; %>
+<x:forEach select="$contentXml/PageContent/Widget[@name='WidgetHolder']/Widget" var="widget" varStatus="status">
+   <x:set var="widgetName" select="$widget/@name" />
+   <x:set var="widgetId" select="$widget/@wid" scope="page" /> 
+   <x:if select="$widgetName = 'ScaleImage'">
+		<div class='widget'>
+		<%
+            Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Image']");
+			Element scaleNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Scale']");
+            Map<String, String> classMap = new HashMap<String, String>();
+            if (scaleNode != null)
+            	classMap.put("class", scaleNode.getTextTrim());
+        %>
+			<%=XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, false, "", classMap) %><br/><br/><br/><br/>
+		</div>
+   </x:if>  
+	<% i++; %>   
+</x:forEach>

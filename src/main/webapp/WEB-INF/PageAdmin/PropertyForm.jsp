@@ -37,7 +37,7 @@
 	Content currentContent = (Content)currentPage.getContent(lang);
 	Document tx = XmlUtils.getTemplateDocument(currentPage.getTemplate());
 	List<Element> fieldList = (List<Element>)tx.selectNodes("/Template/Properties/Field");
-	Document propDocument = currentContent == null ? null : currentContent.getPropertyXmlDoc();
+	Document propDocument =  currentContent.getPropertyXmlDoc();
 	Element fieldData = (propDocument == null) ? null : (Element)propDocument.selectSingleNode("/Properties");
 	String ptyerr = (String)request.getAttribute("ptyError");
 %>

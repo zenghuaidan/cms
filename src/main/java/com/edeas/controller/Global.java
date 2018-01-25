@@ -1,6 +1,8 @@
 package com.edeas.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
@@ -38,6 +40,8 @@ public class Global {
 			});
 		}
     };
+    
+    public static final List<String> excludeSubMenuList = Arrays.asList(new String[]{""});
     
 	public static String getContentPath() {
 		return InitServlet.getWc().getServletContext().getContextPath() + "/resources/Content";

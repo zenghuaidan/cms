@@ -30,6 +30,86 @@ import com.edeas.utils.DateUtils;
 @Controller
 public class PageAdminController extends CmsController {
 	
+	@RequestMapping(path = {"PageAdmin/getPageOptions"}, method={RequestMethod.GET})
+	@ResponseBody
+    public String getPageOptions(int pgid, String attr)
+    {
+        StringBuilder sb = new StringBuilder();
+        Page page = queryService.findPageById(pgid, true);
+        if (attr.equals("thispgchild")) {
+        	Set<Page> children = page.getChildren();
+            for(Page child : children)
+                sb.append("<option value='" + child.getId() + "'>" + child.getName() + "</option>");
+        } else if (attr.startsWith("childoftpl")) {
+            String[] a = attr.split("-"); 
+            String template = a[1];            
+            List<Page> children = queryService.findChildrenUnderTemplate(template, true, false);                        
+            for(Page child : children)
+                sb.append("<option value='" + child.getId() + "'>" + child.getName() + "</option>");
+        } else if (attr.startsWith("childof")) {
+        	String[] a = attr.split("-"); 
+            long parentId = Long.parseLong(a[1]);
+            List<Page> children = queryService.findPagesByParentId(parentId, true, false);
+            for(Page child : children)
+                sb.append("<option value='" + child.getId() + "'>" + child.getName() + "</option>");
+        } else if (attr.startsWith("tplof")) {
+            String[] a = attr.split("-"); 
+            String template = a[1];            
+            List<Page> children = queryService.findPageByTemplate(template, true, false);                        
+            for(Page child : children)
+                sb.append("<option value='" + child.getId() + "'>" + child.getName() + "</option>");
+        } else if (attr.startsWith("tplunderparent")) {
+            //finding all level descendent pages with template under ancestor of parent page
+        	String[] a = attr.split("-"); 
+            String template = a[1];            
+            List<Page> children = queryService.findPagesByParentId(page.getParentId(), true, false);
+            for(Page child : children) 
+            	sb.append(recurrsiveOptionOfTpl(0, template, child, page.getParent().getName() + " > ")); 
+        } else {
+        	//homepage
+        	Page homePage = queryService.getHomePage(true);
+            sb.append(recurrsiveOption(0, homePage, ""));
+            
+            //top
+            List<Page> children = queryService.findPagesByParentId(0, true, false);
+            for(Page child : children) { sb.append(recurrsiveOption(0, child, "")); }
+
+            //other pages
+            children = queryService.findPagesByParentId(-3, true, false);
+            for(Page child : children) { sb.append(recurrsiveOption(0, child, "OtherPages/")); }
+        }
+        return sb.toString();
+    }
+	
+	private String recurrsiveOption(int idtlv, Page page, String constprefix)
+    {
+        StringBuilder sb = new StringBuilder();
+        String prefix = "";
+        for (int i = 0; i < idtlv; i++) prefix += "&nbsp;&nbsp;&nbsp;";
+        sb.append("<option value='" + page.getId() + "'>" + prefix + constprefix + page.getName() + "</option>");
+        if (!Global.excludeSubMenuList.contains(page.getTemplate())) {
+        	Set<Page> children = page.getChildren();
+            for(Page child : children)
+                sb.append(recurrsiveOption(idtlv + 1, child, constprefix));
+        }            
+        return sb.toString();
+    }
+	
+    private String recurrsiveOptionOfTpl(int idtlv, String tpl, Page page, String constprefix)
+    {
+        StringBuilder sb = new StringBuilder();
+        String prefix = "";
+        for (int i = 0; i < idtlv; i++) prefix += "&nbsp;&nbsp;&nbsp;";
+        if (page.getTemplate().equals(tpl))
+        {
+            sb.append("<option value='" + page.getId() + "'>" + prefix + constprefix + page.getName() + "</option>");
+        }
+        Set<Page> children = page.getChildren();
+        for(Page child : children)
+            sb.append(recurrsiveOptionOfTpl(idtlv + 1, tpl, child, constprefix));
+        return sb.toString();
+    }
+	
 	@RequestMapping(path = {"{lang}/viewPage/{pageId}"}, method={RequestMethod.GET})
 	public String viewPage(Model model, @PathVariable("lang") String lang, @PathVariable("pageId") Long pageId, HttpServletRequest request) {
 		if(Lang.exists(lang)) {			
@@ -177,7 +257,7 @@ public class PageAdminController extends CmsController {
 			
 			for (CmsContent cmsContent : (Set<CmsContent>)cmsPage.getContents()) {
 				LiveContent liveContent = livePage.getContent(cmsContent.getLang());
-				if (liveContent == null) {
+				if (liveContent == null || liveContent.isNew()) {
 					liveContent = new LiveContent();
 					livePage.getContents().add(liveContent);
 				}

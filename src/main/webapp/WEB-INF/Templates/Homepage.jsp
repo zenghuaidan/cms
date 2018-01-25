@@ -95,6 +95,7 @@
 
     var revapi206;
     tpj(document).ready(function() {
+    	$("#body").addClass("index page-parent template-slider header-modern subheader-transparent sticky-white");
         if (tpj("#rev_slider_206_1").revolution == undefined) {
             revslider_showDoubleJqueryError("#rev_slider_206_1");
         } else {

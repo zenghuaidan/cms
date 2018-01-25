@@ -36,5 +36,11 @@
 		<Field name="Title" type="txtfield" label="Title" />
 		<Field name="Content" type="redfield" label="Content" />
 	</Widget>
+	
+	<!-- General -->
+	<Widget id="ScaleImgBlock" noedit="yes">
+	    <Field name="Image" type="imgfield" label="Image" />
+	    <Field name="Scale" type="drpfield" label="Scale" />
+	</Widget>
 		
 </WidgetList>
