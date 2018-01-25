@@ -22,19 +22,33 @@
 <x:parse xml="<%=content.getContentXmlWithoutCRLF() %>" var="contentXml"></x:parse>
 <% int i = 1; %>
 <x:forEach select="$contentXml/PageContent/Widget[@name='WidgetHolder']/Widget" var="widget" varStatus="status">
-   <x:set var="widgetName" select="$widget/@name" />
-   <x:set var="widgetId" select="$widget/@wid" scope="page" /> 
-   <x:if select="$widgetName = 'ScaleImage'">
+   	<x:set var="widgetName" select="$widget/@name" />
+   	<x:set var="widgetId" select="$widget/@wid" scope="page" /> 
+   	<x:if select="$widgetName = 'ScaleImage'">
 		<div class='widget'>
-		<%
-            Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Image']");
-			Element scaleNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Scale']");
-            Map<String, String> classMap = new HashMap<String, String>();
-            if (scaleNode != null)
-            	classMap.put("class", scaleNode.getTextTrim());
-        %>
-			<%=XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, false, "", classMap) %><br/><br/><br/><br/>
+			<%
+	            Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Image']");
+				Element scaleNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Scale']");
+	            Map<String, String> classMap = new HashMap<String, String>();
+	            if (scaleNode != null)
+	            	classMap.put("class", scaleNode.getTextTrim());
+	            out.print(XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, false, "", classMap));
+	        %>
 		</div>
-   </x:if>  
+   	</x:if>  
+   	<x:if select="$widgetName = 'GreyBox'">
+   		<div class='widget greyBox'><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+   	</x:if>
+   	<x:if select="$widgetName = 'ColorBox'">
+   		<div class='widget colorBox'><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>	
+   	</x:if>
+   	<x:if select="$widgetName = 'SpaceBlk'">
+   		<div class="widget" style="height:<x:out select="$widget/Field[@name='Text']" escapeXml="false"/>"></div>
+   	</x:if>
+   	<x:if select="$widgetName = 'LeftRightPhotoBlk'">
+   	</x:if>
+   	<x:if select="$widgetName = 'xxxxx'">
+   	</x:if>
+   
 	<% i++; %>   
 </x:forEach>
