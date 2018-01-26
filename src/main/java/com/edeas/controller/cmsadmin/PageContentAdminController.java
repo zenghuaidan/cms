@@ -48,6 +48,7 @@ public class PageContentAdminController extends CmsController {
     public void mceImgUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
     {
 		StringBuilder js = new StringBuilder();
+		String imgurl = "";
         CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
         if(multipartResolver.isMultipart(request))
         {
@@ -59,14 +60,14 @@ public class PageContentAdminController extends CmsController {
 					String orgfil = list.get(0).getOriginalFilename();										
 					String newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_EDITOR), orgfil);	
 					list.get(0).transferTo(new File(Global.getImagesUploadPhysicalPath(Global.IMAGE_EDITOR, newFileName)));															
-					String imgurl = Global.getImagesUploadPath(Global.IMAGE_EDITOR, newFileName);
-					js.append("<script type='text/javascript'>");
-					js.append("parent.document.getElementById('" + iname + "').value='" + imgurl + "';");
-					js.append("parent.closeMceUp('" + iname + "');");
-					js.append("</script>");
+					imgurl = Global.getImagesUploadPath(Global.IMAGE_EDITOR, newFileName);
 				}
             }            
         }
+        js.append("<script type='text/javascript'>");
+        js.append("parent.document.getElementById('" + iname + "').value='" + imgurl + "';");
+        js.append("parent.closeMceUp('" + iname + "');");
+        js.append("</script>");
         response.getWriter().write(js.toString());
 		response.flushBuffer();
     }
@@ -75,6 +76,7 @@ public class PageContentAdminController extends CmsController {
     public void mceDocUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
     {
 		StringBuilder js = new StringBuilder();
+		String docurl = "";
         CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
         if(multipartResolver.isMultipart(request))
         {
@@ -86,14 +88,14 @@ public class PageContentAdminController extends CmsController {
 					String orgfil = list.get(0).getOriginalFilename();										
 					String newFileName = newRandomFilename(Global.getDocUploadPhysicalPath(), orgfil);	
 					list.get(0).transferTo(new File(Global.getDocUploadPhysicalPath(newFileName)));															
-					String docurl = Global.getImagesUploadPath(Global.IMAGE_EDITOR, newFileName);
-					js.append("<script type='text/javascript'>");
-			        js.append("parent.document.getElementById('" + iname + "').value='" + docurl + "';");
-			        js.append("parent.closeMceUp('" + iname + "');");
-			        js.append("</script>");
+					docurl = Global.getImagesUploadPath(Global.IMAGE_EDITOR, newFileName);
 				}
             }            
         }
+        js.append("<script type='text/javascript'>");
+        js.append("parent.document.getElementById('" + iname + "').value='" + docurl + "';");
+        js.append("parent.closeMceUp('" + iname + "');");
+        js.append("</script>");
         response.getWriter().write(js.toString());
 		response.flushBuffer();
     }
