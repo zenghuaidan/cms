@@ -15,9 +15,9 @@
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String txtval = (fieldData == null) ? fpm.getDefaultValue() : XmlUtils.getFieldRaw(fieldData, fpm.getName());
+	String txtval = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();
 	String topOption = "";
-	String selPageId = XmlUtils.getWidgetFieldAttr(fieldData, fpm.getName(), "pgid");
+	String selPageId = XmlUtils.getFieldAttr(fieldData, "pgid");
 	List<Page> pages = null;
 	if(!StringUtils.isBlank(fpm.getAttribute())) {
 		String[] attrs = fpm.getAttribute().split(",");

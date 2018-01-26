@@ -11,7 +11,6 @@
 <%@page import="org.dom4j.Document"%>
 <%
 	Page currentPage = (Page)request.getAttribute("currentPage");
-	long pageId = (Long)request.getAttribute("pageid");
 	String lang = (String)request.getAttribute("lang");
 	String wid = (String)request.getAttribute("wid");
 	String wname = (String)request.getAttribute("wname");
@@ -83,7 +82,7 @@
 <body><div id="ajaxform">
     <h1>WidgetForm</h1>
     <form action="<%=Global.getCMSUrl() %>/PageContentAdmin/UpdateWidget" method="post" id="widgetform" name="widgetform"  enctype="multipart/form-data">
-        <input type="hidden" name="pageid" value="${ currentPage.id }" />
+        <input id="pageid" type="hidden" name="pageid" value="${ currentPage.id }" />
 		<input type="hidden" name="lang" value="${ lang }" />
 		<input type="hidden" name="wname" value="${ wname }" />
 		<input type="hidden" name="wid" value="${ wid }" />
@@ -96,7 +95,7 @@
             		for(Element field : fields) {
             			String fieldType = field.attributeValue("type", "");
             			String fieldPath = "/WEB-INF/PageAdmin/FormFields/" + fieldType + ".jsp";
-            			request.setAttribute("fieldData", dataWidget);
+            			request.setAttribute("fieldData", dataWidget.selectSingleNode("Field[@name='" + XmlUtils.getFieldAttr(field, "name") + "']"));
     	                request.setAttribute("widgetSchema", widget);
     	                request.setAttribute("fieldSchema", field);
         		%>

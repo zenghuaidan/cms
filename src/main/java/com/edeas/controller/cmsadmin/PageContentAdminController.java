@@ -313,7 +313,6 @@ public class PageContentAdminController extends CmsController {
 		if (Lang.exists(lang)) {
 			Page currentPage = queryService.findPageById(pageid, true);
 			if (!currentPage.isNew()) {
-				model.addAttribute("pageid", pageid);
 				model.addAttribute("lang", lang);
 				model.addAttribute("wid", wid);
 				model.addAttribute("wname", wname);

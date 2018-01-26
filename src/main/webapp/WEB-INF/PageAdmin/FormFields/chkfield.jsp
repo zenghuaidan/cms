@@ -10,7 +10,7 @@
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-    String chkval = (fieldData == null) ? fpm.getDefaultValue() : XmlUtils.getFieldRaw(fieldData, fpm.getName());
+    String chkval = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();
     boolean isChk = !StringUtils.isBlank(chkval) && Boolean.valueOf(chkval.toLowerCase());
     String sel = isChk ? "checked" : "";
 %>

@@ -101,6 +101,10 @@
    	<x:if select="$widgetName = 'RichContent'">
    		<div class='widget rec'><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
    	</x:if>
+   	<x:if select="$widgetName = 'PhotoSliders'">
+   		<div class='widget rec'>sdffsdf</div>
+   	</x:if>
+   	
    
 	<% i++; %>   
 </x:forEach>

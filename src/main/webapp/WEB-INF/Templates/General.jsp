@@ -11,6 +11,7 @@
 <link href="${Content}/css/general.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/slider.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/enlarge-img.css" rel="stylesheet" type="text/css" />
+<link href="${Content}/css/accordion.css" rel="stylesheet" type="text/css" />
 
 <div class="general full-wrapper clearfix"> 
     <div class="inner-wrapper">

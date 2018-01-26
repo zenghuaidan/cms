@@ -11,7 +11,7 @@
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String val = (fieldData == null) ? fpm.getDefaultValue() : XmlUtils.getFieldRaw(fieldData, fpm.getName());
+	String val = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();
 	
     String fopts = XmlUtils.getFieldAttr(fieldSchema, "opts");
     String wopts = XmlUtils.getFieldAttr(widgetSchema, fpm.getName() + "Opts");

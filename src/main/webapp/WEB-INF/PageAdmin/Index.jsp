@@ -193,7 +193,7 @@
                     wid = wd.attributeValue("wid");
                     newlb = "null";
                     Element aw = (Element)w.selectSingleNode("AcceptWidget[@ename='" + wname + "']");                   
-                    if (aw.attributeValue("isDynLst", "").toLowerCase() == "yes")
+                    if (aw.attributeValue("isDynLst", "").toLowerCase().equals("yes"))
                     {                        
                         mgrtype = aw.attributeValue("mgrtype");
                         mgrattr = aw.attributeValue("mgrattr");

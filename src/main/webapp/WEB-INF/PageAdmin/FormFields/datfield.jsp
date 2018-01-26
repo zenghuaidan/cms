@@ -11,7 +11,7 @@
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
     String fid = fpm.getName();
-    String txtval = (fieldData == null) ? fpm.getDefaultValue() : XmlUtils.getFieldRaw(fieldData, fpm.getName());
+    String txtval = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();
     if ("today".equals(txtval)) {
     	txtval = com.edeas.utils.DateUtils.yyyyMMdd().format(new Date());
     }

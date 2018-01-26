@@ -12,8 +12,8 @@
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String val = XmlUtils.getFieldRaw(fieldData, fpm.getName());
-	String alt = XmlUtils.getWidgetFieldAttr(fieldData, fpm.getName(), "alt");
+	String val = fieldData.getTextTrim();
+	String alt = XmlUtils.getFieldAttr(fieldData, "alt");
 	
     StringBuffer imgdesc = new StringBuffer("<span style='text-transform:none;'>");
     if(!StringUtils.isBlank(fpm.getAttribute())) {

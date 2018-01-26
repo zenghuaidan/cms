@@ -11,7 +11,7 @@
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String htmval = (fieldData == null) ? fpm.getDefaultValue() : XmlUtils.getFieldRaw(fieldData, fpm.getName());	
+	String htmval = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();	
 %>
 <tr class="datafield">
     <td colspan="2" class="label" style="text-align:center;"><%=fpm.getLabel() %></td>

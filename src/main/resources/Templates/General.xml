@@ -15,7 +15,10 @@
       <AcceptWidget wid="RichEditor" ename="GreyBox" label="Grey Box" ContentAttr="pushcss:editor_grey,tool:mini" />
       <AcceptWidget wid="RichEditor" ename="ColorBox" label="Color Box" ContentAttr="pushcss:editor_color,tool:mini" />
       <AcceptWidget wid="TextBlock" ename="SpaceBlk" label="Space Block" TextLabel="Height" TextDefault="30px" />
-      <AcceptWidget wid="LeftRightPhotoBlk" ImageLeftDefault="true" ImageAttr="fix:500x250" ename="LeftRightPhotoBlk" label="Left Right Photo" />
+      <AcceptWidget wid="LeftRightPhotoBlk" ImageLeftDefault="true" ImageAttr="fix:500x250" ename="LeftRightPhotoBlk" label="Left Right Photo" />      
+      <AcceptWidget ename="PhotoSliders" wid="PhotoSliders" label="Photo Sliders" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoSlider:Image" cols="Image" AddFront="yes">
+        <Widget ename="PhotoSlider" wid="ImageLinkBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:890x470" AddFront="no" />
+      </AcceptWidget>
     </Widget>
     
   </Widgets>

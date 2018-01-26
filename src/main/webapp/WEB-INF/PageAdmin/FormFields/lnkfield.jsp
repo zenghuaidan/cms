@@ -11,7 +11,7 @@
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String val = XmlUtils.getFieldRaw(fieldData, fpm.getName());
+	String val = fieldData.getTextTrim();
 	
     String lnktype = XmlUtils.getFieldAttr(fieldData, "lnktype");
     String lnktarget = XmlUtils.getFieldAttr(fieldData, "target");

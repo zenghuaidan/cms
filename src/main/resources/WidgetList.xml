@@ -17,6 +17,11 @@
 	<Widget id="WidgetListMgr" />    
 	<Widget id="SubPagesMgr" />     
 
+	<Widget id="ImageLinkBlock" noedit="yes">
+    	<Field name="Image" type="imgfield" label="Image" />
+    	<Field name="Link" type="lnkfield" label="Link" />
+  	</Widget>
+
 	<Widget id="TextLinkBlock" noedit="yes">
     	<Field name="Text" type="txtfield" label="Text" />
     	<Field name="Link" type="lnkfield" label="Link" />
@@ -48,6 +53,10 @@
     	<Field name="Image" type="imgfield" label="Image" />
     	<Field name="Caption" type="ttafield" label="Caption" />    
     	<Field name="Content" type="redfield" label="Content" />
+  	</Widget>
+  	
+  	<Widget id="PhotoSliders">
+		
   	</Widget>
 		
 </WidgetList>
