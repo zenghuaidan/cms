@@ -44,6 +44,72 @@ import net.coobird.thumbnailator.Thumbnails.Builder;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PageContentAdminController extends CmsController {	
 	
+	@RequestMapping(path = {"PageContentAdmin/MceImgUpload"}, method={RequestMethod.POST})
+    public void mceImgUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
+    {
+		StringBuilder js = new StringBuilder();
+        CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+        if(multipartResolver.isMultipart(request))
+        {
+        	String fname = "filedata";
+            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+			if(multiRequest.getMultiFileMap().containsKey(fname)) {
+				List<MultipartFile> list = multiRequest.getMultiFileMap().get(fname);
+				if (list.size() == 1 && !StringUtils.isBlank(list.get(0).getOriginalFilename())) {
+					String orgfil = list.get(0).getOriginalFilename();										
+					String newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_EDITOR), orgfil);	
+					list.get(0).transferTo(new File(Global.getImagesUploadPhysicalPath(Global.IMAGE_EDITOR, newFileName)));															
+					String imgurl = Global.getImagesUploadPath(Global.IMAGE_EDITOR, newFileName);
+					js.append("<script type='text/javascript'>");
+					js.append("parent.document.getElementById('" + iname + "').value='" + imgurl + "';");
+					js.append("parent.closeMceUp('" + iname + "');");
+					js.append("</script>");
+				}
+            }            
+        }
+        response.getWriter().write(js.toString());
+		response.flushBuffer();
+    }
+
+	@RequestMapping(path = {"PageContentAdmin/MceDocUpload"}, method={RequestMethod.POST})
+    public void mceDocUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
+    {
+		StringBuilder js = new StringBuilder();
+        CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+        if(multipartResolver.isMultipart(request))
+        {
+        	String fname = "filedata";
+            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+			if(multiRequest.getMultiFileMap().containsKey(fname)) {
+				List<MultipartFile> list = multiRequest.getMultiFileMap().get(fname);
+				if (list.size() == 1 && !StringUtils.isBlank(list.get(0).getOriginalFilename())) {
+					String orgfil = list.get(0).getOriginalFilename();										
+					String newFileName = newRandomFilename(Global.getDocUploadPhysicalPath(), orgfil);	
+					list.get(0).transferTo(new File(Global.getDocUploadPhysicalPath(newFileName)));															
+					String docurl = Global.getImagesUploadPath(Global.IMAGE_EDITOR, newFileName);
+					js.append("<script type='text/javascript'>");
+			        js.append("parent.document.getElementById('" + iname + "').value='" + docurl + "';");
+			        js.append("parent.closeMceUp('" + iname + "');");
+			        js.append("</script>");
+				}
+            }            
+        }
+        response.getWriter().write(js.toString());
+		response.flushBuffer();
+    }
+	
+	@RequestMapping(path = {"PageContentAdmin/TinyMceUpFrame"}, method={RequestMethod.GET})
+	public void tinyMceUpFrame(String wtype, String iname, HttpServletResponse response) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        String aurl = Global.getCMSUrl() + "/PageContentAdmin" + (wtype.equals("webimage") ? "/MceImgUpload" : "/MceDocUpload");
+        sb.append("<html><body><form method='post' action='" + aurl + "' enctype='multipart/form-data'><div>");
+        sb.append("<input type='file' name='filedata' style='width:200px;' /> <input type='submit' value='Upload' />");
+        sb.append("<input type='hidden' name='iname' value='" + iname + "' />");
+        sb.append("</div></form></body></html>");
+        response.getWriter().write(sb.toString());
+		response.flushBuffer();
+	}
+	
 	@ResponseBody
 	@RequestMapping(path = {"PageContentAdmin/MovWidgetDown"}, method={RequestMethod.GET})
 	public Result movWidgetDown(int pgid, String lang, String xid, HttpServletRequest request) throws ParseException {

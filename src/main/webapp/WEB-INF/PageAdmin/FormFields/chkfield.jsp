@@ -11,7 +11,7 @@
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
     String chkval = (fieldData == null) ? fpm.getDefaultValue() : XmlUtils.getFieldRaw(fieldData, fpm.getName());
-    boolean isChk = !StringUtils.isBlank(chkval) && Boolean.getBoolean(chkval.toLowerCase());
+    boolean isChk = !StringUtils.isBlank(chkval) && Boolean.valueOf(chkval.toLowerCase());
     String sel = isChk ? "checked" : "";
 %>
 <tr class="datafield">

@@ -12,6 +12,7 @@ import com.edeas.web.InitServlet;
 
 @SuppressWarnings("serial")
 public class Global {
+	public static final String IMAGE_EDITOR = "editor";
 	public static final String IMAGE_SOURCE = "source";
 	public static final String IMAGE_RESIZE = "resize";
 	public static final String IMAGE_CMGR = "cmgr";

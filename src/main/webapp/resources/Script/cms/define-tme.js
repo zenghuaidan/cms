@@ -297,7 +297,7 @@ function setupRichEditorFields() {
 	var toolsets = new Array();
 	toolsets["mini"] = 'undo redo | styleselect bold italic underline superscript subscript link unlink mailto btnUL numlist image | removeformat code';
 	toolsets["default"] = 'undo redo | styleselect hr bold italic underline superscript subscript alignleft aligncenter alignright alignjustify link unlink mailto btnUL numlist';
-	toolsets["default"] += ' | btnTable btnTableEx resptbl image btnYouTube btnArtistOrMember | removeformat code';	 //jbimages
+	toolsets["default"] += ' | btnTable btnTableEx resptbl image btnYouTube | removeformat code';	 //jbimages
 	//define stylesets
 	var stylesetsa = new Array();
 	stylesetsa["default"] = [  	{ title: 'H2 Title', block: 'h2' },
@@ -368,7 +368,7 @@ function setupRichEditorFields() {
 				btnTable(editor);
 				btnTableEx(editor);
 				btnYouTube(editor);
-				btnArtistOrMember(editor);
+				//btnArtistOrMember(editor);
 				//btnInsMailto(editor);
 			},
 			paste_as_text: true,

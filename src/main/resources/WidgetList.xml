@@ -42,5 +42,12 @@
 	    <Field name="Image" type="imgfield" label="Image" />
 	    <Field name="Scale" type="drpfield" label="Scale" />
 	</Widget>
+	
+	<Widget id="LeftRightPhotoBlk">
+		<Field name="ImageLeft" type="chkfield" label="Image Left ?" />
+    	<Field name="Image" type="imgfield" label="Image" />
+    	<Field name="Caption" type="ttafield" label="Caption" />    
+    	<Field name="Content" type="redfield" label="Content" />
+  	</Widget>
 		
 </WidgetList>

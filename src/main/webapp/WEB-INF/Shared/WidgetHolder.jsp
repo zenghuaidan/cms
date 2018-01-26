@@ -46,8 +46,60 @@
    		<div class="widget" style="height:<x:out select="$widget/Field[@name='Text']" escapeXml="false"/>"></div>
    	</x:if>
    	<x:if select="$widgetName = 'LeftRightPhotoBlk'">
+		<%
+           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Image']");
+			String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, false, "", null);
+       	%>
+   		<x:if select="$widget/Field[@name='ImageLeft'] = 'true'">
+   			<div class="widget content-right">
+        		<div class="cr-left">
+	                <div class="enlarge-img-blk">
+	                    <a class="lightbox" href="#enlarge">
+	                        <div>
+	                            <%=image%>
+	                            <div class="enlarge-icon"><i class="fa fa-expand"></i></div>
+	                        </div>
+	                    </a> 
+	                    <div class="lightbox-target" id="enlarge">
+	                        <%=image%>
+	                       <a class="lightbox-close" href="#"></a>
+	                    </div>
+	                </div>
+	
+	                <div class="caption font-s">
+	                    <x:out select="$widget/Field[@name='Caption']" escapeXml="false"/>
+	                </div>
+	            </div>
+	            <div class="cr-right"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+	            <div class="clear"></div>
+	        </div>
+   		</x:if>
+   		<x:if select="$widget/Field[@name='ImageLeft'] = 'false'">
+	        <div class="widget content-left">
+	            <div class="cl-left"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+	            <div class="cl-right">
+	                <div class="enlarge-img-blk">
+	                    <a class="lightbox" href="#enlarge">
+	                        <div>
+	                            <%=image%>
+	                            <div class="enlarge-icon"><i class="fa fa-expand"></i></div>
+	                        </div>
+	                    </a> 
+	                    <div class="lightbox-target" id="enlarge">
+	                        <%=image%>
+	                       <a class="lightbox-close" href="#"></a>
+	                    </div>
+	                </div>
+	                <div class="caption font-s">
+	                    <x:out select="$widget/Field[@name='Caption']" escapeXml="false"/> 
+	                </div>
+	            </div>
+	            <div class="clear"></div>
+	        </div>
+   		</x:if>	
    	</x:if>
-   	<x:if select="$widgetName = 'xxxxx'">
+   	<x:if select="$widgetName = 'RichContent'">
+   		<div class='widget rec'><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
    	</x:if>
    
 	<% i++; %>   
