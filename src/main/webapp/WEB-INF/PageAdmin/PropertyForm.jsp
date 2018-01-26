@@ -61,7 +61,7 @@
             <% 	} %>
         </table>
         <div class="btns">
-            <div class="url"><span class="hlbg">URL</span>${url}</div>
+            <div class="url"><span class="hlbg">URL</span><%=XmlUtils.getPageLink(currentPage, lang, true, true).getLink() %></div>
             <div class="savecancel">
                 <div class="cmsbtn savebtn">Save</div>
                 <div class="cmsbtn cancelbtn">Cancel</div>
