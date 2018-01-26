@@ -189,18 +189,18 @@ public class XmlUtils {
 	
 	public static String getLinkAttr(Element lnk, String lang, boolean iscms, Map<String, String> othattrs) {
 		LinkInfo linkInfo = getLinkInfo(lnk, lang, iscms);
-		if (linkInfo != null) {
-			StringBuilder sb = new StringBuilder();
+		if (linkInfo != null && !StringUtils.isBlank(linkInfo.getLink())) {
+			StringBuilder sb = new StringBuilder(linkInfo.getLink());
+
+			if (!StringUtils.isBlank(linkInfo.getAnchor())) {
+				sb.append("#" + linkInfo.getAnchor());
+			}
+			sb.append(" href=\"" + sb.toString() + "\"");
 			
-			if (!linkInfo.getType().equals("none"))
+			if (!linkInfo.getType().equals("none") && !StringUtils.isBlank(linkInfo.getTarget()))
 			{
 				sb.append(" target='" + linkInfo.getTarget() + "'");
 			}
-			String ahref = linkInfo.getLink();
-			if (!StringUtils.isBlank(ahref) && !StringUtils.isBlank(linkInfo.getAnchor())) {
-				ahref += "#" + linkInfo.getAnchor();
-			}
-			if (!StringUtils.isBlank(ahref)) { sb.append(" href=\"" + ahref + "\""); }
 			
 			if (othattrs != null) {
 				for (String k : othattrs.keySet())

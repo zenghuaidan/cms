@@ -95,7 +95,7 @@
             		for(Element field : fields) {
             			String fieldType = field.attributeValue("type", "");
             			String fieldPath = "/WEB-INF/PageAdmin/FormFields/" + fieldType + ".jsp";
-            			request.setAttribute("fieldData", dataWidget.selectSingleNode("Field[@name='" + XmlUtils.getFieldAttr(field, "name") + "']"));
+            			request.setAttribute("fieldData", dataWidget == null ? null : dataWidget.selectSingleNode("Field[@name='" + XmlUtils.getFieldAttr(field, "name") + "']"));
     	                request.setAttribute("widgetSchema", widget);
     	                request.setAttribute("fieldSchema", field);
         		%>

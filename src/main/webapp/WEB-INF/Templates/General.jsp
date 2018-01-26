@@ -7,7 +7,8 @@
 <%@page import="com.edeas.service.impl.QueryServiceImpl"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
-<link href="${Content}/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="${Content}/css/icons/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="${Content}/css/icons/glyphicons/style.min.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/general.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/slider.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/enlarge-img.css" rel="stylesheet" type="text/css" />

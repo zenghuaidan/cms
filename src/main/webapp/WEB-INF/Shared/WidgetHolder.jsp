@@ -102,7 +102,29 @@
    		<div class='widget rec'><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
    	</x:if>
    	<x:if select="$widgetName = 'PhotoSliders'">
-   		<div class='widget rec'>sdffsdf</div>
+        <div class="widget content_slider ">
+            <ul class="content_slider_ul">
+            	<% int j = 1; %>
+		   		<x:forEach select="$widget/Widget[@name='PhotoSlider']" var="slider" varStatus="status">
+			   		<%
+			           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");
+						String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, true, "", null);
+						
+						Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Link']");						
+						String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
+						
+						String imageHtml = StringUtils.isBlank(linkAttr) ? image : ("<a" + linkAttr + ">" + image + "</a>");
+			       	%>
+                	<li class="content_slider_li_<%=j%>"><%=imageHtml %></li>
+		   			
+		   			<% j++; %>
+		   		</x:forEach>                
+            </ul>
+            <a class="button button_js slider_prev" href="#"><span class="button_icon"><i class="fa fa-angle-left"></i></span></a>
+            <a class="button button_js slider_next" href="#"><span class="button_icon"><i class="fa fa-angle-right"></i></span></a>
+            <div class="slider_pagination"></div>
+        </div>
+        <div class="clear"></div>
    	</x:if>
    	
    
