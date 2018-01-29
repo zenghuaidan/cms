@@ -153,25 +153,19 @@
             <div class="clear"></div>
     	</div>
    	</x:if>
-   	<x:if select="$widgetName = 'ActionButton'">
-   		<c:if test="${isPageAdmin}">
-   			<div class="widget">   
-   		</c:if>	
-           	<%
-	            Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Link']");
-				Element textNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Text']");
-				Map<String, String> othattrs = new HashMap<String, String>();
-				othattrs.put("class", "button");
-				String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms, othattrs);				
-				if(!StringUtils.isBlank(textNode.getTextTrim()) && !StringUtils.isBlank(linkAttr)) {
-					%>
-	        			<a <%=linkAttr %>><span class="g-btn"><%=textNode.getTextTrim() %></span></a>
-					<%
-				}
-	        %>
-        <c:if test="${isPageAdmin}">
-   			</div>   
-   		</c:if> 
+   	<x:if select="$widgetName = 'ActionButton'">   			
+       	<%
+            Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Link']");
+			Element textNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Text']");
+			Map<String, String> othattrs = new HashMap<String, String>();
+			othattrs.put("class", "button");
+			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms, othattrs);				
+			if(!StringUtils.isBlank(textNode.getTextTrim()) && !StringUtils.isBlank(linkAttr)) {
+				%>
+        			<a <%=linkAttr %>><span class="widget g-btn"><%=textNode.getTextTrim() %></span></a>
+				<%
+			}
+        %>        
    	</x:if>   	
    
 	<% i++; %>   
