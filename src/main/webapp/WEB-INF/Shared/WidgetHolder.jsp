@@ -102,31 +102,77 @@
    		<div class='widget rec'><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
    	</x:if>
    	<x:if select="$widgetName = 'PhotoSliders'">
-        <div class="widget content_slider ">
-            <ul class="content_slider_ul">
-            	<% int j = 1; %>
-		   		<x:forEach select="$widget/Widget[@name='PhotoSlider']" var="slider" varStatus="status">
-			   		<%
-			           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");
-						String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, true, "", null);
-						
-						Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Link']");						
-						String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
-						
-						String imageHtml = StringUtils.isBlank(linkAttr) ? image : ("<a" + linkAttr + ">" + image + "</a>");
-			       	%>
-                	<li class="content_slider_li_<%=j%>"><%=imageHtml %></li>
-		   			
-		   			<% j++; %>
-		   		</x:forEach>                
-            </ul>
-            <a class="button button_js slider_prev" href="#"><span class="button_icon"><i class="fa fa-angle-left"></i></span></a>
-            <a class="button button_js slider_next" href="#"><span class="button_icon"><i class="fa fa-angle-right"></i></span></a>
-            <div class="slider_pagination"></div>
-        </div>
-        <div class="clear"></div>
+   		<c:if test="${isPageAdmin}">
+   			<div class="widget">   
+   		</c:if>		
+	        <div class="content_slider">
+	            <ul class="content_slider_ul">
+	            	<% int j = 1; %>
+			   		<x:forEach select="$widget/Widget[@name='PhotoSlider']" var="slider" varStatus="status">
+				   		<%
+				           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");
+							String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, true, "", null);
+							
+							Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Link']");						
+							String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
+							
+							String imageHtml = StringUtils.isBlank(linkAttr) ? image : ("<a " + linkAttr + ">" + image + "</a>");
+				       	%>
+	                	<li class="content_slider_li_<%=j%>"><%=imageHtml %></li>
+			   			
+			   			<% j++; %>
+			   		</x:forEach>                
+	            </ul>
+	            <a class="button button_js slider_prev" href="#"><span class="button_icon"><i class="fa fa-angle-left"></i></span></a>
+	            <a class="button button_js slider_next" href="#"><span class="button_icon"><i class="fa fa-angle-right"></i></span></a>
+	            <div class="slider_pagination"></div>
+	        </div>
+        <c:if test="${isPageAdmin}">
+   			</div>   
+   		</c:if>        
    	</x:if>
    	
+   	<x:if select="$widgetName = 'ColumnImages'">
+       	<div class="widget sm-img group">
+           	<% int j = 1; %>
+	   		<x:forEach select="$widget/Widget[@name='ColumnImage']" var="imageItem" varStatus="status">
+		   		<%
+		           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");					
+          			String imageUrl = Global.getImagesUploadPath(Global.IMAGE_SOURCE, imageNode.getTextTrim());
+		       	%>
+            	<div class="col span_1_of_4" style="background: url('<%=imageUrl%>')"></div>	   			
+	   			<% j++; %>
+	   		</x:forEach>
+	   		<%
+	   			if(j == 1) {
+	   				%>
+       					<div style="text-align:center"># Configure Column Image Item</div>
+	   				<%
+	   			}
+	   		%>       
+            <div class="clear"></div>
+    	</div>
+   	</x:if>
+   	<x:if select="$widgetName = 'ActionButton'">
+   		<c:if test="${isPageAdmin}">
+   			<div class="widget">   
+   		</c:if>	
+           	<%
+	            Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Link']");
+				Element textNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Text']");
+				Map<String, String> othattrs = new HashMap<String, String>();
+				othattrs.put("class", "button");
+				String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms, othattrs);				
+				if(!StringUtils.isBlank(textNode.getTextTrim()) && !StringUtils.isBlank(linkAttr)) {
+					%>
+	        			<a <%=linkAttr %>><span class="g-btn"><%=textNode.getTextTrim() %></span></a>
+					<%
+				}
+	        %>
+        <c:if test="${isPageAdmin}">
+   			</div>   
+   		</c:if> 
+   	</x:if>   	
    
 	<% i++; %>   
 </x:forEach>

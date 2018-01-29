@@ -19,6 +19,10 @@
       <AcceptWidget ename="PhotoSliders" wid="PhotoSliders" label="Photo Sliders" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoSlider:Image" cols="Image" AddFront="yes">
         <Widget ename="PhotoSlider" wid="ImageLinkBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:890x470" AddFront="no" />
       </AcceptWidget>
+      <AcceptWidget ename="ColumnImages" wid="ColumnImages" label="Column Images" isDynLst="yes" mgrtype="gallery" mgrattr="ColumnImage:Image" cols="Image" AddFront="yes">
+        <Widget ename="ColumnImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114" AddFront="no" />
+      </AcceptWidget>
+      <AcceptWidget wid="TextLinkBlock" ename="ActionButton" label="Action Button" />
     </Widget>
     
   </Widgets>

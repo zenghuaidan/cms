@@ -13,7 +13,9 @@
 <link href="${Content}/css/slider.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/enlarge-img.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/accordion.css" rel="stylesheet" type="text/css" />
-
+<style>
+    .sm-img .span_1_of_4.demo1 { background:#ececec no-repeat center center; background-size: contain}    
+</style>
 <div class="general full-wrapper clearfix"> 
     <div class="inner-wrapper">
         <div class="main-content-pos">

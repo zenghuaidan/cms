@@ -195,7 +195,7 @@ public class XmlUtils {
 			if (!StringUtils.isBlank(linkInfo.getAnchor())) {
 				sb.append("#" + linkInfo.getAnchor());
 			}
-			sb.append(" href=\"" + sb.toString() + "\"");
+			sb.insert(0, " href=\"").append("\"");
 			
 			if (!linkInfo.getType().equals("none") && !StringUtils.isBlank(linkInfo.getTarget()))
 			{

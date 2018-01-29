@@ -117,6 +117,7 @@ public class PageAdminController extends CmsController {
 			if(!page.isNew()) {	
 				Page masterPage = queryService.getMasterPage(true);
 				model.addAttribute("iscms", true);
+				model.addAttribute("isPageAdmin", true);
 				model.addAttribute("lang", lang);
 				model.addAttribute("masterPage", masterPage);
 				model.addAttribute("currentPage", page);				
@@ -133,6 +134,7 @@ public class PageAdminController extends CmsController {
 			if(!page.isNew()) {
 				Page masterPage = queryService.getMasterPage(true);
 				model.addAttribute("iscms", true);
+				model.addAttribute("isPageAdmin", false);
 				model.addAttribute("lang", lang);
 				model.addAttribute("masterPage", masterPage);
 				model.addAttribute("currentPage", page);
@@ -296,6 +298,7 @@ public class PageAdminController extends CmsController {
 		Page masterPage = queryService.getMasterPage(true);
 		model.addAttribute("lang", lang);
 		model.addAttribute("isCms", true);
+		model.addAttribute("isPageAdmin", true);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("masterPage", masterPage);
 		model.addAttribute("referAction", "PageAdmin");

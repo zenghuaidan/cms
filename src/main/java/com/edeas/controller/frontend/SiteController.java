@@ -33,6 +33,7 @@ public class SiteController extends FrontController {
 				if(url.equals(page.getPageUrlForRouteMap())) {
 					Page masterPage = queryService.getMasterPage(false);
 					model.addAttribute("iscms", false);
+					model.addAttribute("isPageAdmin", false);
 					model.addAttribute("lang", lang);
 					model.addAttribute("currentPage", page);
 					model.addAttribute("masterPage", masterPage);
