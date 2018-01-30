@@ -13,11 +13,21 @@
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
 	String htmval = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();	
 %>
-<tr class="datafield">
-    <td colspan="2" class="label" style="text-align:center;"><%=fpm.getLabel() %></td>
-</tr>
-<tr class="datafield">
-	<td colspan="2" class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
-		<script id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" attrs="<%=fpm.getAttribute() %>" style="<%=fpm.getStyle() %>"><%=htmval %></script>
-	</td>
-</tr>
+<c:if test="${formType eq 'property'}">
+	<tr class="datafield">
+	    <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
+	    <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
+	        <script id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" attrs="<%=fpm.getAttribute() %>" style="<%=fpm.getStyle() %>"><c:out value="<%=htmval%>" escapeXml="true"></c:out></script>
+	    </td>
+	</tr>
+</c:if>
+<c:if test="${formType eq 'widget'}">
+	<tr class="datafield">
+	    <td colspan="2" class="label" style="text-align:center;"><%=fpm.getLabel() %></td>
+	</tr>
+	<tr class="datafield">
+		<td colspan="2" class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
+			<script id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" attrs="<%=fpm.getAttribute() %>" style="<%=fpm.getStyle() %>"><c:out value="<%=htmval%>" escapeXml="true"></c:out></script>
+		</td>
+	</tr>
+</c:if>

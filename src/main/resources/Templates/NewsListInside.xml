@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Template id="NewsListInside" haspgtime="no">
+  <Properties excludestd="">
+    <Field name="Image" type="imgfield" label="Image" attr="fix:500x300" /> 
+    <Field name="Title" type="ttafield" label="Title" />
+    <Field name="Content" type="redfield" label="Content" style="width:605px;height:300px;" />
+  </Properties>
+  <WidgetBox />
+  <Widgets>
+
+  </Widgets>
+</Template>

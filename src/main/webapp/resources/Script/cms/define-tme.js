@@ -327,15 +327,15 @@ function setupRichEditorFields() {
 					case "styleset": styleset=a[1]; break;
 					case "theme": 
 						theme = a[1]; 
-						cssarr.push(RU$("Content/cms/editortheme_"+theme+".css"));
+						cssarr.push(RU$("/resources/Content/cms/editortheme_"+theme+".css"));
 					break;
 					case "pushcss": 
 						pushcss = a[1]; 					
-						cssarr.push(RU$("Content/cms/"+pushcss+".css"));
+						cssarr.push(RU$("/resources/Content/cms/"+pushcss+".css"));
 					break;
 					case "css": 
 						sgcss = a[1]; 					
-						cssarr=[RU$("Content/cms/"+sgcss+".css")];
+						cssarr=[RU$("/resources/Content/cms/"+sgcss+".css")];
 					break;
 				}			
 			}

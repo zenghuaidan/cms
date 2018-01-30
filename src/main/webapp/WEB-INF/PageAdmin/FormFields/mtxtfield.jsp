@@ -60,7 +60,7 @@
         <input type='hidden' id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" value="@Html.Raw(txtval)"  />
         <table>
             <tr>
-                <td><input onblur="adjustVaule('<%=fpm.getName() %>');" class="multi-values" type='text' style="<%=fpm.getType() %>" /></td>
+                <td><input onblur="adjustVaule('<%=fpm.getName() %>');" class="multi-values" type='text' style="<%=fpm.getStyle() %>" /></td>
                 <td><img onclick="add(this, '<%=fpm.getName() %>');" src="${Content}/cms/core/images/eplus.png" class="img-scale" /></td>
                 <td><img onclick="del(this, '<%=fpm.getName() %>');" src="${Content}/cms/core/images/cminus.png" class="img-scale" /></td>
             </tr>

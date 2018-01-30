@@ -15,20 +15,20 @@ public class CmsProperties {
 	
 	public static final Map<String, Map<String, String>> articleBaseTpls = new HashMap<String, Map<String, String>>() {		
 		{
-			put("MemberIdx", new HashMap<String, String>(){ 
+			put("NewsListIdx", new HashMap<String, String>(){ 
 				{
 					put("order", "pgtimei");
 					put("datefield", "singledate");
 					put("datelabel", "日期");
-					put("itmlabel", "Member");
+					put("itmlabel", "News");
 				} 
 			});
-			put("ArtistIdx", new HashMap<String, String>(){ 
+			put("NewsMasonryIdx", new HashMap<String, String>(){ 
 				{
 					put("order", "pgtimei");
 					put("datefield", "nodate");
 					put("datelabel", "日期");
-					put("itmlabel", "Member");
+					put("itmlabel", "News");
 				} 
 			});
 		}
@@ -43,17 +43,17 @@ public class CmsProperties {
     
 	public static final Map<String, Map<String, String>> enableDTimeParentTpls = new HashMap<String, Map<String, String>>() {		
 		{
+			put("NewsListIdx", new HashMap<String, String>(){ {put("format", "dat");put("labeldate", "Date");} });
 			put("ConcertIdx", new HashMap<String, String>(){ {put("format", "dat tim");put("labeldate", "Date");put("labeltime", "Time");} });
-			put("NewsIdx", new HashMap<String, String>(){ {put("format", "dat");put("labeldate", "Date");} });
 			put("NewWorksIdx", new HashMap<String, String>(){ {put("format", "dat tim");put("labeldate", "Date");put("labeltime", "Time");} });
 		}
     };
     
-    public static final Map<String, Map<String, String>> enableDTimeTpls = new HashMap<String, Map<String, String>>() {		
-		{
-			put("ArtistSpeakerIndex", new HashMap<String, String>(){ {put("format", "yr");put("labeldate", "Date");put("pastyr", "10");put("upcomingyr", "5");} });			
-		}
-    };
+//    public static final Map<String, Map<String, String>> enableDTimeTpls = new HashMap<String, Map<String, String>>() {		
+//		{
+//			put("NewsListInside", new HashMap<String, String>(){ {put("format", "yr");put("labeldate", "Date");put("pastyr", "10");put("upcomingyr", "5");} });			
+//		}
+//    };
     
     public static final Map<String, Map<String, String>> customPgOrderParentTpls = new HashMap<String, Map<String, String>>() {		
 		{

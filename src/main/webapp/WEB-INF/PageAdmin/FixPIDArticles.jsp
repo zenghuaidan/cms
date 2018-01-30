@@ -64,20 +64,13 @@
 			<c:if test="${not empty configMap['pgorderlabel']}">
 				<th class='colpgo'>${configMap['pgorderlabel']}</th>
 			</c:if>
-			<c:if test="${not 'nodate' eq configMap['datefield']}">
+			<c:if test="${'nodate' ne configMap['datefield']}">
 				<th class='coldate' datype='daterange'>${configMap['datelabel']}</th>	
 			</c:if>
 			<th class='coltitle'>${configMap['itmlabel']}</th>
 			<th class='colfns'></th>
 		</tr>
 		<c:forEach items="${children }" var="child">
-			<c:set var="dateStr" value=""></c:set>
-			<c:if test="${'daterange' eq configMap['datefield']}">
-				<c:set var="dateStr" value="<fmt:formatDate value='${ child.pageTimeFrom }' pattern='yyyy-MM-dd' />-<fmt:formatDate value='${ child.pageTimeTo }' pattern='yyyy-MM-dd' />"></c:set>	
-			</c:if>
-			<c:if test="${'singleyear' eq configMap['datefield']}">
-				<c:set var="dateStr" value="<fmt:formatDate value='${ child.pageTimeFrom }' pattern='yyyy' />"></c:set>
-			</c:if> 			
 			<tr class='data' yri='<fmt:formatDate value="${ child.pageTimeFrom }" pattern="yyyy" />' yrf='<fmt:formatDate value="${ child.pageTimeTo }" pattern="yyyy" />'>
 				<td class='colico'>
 					<img class='pgsdot pgs${child.status.name }' src='${Content}/images/spacer.gif' alt='${child.status.name }' title='${child.status.name }' />
@@ -87,8 +80,18 @@
 				<c:if test="${not empty configMap['pgorderlabel']}">
 					<td class='colpgo'>${child.pageOrder}</td>
 				</c:if>
-				<c:if test="${not 'nodate' eq configMap['datefield']}">
-					<td class='coldate'>${dateStr}</td>	
+				<c:if test="${'nodate' ne configMap['datefield']}">
+					<td class='coldate'>	
+						<c:if test="${'singledate' eq configMap['datefield']}">
+							<fmt:formatDate value='${ child.pageTimeFrom }' pattern='yyyy-MM-dd' />	
+						</c:if>
+						<c:if test="${'daterange' eq configMap['datefield']}">
+							<fmt:formatDate value='${ child.pageTimeFrom }' pattern='yyyy-MM-dd' />-<fmt:formatDate value='${ child.pageTimeTo }' pattern='yyyy-MM-dd' />	
+						</c:if>
+						<c:if test="${'singleyear' eq configMap['datefield']}">
+							<fmt:formatDate value='${ child.pageTimeFrom }' pattern='yyyy' />
+						</c:if> 	
+					</td>		
 				</c:if>
 				<td class='coltitle'>${child.name}</td>
 				<td class='colfns'>

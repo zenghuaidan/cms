@@ -98,6 +98,7 @@
             			request.setAttribute("fieldData", dataWidget == null ? null : dataWidget.selectSingleNode("Field[@name='" + XmlUtils.getFieldAttr(field, "name") + "']"));
     	                request.setAttribute("widgetSchema", widget);
     	                request.setAttribute("fieldSchema", field);
+    	                request.setAttribute("formType", "widget");
         		%>
         				<jsp:include page="<%=fieldPath %>" />
           		<%

@@ -38,7 +38,6 @@
 	Document tx = XmlUtils.getTemplateDocument(currentPage.getTemplate());
 	List<Element> fieldList = (List<Element>)tx.selectNodes("/Template/Properties/Field");
 	Document propDocument =  currentContent.getPropertyXmlDoc();
-	Element fieldData = (propDocument == null) ? null : (Element)propDocument.selectSingleNode("/Properties");
 	String ptyerr = (String)request.getAttribute("ptyError");
 %>
 <form action="<%=Global.getCMSUrl() %>/PageContentAdmin/UpdateProperty" method="post" id="propertyform" name="propertyform" enctype="multipart/form-data">	
@@ -53,9 +52,12 @@
         	<% 
 	            for (Element fieldSchema : fieldList)
 	            {
+	            	
+					Element fieldData = (propDocument == null) ? null : XmlUtils.getPtyField(propDocument, XmlUtils.getFieldAttr(fieldSchema, "name"));
 	                String path = "/WEB-INF/PageAdmin/FormFields/" + fieldSchema.attributeValue("type") + ".jsp";
 	                request.setAttribute("fieldData", fieldData);
 	                request.setAttribute("fieldSchema", fieldSchema);
+	                request.setAttribute("formType", "property");
             %>            		
                 	<jsp:include page="<%=path%>" /> 
             <% 	} %>

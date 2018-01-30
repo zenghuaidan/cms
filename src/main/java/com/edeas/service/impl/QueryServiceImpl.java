@@ -1,7 +1,7 @@
 package com.edeas.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -95,7 +95,15 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		getContentDao(iscms).delete(content.getId());
 	}
 	
-	public Page getFirstChild(long parentId, boolean iscms, boolean checkActive, Map<String, String> orderInfo) {
-		return getPageDao(iscms).getFirstChild(parentId, iscms, checkActive, orderInfo);
+	public Page getFirstChild(long parentId, boolean iscms, boolean checkActive, String order) {//orderInfo: key=property of Page, value=asc|desc
+		return getPageDao(iscms).getFirstChild(parentId, checkActive, order);
+	}
+	
+	public List<Page> getChidrenByPageTimeFromDesc(long parentId, boolean iscms, boolean checkActive) {
+		return getChidrenWithOrder(parentId, iscms, checkActive, Arrays.asList("pageTimeFrom desc"));
+	}
+	
+	public List<Page> getChidrenWithOrder(long parentId, boolean iscms, boolean checkActive, List<String> orders) {
+		return getPageDao(iscms).getChidrenWithOrder(parentId, checkActive, orders);
 	}
 }

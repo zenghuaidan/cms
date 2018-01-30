@@ -131,7 +131,7 @@ public class XmlUtils {
     {
         Element fieldNode = getPtyField(document, fieldeName);
         String val = (fieldNode == null) ? "" : fieldNode.getText();
-        if (isTta) { val = val.replaceAll("\r\n", "<br />"); }
+        if (isTta) { val = val.replaceAll("\r\n", "<br />").replace("\n", "<br />"); }
         return val;
     }
 	

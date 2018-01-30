@@ -368,10 +368,11 @@ public class Page<T extends Page, E extends Content> {
 		if (pid != null) {
 			if(pid == MASTER_PAGE_PARENT_ID) return "/Footer/";
 			if(pid == OTHER_PAGE_PARENT_ID) return "/Others/";
+			Page page = (Page)this.getParent();
 			while(pid > 0) {
-				Page page = (Page)this.getParent();
 				sb.insert(0, "/" + page.getUrl());
-				pid = page.getParent() == null ? 0 : ((Page)this.getParent()).getId();
+				page = (Page)page.getParent();
+				pid = page == null || page.getParent() == null ? 0 : ((Page)page.getParent()).getId();
 			}
 		}
 		return sb.toString();

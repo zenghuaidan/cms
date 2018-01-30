@@ -17,7 +17,7 @@
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
-        <input type='text' id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" value="<%=txtval %>" style="<%=fpm.getType() %>"  />
+        <input type='text' id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" value="<%=txtval %>" style="<%=fpm.getStyle() %>"  />
         <%=fpm.getRemark() %>
     </td>
 </tr>

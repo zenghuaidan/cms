@@ -38,6 +38,9 @@ function setPtyFormSubmission() {
 	};
    
 	$("#propertyform").ajaxForm(options);
+	$('#propertyform').bind('form-pre-serialize', function(event, form, options, veto) {
+		tinyMCE.triggerSave();
+	});
    	$("#propertyform").ajaxSubmit(options); 
 //    $("#propertyform").submit(); //standard post to support file uploads
     /* AJAX Submit Not Support File Uploads

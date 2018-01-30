@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Template id="Link" haspgtime="no">
+  <Properties excludestd="">
+    <Field name="MenuName" type="txtfield" label="Menu name" />
+    <Field name="Link" type="lnkfield" label="Link" />
+  </Properties>
+  <WidgetBox />
+  <Widgets>
+  </Widgets>
+</Template>

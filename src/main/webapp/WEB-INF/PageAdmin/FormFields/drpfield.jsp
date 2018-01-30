@@ -23,7 +23,7 @@
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
-        <select id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" style="<%=fpm.getType() %>">
+        <select id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" style="<%=fpm.getStyle() %>">
 	        <c:forEach items="${opts }" var="opt">
 	        	<option value="${fn:split(opt, '^')[0]}" ${fn:split(opt, '^')[0] eq val ? ' selected' : ''}>${fn:split(opt, '^')[1]}</option>
 	        </c:forEach>        

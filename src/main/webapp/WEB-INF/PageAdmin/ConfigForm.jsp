@@ -64,9 +64,9 @@
 	Long parentid = (Long)request.getAttribute("parentid");
 	String paretnTemplate = parentPage == null ? "" : parentPage.getTemplate();
 	String template = currentPage.getTemplate();
-	boolean enableParentDTime = CmsProperties.enableDTimeParentTpls.containsKey(paretnTemplate);
-	boolean enableDTime = CmsProperties.enableDTimeTpls.containsKey(template);
-	Map<String, String> dtconfig = enableParentDTime ?  CmsProperties.enableDTimeParentTpls.get(paretnTemplate) : CmsProperties.enableDTimeTpls.get(template);
+	boolean enableDTime = CmsProperties.enableDTimeParentTpls.containsKey(paretnTemplate);
+	//boolean enableDTime = CmsProperties.enableDTimeTpls.containsKey(template);
+	Map<String, String> dtconfig = enableDTime ?  CmsProperties.enableDTimeParentTpls.get(paretnTemplate) : null;
 %>
 
 <%!
@@ -111,10 +111,8 @@
 		            </div>
 	     		</c:if>
 	            
-	
-				<c:set var="enableParentDTime" value="<%=enableParentDTime %>" />
 				<c:set var="enableDTime" value="<%=enableDTime %>" />
-				<c:if test="${ enableParentDTime || enableDTime }">
+				<c:if test="${ enableDTime }">
 					<c:set var="format" value='<%= dtconfig.get("format") %>' />
 					<!-- Single Year Range -->
 					<c:if test="${fn:contains(format, 'yr')}">

@@ -11,12 +11,12 @@
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String txtval = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();	
+	String txtval = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getText();	
 %>
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
-        <textarea id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" style="<%=fpm.getType() %>"><%=txtval %></textarea>
+        <textarea id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" style="<%=fpm.getStyle() %>"><%=txtval %></textarea>
         <%=fpm.getRemark() %>
     </td>
 </tr>

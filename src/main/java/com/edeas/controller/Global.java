@@ -25,20 +25,10 @@ public class Global {
 		}
     };
     
-	public static final Map<String, Map<String, String>> goChildTemplates = new HashMap<String, Map<String, String>>() {		
+	public static final Map<String, String> goChildTemplates = new HashMap<String, String>() {		
 		{
-			put("TopSector", new HashMap<String, String>(){ 
-				{
-					put("column", "pageOrder");
-					put("order", "asc");
-				} 
-			});
-			put("Sector", new HashMap<String, String>(){ 
-				{
-					put("column", "pageOrder");
-					put("order", "asc");
-				} 
-			});
+			put("TopSector", "pageOrder asc");
+			put("Sector", "pageOrder asc");
 		}
     };
     
