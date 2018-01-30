@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Template id="FullWidthMasonryGallery" haspgtime="no">
+  <Properties excludestd="">
+    <Field name="HeadTitle" type="txtfield" label="Header title" />
+    <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
+    <Field name="SeoDesc" type="txtfield" label="SEO Description" />
+    <Field name="MenuName" type="txtfield" label="Menu name" />  
+  </Properties>
+  <WidgetBox />
+  <Widgets>
+  	<Widget ename="FullWidthMasonryGalleryContent" wid="FullWidthMasonryGalleryContent" label="Gallery Content" jsel="div.content_wrapper" />
+  
+	<Widget ename="FullWidthMasonryGallery" wid="WidgetListMgr" jsel="div.grid" mgrtype="gallery" mgrattr="FullWidthMasonryGalleryItem:Image" cols="Image">
+      <Widget ename="FullWidthMasonryGalleryItem" wid="FullWidthMasonryGalleryItem" ImageAttr="cmgrw:114" AddFront="yes" />
+    </Widget>
+  </Widgets>
+</Template>

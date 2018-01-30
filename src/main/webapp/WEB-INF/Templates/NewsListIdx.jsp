@@ -12,8 +12,6 @@
 <%@page import="org.dom4j.Document"%>
 <%@ include file="/WEB-INF/Shared/commons.jsp" %>
 
-<link href="${Content}/css/icons/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="${Content}/css/icons/glyphicons/style.min.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/news-list.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/pagination.css" rel="stylesheet" type="text/css" />
 

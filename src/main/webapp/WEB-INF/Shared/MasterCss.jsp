@@ -5,6 +5,8 @@
 
 <!-- FONTS -->
 <link href='https://fonts.googleapis.com/css?family=Raleway:200,400,300,500,600' rel='stylesheet' type='text/css'>
+<link href="${Content}/css/icons/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="${Content}/css/icons/glyphicons/style.min.css" rel="stylesheet" type="text/css" />
     
 <link href="${Content}/css/global.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/header.css" rel="stylesheet" type="text/css" />

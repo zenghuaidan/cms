@@ -65,7 +65,8 @@
     <!-- CSS -->
     <%@include file="/WEB-INF/Shared/MasterCss.jsp" %>
     
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script-->
 </head>
 <body id="body" class="<%=lang%> <%=Global.langClass(lang)%> sticky-header nice-scroll-on">    
 

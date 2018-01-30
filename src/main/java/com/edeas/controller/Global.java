@@ -55,7 +55,11 @@ public class Global {
 	}
 	
 	public static String getImagesUploadPath(String type, String val) {
-		return getImagesUploadPath() + "/" + type + "/" + val;
+		return getImagesUploadPath(type) + "/" + val;
+	}
+	
+	public static String getImagesUploadPath(String type) {
+		return getImagesUploadPath() + "/" + type;
 	}
 	
 	public static String getImagesUploadPath() {

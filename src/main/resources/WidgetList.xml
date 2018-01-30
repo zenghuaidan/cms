@@ -62,5 +62,21 @@
   	<Widget id="ColumnImages">
 		
   	</Widget>
+  	
+  	<!-- Gallery -->
+  	<Widget id="FullWidthMasonryGalleryContent">
+  	    <Field name="Image" type="imgfield" label="Image" /> 
+    	<Field name="Title" type="ttafield" label="Title" />
+    	<Field name="Content" type="ttafield" label="Content" />
+    </Widget>
+     
+  	<Widget id="FullWidthMasonryGalleryItem">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Name" type="txtfield" label="Name" />
+		<Field name="Title" type="ttafield" label="Title" />
+		<Field name="Content" type="ttafield" label="Content" />
+		<Field name="Image" type="imgfield" label="Image" />
+		<Field name="Detail" type="redfield" label="Detail" />
+  	</Widget>  	
 		
 </WidgetList>

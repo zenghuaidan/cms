@@ -356,7 +356,6 @@ public class PageContentAdminController extends CmsController {
 				Element parentNode = StringUtils.isBlank(parentxid) ? null : (Element)contentDocument.selectSingleNode("//Widget[@id='" + parentxid + "']");
 				if (parentNode == null) {
 					parentNode = (Element)contentDocument.selectSingleNode("/PageContent");
-					((Element)contentDocument.selectSingleNode("/PageContent")).add(parentNode);
 				}
 				widgetNode = new DOMElement("Widget");
 				wxid = createWidgetNode(contentDocument, parentNode, widgetNode, wid, wname, wxid, addToFront);

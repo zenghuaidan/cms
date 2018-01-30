@@ -5,6 +5,10 @@
   <Template id="General" name="General" />
   <Template id="Sector" name="Sector" top="yes"/>
   <Template id="Link" name="Link" top="yes"  />
+  <Template id="FixWidthMasonryGallery" name="Fix Width Masonry Gallery" />
+  <Template id="FullWidthMasonryGallery" name="Full Width Masonry Gallery" />
+  <Template id="FullWidthMasonryGalleryWithFiltering" name="Full Width Masonry Gallery With Filtering" />
+  <Template id="VideoGallery" name="Video Gallery" />
   <Template id="NewsListIdx" name="News List Index" isunique="yes">
     <AcceptChildList>
       <RefTemplate refid="NewsListInside" name="News" />
