@@ -5,8 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +31,8 @@ import com.edeas.dwr.SchemaInfo;
 import com.edeas.model.Content;
 import com.edeas.model.Page;
 import com.edeas.web.InitServlet;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class XmlUtils {
 	protected static final Logger logger = Logger.getLogger(CmsController.class);
@@ -280,5 +287,50 @@ public class XmlUtils {
          }
          return linkInfo;
      }
+
+	public static String[] parseOpts(HttpServletRequest request, String optStr) throws Exception {
+		//FromPropertyMtxtfield:Category:encryptValue=true,otherVlue=xxx
+		if (!StringUtils.isBlank(optStr) && optStr.contains("FromPropertyMtxtfield")) {
+			List<String> valueList = new ArrayList<String>();
+			String[] settings = optStr.split(":", 2);
+			if (settings.length == 2 && !StringUtils.isBlank(settings[1])) {
+				String[] filedNameAndItsSetting = settings[1].split(":", 2);
+				String fieldeName = filedNameAndItsSetting[0];
+				boolean encryptValue = false;
+				if (filedNameAndItsSetting.length == 2) {
+					String[] fieldSettings = filedNameAndItsSetting[1].split(",");
+					for(String filedSetting : fieldSettings) {
+						String settingName = filedSetting.split("=", 2)[0];
+						switch (settingName) {
+						case "encryptValue":
+							encryptValue = filedSetting.split("=", 2).length == 2 ? Boolean.parseBoolean(filedSetting.split("=", 2)[1]) : false;
+							break;
+						default:
+							break;
+						}
+					}
+				}				
+				Page currentPage = (Page) request.getAttribute("currentPage");
+				String lang = (String) request.getAttribute("lang");
+
+				Content content = currentPage.getContent(lang);
+				Document propertyDocument = content.getPropertyXmlDoc();
+				String values = XmlUtils.getPtyFieldVal(propertyDocument, fieldeName, false);
+				Type type = new TypeToken<String[]>(){}.getType();
+				String[] opts = new Gson().fromJson(values, type);
+				for(int i = 0; i < opts.length; i++) {
+					String value = encryptValue ? MessageDigestUtils.encryptBASE64(opts[i].getBytes()) : opts[i];
+					String displayValue = opts[i];
+					String result = value + "^" + displayValue;
+					if (!valueList.contains(result)) {
+						valueList.add(result);
+					}
+				}
+			}
+			return valueList.toArray(new String[]{});
+		} else {
+			return optStr.split(",");
+		}
+	}
 	 
 }

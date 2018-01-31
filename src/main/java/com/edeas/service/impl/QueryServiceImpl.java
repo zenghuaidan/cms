@@ -103,6 +103,10 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		return getChidrenWithOrder(parentId, iscms, checkActive, Arrays.asList("pageTimeFrom desc"));
 	}
 	
+	public List<Page> getChidrenByPageOrderAsc(long parentId, boolean iscms, boolean checkActive) {
+		return getChidrenWithOrder(parentId, iscms, checkActive, Arrays.asList("pageOrder asc"));
+	}
+	
 	public List<Page> getChidrenWithOrder(long parentId, boolean iscms, boolean checkActive, List<String> orders) {
 		return getPageDao(iscms).getChidrenWithOrder(parentId, checkActive, orders);
 	}

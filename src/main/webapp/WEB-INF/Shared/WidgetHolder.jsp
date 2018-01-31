@@ -166,7 +166,63 @@
 				<%
 			}
         %>        
-   	</x:if>   	
+   	</x:if>  
+   	<x:if select="$widgetName = 'PhotoAlbums'">
+       	<%
+            Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Link']");			
+			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);			
+			Element dateNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Date']");
+			String year = dateNode.getTextTrim().split("-")[0];
+			
+			List<Element> imageNodes = (List<Element>)contentDocument.selectNodes("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[@name='PhotoAlbum']");
+			boolean hasImage = imageNodes != null && imageNodes.size() > 0;
+			String noImageClass = hasImage ? "" : "no-img";
+			String noImageBackground = hasImage ? "" : "style='background-color:#17bbce;'";
+        %>     	
+        <c:set var="hasImage" value="<%=hasImage%>"></c:set>
+    	<div <%=noImageBackground%> class="photo-gallery post-item isotope-item clearfix <%=noImageClass%> <%=year%> cat-<x:out select="$widget/Field[@name='Category']" escapeXml="false"/>">
+   			<div class="widget">
+		        <div class="post-photo-wrapper">
+		        	<c:if test="${hasImage}">		        	
+		            	<img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Widget[@name='PhotoAlbum'][1]/Field[@name='Image']" escapeXml="false"/>"/>
+		            </c:if>		         
+		        </div>
+		        <div class="post-desc-wrapper">
+            		<c:if test="${hasImage}"> 
+			            <div class="post-desc dark">
+			                <div class="post-head">
+			                    <div class="post-meta clearfix">
+			                        <div class="author-date"><span><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></span></div>
+			                    </div>
+			                </div>
+			                <div class="post-title">
+			                    <h2 class="entry-title"><a <%=linkAttr%>><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></a></h2>
+			                </div>
+			                <div class="links-wrappper clearfix" >
+			                	<c:set var="first" value="true"></c:set>
+						   		<x:forEach select="$widget/Widget[@name='PhotoAlbum']" var="album" varStatus="status">
+				                    <c:if test="${not first}">
+				                    	<a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$album/Field[@name='Image']" escapeXml="false"/>" rel="prettyPhoto[gallery2]"  style="display:none;"></a>
+				                    </c:if>						   			
+						   			<c:if test="${first}">
+				                    	<a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$album/Field[@name='Image']" escapeXml="false"/>" rel="prettyPhoto[gallery2]"><i class="fa fa-expand"></i></a>
+				                    	<c:set var="first" value="first"></c:set>
+				                    </c:if>				                   
+								</x:forEach> 		      
+			                </div>
+			            </div>
+	            	</c:if>
+		            <c:if test="${not hasImage}">                    
+	                    <div class="post-desc">
+	                        <div class="post-title">
+	                            <h2 class="entry-title"><a <%=linkAttr%>><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></a></h2>
+	                        </div>
+	                    </div>
+		            </c:if>
+		        </div>
+   			</div>
+       	</div>	   
+   	</x:if>    	
    
 	<% i++; %>   
 </x:forEach>

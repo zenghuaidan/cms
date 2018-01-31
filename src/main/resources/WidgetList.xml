@@ -77,6 +77,13 @@
 		<Field name="Content" type="ttafield" label="Content" />
 		<Field name="Image" type="imgfield" label="Image" />
 		<Field name="Detail" type="redfield" label="Detail" />
-  	</Widget>  	
+  	</Widget>
+  	
+  	<Widget id="PhotoAlbums">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Category" type="drpfield" label="Category" />
+		<Field name="Title" type="ttafield" label="Title" />
+		<Field name="Link" type="lnkfield" label="Link" />		
+  	</Widget>
 		
 </WidgetList>

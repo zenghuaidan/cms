@@ -146,7 +146,7 @@
 	    	for(Page topPage : topPages){
 	        	String ico = topPage.isActive() ? "active" : "inactive";
 	        	String icolb = topPage.isActive() ? "Active" : "Inactive";        	
-	        	Set<Page> subPages = topPage.getChildren(false);
+	        	List<Page> subPages = queryService.getChidrenByPageOrderAsc(topPage.getId(), true, true);
 	        	i++;        	
 	   	%>    
          <c:set var="i" value="<%=i %>"/>

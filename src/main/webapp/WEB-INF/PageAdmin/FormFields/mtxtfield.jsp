@@ -5,7 +5,7 @@
 <%@page import="org.dom4j.Element"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.*"%>
-
+<%@ include file="/WEB-INF/Shared/commons.jsp" %>
 <%
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
@@ -57,12 +57,12 @@
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
-        <input type='hidden' id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" value="@Html.Raw(txtval)"  />
+        <input type='hidden' id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" value='<%=txtval%>'  />
         <table>
             <tr>
                 <td><input onblur="adjustVaule('<%=fpm.getName() %>');" class="multi-values" type='text' style="<%=fpm.getStyle() %>" /></td>
-                <td><img onclick="add(this, '<%=fpm.getName() %>');" src="${Content}/cms/core/images/eplus.png" class="img-scale" /></td>
-                <td><img onclick="del(this, '<%=fpm.getName() %>');" src="${Content}/cms/core/images/cminus.png" class="img-scale" /></td>
+                <td style="vertical-align:middle; cursor:pointer;"><img onclick="add(this, '<%=fpm.getName() %>');" src="${Content}/cms/core/images/eplus.png" class="img-scale" /></td>
+                <td style="vertical-align:middle; cursor:pointer;"><img onclick="del(this, '<%=fpm.getName() %>');" src="${Content}/cms/core/images/cminus.png" class="img-scale" /></td>
             </tr>
         </table>        
         <%=fpm.getRemark() %>

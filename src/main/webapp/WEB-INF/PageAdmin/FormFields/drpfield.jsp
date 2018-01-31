@@ -10,13 +10,12 @@
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define
 	Element fieldSchema = (Element)request.getAttribute("fieldSchema");//file schema
+	String formType = (String)request.getAttribute("formType");//form type
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
-	String val = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();
-	
-    String fopts = XmlUtils.getFieldAttr(fieldSchema, "opts");
-    String wopts = XmlUtils.getFieldAttr(widgetSchema, fpm.getName() + "Opts");
-    if (!StringUtils.isBlank(wopts)) { fopts = wopts; }
-    String[] opts = StringUtils.isBlank(fopts) ? new String[]{} :  fopts.split(",");
+	String val = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();	    
+    
+    String optStr = "property".equals(formType) ? XmlUtils.getFieldAttr(fieldSchema, "opts") : XmlUtils.getFieldAttr(widgetSchema, fpm.getName() + "Opts");    
+    String[] opts = XmlUtils.parseOpts(request, optStr);
 %>
 <c:set var="opts" value="<%=opts %>"></c:set>
 <c:set var="val" value="<%=val %>"></c:set>
