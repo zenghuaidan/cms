@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.AuthController;
+import com.edeas.controller.cmsadmin.CmsProperties;
 import com.edeas.model.User;
+import com.edeas.service.impl.UserServiceImpl;
 
 public class LoginFilter implements Filter {
 	
@@ -30,7 +33,18 @@ public class LoginFilter implements Filter {
 		HttpSession session = getSession(_request);
 		User user = (User)session.getAttribute(AuthController.LOGIN_USER);
 		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
-			_response.sendRedirect(_request.getContextPath() + cmsurl);
+			if (CmsProperties.isDevMode()) {
+				UserServiceImpl userService = (UserServiceImpl)WebApplicationContextUtils.getWebApplicationContext(_request.getSession().getServletContext()).getBean("userService");
+				user = userService.tryLogin(CmsProperties.getDevLoginUser());
+			}
+			
+			//if still could not find the user, then to login url
+			if (user != null) {
+				session.setAttribute(AuthController.LOGIN_USER, user);
+				SystemSessionContext.addSession(session);				
+			} else {
+				_response.sendRedirect(_request.getContextPath() + cmsurl);
+			}
 		} else {
 			chain.doFilter(request, response);
 		}

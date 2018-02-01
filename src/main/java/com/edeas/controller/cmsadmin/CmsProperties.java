@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+
 @SuppressWarnings("serial")
 public class CmsProperties {
 
@@ -146,6 +148,15 @@ public class CmsProperties {
 	
 	public static boolean isNoContentTpl(String template) {		
 		return getNoContentTpls().contains(template);
+	}
+	
+	public static boolean isDevMode() {
+		String devMode = getValue("devMode");
+		return !StringUtils.isBlank(devMode) && (devMode.toLowerCase().equals("on") || devMode.toLowerCase().equals("yes"));
+	}
+	
+	public static String getDevLoginUser() {
+		return getValue("devLoginUser");
 	}
 	
 	// default level is -1, if incorrect level no is set, -1 will be set, if same template occur, the first will be used
