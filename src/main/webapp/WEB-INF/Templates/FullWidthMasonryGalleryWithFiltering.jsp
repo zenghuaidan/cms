@@ -46,6 +46,16 @@
 	Content content = currentPage.getContent(lang);	
 	Document contentDocument = content.getContentXmlDoc();
 	List<Element> elements = (List<Element>)contentDocument.selectNodes("/PageContent/Widget[@name='WidgetHolder']/Widget[@name='PhotoAlbums']");
+	for(Element element : elements) {
+		List<Element> imageNodes = (List<Element>)element.selectNodes("Widget[@name='PhotoAlbum']");
+		%>
+			<style> 
+		        .<%=XmlUtils.getFieldAttr(element, "id") %>:hover:after {
+				    content: '<%=imageNodes.size()%> Photo(s)';
+				}
+			</style>
+		<%
+	}
 %>
 <div class="clearfix"> 
     <div class="full-wrapper clearfix bg-darkGrey">
@@ -112,8 +122,7 @@
 
             <div class="isotope_wrapper clearfix">
                 <div class="posts_group lm_wrapper col-4 masonry tiles isotope">
-					<jsp:include page="/WEB-INF/Shared/WidgetHolder.jsp" />
-					<div class="clear"></div>    
+					<jsp:include page="/WEB-INF/Shared/WidgetHolder.jsp" />					
                 </div>
             </div>
         </div>

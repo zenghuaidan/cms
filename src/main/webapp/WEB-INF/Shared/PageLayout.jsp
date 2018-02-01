@@ -19,9 +19,10 @@
 <script type="text/javascript" src="${Script}/mfn.menu.js"></script>
 <script type="text/javascript" src="${Script}/jquery.plugins.js"></script>
 <script type="text/javascript" src="${Script}/animations/animations.js"></script>
-<script type="text/javascript" src="${Script}/scripts.js"></script>
 <script type="text/javascript" src="${Script}/back-to-top.js"></script>
-    
+<script type="text/javascript" src="${Script}/scripts.js"></script>
+<script type="text/javascript" src="${context}/dwr/engine.js"></script>
+<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>    
 <div>
     <!-- Header Wrapper -->
     <div id="Header_wrapper">

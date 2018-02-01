@@ -62,6 +62,8 @@
     <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="${Script}/cms/common.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="${context}/dwr/engine.js"></script>
+	<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>
     <script type="text/javascript">
         function neww() { openWidgetFormWin(<%=pageId%>,'<%=lang%>','new','<%=childWidgetId%>','<%=childWidgetName%>','<%=mgrxid%>','openerrefresh'); }
         function editw(xid) { openWidgetFormWin(<%=pageId%>,'<%=lang%>',xid,'<%=childWidgetId%>','<%=childWidgetName%>','<%=mgrxid%>','openerrefresh'); }

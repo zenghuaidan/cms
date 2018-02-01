@@ -169,16 +169,17 @@
    	</x:if>  
    	<x:if select="$widgetName = 'PhotoAlbums'">
        	<%
-            Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Link']");			
+       		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
+            Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
 			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);			
-			Element dateNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Date']");
+			Element dateNode = (Element)widget.selectSingleNode("Field[@name='Date']");
 			String year = dateNode.getTextTrim().split("-")[0];
 			
-			List<Element> imageNodes = (List<Element>)contentDocument.selectNodes("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[@name='PhotoAlbum']");
+			List<Element> imageNodes = (List<Element>)widget.selectNodes("Widget[@name='PhotoAlbum']");
 			boolean hasImage = imageNodes != null && imageNodes.size() > 0;
 			String noImageClass = hasImage ? "" : "no-img";
 			String noImageBackground = hasImage ? "" : "style='background-color:#17bbce;'";
-        %>     	
+        %>           	
         <c:set var="hasImage" value="<%=hasImage%>"></c:set>
     	<div <%=noImageBackground%> class="photo-gallery post-item isotope-item clearfix <%=noImageClass%> <%=year%> cat-<x:out select="$widget/Field[@name='Category']" escapeXml="false"/>">
    			<div class="widget">
@@ -205,7 +206,7 @@
 				                    	<a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$album/Field[@name='Image']" escapeXml="false"/>" rel="prettyPhoto[gallery2]"  style="display:none;"></a>
 				                    </c:if>						   			
 						   			<c:if test="${first}">
-				                    	<a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$album/Field[@name='Image']" escapeXml="false"/>" rel="prettyPhoto[gallery2]"><i class="fa fa-expand"></i></a>
+				                    	<a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$album/Field[@name='Image']" escapeXml="false"/>" rel="prettyPhoto[gallery2]"><i class="fa fa-expand <%=XmlUtils.getFieldAttr(widget, "id") %>"></i></a>
 				                    	<c:set var="first" value="first"></c:set>
 				                    </c:if>				                   
 								</x:forEach> 		      

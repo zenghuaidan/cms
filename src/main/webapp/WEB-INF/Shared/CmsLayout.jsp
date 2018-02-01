@@ -18,7 +18,10 @@
     	<script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
     	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-    	<script src="${Script}/cms/common.js")" type="text/javascript"></script>  
+    	<script src="${Script}/cms/common.js")" type="text/javascript"></script> 
+	    	
+		<script type="text/javascript" src="${context}/dwr/engine.js"></script>
+		<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script> 
 	</head>
 	<body id="cmsbody" class="">		
 	    <div id="cmsheader" class="cmspgw cmstyle">
@@ -31,7 +34,7 @@
 	                <span class="txtlnk" onclick="goUrl('<%=Global.getCMSUrl() %>/Logout');">Logout</span>
 	            </div>
 	            <div class='bottom hlcolor'>
-	                ${user.name}
+	                ${sessionScope.LOGIN_USER.name}
 	            </div>
 	        </div>
 	    </div>

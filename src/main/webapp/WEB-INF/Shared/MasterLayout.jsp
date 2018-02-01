@@ -35,7 +35,7 @@
 	String seoKeys = XmlUtils.getPtyFieldVal(contentDocument, "SeoKeys", false);
 %>
 <head>
-    <title><%=imageUrl%></title>    
+    <title><%=headTitle%></title>    
 	<%@include file="/WEB-INF/Shared/commons.jsp" %>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />
     <meta name="description" content="<%=seoDesc%>" />

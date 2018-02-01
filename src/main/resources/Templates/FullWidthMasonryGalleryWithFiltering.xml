@@ -10,7 +10,7 @@
   <WidgetBox />
   <Widgets>
 
-    <Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.posts_group" htagid="wholder">           
+    <Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.isotope_wrapper" htagid="wholder">           
       <AcceptWidget ename="PhotoAlbums" wid="PhotoAlbums" label="Photo Albums" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoAlbum:Image" cols="Image" AddFront="yes" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true">
         <Widget ename="PhotoAlbum" wid="ImgBlock" label="Album Item" ImageAttr="cmgrw:114" AddFront="no" />
       </AcceptWidget>      

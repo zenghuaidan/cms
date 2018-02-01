@@ -17,14 +17,19 @@
     String lnktarget = XmlUtils.getFieldAttr(fieldData, "target");
     String lnkanchor = XmlUtils.getFieldAttr(fieldData, "anchor");
     String nwsel = lnktarget.equals("_blank") ? " SELECTED" : "";
+    String nonchk = "";
     String extchk = ""; 
     String intchk = ""; 
     String dochk = "";
-    switch (lnktype)
-    {
-        case "external": extchk = " CHECKED"; break;
-        case "internal": intchk = " CHECKED"; break;
-        case "document": dochk = " CHECKED"; break;
+    if (StringUtils.isBlank(lnktype) || lnktype.equals("none")) {
+    	nonchk = " CHECKED";
+    } else {
+	    switch (lnktype)
+	    {
+	        case "external": extchk = " CHECKED"; break;
+	        case "internal": intchk = " CHECKED"; break;
+	        case "document": dochk = " CHECKED"; break;
+	    }    	
     }
     String intval = lnktype.equals("internal") ? val : "";
     String extval = lnktype.equals("external") ? val : "";
@@ -47,7 +52,7 @@
     </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
         <input type='hidden' id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" class="lnkvalfield" value="<%=val %>" />
-        <input type="radio" id="<%=fpm.getName() %>_type_document" name="<%=fpm.getName() %>_type" value="nolink" />
+        <input type="radio" id="<%=fpm.getName() %>_type_document" name="<%=fpm.getName() %>_type" value="nolink" <%=nonchk %> />
         <span>None</span>
         <br /><input type="radio" id="<%=fpm.getName() %>_type_internal" name="<%=fpm.getName() %>_type" value="internal" <%=intchk %> />
         <span>Internal:
@@ -68,7 +73,7 @@
         </span>
         <c:set var="docval" value="<%=docval %>"></c:set>
         <c:if test="${not empty docval}">
-        	<input type='button' value='View' onclick='window.open('<%=Global.getDocUploadPath(docval)%>');' />
+        	<input type='button' value='View' onclick='window.open("<%=Global.getDocUploadPath(docval)%>");' />
         </c:if>
         <%=fpm.getRemark() %>
     </td>

@@ -56,7 +56,8 @@
     <script src="${Script}/cms/tinymce/tinymce.min.js" type="text/javascript"></script>
     <script src="${Script}/cms/define-tme.js" type="text/javascript"></script>    
     <script src="${Script}/cms/ajaxform.js" type="text/javascript"></script>    
-    
+	<script type="text/javascript" src="${context}/dwr/engine.js"></script>
+	<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>    
     <script>
         jQuery.browser={};(function(){jQuery.browser.msie=false; jQuery.browser.version=0;if(navigator.userAgent.match(/MSIE ([0-9]+)./)){ jQuery.browser.msie=true;jQuery.browser.version=RegExp.$1;}})();
     </script>

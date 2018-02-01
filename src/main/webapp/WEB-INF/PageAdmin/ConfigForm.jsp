@@ -36,6 +36,8 @@
     <script src="${Script}/cms/fieldslib.js" type="text/javascript"></script>    
     <script src="${Script}/cms/ajaxform.js" type="text/javascript"></script>
     <script src="${Script}/cms/configform.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${context}/dwr/engine.js"></script>
+	<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>
     <script type="text/javascript">
         function submitPgConfigForm() {
             var u = cmsroot + "PageAdmin/Save";

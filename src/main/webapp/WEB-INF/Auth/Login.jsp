@@ -94,13 +94,15 @@
                 </div>
             </div>
 
-            <footer>Developed by © edeas Limited</footer>
+            <footer>Developed by ï¿½ edeas Limited</footer>
         </div>
     </form>
     <script type="text/javascript" src="${Script}/classie.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="${Script}/cms/jquery.validate.min.js" type="text/javascript"></script>
     <script src="${Script}/cms/common.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${context}/dwr/engine.js"></script>
+	<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#userName, #password').bind('keypress', function (event) {
