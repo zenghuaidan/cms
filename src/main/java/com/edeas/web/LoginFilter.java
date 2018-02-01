@@ -41,7 +41,8 @@ public class LoginFilter implements Filter {
 			//if still could not find the user, then to login url
 			if (user != null) {
 				session.setAttribute(AuthController.LOGIN_USER, user);
-				SystemSessionContext.addSession(session);				
+				SystemSessionContext.addSession(session);
+				chain.doFilter(request, response);
 			} else {
 				_response.sendRedirect(_request.getContextPath() + cmsurl);
 			}
