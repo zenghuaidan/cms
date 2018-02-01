@@ -28,7 +28,7 @@
 
 	Content content = currentPage.getContent(lang);
     Element mgrnode = null;
-    if (content != null)
+    if (content != null && !content.isNew())
     	mgrnode = (Element)content.getContentXmlDoc().selectSingleNode("//Widget[@id='"+mgrxid+"']");
 %>
 <html>
@@ -104,7 +104,8 @@
         <%
         	if("gallery".equals(mgrtype)) {
         		String[] a = mgrattr.split(":");
-        		List<Element> wlist = (List<Element>)mgrnode.selectNodes("Widget[@name='" + a[0] + "']");
+        		
+        		List<Element> wlist = mgrnode == null ? new ArrayList<Element>() : (List<Element>)mgrnode.selectNodes("Widget[@name='" + a[0] + "']");
         		out.print("<div id='gallery'>");
         		int i = 0;
         		for(Element w : wlist) {
@@ -129,7 +130,7 @@
         		out.print("</div>");
         	} else if("txtlist".equals(mgrtype)) {
         		String[] a = mgrattr.split(":");
-        		List<Element> wlist = (List<Element>)mgrnode.selectNodes("Widget[@name='" + a[0] + "']");
+        		List<Element> wlist = mgrnode == null ? new ArrayList<Element>() : (List<Element>)mgrnode.selectNodes("Widget[@name='" + a[0] + "']");
         		out.print("<div id='wlisting'>");
         		for(Element w : wlist) {
         			String[] b = a[1].split(",");

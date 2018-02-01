@@ -79,6 +79,13 @@
 		<Field name="Detail" type="redfield" label="Detail" />
   	</Widget>
   	
+  	<Widget id="FixWidthMasonryGalleryItem">  		
+		<Field name="Title" type="ttafield" label="Title" />
+		<Field name="Content" type="ttafield" label="Content" />
+		<Field name="SmallImage" type="imgfield" label="Small Image" />
+		<Field name="LargeImage" type="imgfield" label="Large Image" />
+  	</Widget>
+  	
   	<Widget id="PhotoAlbums">
   		<Field name="Date" type="datfield" label="Date" />
   		<Field name="Category" type="drpfield" label="Category" />
