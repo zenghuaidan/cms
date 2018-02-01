@@ -8,7 +8,7 @@
   </Properties>
   <WidgetBox />
   <Widgets>
-	<Widget ename="FixWidthMasonryGallery" wid="WidgetListMgr" jsel="#grid-gallery" mgrtype="gallery" mgrattr="FixWidthMasonryGalleryItem:SmallImage" cols="Image">
+	<Widget ename="FixWidthMasonryGallery" wid="WidgetListMgr" jsel=".inner-wrapper" mgrtype="gallery" mgrattr="FixWidthMasonryGalleryItem:SmallImage" cols="Image">
       <Widget ename="FixWidthMasonryGalleryItem" wid="FixWidthMasonryGalleryItem" SmallImageAttr="cmgrw:114" AddFront="yes" />
     </Widget>
   </Widgets>
