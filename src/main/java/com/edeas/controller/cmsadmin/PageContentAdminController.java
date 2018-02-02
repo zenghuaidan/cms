@@ -274,6 +274,7 @@ public class PageContentAdminController extends CmsController {
 		if (content == null || content.isNew()) {
 			content = new CmsContent();
 			content.init(page, Lang.getByName(lang));
+			page.getContents().add(content);
 		}
 		Document contentDocument = content.getContentXmlDoc();
 		Element parentNode = (StringUtils.isBlank(pwxid)) ? (Element)contentDocument.selectSingleNode("/PageContent") : (Element)contentDocument.selectSingleNode("//Widget[@id='" + pwxid + "']");
