@@ -80,8 +80,10 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	public void delete(long pageId) {
 		Page cmsPage = findPageById(pageId, true);
 		Page livePage = findPageById(pageId, false);
-		delete(cmsPage, true);
-		delete(livePage, false);
+		if(!cmsPage.isNew())
+			delete(cmsPage, true);
+		if(!livePage.isNew())
+			delete(livePage, false);
 	}
 	
 	private void delete(Page page, boolean iscms) {
