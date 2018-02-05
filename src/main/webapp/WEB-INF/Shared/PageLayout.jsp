@@ -15,6 +15,8 @@
 	Content masterContent = masterPage.getContent(lang);
 		
 	List<? extends Page> topPages = InitServlet.getQueryService().getAllTopPage(iscms, true);
+	
+	Page homePage = InitServlet.getQueryService().getHomePage(iscms);
 %>
 
 <!-- JS -->
@@ -43,7 +45,7 @@
                             <div class="menu_wrapper">
                                 <nav id="menu">
                                     <ul id="menu-main-menu" class="menu">
-                                        <li><a href="index.html"><span>Home</span></a></li>
+                                        <li><a href="index.html"><span><%=XmlUtils.getPtyFieldVal(homePage.getContent(lang).getPropertyXmlDoc(), "MenuName", false) %></span></a></li>
                        		         	<%
 							         		for(Page topPage : topPages) {
 							         			String menuName = XmlUtils.getPtyFieldVal(topPage.getContent(lang).getPropertyXmlDoc(), "MenuName", false);
