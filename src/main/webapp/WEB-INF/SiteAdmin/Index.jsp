@@ -163,10 +163,8 @@
 	         <c:if test="${!topPage.hideSubTpl}">
 		         <div class='sectionpglist newpgdrop lv2drop' lv='2'>
 		         	<%
-		         		for(Page subPage : subPages) {
-		         			if(!subPage.isHideSubTpl()) {
-		         				out.print(pgdiv(2, subPage.getId(), subPage.getStatus().getName(), subPage.isActive(), subPage.getName()));
-		         			}
+		         		for(Page subPage : subPages) {		         			
+		         			out.print(pgdiv(2, subPage.getId(), subPage.getStatus().getName(), subPage.isActive(), subPage.getName()));		         			
 	         			} 
 	         		%>	             
 		         </div>
