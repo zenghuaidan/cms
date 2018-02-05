@@ -6,6 +6,7 @@
 <%@page import="com.edeas.service.impl.QueryServiceImpl"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
+<%@page import="java.util.*"%>
 <% 
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");		
@@ -13,6 +14,7 @@
 	Page masterPage = (Page)request.getAttribute("masterPage");
 	Content masterContent = masterPage.getContent(lang);
 		
+	List<? extends Page> topPages = InitServlet.getQueryService().getAllTopPage(iscms, true);
 %>
 
 <!-- JS -->
@@ -42,47 +44,27 @@
                                 <nav id="menu">
                                     <ul id="menu-main-menu" class="menu">
                                         <li><a href="index.html"><span>Home</span></a></li>
-                                        <li>
-                                            <a href="general.html"><span>General Template</span></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="general.html"><span>General Widget</span></a></li>
-                                                <li><a href="general-special.html"><span>Special Widget</span></a></li>
-                                                <li><a href="#"><span>Demo 1</span></a></li>
-                                                <li><a href="#"><span>Demo 2</span></a></li>
-                                                <li><a href="#"><span>Demo 3</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="current-menu-item"><a href="news.html"><span>News</span></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="news.html"><span>List</span></a></li>
-                                                <li><a href="news-masonry.html">Masonry<span></span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="photo-gallery.html"><span>Gallery</span></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="photo-gallery.html"><span>Full width Masonry Gallery (Enlarge photo include caption detail)</span></a></li>
-                                                <li><a href="photo-gallery-full-masonry.html"><span>Full width Masonry Gallery (jQuery Filtering)</span></a></li>
-                                                <li><a href="photo-gallery-guide.html"><span>Fix width Masonry Gallery (Carousel popup effect)</span></a></li>
-                                                <li><a href="video-gallery.html"><span>Video Gallery</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="form-general.html"><span>Form</span></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="form-general.html"><span>General Form</span></a></li>
-                                                <li><a href="form-special.html"><span>Special Form Style</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="event-calendar.html"><span>Special Template</span></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="event-calendar.html"><span>Event Calendar</span></a></li>
-                                                <li><a href="timeline.html"><span>Timeline (Vertical)</span></a></li>
-                                                <li><a href="timeline-vertical.html"><span>Timeline (Vertical animation timeline)</span></a></li>
-                                                <li><a href="timeline-horizontal.html"><span>Timeline (Horizontal)</span></a></li>
-                                                <li><a href="google-map.html"><span>Contact Page with Google map</span></a></li>
-                                           </ul>
-                                        </li>
+                       		         	<%
+							         		for(Page topPage : topPages) {
+							         			String menuName = XmlUtils.getPtyFieldVal(topPage.getContent(lang).getPropertyXmlDoc(), "MenuName", false);
+							         			List<Page> subPages = InitServlet.getQueryService().getChidrenByPageOrderAsc(topPage.getId(), iscms, true);
+							         			%>
+		                                        <li>
+		                                            <a href="<%=topPage.getPageUrlForRouteMap() %>"><span><%=menuName%></span></a>
+		                                            <ul class="sub-menu">
+		                                            	<% 
+			                                            	for(Page subPage : subPages) {
+			                                            		menuName = XmlUtils.getPtyFieldVal(subPage.getContent(lang).getPropertyXmlDoc(), "MenuName", false);
+		                                            			%>
+		                                                			<li><a href="general.html"><span><%=menuName%></span></a></li>
+		                                            			<%
+			                                            	}
+		                                            	%>		                                                
+		                                            </ul>
+		                                        </li>                                        
+							         			<%		         			
+						         			} 
+						         		%>	  
                                     </ul>
                                 </nav><a class="responsive-menu-toggle " href="#"></a>
                             </div>

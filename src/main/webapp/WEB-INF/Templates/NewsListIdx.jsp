@@ -102,7 +102,7 @@
 <script>
 function goToPage(page) {
 	var year = $("select.news").val();
-	var pageSize = 2;
+	var pageSize = 15;
 	if (year != null) {
 		var total = $("div[year='" + year + "']").length;
 		var pageCount = Math.floor((total + pageSize - 1) / pageSize);
