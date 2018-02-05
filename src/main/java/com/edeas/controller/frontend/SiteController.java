@@ -1,5 +1,6 @@
 package com.edeas.controller.frontend;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,11 @@ public class SiteController extends FrontController {
 					model.addAttribute("lang", lang);
 					model.addAttribute("currentPage", page);
 					model.addAttribute("masterPage", masterPage);
+					Enumeration parameterNames = request.getParameterNames();
+					while(parameterNames.hasMoreElements()) {
+						String parameterName = (String)parameterNames.nextElement();
+						model.addAttribute(parameterName, request.getParameter(parameterName));
+					}
 					return "Templates/" + page.getTemplate();
 				}
 			}

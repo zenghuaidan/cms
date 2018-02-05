@@ -92,5 +92,35 @@
 		<Field name="Title" type="ttafield" label="Title" />
 		<Field name="Link" type="lnkfield" label="Link" />		
   	</Widget>
+  	
+  	<Widget id="Html5VideoStyleGallery">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Image" type="imgfield" label="Image" />
+  		<Field name="Video" type="docfield" label="Video" />
+  		<Field name="Title" type="ttafield" label="Title" />
+  		<Field name="Content" type="ttafield" label="Content" />		
+  	</Widget>
+  	<Widget id="YoutubeStyleGallery">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Image" type="imgfield" label="Image" />
+  		<Field name="Link" type="lnkfield" label="Link" />
+  		<Field name="Title" type="ttafield" label="Title" />
+  		<Field name="Content" type="ttafield" label="Content" />		
+  	</Widget>
+  	<Widget id="ImageStyleGallery">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Image" type="imgfield" label="Image" />
+  		<Field name="Link" type="lnkfield" label="Link" />
+  		<Field name="Title" type="ttafield" label="Title" />
+  		<Field name="Content" type="ttafield" label="Content" />		
+  	</Widget>
+  	<Widget id="ImageDetailStyleGallery">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Image" type="imgfield" label="Image" />
+  		<Field name="Video" type="docfield" label="Video" />
+  		<Field name="Title" type="ttafield" label="Title" />
+  		<Field name="Content" type="ttafield" label="Content" />
+  		<Field name="Detail" type="redfield" label="Detail" />		
+  	</Widget>  	
 		
 </WidgetList>

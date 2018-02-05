@@ -9,6 +9,7 @@
   <Template id="FullWidthMasonryGallery" name="Full Width Masonry Gallery" />
   <Template id="FullWidthMasonryGalleryWithFiltering" name="Full Width Masonry Gallery With Filtering" />
   <Template id="VideoGallery" name="Video Gallery" />
+  <Template id="VideoDetail" name="Video Detail" isunique="yes" />
   <Template id="NewsListIdx" name="News List Index" isunique="yes">
     <AcceptChildList>
       <RefTemplate refid="NewsListInside" name="News" />

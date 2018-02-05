@@ -47,7 +47,7 @@
         case "sc": applybtn1 = "btnapplyen"; applylbl1 = apply + " English"; applybtn2 = "btnapplytc"; applylbl2 = apply + " 繁體"; break;
     }
 	Page currentPage = (Page)request.getAttribute("currentPage");
-	String templatePath = request.getRequestURL().toString().replaceAll(request.getRequestURI(), "") + Global.getCMSUrl() + "/" + lang + "/viewPage/" + currentPage.getId();	
+	String templatePath = request.getRequestURL().toString().replaceAll(request.getRequestURI(), "") + Global.getCMSUrl() + "/" + lang + "/viewPage/" + currentPage.getId() + "?" + request.getQueryString();	
 	Content currentContent = (Content)currentPage.getContent(lang);
 %>
 <%!

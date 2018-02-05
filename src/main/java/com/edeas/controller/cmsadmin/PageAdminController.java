@@ -3,6 +3,7 @@ package com.edeas.controller.cmsadmin;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
@@ -120,7 +121,12 @@ public class PageAdminController extends CmsController {
 				model.addAttribute("isPageAdmin", true);
 				model.addAttribute("lang", lang);
 				model.addAttribute("masterPage", masterPage);
-				model.addAttribute("currentPage", page);				
+				model.addAttribute("currentPage", page);	
+				Enumeration parameterNames = request.getParameterNames();
+				while(parameterNames.hasMoreElements()) {
+					String parameterName = (String)parameterNames.nextElement();
+					model.addAttribute(parameterName, request.getParameter(parameterName));
+				}
 				return "Templates/" + page.getTemplate();
 			}
 		}
@@ -138,6 +144,11 @@ public class PageAdminController extends CmsController {
 				model.addAttribute("lang", lang);
 				model.addAttribute("masterPage", masterPage);
 				model.addAttribute("currentPage", page);
+				Enumeration parameterNames = request.getParameterNames();
+				while(parameterNames.hasMoreElements()) {
+					String parameterName = (String)parameterNames.nextElement();
+					model.addAttribute(parameterName, request.getParameter(parameterName));
+				}
 				return "Templates/" + page.getTemplate();
 			}
 		}
@@ -280,6 +291,8 @@ public class PageAdminController extends CmsController {
 		lang = StringUtils.isBlank(lang) ? CmsProperties.getDefaultLanguage() : lang;
 		Page page;
 		if(id == Page.HOME_PAGE_PARENT_ID || id == Page.MASTER_PAGE_PARENT_ID) {
+//			http://localhost:8081/cms/cmsadmin/PageAdmin/Index?id=-1
+//			http://localhost:8081/cms/cmsadmin/PageAdmin/Index?id=-2
 			page = id == Page.HOME_PAGE_PARENT_ID ? queryService.getHomePage(true) : queryService.getMasterPage(true);
 			if(page.isNew()) {
 				CmsPage parent = new CmsPage();
@@ -303,6 +316,11 @@ public class PageAdminController extends CmsController {
 		model.addAttribute("masterPage", masterPage);
 		model.addAttribute("referAction", "PageAdmin");
 		model.addAttribute("newatfront", false);
+		Enumeration parameterNames = request.getParameterNames();
+		while(parameterNames.hasMoreElements()) {
+			String parameterName = (String)parameterNames.nextElement();
+			model.addAttribute(parameterName, request.getParameter(parameterName));
+		} 		
 		return "PageAdmin/Index";
 	}
 	

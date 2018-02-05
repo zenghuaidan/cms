@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -251,7 +252,7 @@ public class Page<T extends Page, E extends Content> {
 	}
 
 	public String getUrl() {
-		return url;
+		return StringUtils.isBlank(url) ? "" : url;
 	}
 
 	public void setUrl(String url) {
@@ -406,7 +407,7 @@ public class Page<T extends Page, E extends Content> {
             
             if (Global.fixUrlPrefix.containsKey(this.parentId))
             {
-                sb.insert(0, Global.fixUrlPrefix.get(this.parentId));
+                sb.insert(0, Global.fixUrlPrefix.get(this.parentId) + "/");
                 return sb.toString();
             }
             else
@@ -434,18 +435,17 @@ public class Page<T extends Page, E extends Content> {
 		this.initNewPage(parent, false);
 	}
 	public void initNewPage(CmsPage parent, boolean newAtFront) {		
-		Long parentId = parent.getId();		
+		Long parentId = parent.getId();	// the id for the parent have already been set before calling this method	
+		this.parentId = parentId;
         if (parentId == HOME_PAGE_PARENT_ID) {
             this.rootId = HOME_PAGE_PARENT_ID;            
             this.template = HOME_PAGE_TEMPLATE;
             this.name = HOME_PAGE_TEMPLATE;
             this.url = "index";
-            this.parentId = HOME_PAGE_PARENT_ID;
         } else if (parentId == MASTER_PAGE_PARENT_ID) {
             this.rootId = MASTER_PAGE_PARENT_ID;
             this.template = MASTER_PAGE_TEMPLATE;
             this.name = MASTER_PAGE_TEMPLATE;
-            this.parentId = MASTER_PAGE_PARENT_ID;
         } else if (parentId < 0) {
             this.rootId = parentId;
         } else if (!parent.isNew()) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Template id="FullWidthMasonryGalleryWithFiltering" haspgtime="no">
+<Template id="VideoGallery" haspgtime="no">
   <Properties excludestd="">
     <Field name="HeadTitle" type="txtfield" label="Header title" />
     <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
@@ -8,6 +8,11 @@
   </Properties>
   <WidgetBox />
   <Widgets>
-
+	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.widgetHolder" htagid="wholder">           
+      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" />
+      <AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" ImageAttr="fix:576x450" />
+      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" ImageAttr="fix:576x450" />
+      <AcceptWidget wid="ImageDetailStyleGallery" ename="ImageDetailStyleGallery" label="Post with Cover Image, external link and detail" ImageAttr="fix:576x450" />
+    </Widget>
   </Widgets>
 </Template>

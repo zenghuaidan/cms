@@ -18,6 +18,14 @@
 	
 	Content content = currentPage.getContent(lang);	
 	Document contentDocument = content.getContentXmlDoc();
+	String videoDetailPageUrl = "";
+	if ("VideoGallery".equals(currentPage.getTemplate())) {
+		List<Page> videoDetailPages = (List<Page>)InitServlet.getQueryService().findPageByTemplate("VideoDetail", iscms, true);
+		if (videoDetailPages != null && videoDetailPages.size() > 0) {
+			Page videoDetailPage = videoDetailPages.get(0);
+			videoDetailPageUrl = videoDetailPage.getPageUrlForRouteMap();				
+		}
+	}
 %>
 <x:parse xml="<%=content.getContentXmlWithoutCRLF() %>" var="contentXml"></x:parse>
 <% int i = 1; %>
@@ -224,6 +232,98 @@
    			</div>
        	</div>	   
    	</x:if>    	
-   
+   	
+  	<x:if select="$widgetName = 'Html5VideoStyleGallery'">
+		<div class="widget format-video 2016 cat-video post-item isotope-item clearfix">
+	        <div id="jp_container_128" class="jp-video mfn-jcontainer jp-video-360p">
+	            <div class="jp-type-single">
+	                <div id="jquery_jplayer_128" class="jp-jplayer mfn-jplayer" data-m4v="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Field[@name='Video']" escapeXml="false"/>" data-img="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>"></div>
+	                <%@ include file="/WEB-INF/Shared/Video.jsp" %>
+	            </div>
+	        </div>
+	        <div class="post-desc-wrapper">
+	            <div class="post-desc">
+	                <div class="post-date font-s"><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></div>
+	                <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
+	                <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+	            </div>
+	        </div>
+	    </div>          	
+   	</x:if>
+   	<x:if select="$widgetName = 'YoutubeStyleGallery'">
+       	<%
+       		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
+            Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
+			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
+			Element dateNode = (Element)widget.selectSingleNode("Field[@name='Date']");
+			String year = dateNode.getTextTrim().split("-")[0];
+        %> 
+	    <div class="widget 2016 cat-video post-item isotope-item clearfix">
+	        <a <%=linkAttr%>><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a>
+	        <div class="post-desc-wrapper">
+	            <div class="post-desc">
+	                <div class="post-date font-s"><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></div>
+	                <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
+	                <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+	            </div>
+	        </div>
+	    </div>
+   	</x:if>
+   	<x:if select="$widgetName = 'ImageStyleGallery'">
+   		<%
+       		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
+            Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
+			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);			
+        %>
+	 	<div class="widget 2016 cat-video post-item isotope-item clearfix">
+	        <a <%=linkAttr%>>
+	            <div class="withlink-blk">
+	                <div class="box-row">  <!-- btn for desktop only!-->
+	                    <div class="box"><i class="fa fa-external-link"></i></div>
+	                </div>
+	                <img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/>
+	            </div>
+	     
+	            <div class="post-desc-wrapper">
+	                <div class="post-desc">
+	                    <div class="post-date font-s"><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></div>
+	                    <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
+	                    <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+	                    
+	                    <div class="post-footer link-blk-m"> <!-- btn for tablet & mobile!-->
+	                        <div class="box"><i class="fa fa-external-link"></i></div>
+	                        <div class="clear"></div>
+	                    </div>
+	                </div>
+	            </div>
+	        </a>
+	    </div>
+   	</x:if>
+   	<x:if select="$widgetName = 'ImageDetailStyleGallery'">
+        <div class="widget 2015 cat-video cat-detail post-item isotope-item clearfix">
+	        <a href="<%=videoDetailPageUrl%>?pageId=<%=currentPage.getId() %>&videoId=<x:out select="$widget/@id" escapeXml="false"/>">
+	            <div class="withlink-blk">
+	                <div class="box-row">  <!-- btn for desktop only!-->
+	                    <div class="box"><i class="gi gi-more"></i></div>
+	                </div>
+	                <img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/>
+	            </div>
+	     
+	            <div class="post-desc-wrapper">
+	                <div class="post-desc">
+	                    <div class="post-date font-s"><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></div>
+	                    <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
+	                    <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+	                    
+	                    <div class="post-footer link-blk-m"> <!-- btn for tablet & mobile!-->
+	                        <div class="box"><i class="gi gi-more"></i></div>
+	                        <div class="clear"></div>
+	                    </div>
+	                </div>
+	            </div>
+	        </a>
+	    </div>
+   	</x:if>
+   	
 	<% i++; %>   
 </x:forEach>
