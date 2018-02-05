@@ -39,7 +39,7 @@
 		Page videoPage = (Page)InitServlet.getQueryService().findPageById(pageId, iscms);
 		Document contentDocument = videoPage.getContent(lang).getContentXmlDoc();
 		Element videoNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[@id='" + videoId + "']");
-		videoNodeXml = videoNode != null ? videoNode.asXML().replaceAll("\n", "</br>") : "";
+		videoNodeXml = videoNode != null ? XmlUtils.getXmlWithoutCRLF(videoNode.asXML()) : "";
 	} 
 %>
 <c:if test="${isPageAdmin}">

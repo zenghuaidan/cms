@@ -138,8 +138,12 @@ public class XmlUtils {
     {
         Element fieldNode = getPtyField(document, fieldeName);
         String val = (fieldNode == null) ? "" : fieldNode.getText();
-        if (isTta) { val = val.replaceAll("\r\n", "<br />").replace("\n", "<br />"); }
+        if (isTta) { val = getXmlWithoutCRLF(val); }
         return val;
+    }
+    
+    public static String getXmlWithoutCRLF(String xml) {
+    	return xml.replaceAll("\r\n", "<br />").replace("\n", "<br />");
     }
 	
 	public static String formatXml(Document document) {
