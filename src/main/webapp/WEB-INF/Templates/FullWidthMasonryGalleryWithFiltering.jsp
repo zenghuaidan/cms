@@ -78,7 +78,7 @@
                             <%
                             	List<String> years = new ArrayList<String>();
                             	for(Element element : elements) {
-                            		String[] dateInfo = ((Element)element.selectSingleNode("Field[@name='Date']")).getTextTrim().split("-");
+                            		String[] dateInfo = XmlUtils.getFieldRaw(element, "Date").split("-");
                             		String year = dateInfo.length > 0 ? dateInfo[0] : "";
                             		if (!StringUtils.isBlank(year) && !years.contains(year)) {
                             			years.add(year);                          			
@@ -103,7 +103,7 @@
                             <%
                             	List<String> categories = new ArrayList<String>();
                             	for(Element element : elements) {
-                            		String category = ((Element)element.selectSingleNode("Field[@name='Category']")).getTextTrim();
+                            		String category = XmlUtils.getFieldRaw(element, "Category");
                             		if (!StringUtils.isBlank(category) && !categories.contains(category)) {
                             			categories.add(category);                            			
                             		}

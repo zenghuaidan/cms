@@ -27,6 +27,7 @@
 	String optStr = "property".equals(formType) ? XmlUtils.getFieldAttr(fieldSchema, "opts") : XmlUtils.getFieldAttr(widgetSchema, fpm.getName() + "Opts");    
     String[] opts = XmlUtils.parseOpts(request, optStr);
 %>
+<script type="text/javascript" src="${Script}/cms/mckfield.js"></script>
 <c:set var="opts" value="<%=opts %>"></c:set>
 <c:set var="chkvals" value="<%=chkvals %>"></c:set>
 <tr class="datafield">
@@ -34,7 +35,7 @@
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
         <input type="hidden" id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" value="<%=chkvals %>" />
    	    <c:forEach items="${opts }" var="opt">
-        	<input type='checkbox' value="${fn:split(opt, '^')[0]}" ${fn:contains(chkvals, fn:split(opt, '^')[0]) ? 'checked' : ''} disabled/>${fn:split(opt, '^')[1]}
+        	<input type='checkbox' value="${fn:split(opt, '^')[0]}" ${fn:contains(chkvals, fn:split(opt, '^')[0]) ? 'checked' : ''} />${fn:split(opt, '^')[1]}
         </c:forEach>      
     </td>
 </tr>

@@ -320,15 +320,17 @@ public class XmlUtils {
 				Content content = currentPage.getContent(lang);
 				Document propertyDocument = content.getPropertyXmlDoc();
 				String values = XmlUtils.getPtyFieldVal(propertyDocument, fieldeName, false);
-				Type type = new TypeToken<String[]>(){}.getType();
-				String[] opts = new Gson().fromJson(values, type);
-				for(int i = 0; i < opts.length; i++) {
-					String value = encryptValue ? MessageDigestUtils.encryptBASE64(opts[i].getBytes()) : opts[i];
-					String displayValue = opts[i];
-					String result = value + "^" + displayValue;
-					if (!valueList.contains(result)) {
-						valueList.add(result);
-					}
+				if (!StringUtils.isBlank(values)) {
+					Type type = new TypeToken<String[]>(){}.getType();
+					String[] opts = new Gson().fromJson(values, type);
+					for(int i = 0; i < opts.length; i++) {
+						String value = encryptValue ? MessageDigestUtils.encryptBASE64(opts[i].getBytes()) : opts[i];
+						String displayValue = opts[i];
+						String result = value + "^" + displayValue;
+						if (!valueList.contains(result)) {
+							valueList.add(result);
+						}
+					}					
 				}
 			}
 			return valueList.toArray(new String[]{});

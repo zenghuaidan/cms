@@ -122,12 +122,12 @@ public class Content<T extends Page> {
 	
 	@Transient
 	public String getPropertyXmlWithoutCRLF() {
-		return XmlUtils.getXmlWithoutCRLF(getPropertyXml());
+		return getPropertyXml().replaceAll("\r\n", "<br />");
 	}
 	
 	@Transient
 	public String getContentXmlWithoutCRLF() {
-		return XmlUtils.getXmlWithoutCRLF(getContentXml());
+		return getContentXml().replaceAll("\r\n", "<br />");
 	}
 	
 	@Transient

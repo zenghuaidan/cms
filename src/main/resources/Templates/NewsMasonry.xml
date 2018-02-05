@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Template id="VideoGallery" haspgtime="no">
+<Template id="NewsMasonry" haspgtime="no">
   <Properties excludestd="">
     <Field name="HeadTitle" type="txtfield" label="Header title" />
     <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
     <Field name="SeoDesc" type="txtfield" label="SEO Description" />
-    <Field name="MenuName" type="txtfield" label="Menu name" />  
-    <Field name="Category" type="mtxtfield" label="Category" />    
+    <Field name="MenuName" type="txtfield" label="Menu name" />   
+    <Field name="Category" type="mtxtfield" label="Category" /> 
   </Properties>
   <WidgetBox />
   <Widgets>
@@ -13,7 +13,12 @@
       <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
       <AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" ImageAttr="fix:576x450" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
       <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" ImageAttr="fix:576x450" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
-      <AcceptWidget wid="ImageDetailStyleGallery" ename="ImageDetailStyleGallery" label="Post with Cover Image, external link and detail" ImageAttr="fix:576x450" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
+      
+      <AcceptWidget wid="DescriptionStyleGallery" ename="DescriptionStyleGallery" label="Post with short description" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
+      <AcceptWidget ename="SliderStyleGallery" wid="SliderStyleGallery" label="Post with Fix Size Slider" isDynLst="yes" mgrtype="gallery" mgrattr="Slider:Image" cols="Image" AddFront="yes" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true">
+        <Widget ename="Slider" wid="ImgBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:825x436" AddFront="no" />
+      </AcceptWidget>
+      <AcceptWidget wid="ImageDocumentAndDetailStyleGallery" ename="ImageDocumentAndDetailStyleGallery" label="Post with Image(Include content page &amp; download document)" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
     </Widget>
   </Widgets>
 </Template>

@@ -31,7 +31,7 @@
 <%	
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");
-	String pageIdStr = (String)request.getAttribute("pageId");
+	String pageIdStr = (String)request.getAttribute("videoPageId");
 	String videoId = (String)request.getAttribute("videoId");
 	String videoNodeXml = "";
 	if (!StringUtils.isBlank(pageIdStr) && !StringUtils.isBlank(videoId)) {

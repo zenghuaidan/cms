@@ -10,14 +10,11 @@
   <Template id="FullWidthMasonryGalleryWithFiltering" name="Full Width Masonry Gallery With Filtering" />
   <Template id="VideoGallery" name="Video Gallery" />
   <Template id="VideoDetail" name="Video Detail" isunique="yes" />
+  <Template id="NewsDetail" name="News Detail" isunique="yes" />
+  <Template id="NewsMasonry" name="News Masonry" />
   <Template id="NewsListIdx" name="News List Index" isunique="yes">
     <AcceptChildList>
       <RefTemplate refid="NewsListInside" name="News" />
-    </AcceptChildList>
-  </Template>
-  <Template id="NewsMasonryIdx" name="News Masonry Index" isunique="yes">
-    <AcceptChildList>
-      <RefTemplate refid="NewsMasonryInside" name="News" />
     </AcceptChildList>
   </Template>
 </TemplateList>
