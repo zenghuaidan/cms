@@ -52,13 +52,13 @@
 							         			List<Page> subPages = InitServlet.getQueryService().getChidrenByPageOrderAsc(topPage.getId(), iscms, true);
 							         			%>
 		                                        <li>
-		                                            <a href="<%=topPage.getPageUrlForRouteMap() %>"><span><%=menuName%></span></a>
+		                                            <a href="<%=XmlUtils.getPageLink(topPage, lang, iscms, false).getLink() %>"><span><%=menuName%></span></a>
 		                                            <ul class="sub-menu">
 		                                            	<% 
 			                                            	for(Page subPage : subPages) {
 			                                            		menuName = XmlUtils.getPtyFieldVal(subPage.getContent(lang).getPropertyXmlDoc(), "MenuName", false);
 		                                            			%>
-		                                                			<li><a href="general.html"><span><%=menuName%></span></a></li>
+		                                                			<li><a href="<%=XmlUtils.getPageLink(subPage, lang, iscms, false).getLink() %>"><span><%=menuName%></span></a></li>
 		                                            			<%
 			                                            	}
 		                                            	%>		                                                

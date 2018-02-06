@@ -23,7 +23,7 @@
 		List<Page> detailPages = (List<Page>)InitServlet.getQueryService().findPageByTemplate(currentPage.getTemplate(), iscms, true);
 		if (detailPages != null && detailPages.size() > 0) {
 			Page detailPage = detailPages.get(0);
-			detailPageUrl = detailPage.getPageUrlForRouteMap();				
+			detailPageUrl = XmlUtils.getPageLink(detailPage, lang, iscms, false).getLink();				
 		}
 	}
 %>

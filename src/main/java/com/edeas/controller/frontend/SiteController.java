@@ -31,7 +31,7 @@ public class SiteController extends FrontController {
 		if(pages.size() > 0) {
 			for(Page page : pages) {
 				String url = request.getRequestURI().replaceAll(InitServlet.getWc().getServletContext().getContextPath(), "").replaceAll("/" + lang + "/", "").replaceAll(".html", "");
-				if(url.equals(page.getPageUrlForRouteMap())) {
+				if(url.equals(page.getPageUrl())) {
 					Page masterPage = queryService.getMasterPage(false);
 					model.addAttribute("iscms", false);
 					model.addAttribute("isPageAdmin", false);

@@ -398,7 +398,7 @@ public class Page<T extends Page, E extends Content> {
 	}
 	
 	@Transient
-	public String getPageUrlForRouteMap()
+	public String getPageUrl() //the page's url without .html, it use for locate the page using user's url typing on the browser 
     {
         if (!this.isNew())
         {
