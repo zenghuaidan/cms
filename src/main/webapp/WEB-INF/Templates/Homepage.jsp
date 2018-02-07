@@ -48,24 +48,29 @@
                      <h2>Latest News</h2>
                      <div class="recent-posts">
                          <ul>
-                             <li class="post">
-                                 <a href="#">
-                                     <div class="photo"><img src="images/demo-img-160x160.gif" class="img-scale" /></div>
-                                     <div class="desc">
-                                         <div class="post-intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </div>
-                                         <div class="date">December 13, 2016</div>
-                                     </div>
-                                 </a>
-                             </li>
-                             <li class="post">
-                                 <a href="#">
-                                     <div class="photo"><img src="images/demo-img-160x160.gif" class="img-scale" /></div>
-                                     <div class="desc">
-                                         <div class="post-intro">Cumque nihil impedit quo minus id quod maxime placeat facere possimus.</div>
-                                         <div class="date">November 13, 2016</div>
-                                     </div>
-                                 </a>
-                             </li>
+                         	<% int i = 1; %>
+                         	<x:forEach select="$contentXml/PageContent/Widget[@name='HomepageNews']/Widget[@name='News']" var="news" varStatus="status">
+	                         	<%
+	                         		Element newsPageElement = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='HomepageNews']/Widget[@name='News'][" + i++ + "]/Field[@name='Page']");	                         		
+	                         		long newsPageId = Long.parseLong(XmlUtils.getFieldAttr(newsPageElement, "pgid", "0"));
+	                         		Page newsPage = InitServlet.getQueryService().findPageById(newsPageId, iscms);
+	                         		Content newsContent = newsPage.getContent(lang);
+	                         		Document ptyDocument = newsContent.getPropertyXmlDoc();
+	                         		String contentStr = XmlUtils.getPtyFieldVal(ptyDocument, "Content", true);
+	                         	%>
+	                         	<c:set var="newsDate" value="<%=newsPage.getPageTimeFrom() %>"></c:set>
+	                             <li class="post">
+	                                 <a <%=XmlUtils.getLinkAttr(XmlUtils.getPageLink(newsPage.getParent(), lang, iscms), lang, iscms, null) %>>
+	                               		<x:if select="$news/Field[@name='Image']">
+	                                    	<div class="photo"><img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$news/Field[@name='Image']" escapeXml="false"/>" class="img-scale" /></div>
+	                                    </x:if>
+	                                     <div class="desc">
+	                                         <div class="post-intro"><c:out value="<%=contentStr%>" escapeXml="false"></c:out></div>
+	                                         <div class="date"><fmt:formatDate value="${newsDate}" pattern="MMMM dd, yyyy" /></div>
+	                                     </div>
+	                                 </a>
+	                             </li>
+                         	</x:forEach>
                          </ul>
                      </div>
                  </div>
@@ -75,7 +80,7 @@
                  <div class="links-pos">
                      <h2>Quick Links</h2>
                      <ul>
-                         <% int i = 1; %>
+                         <% i = 1; %>
                          <x:forEach select="$contentXml/PageContent/Widget[@name='HomepageQuickLinks']/Widget[@name='QuickLink']" var="quickLink" varStatus="status">
                          	<%
                          		Element quickLink = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='HomepageQuickLinks']/Widget[@name='QuickLink'][" + i++ + "]/Field[@name='Link']");

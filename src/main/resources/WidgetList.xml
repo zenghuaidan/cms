@@ -17,6 +17,11 @@
 	<Widget id="WidgetListMgr" />    
 	<Widget id="SubPagesMgr" />     
 
+<Widget id="ImagePageBlock" noedit="yes">
+    	<Field name="Image" type="imgfield" label="Image" />
+    	<Field name="Page" type="spgfield" label="Page" />
+  	</Widget>
+
 	<Widget id="ImageLinkBlock" noedit="yes">
     	<Field name="Image" type="imgfield" label="Image" />
     	<Field name="Link" type="lnkfield" label="Link" />

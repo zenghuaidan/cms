@@ -35,8 +35,8 @@
 					// not support...
 				}
 			} else if("TopOpt".equals(typeAndValue[0])) {
-				String[] options = typeAndValue[1].split("^");
-				topOption = "<option value='"+options[1]+"'>" + options[0] + "</option>";
+				String[] options = typeAndValue[1].split("\\^");
+				topOption = "<option value='" + (options.length == 2 ? options[1] : "") + "'>" + options[0] + "</option>";
 			}
 			
 		}

@@ -197,18 +197,17 @@ public class XmlUtils {
 	public static String getLinkAttr(Element lnk, String lang, boolean iscms) {
 		return getLinkAttr(lnk, lang, iscms, null);
 	}
-	
-	public static String getLinkAttr(Element lnk, String lang, boolean iscms, Map<String, String> othattrs) {
-		LinkInfo linkInfo = getLinkInfo(lnk, lang, iscms);
+
+	public static String getLinkAttr(LinkInfo linkInfo, String lang, boolean iscms, Map<String, String> othattrs) {
 		if (linkInfo != null && !StringUtils.isBlank(linkInfo.getLink())) {
 			StringBuilder sb = new StringBuilder(linkInfo.getLink());
-
+			
 			if (!StringUtils.isBlank(linkInfo.getAnchor())) {
 				sb.append("#" + linkInfo.getAnchor());
 			}
 			sb.insert(0, " href=\"").append("\"");
 			
-			if (!linkInfo.getType().equals("none") && !StringUtils.isBlank(linkInfo.getTarget()))
+			if (!StringUtils.isBlank(linkInfo.getType()) && !linkInfo.getType().equals("none") && !StringUtils.isBlank(linkInfo.getTarget()))
 			{
 				sb.append(" target='" + linkInfo.getTarget() + "'");
 			}
@@ -221,7 +220,12 @@ public class XmlUtils {
 			}
 			return sb.toString();
 		}
-		return "";
+		return "#";
+	}
+	
+	public static String getLinkAttr(Element lnk, String lang, boolean iscms, Map<String, String> othattrs) {
+		LinkInfo linkInfo = getLinkInfo(lnk, lang, iscms);
+		return getLinkAttr(linkInfo, lang, iscms, othattrs);
 	}
 	
 	public static LinkInfo getLinkInfo(Element lnk, String lang, boolean iscms)
@@ -244,6 +248,11 @@ public class XmlUtils {
 		return null;
 	}
 	
+	public static LinkInfo getPageLink(long pageid, String lang, boolean iscms){
+		Page page = InitServlet.getQueryService().findPageById(pageid, iscms);
+		return getPageLink(page, lang, iscms, false);
+	}
+	
 	public static LinkInfo getPageLink(Page page, String lang, boolean iscms){
 		return getPageLink(page, lang, iscms, false);
 	}
@@ -251,7 +260,7 @@ public class XmlUtils {
 	 public static LinkInfo getPageLink(Page page, String lang, boolean iscms, boolean isptyurl)
      {
 		 LinkInfo linkInfo = new LinkInfo();
-         if (!page.isNew()) {
+         if (page != null && !page.isNew()) {
              if (page.getTemplate().endsWith("Link")) {              
                  Element lnk = XmlUtils.getPtyField(page.getContent(lang).getPropertyXmlDoc(), "Link");
                  if (lnk != null) {

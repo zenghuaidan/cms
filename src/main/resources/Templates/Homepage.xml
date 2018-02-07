@@ -16,6 +16,10 @@
     
     <Widget ename="HomepageQuickLinks" wid="WidgetListMgr" jsel="div.links" mgrtype="txtlist" mgrattr="QuickLink:Text" cols="Text">
       <Widget ename="QuickLink" wid="TextLinkBlock" AddFront="yes" />
+    </Widget>
+    
+    <Widget ename="HomepageNews" wid="WidgetListMgr" jsel="div.news" mgrtype="gallery" mgrattr="News:Image" cols="Image">
+      <Widget ename="News" wid="ImagePageBlock" PageAttr="Parent:Template=NewsListInside,TopOpt:----Please Select----^" ImageAttr="cmgrw:114,fix:160x160" PageLabel="News" AddFront="yes" />
     </Widget> 
     
   </Widgets>
