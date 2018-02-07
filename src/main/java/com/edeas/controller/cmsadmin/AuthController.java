@@ -38,7 +38,7 @@ public class AuthController extends CmsController {
 	@RequestMapping(path = {"Logout"}, method={RequestMethod.GET})
 	public String logout(HttpSession session){
 		session.removeAttribute(LOGIN_USER);
-		return "redirect:Auth/Login";
+		return "redirect:Login";
 	}
 	
 	@ResponseBody
