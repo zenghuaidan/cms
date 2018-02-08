@@ -14,3 +14,10 @@ function isandroid() {
 
 /*function ismobdev() { return (isipad()||isandroid()); }*/
 function ismobdev() { return (isiphone() || isandroid()); }
+
+function goUrl(u) { location.href = u; }
+function popUrl(u) { window.open(u); }
+function switchlang(a, b) {
+    var c = window.location.toString().substr(0).replace("/" + a + "/", "/" + b + "/");
+    window.location = c;
+}

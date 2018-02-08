@@ -25,6 +25,7 @@
 <script type="text/javascript" src="${Script}/animations/animations.js"></script>
 <script type="text/javascript" src="${Script}/back-to-top.js"></script>
 <script type="text/javascript" src="${Script}/scripts.js"></script>
+<script type="text/javascript" src="${Script}/main.js"></script>
 <script type="text/javascript" src="${context}/dwr/engine.js"></script>
 <script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>    
 <div>
@@ -72,13 +73,31 @@
                             </div>
                         </div>
                         <div class="top_bar_right">
-                            <span><a href="#">繁</a></span><span><a href="#">簡</a></span><!-- for Desktop/Tablet only -->
+                        	<!-- for desktop and pad only -->
+                        	<c:if test="${lang ne 'en'}">
+                        		<span><a href="javascript:switchlang('${lang}','en');">EN</a></span>
+                        	</c:if>                           
+                        	<c:if test="${lang ne 'tc'}">
+                        		<span><a href="javascript:switchlang('${lang}','tc');">繁</a></span>
+                        	</c:if>                           
+                        	<c:if test="${lang ne 'sc'}">
+                        		<span><a href="javascript:switchlang('${lang}','sc');">简</a></span>
+                        	</c:if>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="lang-m">
-                <span><a href="#">繁</a></span><span><a href="#">簡</a></span><!-- for mobile only -->
+            	<!-- for mobile only -->
+                <c:if test="${lang ne 'en'}">
+               		<span><a href="javascript:switchlang('${lang}','en');">EN</a></span>
+               	</c:if>                           
+               	<c:if test="${lang ne 'tc'}">
+               		<span><a href="javascript:switchlang('${lang}','tc');">繁</a></span>
+               	</c:if>                           
+               	<c:if test="${lang ne 'sc'}">
+               		<span><a href="javascript:switchlang('${lang}','sc');">简</a></span>
+               	</c:if>
             </div>
 
             <jsp:include page="/WEB-INF/Templates/Banner.jsp" />
