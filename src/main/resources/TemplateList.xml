@@ -12,6 +12,8 @@
   <Template id="VideoDetail" name="Video Detail" isunique="yes" />
   <Template id="NewsDetail" name="News Detail" isunique="yes" />
   <Template id="NewsMasonry" name="News Masonry" />
+  <Template id="GeneralForm" name="General Form"  isunique="yes" />
+  <Template id="SpecialForm" name="Special Form"  isunique="yes" />
   <Template id="NewsListIdx" name="News List Index" isunique="yes">
     <AcceptChildList>
       <RefTemplate refid="NewsListInside" name="News" />
