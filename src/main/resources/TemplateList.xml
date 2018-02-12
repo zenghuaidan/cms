@@ -14,6 +14,8 @@
   <Template id="NewsMasonry" name="News Masonry" />
   <Template id="GeneralForm" name="General Form"  isunique="yes" />
   <Template id="SpecialForm" name="Special Form"  isunique="yes" />
+  <Template id="GoogleMap" name="Google Map"  isunique="yes" />
+  <Template id="EventCalendar" name="Event Calendar"  isunique="yes" />
   <Template id="NewsListIdx" name="News List Index" isunique="yes">
     <AcceptChildList>
       <RefTemplate refid="NewsListInside" name="News" />

@@ -2,7 +2,7 @@
 <Template id="Masterpage" haspgtime="no">
   <Properties excludestd="">    
     <Field name="HeadTitle" type="txtfield" label="Header title" />    
-    <Field name="Image" type="imgfield" label="Image" />
+    <Field name="Image" type="imgfield" label="Share Image" />
   </Properties>
   <WidgetBox />
   <Widgets>

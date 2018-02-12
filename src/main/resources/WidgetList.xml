@@ -32,6 +32,11 @@
     	<Field name="Link" type="lnkfield" label="Link" />
   	</Widget>
   	
+  	<Widget id="TitleContentBlock">		
+		<Field name="Title" type="txtfield" label="Title" />
+		<Field name="Content" type="redfield" label="Content" />
+	</Widget> 
+  	
 	<Widget id="TwoTitleContentBlock">		
 		<Field name="Title" type="txtfield" label="Title" />
 		<Field name="SubTitle" type="txtfield" label="Sub Title" />
@@ -158,4 +163,21 @@
   		<Field name="Detail" type="redfield" label="Detail" />
   	</Widget>
 		
+		
+	<!-- Google Map -->
+	<Widget id="GoogleMap">  		
+  		<Field name="Latitude" type="txtfield" label="Latitude" />
+  		<Field name="Longitude" type="txtfield" label="Longitude" />
+  		<Field name="Image" type="docfield" label="Image" />  		
+  	</Widget>
+  	
+  	<!-- Event Calendar -->
+  	<Widget id="EventCalendarInfo">  		
+  		<Field name="Date" type="datfield" label="Date" />  
+  		<Field name="JobTime" type="timerangefield" label="Job Time" />
+  		<Field name="JobDesc" type="ttafield" label="Job Description" />
+  		<Field name="LeisureTime" type="timerangefield" label="Leisure Time" />
+  		<Field name="LeisureDesc" type="ttafield" label="Leisure Description" />
+  	</Widget>  	
+  	
 </WidgetList>

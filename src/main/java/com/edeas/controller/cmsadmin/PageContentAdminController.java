@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -367,19 +368,24 @@ public class PageContentAdminController extends CmsController {
 				Element dataField = (Element)widgetNode.selectSingleNode("Field[@name='" + fpm.getName() + "']");
 				String value = request.getParameter(fpm.getName());
 				if (Lang.en.equals(Lang.getByName(lang))) value = value.replaceAll("<br /><br />", "<br />&nbsp;<br />");
-				if (dataField != null) {
-					dataField.addAttribute("ftype", fpm.getType());
-					dataField.setText(XmlUtils.toCDATA(value));
-				} else {
+				if (dataField == null) {
 					dataField = widgetNode.addElement("Field");
 					int i = 1;
                     while (contentDocument.selectSingleNode("//*[@id='" + wxid + "-" + fpm.getName() + "-" + i + "']") != null) i++;
                     String fxid = wxid + "-" + fpm.getName() + "-" + i;
-                    dataField.addAttribute("name", fpm.getName());
                     dataField.addAttribute("id", fxid);
-                    dataField.addAttribute("ftype", fpm.getType());
-                    dataField.addText(XmlUtils.toCDATA(value));
 				}
+				Enumeration parameterNames = request.getParameterNames();
+				while(parameterNames.hasMoreElements()) {
+					String parameterName = (String)parameterNames.nextElement();
+					if (parameterName.startsWith(fpm.getName() + "_") && parameterName.split("_", 2).length == 2 && !StringUtils.isBlank(parameterName.split("_", 2)[1])) {
+						String key = parameterName.split("_", 2)[1];
+						dataField.addAttribute(key, request.getParameter(parameterName));
+					}
+				}
+				dataField.addAttribute("name", fpm.getName());
+				dataField.addAttribute("ftype", fpm.getType());
+				dataField.setText(XmlUtils.toCDATA(value));
 				error.append(setSpecialField(fpm, dataField, request));
 			}
 			if(StringUtils.isBlank(error.toString())) {
@@ -519,19 +525,24 @@ public class PageContentAdminController extends CmsController {
 			Element dataField = (Element)propDataXml.selectSingleNode("Field[@name='" + fpm.getName() + "']");
 			String value = request.getParameter(fpm.getName());
 			if(lang.equals("en")) value = value.replaceAll("<br /><br />", "<br />&nbsp;<br />");
-			if(dataField != null) {
-				dataField.addAttribute("ftype", fpm.getType());
-				dataField.setText(XmlUtils.toCDATA(value));
-			} else {
+			if(dataField == null) {			
 				dataField = propDataXml.addElement("Field");
 				int i = 1;
 				while (propDataXml.selectSingleNode("//*[@id='" + fpm.getName() + "-" + i + "']") != null) { i++; }
 				String fxid = fpm.getName() + "-" + i;
 				dataField.addAttribute("id", fxid);
-				dataField.addAttribute("name", fpm.getName());
-				dataField.addAttribute("ftype", fpm.getType());
-				dataField.addText(XmlUtils.toCDATA(value));
 			}
+			Enumeration parameterNames = request.getParameterNames();
+			while(parameterNames.hasMoreElements()) {
+				String parameterName = (String)parameterNames.nextElement();
+				if (parameterName.startsWith(fpm.getName() + "_") && parameterName.split("_", 2).length == 2 && StringUtils.isBlank(parameterName.split("_", 2)[1])) {
+					String key = parameterName.split("_", 2)[1];
+					dataField.addAttribute(key, request.getParameter(parameterName));
+				}
+			}
+			dataField.addAttribute("name", fpm.getName());
+			dataField.addAttribute("ftype", fpm.getType());
+			dataField.setText(XmlUtils.toCDATA(value));
 			errors.append(setSpecialField(fpm, dataField, request) + System.lineSeparator());
 		}
 		if (StringUtils.isBlank(errors.toString())) {

@@ -2,6 +2,7 @@
 <%@page import="org.dom4j.Element"%>
 <%@page import="org.dom4j.Node"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
+<%@page import="com.edeas.utils.HtmlUtils"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.cmsadmin.CmsProperties"%>
 <%@page import="com.edeas.model.CmsPage"%>
@@ -69,19 +70,6 @@
 	boolean enableDTime = CmsProperties.enableDTimeParentTpls.containsKey(paretnTemplate);
 	//boolean enableDTime = CmsProperties.enableDTimeTpls.containsKey(template);
 	Map<String, String> dtconfig = enableDTime ?  CmsProperties.enableDTimeParentTpls.get(paretnTemplate) : null;
-%>
-
-<%!
-	public String timeOptions(int i, int f, int t) {
-	    String options = "";
-	    for (int x=1; x <= f; x++)
-	    {
-	        String xp = ((x < 10) ? "0" : "") + x;
-	        String sel = (x == t) ? " selected" : "";
-	        options += "\r\n<option value='" + x + "' " + sel + ">" + xp + "</option>";
-	    }
-	    return options;
-	}
 %>
 
 <body>
@@ -193,21 +181,21 @@
 	                    <div class="editor-field timefield ${ format }">
 	                        <!--- pgtimei: Start Time -->
 	                        <select id="pgtimeihr" name="pgtimeihr" class="time hr">
-	                        	<c:out escapeXml="false" value='<%=timeOptions(0, 23, currentPage.getPageTimeFrom().getHours()) %>'></c:out>
+	                        	<%=HtmlUtils.timeOptions(0, 23, currentPage.getPageTimeFrom().getHours()) %>
 	                       	</select>
 	                        <span>:</span>
 	                        <select id="pgtimeimin" name="pgtimeimin" class="time min">
-	                        	<c:out escapeXml="false" value='<%=timeOptions(0, 59, currentPage.getPageTimeFrom().getMinutes()) %>'></c:out>
+	                        	<%=HtmlUtils.timeOptions(0, 59, currentPage.getPageTimeFrom().getMinutes()) %>
 	                       	</select>
 	                        <!--- pgtimef: End Time -->
 	                        <c:if test="${fn:contains(format, 'timr')}">
 	                            <span>-</span>
 	                            <select id="pgtimefhr" name="pgtimefhr" class="time hr">
-	                            	<c:out escapeXml="false" value='<%=timeOptions(0, 23, currentPage.getPageTimeTo().getHours()) %>'></c:out>
+	                            	<%=HtmlUtils.timeOptions(0, 23, currentPage.getPageTimeTo().getHours()) %>
 	                           	</select>
 	                            <span>:</span>
 	                            <select id="pgtimefmin" name="pgtimefmin" class="time min">
-	                            	<c:out escapeXml="false" value='<%=timeOptions(0, 59, currentPage.getPageTimeTo().getMinutes()) %>'></c:out>
+	                            	<%=HtmlUtils.timeOptions(0, 59, currentPage.getPageTimeTo().getMinutes()) %>
 	                           	</select>
 	                        </c:if>                        
 	                    </div>

@@ -5,7 +5,7 @@ function setupDatetimeFields() {
     //$(this).attr("readonly","true");
     //var d = $.datepicker.parseDate("dd/mm/yy", $(this).val().substr(0, 10));
     //var d = $.datepicker.parseDate("dd/mm/yy", $(this).val());
-    $(this).datetimepicker({ format: 'Y-m-d h:m', value: $(this).val() });    
+    $(this).datetimepicker({ format: 'Y-m-d H:i', value: $(this).val() });    
   });
 }
 

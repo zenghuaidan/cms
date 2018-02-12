@@ -16,10 +16,25 @@
     	txtval = com.edeas.utils.DateUtils.yyyyMMdd().format(new Date());
     }
 %>
-
+<script type="text/javascript">	
+	function setDate(fid) {
+		var dateStr = $.trim($("#" + fid).val());
+		if (dateStr != '') {
+			$("input[name='" + fid + "_year']").val(parseInt(dateStr.split('-')[0]));
+			$("input[name='" + fid + "_month']").val(parseInt(dateStr.split('-')[1]));
+			$("input[name='" + fid + "_day']").val(parseInt(dateStr.split('-')[2]));			
+		}		
+	}
+	$(function() {
+		setDate('<%=fid%>');
+	});
+</script>
+<input type="hidden" name="<%=fid%>_year" value="" />
+<input type="hidden" name="<%=fid%>_month" value="" />
+<input type="hidden" name="<%=fid%>_day" value="" />
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
-    	<input id="<%=fid%>" name="<%=fid%>" value="<%=txtval%>" style="<%=fpm.getStyle() %>" />
+    	<input id="<%=fid%>" name="<%=fid%>" value="<%=txtval%>" style="<%=fpm.getStyle() %>" onchange="setTime('<%=fid%>')" />
     </td>
 </tr>

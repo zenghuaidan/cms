@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Template id="GoogleMap" haspgtime="no">
+  <Properties excludestd="">
+    <Field name="HeadTitle" type="txtfield" label="Header title" />
+    <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
+    <Field name="SeoDesc" type="txtfield" label="SEO Description" />
+    <Field name="MenuName" type="txtfield" label="Menu name" />   
+  </Properties>
+  <WidgetBox />
+  <Widgets>
+
+	<Widget ename="GoogleMap" wid="GoogleMap" label="Title" jsel="div.map-blk" />
+
+    <Widget ename="GoogleMapInfos" wid="WidgetListMgr" jsel="#GoogleMapInfos" mgrtype="txtlist" mgrattr="GoogleMapInfo:Title" cols="Text">
+      <Widget ename="GoogleMapInfo" wid="TitleContentBlock" AddFront="yes" />
+    </Widget>
+    
+  </Widgets>
+</Template>

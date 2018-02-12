@@ -1,5 +1,3 @@
-<%@page import="com.google.gson.Gson"%>
-<%@page import="com.fasterxml.jackson.databind.util.JSONPObject"%>
 <%@page import="com.edeas.dwr.SchemaInfo"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
@@ -11,9 +9,6 @@
 <%@page import="com.edeas.model.Page"%>
 <%@page import="com.edeas.model.Content"%>
 <%@page import="org.dom4j.Document"%>
-<%@page import="com.google.gson.Gson"%>
-<%@page import="com.google.gson.GsonBuilder"%>
-<%@page import="com.google.gson.reflect.TypeToken"%>
 <%@page import="java.lang.reflect.Type"%>
 <%@include file="/WEB-INF/Shared/commons.jsp" %>
 <%
