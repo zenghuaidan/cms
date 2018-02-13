@@ -35,6 +35,12 @@
   	<Widget id="TitleContentBlock">		
 		<Field name="Title" type="txtfield" label="Title" />
 		<Field name="Content" type="redfield" label="Content" />
+	</Widget>
+	
+	<Widget id="TitleImageContentBlock">		
+		<Field name="Title" type="txtfield" label="Title" />
+		<Field name="Image" type="imgfield" label="Image" />
+		<Field name="Content" type="redfield" label="Content" />
 	</Widget> 
   	
 	<Widget id="TwoTitleContentBlock">		
@@ -184,5 +190,25 @@
   	</Widget>  	
   	
   	<!-- Vertical Timeline -->
+  	<Widget id="ImageTimelineBlk">
+  		<Field name="Date" type="datfield" label="Date" />  		
+  		<Field name="Title" type="ttafield" label="Title" />  
+  		<Field name="Image" type="imgfield" label="Image" />		
+  		<Field name="Content" type="redfield" label="Content" />	
+  	</Widget>
+  	
+  	<Widget id="Html5VideoTimelineBlk">
+  		<Field name="Date" type="datfield" label="Date" />  		
+  		<Field name="Title" type="ttafield" label="Title" />
+  		<Field name="Image" type="imgfield" label="Image" />
+  		<Field name="Video" type="docfield" label="Video" />
+  		<Field name="Content" type="redfield" label="Content" />	
+  	</Widget>
+  	
+  	<Widget id="TimelineSliderImages">
+  		<Field name="Date" type="datfield" label="Date" />  		
+  		<Field name="Title" type="ttafield" label="Title" />  		
+  		<Field name="Content" type="redfield" label="Content" />	
+  	</Widget>
   	
 </WidgetList>
