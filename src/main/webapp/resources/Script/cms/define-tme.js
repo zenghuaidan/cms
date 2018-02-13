@@ -300,12 +300,15 @@ function setupRichEditorFields() {
 	toolsets["default"] += ' | btnTable btnTableEx resptbl image btnYouTube | removeformat code';	 //jbimages
 	//define stylesets
 	var stylesetsa = new Array();
-	stylesetsa["default"] = [  	{ title: 'H2 Title', block: 'h2' },
+	stylesetsa["default"] = [  	{ title: 'H1 Title', block: 'h1' },
+								{ title: 'H2 Title', block: 'h2' },
 								{ title: 'H3 Title', block: 'h3' },
+								{ title: 'H4 Title', block: 'h4' },
 								{ title: 'Small font', inline: 'span', classes: 'font-s' },
-								//{ title: 'Green color', inline: 'span', classes: 'txt-green' },
+								{ title: 'Green color', inline: 'span', classes: 'txt-green' },
                                 { title: 'Red color', inline: 'span', classes: 'txt-red' },
-                                { title: 'Theme color', inline: 'span', classes: 'theme-txt' },
+                                { title: 'Blue color', inline: 'span', classes: 'txt-blue' },
+                                //{ title: 'Theme color', inline: 'span', classes: 'theme-txt' },
 	];
 	stylesetsa["pop"] = [  	{ title: 'Title', inline: 'span', classes: 'title' },
 							//{ title: 'Text Blue', inline: 'span', classes: 'txtBlue' },

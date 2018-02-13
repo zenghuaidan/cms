@@ -53,12 +53,17 @@
    	<x:if select="$widgetName = 'SpaceBlk'">
    		<div class="widget" style="height:<x:out select="$widget/Field[@name='Text']" escapeXml="false"/>"></div>
    	</x:if>
+   	<x:if select="$widgetName = 'HRBlk'">
+   		<div class="widget" ${isPageAdmin ? 'style=height:25px;' : '' }>
+   			<hr/>
+   		</div>
+   	</x:if>   	
    	<x:if select="$widgetName = 'LeftRightPhotoBlk'">
 		<%
            	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Image']");
 			String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, false, "", null);
        	%>
-   		<x:if select="$widget/Field[@name='ImageLeft'] = 'true'">
+   		<x:if select="$widget/Field[@name='ImageAlign'] = 'LeftPhoto'">
    			<div class="widget content-right">
         		<div class="cr-left">
 	                <div class="enlarge-img-blk">
@@ -82,7 +87,7 @@
 	            <div class="clear"></div>
 	        </div>
    		</x:if>
-   		<x:if select="$widget/Field[@name='ImageLeft'] = 'false'">
+   		<x:if select="$widget/Field[@name='ImageAlign'] = 'RightPhoto'">
 	        <div class="widget content-left">
 	            <div class="cl-left"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
 	            <div class="cl-right">

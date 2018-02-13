@@ -17,7 +17,7 @@
 	<Widget id="WidgetListMgr" />    
 	<Widget id="SubPagesMgr" />     
 
-<Widget id="ImagePageBlock" noedit="yes">
+	<Widget id="ImagePageBlock" noedit="yes">
     	<Field name="Image" type="imgfield" label="Image" />
     	<Field name="Page" type="spgfield" label="Page" />
   	</Widget>
@@ -52,14 +52,14 @@
 		<Field name="Content" type="redfield" label="Content" />
 	</Widget>
 	
-	<!-- General -->
+	<!-- General -->		
 	<Widget id="ScaleImgBlock" noedit="yes">
 	    <Field name="Image" type="imgfield" label="Image" />
 	    <Field name="Scale" type="drpfield" label="Scale" />
 	</Widget>
 	
 	<Widget id="LeftRightPhotoBlk">
-		<Field name="ImageLeft" type="chkfield" label="Image Left ?" />
+		<Field name="ImageAlign" type="drpfield" label="Image Align" />
     	<Field name="Image" type="imgfield" label="Image" />
     	<Field name="Caption" type="ttafield" label="Caption" />    
     	<Field name="Content" type="redfield" label="Content" />
@@ -74,6 +74,9 @@
   	</Widget>
   	
   	<!-- Gallery -->
+  	<Widget id="HRBlock">  	    
+    </Widget>
+    
   	<Widget id="FullWidthMasonryGalleryContent">
   	    <Field name="Image" type="imgfield" label="Image" /> 
     	<Field name="Title" type="ttafield" label="Title" />
@@ -179,5 +182,7 @@
   		<Field name="LeisureTime" type="timerangefield" label="Leisure Time" />
   		<Field name="LeisureDesc" type="ttafield" label="Leisure Description" />
   	</Widget>  	
+  	
+  	<!-- Vertical Timeline -->
   	
 </WidgetList>

@@ -17,10 +17,11 @@ ul li  { margin:0px 0px 0px 30px; padding:0; line-height:1.8; list-style-type:di
 .clear {clear:both}							
 
 /* font & header */
-h1, h2 ,h3{ /*text-transform:uppercase;*/ font-family: 'Raleway-Light',sans-serif}
-h1 { font-size:40px; line-height:normal; color:#fff;} 
+h1, h2 ,h3 ,h4{ /*text-transform:uppercase;*/ font-family: 'Raleway-Light',sans-serif}
+h1 { font-size:40px; line-height:normal; } 
 h2 { font-size:30px; line-height:1.4; margin-bottom:15px; font-weight:bold; } 
 h3 { font-size:20px; line-height:1.4; margin-bottom:15px; font-weight:bold; }
+h4 { font-size:10px; line-height:1.4; margin-bottom:15px; font-weight:bold; }
 
 .font-l  { font-size:24px; line-height:1.4}
 .font-m  { font-size:18px}
@@ -31,6 +32,8 @@ h3 { font-size:20px; line-height:1.4; margin-bottom:15px; font-weight:bold; }
 .txt-lightGreen		{ color:#99cc33}
 .txt-green 			{ color:#018752}
 .txt-orange			{ color:#f47920;}
+.txt-blue			{ color:#0000ff;}
+.txt-red			{ color:#ff0000;}
 
 /* table */
 /* • General template - color table style */
