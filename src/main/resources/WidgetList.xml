@@ -211,4 +211,11 @@
   		<Field name="Content" type="redfield" label="Content" />	
   	</Widget>
   	
+  	<!-- Left Right Vertical Timeline -->
+  	<Widget id="TimelineBlk">
+  		<Field name="Date" type="datfield" label="Date" />  		
+  		<Field name="Title" type="ttafield" label="Title" />  		
+  		<Field name="Content" type="redfield" label="Content" />	
+  	</Widget>
+  	
 </WidgetList>

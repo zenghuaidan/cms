@@ -41,7 +41,15 @@ public class DateUtils {
         } else {
         	return diff + " Milliseconds";
         }
-    } 
+    }
+	
+	public static String toMonth(int month, boolean isShort) {
+		if (isShort) {
+			return new String[] {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Agu", "Sept", "Oct", "Nov", "Dec"}[month - 1];
+		} else {
+			return new String[] {"January", "February", "March", "April", "May", "June", "July", "Aguest", "September", "October", "November", "December"}[month - 1];
+		}
+	}
 	
 	public static boolean isValidateTime(Date when, String startTimeStr, String endTimeStr) {
 		return isValidateTime(when, startTimeStr, endTimeStr, 0);

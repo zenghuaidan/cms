@@ -107,6 +107,11 @@ public class XmlUtils {
         return schemaInfo;
     }
 	
+	public static String getFieldRaw(Element w, String fieldname, boolean isTta)
+    {		
+        return isTta ? getXmlWithoutCRLF(getFieldRaw(w, fieldname)) : getFieldRaw(w, fieldname);
+    }
+	
 	public static String getFieldRaw(Element w, String fieldname)
     {
 		Element fnode = (w == null) ? null : (Element)w.selectSingleNode("Field[@name='" + fieldname + "']");
@@ -134,7 +139,7 @@ public class XmlUtils {
         return (document == null) ? null : (Element)document.selectSingleNode("/Properties/Field[@name='" + fieldeName + "']");
     }
     
-    public static String getPtyFieldVal(Document document, String fieldeName, Boolean isTta)
+    public static String getPtyFieldVal(Document document, String fieldeName, boolean isTta)
     {
         Element fieldNode = getPtyField(document, fieldeName);
         String val = (fieldNode == null) ? "" : fieldNode.getText();

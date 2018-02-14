@@ -147,8 +147,8 @@
 		                                    </div>
 		                                    <div class="detail-col">
 		                                        <div>
-		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title")%>' escapeXml="true"></c:out></h2>
-		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="true"></c:out>
+		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title", true)%>' escapeXml="false"></c:out></h2>
+		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out>
 		                                        </div>
 		                                    </div>
 		                                </div>
@@ -184,8 +184,8 @@
 		                                    </div>
 		                                    <div class="detail-col">
 		                                        <div>
-		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title")%>' escapeXml="true"></c:out></h2>
-		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="true"></c:out>
+		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title", true)%>' escapeXml="false"></c:out></h2>
+		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out>
 												</div>
 		                                    </div>
 		                                </div>
@@ -209,8 +209,8 @@
 		                                    </div></div>
 		                                    <div class="detail-col">
 		                                        <div>
-		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title")%>' escapeXml="true"></c:out></h2>
-		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="true"></c:out>
+		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title", true)%>' escapeXml="false"></c:out></h2>
+		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out>
 		                                        </div>
 		                                    </div>
 		                                </div>

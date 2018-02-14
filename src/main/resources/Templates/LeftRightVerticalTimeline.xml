@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Template id="LeftRightVerticalTimeline" haspgtime="no">
+  <Properties excludestd="">
+    <Field name="HeadTitle" type="txtfield" label="Header title" />
+    <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
+    <Field name="SeoDesc" type="txtfield" label="SEO Description" />
+    <Field name="MenuName" type="txtfield" label="Menu name" />   
+  </Properties>
+  <WidgetBox />
+  <Widgets>
+
+    <Widget ename="TimelineBlks" wid="WidgetListMgr" jsel="div.bg-teal" mgrtype="txtlist" mgrattr="TimelineBlk:Date" cols="Text">
+      <Widget ename="TimelineBlk" wid="TimelineBlk" AddFront="yes" />
+    </Widget>
+    
+  </Widgets>
+</Template>
