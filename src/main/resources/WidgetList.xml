@@ -79,6 +79,11 @@
 		
   	</Widget>
   	
+  	<Widget id="AccordionOrToggles">
+		<Field name="Type" type="drpfield" label="Type" />
+		<Field name="Title" type="txtfield" label="Title" />
+  	</Widget>  	
+  	
   	<!-- Gallery -->
   	<Widget id="HRBlock">  	    
     </Widget>

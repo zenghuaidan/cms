@@ -444,6 +444,26 @@
                 </div>
             </div>
     	</div>
+   	</x:if>
+   	
+   	<x:if select="$widgetName = 'AccordionOrToggles'">  
+		<div class="col2-table-halfRow widget">                        
+	        <h2><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h2>
+	        <div class="accordion">	        	
+	            <div class="mfn-acc accordion_wrapper open1st <x:out select="$widget/Field[@name='Type']" escapeXml="false"/>">
+              		<x:forEach select="$widget/Widget[@name='AccordionOrToggle']" var="item" varStatus="status">
+		                <div class="question">
+		                    <div class="title">
+		                        <i class="fa fa-plus acc-icon-plus"></i><i class="fa fa-minus acc-icon-minus"></i><x:out select="$item/Field[@name='Title']" escapeXml="false"/>
+		                    </div>
+		                    <div class="answer">
+		                        <x:out select="$item/Field[@name='Content']" escapeXml="false"/>
+		                    </div>
+		                </div>	   		   			
+   					</x:forEach>	                
+	            </div>
+	        </div>                        
+		</div>
    	</x:if>	
    	
 	<% i++; %>

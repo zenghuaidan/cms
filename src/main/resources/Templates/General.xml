@@ -24,6 +24,9 @@
         <Widget ename="ColumnImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114" AddFront="no" />
       </AcceptWidget>
       <AcceptWidget wid="TextLinkBlock" ename="ActionButton" label="Action Button" />
+      <AcceptWidget ename="AccordionOrToggles" wid="AccordionOrToggles" TypeOpts="accordion^Accordion,toggle^Toggle" label="Accordion or Toggle" isDynLst="yes" mgrtype="txtlist" mgrattr="AccordionOrToggle:Title" cols="Text">
+	    <Widget ename="AccordionOrToggle" wid="TitleContentBlock" AddFront="yes" />
+	  </AcceptWidget>
     </Widget>
     
   </Widgets>
