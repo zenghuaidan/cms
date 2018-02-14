@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Template id="HorizontalTimeline" haspgtime="no">
+  <Properties excludestd="">
+    <Field name="HeadTitle" type="txtfield" label="Header title" />
+    <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
+    <Field name="SeoDesc" type="txtfield" label="SEO Description" />
+    <Field name="MenuName" type="txtfield" label="Menu name" />
+    <Field name="StartDate" type="datfield" label="Start Date" />   
+  </Properties>
+  <WidgetBox />
+  <Widgets>
+  
+    <Widget ename="HorizontalTimelineBlks" wid="WidgetListMgr" jsel="div.timeline-pos" mgrtype="txtlist" mgrattr="HorizontalTimelineBlk:Date" cols="Text">
+      <Widget ename="HorizontalTimelineBlk" wid="HorizontalTimelineBlk" ImageAttr="fix:400x252" AddFront="yes" />
+    </Widget>
+    
+  </Widgets>
+</Template>

@@ -223,4 +223,13 @@
   		<Field name="Content" type="redfield" label="Content" />	
   	</Widget>
   	
+  	<!-- Horizontal Timeline -->
+  	<Widget id="HorizontalTimelineBlk">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Image" type="imgfield" label="Image" />	
+  		<Field name="Description" type="txtfield" label="Description" />
+  		<Field name="Content" type="redfield" label="Content" />
+  		<Field name="Detail" type="redfield" label="Detail" />
+  	</Widget>
+  	
 </WidgetList>

@@ -85,10 +85,10 @@
 
 	/* line arrow left */
 	.timelineFlat #t_line_left			{ left:-30px;}
-	.timelineFlat #t_line_left:after 	{ content:url('images-timeline-horizontal/arrow-left.svg'); position:absolute; right:0; top:-8px; }
+	.timelineFlat #t_line_left:after 	{ content:url('images-timeline-horizontal/arrow-left.svg'); position:absolute; right:0; top:0px; }
 
 	/* line arrow right */
-	.timelineFlat #t_line_right { right:-30px;}s
+	.timelineFlat #t_line_right { right:-30px;}
 	.timelineFlat #t_line_right:after { content:url('images-timeline-horizontal/arrow-right.svg'); position:absolute; left:0; top:0;}
 
 	.timelineFlat { display:none;}

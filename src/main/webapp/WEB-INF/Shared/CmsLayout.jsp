@@ -91,7 +91,7 @@
 	                </div>
 	            </div>
 	            <img class="bigicon" src="${Content}/images/spacer.gif" alt="Icon" />
-	            <img class="close" src="${Content}/images/spacer.gif"" alt="Close" />
+	            <img class="close" src="${Content}/images/spacer.gif" alt="Close" />
 	        </div>
 	    </div>
 	</body>

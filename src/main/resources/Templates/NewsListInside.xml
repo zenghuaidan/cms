@@ -4,7 +4,7 @@
     <Field name="Image" type="imgfield" label="Image" attr="fix:500x300" /> 
     <Field name="Title" type="ttafield" label="Title" />
     <Field name="Content" type="redfield" label="Content" style="width:605px;height:300px;" />
-    <Field name="Detail" type="redfield" label="Content" style="width:605px;height:300px;" />
+    <Field name="Detail" type="redfield" label="Detail" style="width:605px;height:300px;" />
   </Properties>
   <WidgetBox />
   <Widgets>
