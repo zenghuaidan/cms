@@ -54,7 +54,7 @@
 	    <div class="inner-wrapper">
 	        <div class="main-content-pos">
 	            <div class="g-title-blk">
-	                <div class="title-col1"><div class="btn-back"></div></div>
+	                <div class="title-col1"><div class="btn-back" onclick="history.go(-1);"></div></div>
 	                <div class="title-col2">
 	                    <h1><x:out select="$widget/Widget/Field[@name='Title']" escapeXml="false"/></h1>
 	                    <h3><x:out select="$widget/Widget/Field[@name='Date']" escapeXml="false"/></h3>

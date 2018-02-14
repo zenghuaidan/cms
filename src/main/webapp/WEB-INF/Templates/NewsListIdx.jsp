@@ -20,6 +20,13 @@
 	String lang = (String)request.getAttribute("lang");	
 	Page currentPage = (Page)request.getAttribute("currentPage");
 	List<Page> children = InitServlet.getQueryService().getChidrenByPageTimeFromDesc(currentPage.getId(), iscms, true);
+	
+	String detailPageUrl = "";
+	List<Page> detailPages = (List<Page>)InitServlet.getQueryService().findPageByTemplate("NewsDetail", iscms, true);
+	if (detailPages != null && detailPages.size() > 0) {
+		Page detailPage = detailPages.get(0);
+		detailPageUrl = XmlUtils.getPageLink(detailPage, lang, iscms, false).getLink();				
+	}
 %>
 
 <div class="full-wrapper clearfix"> 
@@ -67,24 +74,26 @@
 			                        <div class="news-list-week"><fmt:formatDate value="${ pageTimeFrom }" pattern="E" /></div>
 			                    </div>
 			                </div>
-			                <div class="col-sm col-right <%=noImageClass%>">
-			                    <div>
-			                    	<c:if test="${hasImage}">
-           		                        <div class="inner-list-blk">
-				                            <div class="in-col-sm cover">
-				                            	<%=XmlUtils.tagimg(imageField, Global.IMAGE_SOURCE, false, "", classMap) %>
-				                            </div>
-				                            <div class="in-col-sm intro">   
-			                    	</c:if>
-			                        <h3><%=titleVal %></h3>
-			                        <%=contentVal%>
-  			                    	<c:if test="${hasImage}"> 
-                  	                        </div>
-				                            <div class="clear"></div>
-				                        </div>  
-			                    	</c:if>
-			                    </div>
-			                </div>
+			                <a href="<%=detailPageUrl%>?newsPageId=<%=child.getId() %>">
+				                <div class="col-sm col-right <%=noImageClass%>">
+				                    <div>
+				                    	<c:if test="${hasImage}">
+	           		                        <div class="inner-list-blk">
+					                            <div class="in-col-sm cover">
+					                            	<%=XmlUtils.tagimg(imageField, Global.IMAGE_SOURCE, false, "", classMap) %>
+					                            </div>
+					                            <div class="in-col-sm intro">   
+				                    	</c:if>
+				                        <h3><%=titleVal %></h3>
+				                        <%=contentVal%>
+	  			                    	<c:if test="${hasImage}"> 
+	                  	                        </div>
+					                            <div class="clear"></div>
+					                        </div>  
+				                    	</c:if>
+				                    </div>
+				                </div>
+			                </a>
 			            </div>
 						
 					<%

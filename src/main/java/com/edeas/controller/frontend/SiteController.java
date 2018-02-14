@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.edeas.controller.cmsadmin.CmsProperties;
+import com.edeas.dto.LinkInfo;
 import com.edeas.model.Lang;
 import com.edeas.model.Page;
+import com.edeas.utils.XmlUtils;
 import com.edeas.web.InitServlet;
 
 @Controller
@@ -30,8 +32,8 @@ public class SiteController extends FrontController {
 		List<Page> pages = queryService.findPageByUrl(pageUrl, false, true);
 		if(pages.size() > 0) {
 			for(Page page : pages) {
-				String url = request.getRequestURI().replaceAll(InitServlet.getWc().getServletContext().getContextPath(), "").replaceAll("/" + lang + "/", "").replaceAll(".html", "");
-				if(url.equals(page.getPageUrl())) {
+				String url = request.getRequestURI();
+				if(url.equals(XmlUtils.getPageLink(page, lang, false).getLink())) {
 					Page masterPage = queryService.getMasterPage(false);
 					model.addAttribute("iscms", false);
 					model.addAttribute("isPageAdmin", false);

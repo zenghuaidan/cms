@@ -19,8 +19,10 @@
 	Content content = currentPage.getContent(lang);	
 	Document contentDocument = content.getContentXmlDoc();
 	String detailPageUrl = "";
-	if ("VideoGallery".equals(currentPage.getTemplate()) || "NewsMasonry".equals(currentPage.getTemplate())) {
-		List<Page> detailPages = (List<Page>)InitServlet.getQueryService().findPageByTemplate(currentPage.getTemplate(), iscms, true);
+	boolean isVideoGallery = "VideoGallery".equals(currentPage.getTemplate());
+	boolean isNewsMasonry = "NewsMasonry".equals(currentPage.getTemplate());
+	if (isVideoGallery || isNewsMasonry) {
+		List<Page> detailPages = (List<Page>)InitServlet.getQueryService().findPageByTemplate(isVideoGallery ? "VideoDetail" : "NewsDetail", iscms, true);
 		if (detailPages != null && detailPages.size() > 0) {
 			Page detailPage = detailPages.get(0);
 			detailPageUrl = XmlUtils.getPageLink(detailPage, lang, iscms, false).getLink();				

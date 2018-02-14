@@ -22,13 +22,23 @@
 	String pageIdStr = (String)request.getAttribute("newsPageId");
 	String newsId = (String)request.getAttribute("newsId");
 	String newsNodeXml = "";
-	if (!StringUtils.isBlank(pageIdStr) && !StringUtils.isBlank(newsId)) {
+	boolean isMasonry = true;
+	Date newsDate = null;
+	if (!StringUtils.isBlank(pageIdStr)) {
 		Long pageId = Long.parseLong(pageIdStr);
-		Page videoPage = (Page)InitServlet.getQueryService().findPageById(pageId, iscms);
-		Document contentDocument = videoPage.getContent(lang).getContentXmlDoc();
-		Element newsNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[@id='" + newsId + "']");
-		newsNodeXml = newsNode != null ? XmlUtils.getXmlWithoutCRLF(newsNode.asXML()) : "";
-	} 
+		Page newsDetailPage = (Page)InitServlet.getQueryService().findPageById(pageId, iscms);
+		if (!StringUtils.isBlank(newsId)) {
+			Document contentDocument = newsDetailPage.getContent(lang).getContentXmlDoc();
+			Element newsNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[@id='" + newsId + "']");
+			newsNodeXml = newsNode != null ? XmlUtils.getXmlWithoutCRLF(newsNode.asXML()) : "";			
+		} else {
+			isMasonry = false;
+			Document ptyDocument = newsDetailPage.getContent(lang).getPropertyXmlDoc();
+			Element newsNode = (Element)ptyDocument.selectSingleNode("/Properties");
+			newsNodeXml = newsNode != null ? XmlUtils.getXmlWithoutCRLF(newsNode.asXML()) : "";
+			newsDate = newsDetailPage.getPageTimeFrom();
+		}
+	}
 %>
 <c:if test="${isPageAdmin}">
 	<style>
@@ -36,22 +46,31 @@
 	</style>
 </c:if>
 <c:set var="newsNodeXml" value="<%=newsNodeXml %>"></c:set>
+<c:set var="isMasonry" value="<%=isMasonry %>"></c:set>
 <c:if test="${not empty newsNodeXml }">
 	<x:parse xml="<%=newsNodeXml %>" var="widget"></x:parse>
 	<div class="general detail full-wrapper clearfix"> 
 	    <div class="inner-wrapper">
 	        <div class="main-content-pos">
 	            <div class="g-title-blk">
-	                <div class="title-col1"><div class="btn-back"></div></div>
+	                <div class="title-col1"><div class="btn-back" onclick="history.go(-1);"></div></div>
 	                <div class="title-col2">
-	                    <h1><x:out select="$widget/Widget/Field[@name='Title']" escapeXml="false"/></h1>
-	                    <h3><x:out select="$widget/Widget/Field[@name='Date']" escapeXml="false"/></h3>
+	                    <h1><x:out select="$widget/*/Field[@name='Title']" escapeXml="false"/></h1>
+	                    <h3>
+	                    	<c:if test="${isMasonry}">
+	                    		<x:out select="$widget/*/Field[@name='Date']" escapeXml="false"/>
+	                    	</c:if>
+	                    	<c:if test="${not isMasonry}">
+	                    		<c:set var="newsDate" value="<%=newsDate%>"></c:set>	                    	
+	                    		<fmt:formatDate value="${newsDate}" pattern="yyyy-MM-dd" />
+	                    	</c:if>
+                    	</h3>
 	                </div>
 	                <div class="clear"></div>
 	            </div>	        
 	
 	            <div>
-	               <x:out select="$widget/Widget/Field[@name='Detail']" escapeXml="false"/>
+	               <x:out select="$widget/*/Field[@name='Detail']" escapeXml="false"/>
 	            </div>
 	        </div>
 	    </div>

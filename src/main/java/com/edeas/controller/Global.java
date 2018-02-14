@@ -21,7 +21,7 @@ public class Global {
 	
 	public static final Map<Long, String> fixUrlPrefix = new HashMap<Long, String>() {		
 		{
-			put(-3l, "Others");
+			put(-3l, "Others/");
 		}
     };
     
