@@ -158,30 +158,44 @@
         </div>
 
         <div class="photo-container">
-            <div class="grid">
-       	   		<x:forEach select="$contentXml/PageContent/Widget[@name='FullWidthMasonryGallery']/Widget[@name='FullWidthMasonryGalleryItem']" var="imageItem" varStatus="status">			   		
-	                <!--Post !-->
-	                <div class="grid__item" data-size="<x:out select="$imageItem/Field[@name='Image']/@srcw" escapeXml="false"/>x<x:out select="$imageItem/Field[@name='Image']/@srch" escapeXml="false"/>">
-	                    <a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" class="img-wrap">
-	                    	<img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" alt="<x:out select="$imageItem/Field[@name='Image']/@alt" escapeXml="false"/>" />
-	                        <c:if test="${not isPageAdmin }">
-	                        <div class="description description--grid">
-	                            <div>
-	                                <h2><x:out select="$imageItem/Field[@name='Title']" escapeXml="false"/></h2>
-	                                <p><x:out select="$imageItem/Field[@name='Content']" escapeXml="false"/></p>
-	                                <div class="details">
-	                                    <ul>
-	                                        <li><i class="fa fa-calendar"></i><span><x:out select="$imageItem/Field[@name='Date']" escapeXml="false"/></span></li>
-	                                        <li><i class="fa fa-user"></i><span><x:out select="$imageItem/Field[@name='Name']" escapeXml="false"/></span></li>	                                        
-	                                        <li><i class="fa fa-external-link"></i><span class="more-detail">More Detail</span><div class="more-detail-content"><x:out select="$imageItem/Field[@name='Detail']" escapeXml="false"/></div></li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        </c:if>
-	                    </a>
-	                </div>
-		   		</x:forEach>
+            <div class="grid">            	
+		   		<x:choose>
+				 <x:when select="$contentXml/PageContent/Widget[@name='FullWidthMasonryGallery']/Widget[@name='FullWidthMasonryGalleryItem']">
+	       	   		<x:forEach select="$contentXml/PageContent/Widget[@name='FullWidthMasonryGallery']/Widget[@name='FullWidthMasonryGalleryItem']" var="imageItem" varStatus="status">			   		
+		                <!--Post !-->
+		                <div class="grid__item" data-size="<x:out select="$imageItem/Field[@name='Image']/@srcw" escapeXml="false"/>x<x:out select="$imageItem/Field[@name='Image']/@srch" escapeXml="false"/>">
+		                    <a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" class="img-wrap">
+		                    	<img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" alt="<x:out select="$imageItem/Field[@name='Image']/@alt" escapeXml="false"/>" />
+		                        <c:if test="${not isPageAdmin }">
+		                        <div class="description description--grid">
+		                            <div>
+		                                <h2><x:out select="$imageItem/Field[@name='Title']" escapeXml="false"/></h2>
+		                                <p><x:out select="$imageItem/Field[@name='Content']" escapeXml="false"/></p>
+		                                <div class="details">
+		                                    <ul>
+		                                        <li><i class="fa fa-calendar"></i><span><x:out select="$imageItem/Field[@name='Date']" escapeXml="false"/></span></li>
+		                                        <li><i class="fa fa-user"></i><span><x:out select="$imageItem/Field[@name='Name']" escapeXml="false"/></span></li>	                                        
+		                                        <li><i class="fa fa-external-link"></i><span class="more-detail">More Detail</span><div class="more-detail-content"><x:out select="$imageItem/Field[@name='Detail']" escapeXml="false"/></div></li>
+		                                    </ul>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        </c:if>
+		                    </a>
+		                </div>
+			   		</x:forEach>
+				 </x:when>
+				 <x:otherwise>
+				 	<div style="text-align:center">#FullWidthMasonryGallery#</div>
+				 	<script>
+				 		$(function() {
+				 			setTimeout(function(){
+				 				$("div.grid").css("height", "25px");
+				 			}, 1000);				 							 			
+				 		});
+				 	</script>
+				 </x:otherwise>
+				</x:choose>
             </div>
             <!-- /grid -->
             <div class="preview">

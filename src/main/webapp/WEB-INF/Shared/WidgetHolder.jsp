@@ -64,21 +64,37 @@
 		<%
            	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Image']");
 			String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, false, "", null);
+			
+			Element enlargeNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Field[@name='Enlarge']");
+			String chkval = (enlargeNode == null) ? "false" : enlargeNode.getTextTrim();
+		    boolean enlarge = !StringUtils.isBlank(chkval) && Boolean.valueOf(chkval.toLowerCase());
        	%>
    		<x:if select="$widget/Field[@name='ImageAlign'] = 'LeftPhoto'">
    			<div class="widget content-right">
         		<div class="cr-left">
 	                <div class="enlarge-img-blk">
-	                    <a class="lightbox" href="#enlarge">
-	                        <div>
-	                            <%=image%>
-	                            <div class="enlarge-icon"><i class="fa fa-expand"></i></div>
-	                        </div>
-	                    </a> 
-	                    <div class="lightbox-target" id="enlarge">
-	                        <%=image%>
-	                       <a class="lightbox-close" href="#"></a>
-	                    </div>
+	                    <%
+                        	if(enlarge) {
+                        		%>
+				                    <a class="lightbox" href="#enlarge<%=i %>">
+				                        <div>
+				                            <%=image%>
+	                            			<div class="enlarge-icon"><i class="fa fa-expand"></i></div>				                            
+				                        </div>
+				                    </a> 
+				                    <div class="lightbox-target" id="enlarge<%=i %>">
+				                        <%=image%>
+				                       <a class="lightbox-close" href="#"></a>
+				                    </div>                        			
+                        		<%
+                        	} else {
+                        		%>
+                        			<div>
+			                            <%=image%>				                            
+			                        </div>
+                        		<%
+                        	}
+                        %>
 	                </div>
 	
 	                <div class="caption font-s">
@@ -94,16 +110,28 @@
 	            <div class="cl-left"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
 	            <div class="cl-right">
 	                <div class="enlarge-img-blk">
-	                    <a class="lightbox" href="#enlarge">
-	                        <div>
-	                            <%=image%>
-	                            <div class="enlarge-icon"><i class="fa fa-expand"></i></div>
-	                        </div>
-	                    </a> 
-	                    <div class="lightbox-target" id="enlarge">
-	                        <%=image%>
-	                       <a class="lightbox-close" href="#"></a>
-	                    </div>
+	                    <%
+                        	if(enlarge) {
+                        		%>
+				                    <a class="lightbox" href="#enlarge<%=i %>">
+				                        <div>
+				                            <%=image%>
+	                            			<div class="enlarge-icon"><i class="fa fa-expand"></i></div>				                            
+				                        </div>
+				                    </a> 
+				                    <div class="lightbox-target" id="enlarge<%=i %>">
+				                        <%=image%>
+				                       <a class="lightbox-close" href="#"></a>
+				                    </div>                        			
+                        		<%
+                        	} else {
+                        		%>
+                        			<div>
+			                            <%=image%>	                            							                            
+			                        </div>
+                        		<%
+                        	}
+                        %>
 	                </div>
 	                <div class="caption font-s">
 	                    <x:out select="$widget/Field[@name='Caption']" escapeXml="false"/> 
@@ -114,34 +142,44 @@
    		</x:if>	
    	</x:if>
    	<x:if select="$widgetName = 'RichContent'">
-   		<div class='widget rec'><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+   		<%
+           	Element contentWidget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");			
+       	%>
+   		<div class='widget rec'>
+   			<%= XmlUtils.getFieldRaw(contentWidget, "Content") %>
+   			
+   			<!-- Using below will have issue when insert table, it will auto gen many <br> before the table, don't know the reason  -->
+   			<!--x:out select="$widget/Field[@name='Content']" escapeXml="false" /-->
+   		</div>
    	</x:if>
    	<x:if select="$widgetName = 'PhotoSliders'">
    		<c:if test="${isPageAdmin}">
    			<div class="widget">   
-   		</c:if>		
-	        <div class="content_slider">
-	            <ul class="content_slider_ul">
-	            	<% int j = 1; %>
-			   		<x:forEach select="$widget/Widget[@name='PhotoSlider']" var="slider" varStatus="status">
-				   		<%
-				           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");
-							String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, true, "", null);
-							
-							Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Link']");						
-							String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
-							
-							String imageHtml = StringUtils.isBlank(linkAttr) ? image : ("<a " + linkAttr + ">" + image + "</a>");
-				       	%>
-	                	<li class="content_slider_li_<%=j%>"><%=imageHtml %></li>
-			   			
-			   			<% j++; %>
-			   		</x:forEach>                
-	            </ul>
-	            <a class="button button_js slider_prev" href="#"><span class="button_icon"><i class="fa fa-angle-left"></i></span></a>
-	            <a class="button button_js slider_next" href="#"><span class="button_icon"><i class="fa fa-angle-right"></i></span></a>
-	            <div class="slider_pagination"></div>
-	        </div>
+   		</c:if>
+   			<x:if select="$widget/Widget[@name='PhotoSlider']">
+		        <div class="content_slider">
+		            <ul class="content_slider_ul">
+		            	<% int j = 1; %>
+				   		<x:forEach select="$widget/Widget[@name='PhotoSlider']" var="slider" varStatus="status">
+					   		<%
+					           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");
+								String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, true, "", null);
+								
+								Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Link']");						
+								String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
+								
+								String imageHtml = StringUtils.isBlank(linkAttr) ? image : ("<a " + linkAttr + ">" + image + "</a>");
+					       	%>
+		                	<li class="content_slider_li_<%=j%>"><%=imageHtml %></li>
+				   			
+				   			<% j++; %>
+				   		</x:forEach>                
+		            </ul>
+		            <a class="button button_js slider_prev" href="#"><span class="button_icon"><i class="fa fa-angle-left"></i></span></a>
+		            <a class="button button_js slider_next" href="#"><span class="button_icon"><i class="fa fa-angle-right"></i></span></a>
+		            <div class="slider_pagination"></div>
+		        </div>
+   			</x:if>	
         <c:if test="${isPageAdmin}">
    			</div>   
    		</c:if>        
@@ -175,9 +213,9 @@
 			Map<String, String> othattrs = new HashMap<String, String>();
 			othattrs.put("class", "button");
 			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms, othattrs);				
-			if(!StringUtils.isBlank(textNode.getTextTrim()) && !StringUtils.isBlank(linkAttr)) {
+			if(!StringUtils.isBlank(textNode.getTextTrim()) || iscms) {
 				%>
-        			<a <%=linkAttr %>><span class="widget g-btn"><%=textNode.getTextTrim() %></span></a>
+        			<a class="button" <%=linkAttr %>><span class="widget g-btn"><%=textNode.getTextTrim() %></span></a>
 				<%
 			}
         %>        

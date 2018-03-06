@@ -8,7 +8,7 @@ img 		 { width:100%; border:0; -ms-interpolation-mode: bicubic; }
 
 hr { height:1px; background-color:#e7e7e7; border:none; margin:2% 0;}
 
-a      { color:#018752; text-decoration:underline; outline:0;}
+a      { color:#124b98; text-decoration:underline; outline:0;}
 a:hover  { text-decoration:underline;}
 
 ul   { margin:0px; padding:10px 0px; text-indent:0;}
@@ -30,7 +30,7 @@ h4 { font-size:10px; line-height:1.4; margin-bottom:15px; font-weight:bold; }
 .txt-white			{ color:#fff;}
 .txt-black			{ color:#333;}
 .txt-lightGreen		{ color:#99cc33}
-.txt-green 			{ color:#018752}
+.txt-green 			{ color:#124b98}
 .txt-orange			{ color:#f47920;}
 .txt-blue			{ color:#0000ff;}
 .txt-red			{ color:#ff0000;}
@@ -38,7 +38,7 @@ h4 { font-size:10px; line-height:1.4; margin-bottom:15px; font-weight:bold; }
 /* table */
 /* • General template - color table style */
 table.gen        { text-align:left; vertical-align:top; margin:1% 0 0 0;}
-table.gen th     { background-color:#018752; padding:1% 2%; color:#fff; text-align:left; vertical-align:top; }
+table.gen th     { background-color:#124b98; padding:1% 2%; color:#fff; text-align:left; vertical-align:top; }
 table.gen tr.even td { background-color:#dbdbdb; padding:1% 2%; border-bottom:1px solid #fff; text-align:left; vertical-align:top; }
 table.gen tr.odd td  { background-color:#e7e7e7; padding:1% 2%; border-bottom:1px solid #fff; text-align:left; vertical-align:top; }
 
@@ -58,7 +58,7 @@ table.nude tr.odd td   { background-color:#fff; padding:0; border-bottom:1px sol
 .col2-table-row:nth-child(odd) {background-color:#dbdbdb}
 .col2-table-row:nth-child(even) {background-color:#e7e7e7}
 .col2-table-row .field   { text-transform:uppercase; text-align:right; width:25%;
-								  background-color:#018752; color:#fff;} 
+								  background-color:#124b98; color:#fff;} 
 .col2-table-row .detail  { width:75%}
 
 

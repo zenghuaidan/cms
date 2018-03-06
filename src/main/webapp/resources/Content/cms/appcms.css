@@ -1,4 +1,4 @@
-﻿/*************************** SITE SPECIFIC ***********************/ 
+/*************************** SITE SPECIFIC ***********************/ 
 .clear    { clear:both; float:none; }
 .cmspgw   { }
 .hlcolor  { color:#176548}
@@ -7,7 +7,7 @@
 .hlgradbg a, .hlgradbg a:link, .hlgradbg a:visited { color: #fff;}
 .hlgradbg a:hover, .hlgradbg a:active, .hlgradbg a:focus { text-decoration: underline; outline: none; color: #fff;}
 .pg span:hover {}
-#cmslogo { padding: 5px 0px 5px 20px; width: auto; height: 70px; }
+#cmslogo { padding: 12px 0px 0px 20px; width: auto; height: 70px; }
 .selcmstab { color:#fff; }
 .newWdropbox  { color:#06c; }
 
