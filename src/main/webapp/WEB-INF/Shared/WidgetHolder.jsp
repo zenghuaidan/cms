@@ -25,7 +25,8 @@
 		List<Page> detailPages = (List<Page>)InitServlet.getQueryService().findPageByTemplate(isVideoGallery ? "VideoDetail" : "NewsDetail", iscms, true);
 		if (detailPages != null && detailPages.size() > 0) {
 			Page detailPage = detailPages.get(0);
-			detailPageUrl = XmlUtils.getPageLink(detailPage, lang, iscms, false).getLink();				
+			detailPageUrl = XmlUtils.getPageLink(detailPage, lang, iscms, false).getLink();
+			detailPageUrl += (detailPageUrl.indexOf("?") != -1 ? "&" : "?"); 
 		}
 	}
 %>
@@ -373,7 +374,7 @@
 			}
         %>
         <div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
-	        <a href="<%=detailPageUrl%>?videoPageId=<%=currentPage.getId() %>&videoId=<x:out select="$widget/@id" escapeXml="false"/>">
+	        <a href="<%=detailPageUrl%>videoPageId=<%=currentPage.getId() %>&videoId=<x:out select="$widget/@id" escapeXml="false"/>">
 	            <div class="withlink-blk">
 	                <div class="box-row">  <!-- btn for desktop only!-->
 	                    <div class="box"><i class="gi gi-more"></i></div>
@@ -407,7 +408,7 @@
 			}
         %>
 		<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
-        	<a href="<%=detailPageUrl%>?newsPageId=<%=currentPage.getId() %>&newsId=<x:out select="$widget/@id" escapeXml="false"/>"><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a>
+        	<a href="<%=detailPageUrl%>newsPageId=<%=currentPage.getId() %>&newsId=<x:out select="$widget/@id" escapeXml="false"/>"><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a>
 
             <div class="post-desc-wrapper">
 	            <div class="post-desc">
@@ -417,7 +418,7 @@
 	                    <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
 	                </a>
 	                <div class="post-footer">
-	                    <a href="<%=detailPageUrl%>?newsPageId=<%=currentPage.getId() %>&newsId=<x:out select="$widget/@id" escapeXml="false"/>"><div class="box"><i class="gi gi-more"></i></div></a>
+	                    <a href="<%=detailPageUrl%>newsPageId=<%=currentPage.getId() %>&newsId=<x:out select="$widget/@id" escapeXml="false"/>"><div class="box"><i class="gi gi-more"></i></div></a>
 	                    <a href="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Field[@name='Document']" escapeXml="false"/>"> <div class="box"><i class="fa fa-download"></i></div></a>
 	                    <div class="clear"></div>
 	                </div>
