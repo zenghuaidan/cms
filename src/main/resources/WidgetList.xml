@@ -221,7 +221,7 @@
   	<Widget id="TimelineBlk">
   		<Field name="Date" type="datfield" label="Date" />  		
   		<Field name="Title" type="ttafield" label="Title" />  		
-  		<Field name="Content" type="redfield" label="Content" />	
+  		<Field name="Content" type="ttafield" label="Content" />	
   	</Widget>
   	
   	<!-- Horizontal Timeline -->
@@ -229,8 +229,9 @@
   		<Field name="Date" type="datfield" label="Date" />
   		<Field name="Image" type="imgfield" label="Image" />	
   		<Field name="Description" type="txtfield" label="Description" />
-  		<Field name="Content" type="redfield" label="Content" />
-  		<Field name="Detail" type="redfield" label="Detail" />
+  		<Field name="Content" type="ttafield" label="Content" />
+  		<Field name="DetailTitle" type="ttafield" label="Detail Title" />
+  		<Field name="Detail" type="ttafield" label="Detail Content" />
   	</Widget>
   	
 </WidgetList>

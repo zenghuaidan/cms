@@ -79,6 +79,9 @@
         
     }); 
 </script>
+<style>
+	.image_roll_zoom { background : unset !important; }
+</style>
 
 <div class="full-wrapper timeline-pos clearfix"> 
 	<div class="timelineLoader">
@@ -103,8 +106,8 @@
                     	<img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(element, "Image")) %>" alt="<%=XmlUtils.getWidgetFieldAttr(element, "Image", "alt") %>"/>
                     </a>
                     <h2><%=dateStr%></h2>
-                    <span><c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out></span>
-                    <div class="read_more" data-id="<%=dateId%>">Read more</div>
+                    <span><c:out value='<%=XmlUtils.getFieldRaw(element, "Content", false)%>' escapeXml="false"></c:out></span>
+                    <div class="read_more" data-id="<%=dateId%>"><%= lang.equals("en") ? "Read more" : (lang.equals("tc") ? "閱讀更多" : "阅读更多") %></div>
                 </div>
                 <div class="item_open" data-id="<%=dateId%>" data-access="<%=Global.getWebUrl() %>/common/timelineDetail?iscms=${iscms}&lang=${lang}&pageId=${currentPage.id}&timelineId=<%=XmlUtils.getFieldAttr(element, "id") %>">
                     <div class="item_open_content">

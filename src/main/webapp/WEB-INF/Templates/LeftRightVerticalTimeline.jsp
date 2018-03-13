@@ -66,13 +66,12 @@
            			for(Element element : elements) {
            				%>
                         <div class="cd-timeline-block">
-                            <div class="cd-timeline-img cd-picture">
-                                <img src="images/icon-picture.svg" alt="Picture">
+                            <div class="cd-timeline-img">
                             </div>
 
                             <div class="cd-timeline-content">                                
                                 <h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title", true)%>' escapeXml="false"></c:out></h2>
-		                        <p><c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out></p>
+		                        <p><c:out value='<%=XmlUtils.getFieldRaw(element, "Content", true)%>' escapeXml="false"></c:out></p>
                                 <!--a href="#0" class="cd-read-more">Read more</a-->
                                 <%
                                 	String date = XmlUtils.getFieldRaw(element, "Date");

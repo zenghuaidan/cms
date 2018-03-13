@@ -76,7 +76,7 @@
 
 	.timelineFlat #t_line_left,
 	.timelineFlat #t_line_right { display: inline-block; top:39px; width:14px; height:21px; font-size: 21px; color: #b7b6b6; position: relative; 
-								  border: 1px solid red; cursor:pointer;
+								 cursor:pointer;
 								 -webkit-font-smoothing: antialiased;
 								-moz-osx-font-smoothing: grayscale;}
 
