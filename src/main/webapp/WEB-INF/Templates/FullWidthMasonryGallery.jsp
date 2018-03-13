@@ -186,14 +186,16 @@
 			   		</x:forEach>
 				 </x:when>
 				 <x:otherwise>
-				 	<div style="text-align:center">#FullWidthMasonryGallery#</div>
-				 	<script>
-				 		$(function() {
-				 			setTimeout(function(){
-				 				$("div.grid").css("height", "25px");
-				 			}, 1000);				 							 			
-				 		});
-				 	</script>
+				 	<c:if test="${ isPageAdmin }">
+					 	<div style="text-align:center">#FullWidthMasonryGallery#</div>
+					 	<script>
+					 		$(function() {
+					 			setTimeout(function(){
+					 				$("div.grid").css("height", "25px");
+					 			}, 1000);				 							 			
+					 		});
+					 	</script>
+				 	</c:if>
 				 </x:otherwise>
 				</x:choose>
             </div>
