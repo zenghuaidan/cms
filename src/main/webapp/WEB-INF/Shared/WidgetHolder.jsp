@@ -194,7 +194,7 @@
 		           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");					
           			String imageUrl = Global.getImagesUploadPath(Global.IMAGE_SOURCE, imageNode.getTextTrim());
 		       	%>
-            	<div class="col span_1_of_4" style="background: url('<%=imageUrl%>')"></div>	   			
+            	<div class="col span_1_of_4" style="background: url('<%=imageUrl%>') #ececec no-repeat center center; background-size: contain;"></div>	   			
 	   			<% j++; %>
 	   		</x:forEach>
 	   		<%

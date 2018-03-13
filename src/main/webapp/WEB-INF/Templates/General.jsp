@@ -11,8 +11,7 @@
 <link href="${Content}/css/slider.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/enlarge-img.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/accordion.css" rel="stylesheet" type="text/css" />
-<style>
-    .sm-img .span_1_of_4 { background:#ececec no-repeat center center; background-size: contain}   
+<style>   
     <c:if test="${isPageAdmin}">
 	    h1, h2, h3 { text-align: left !important; } 
     </c:if>
