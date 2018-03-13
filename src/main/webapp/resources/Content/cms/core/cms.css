@@ -301,6 +301,24 @@ h1 { padding:0px 15px; margin:0px; text-align:center;}
 .woptlist .nwHtml5VideoTimelineBlk img                { background-image:url(widgets/icon-timelinemovie.png)}
 .woptlist .nwHtml5VideoTimelineBlk:hover img     { background-image:url(widgets/icon-timelinemovie-d.png)}
 
+.woptlist .nwHtml5VideoStyleGallery img                { background-image:url(widgets/icon-post-video.png)}
+.woptlist .nwHtml5VideoStyleGallery:hover img     { background-image:url(widgets/icon-post-video-d.png)}
+.woptlist .nwYoutubeStyleGallery img                { background-image:url(widgets/icon-post-youtube.png)}
+.woptlist .nwYoutubeStyleGallery:hover img     { background-image:url(widgets/icon-post-youtube-d.png)}
+.woptlist .nwImageStyleGallery img                { background-image:url(widgets/icon-post-cover.png)}
+.woptlist .nwImageStyleGallery:hover img     { background-image:url(widgets/icon-post-cover-d.png)}
+.woptlist .nwDescriptionStyleGallery img                { background-image:url(widgets/icon-post-description.png)}
+.woptlist .nwDescriptionStyleGallery:hover img     { background-image:url(widgets/icon-post-description-d.png)}
+.woptlist .nwSliderStyleGallery img                { background-image:url(widgets/icon-post-silder.png)}
+.woptlist .nwSliderStyleGallery:hover img     { background-image:url(widgets/icon-post-silder-d.png)}
+.woptlist .nwImageDocumentAndDetailStyleGallery img                { background-image:url(widgets/icon-post-pg.png)}
+.woptlist .nwImageDocumentAndDetailStyleGallery:hover img     { background-image:url(widgets/icon-post-pg-d.png)}
+
+.woptlist .nwImageStyleGallery img                { background-image:url(widgets/icon-post-cover.png)}
+.woptlist .nwImageStyleGallery:hover img     { background-image:url(widgets/icon-post-cover-d.png)}
+.woptlist .nwImageDetailStyleGallery img                { background-image:url(widgets/icon-post-pg.png)}
+.woptlist .nwImageDetailStyleGallery:hover img     { background-image:url(widgets/icon-post-pg-d.png)}
+
 
 
 .woptlist .nwMilestoneYrBlk img         { background-image:url(widgets/icon-nwMilestoneYrBlk.png) }

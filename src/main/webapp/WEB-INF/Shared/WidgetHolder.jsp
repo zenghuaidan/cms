@@ -200,7 +200,9 @@
 	   		<%
 	   			if(j == 1) {
 	   				%>
-       					<div style="text-align:center"># Configure Column Image Item</div>
+	   					<c:if test="${ isPageAdmin }">
+	       					<div style="text-align:center"># Configure Column Image Item</div>
+	   					</c:if>
 	   				<%
 	   			}
 	   		%>       
