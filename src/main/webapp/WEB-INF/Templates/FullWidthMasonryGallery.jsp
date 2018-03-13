@@ -175,7 +175,7 @@
 		                                    <ul>
 		                                        <li><i class="fa fa-calendar"></i><span><x:out select="$imageItem/Field[@name='Date']" escapeXml="false"/></span></li>
 		                                        <li><i class="fa fa-user"></i><span><x:out select="$imageItem/Field[@name='Name']" escapeXml="false"/></span></li>	                                        
-		                                        <li><i class="fa fa-external-link"></i><span class="more-detail">More Detail</span><div class="more-detail-content"><x:out select="$imageItem/Field[@name='Detail']" escapeXml="false"/></div></li>
+		                                        <li><i class="fa fa-external-link"></i><span class="more-detail"><%= lang.equals("en") ? "More Detail" : (lang.equals("tc") ? "更多詳情" : "更多详情") %></span><div class="more-detail-content"><x:out select="$imageItem/Field[@name='Detail']" escapeXml="false"/></div></li>
 		                                    </ul>
 		                                </div>
 		                            </div>
