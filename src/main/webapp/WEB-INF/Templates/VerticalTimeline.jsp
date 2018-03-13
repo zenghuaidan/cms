@@ -33,6 +33,7 @@
 	    height: 25px;
 	    margin-left: -5px !important;
 	}
+	.center { background-position: center center !important; }
 </style>
 
 <%
@@ -135,17 +136,20 @@
 		                                    <div><img src="${Content}/images/spacer.png"/></div>
 		                                </div>
 		                                <div class="col2-sm2">
-		                                    <div class="time-cover">
-		                                    	<%
-		                                    		String image = XmlUtils.getFieldRaw(element, "Image");
-		                                    		if(!StringUtils.isBlank(image)) {
-		                                    			%>
-		                                    				<img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, image) %>">
-		                                    			<%
-		                                    		}
-		                                    	%>
-		                                    </div>
-		                                    <div class="detail-col">
+	                                    	<%
+	                                    		String image = XmlUtils.getFieldRaw(element, "Image");
+	                                    		String contentStyle = "";
+	                                    		if(!StringUtils.isBlank(image)) {
+	                                    			%>
+	                                    				<div class="time-cover">
+	                                    					<img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, image) %>">
+	                                    				</div>
+	                                    			<%
+	                                    		} else {
+	                                    			contentStyle = "style='width:100%'";
+	                                    		}
+	                                    	%>
+		                                    <div class="detail-col" <%=contentStyle %>>
 		                                        <div>
 		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title", true)%>' escapeXml="false"></c:out></h2>
 		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out>
@@ -156,6 +160,8 @@
 		                        </div>
 								<%
 							} else if("TimelineSliderImages".equals(widgetName)) {
+                                List<Element> timelineSliderImages = (List<Element>)element.selectNodes("Widget[@name='TimelineSliderImage']");
+                                String contentStyle = timelineSliderImages.size() > 0 ? "" : "style='width:100%'";
 								%>
 		                        <div class="col-sm-height col-2">
 		                            <div class="row-height">
@@ -163,26 +169,32 @@
 		                                    <div><img src="${Content}/images/spacer.png"/></div>
 		                                </div>
 		                                <div class="col2-sm2">
-		                                    <div class="time-cover">
-		                                        <div id="rev_slider_16_2_wrapper" class="rev_slider_wrapper">
-		                                            <div id="rev_slider_16_2" class="rev_slider" data-version="5.0.4.1">
-		                                                <ul>
-		                                                	<%
-		                                                		for(Element timelineSliderImage : (List<Element>)element.selectNodes("Widget[@name='TimelineSliderImage']")) {
-		                                                			Element image = (Element)timelineSliderImage.selectSingleNode("Field[@name='Image']");
-		                                                			%>
-				                                                    <li data-index="rs-21" data-transition="fade" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide" data-description="">
-				                                                        <img src='<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(timelineSliderImage, "Image"))%>'  alt="<%=XmlUtils.getFieldAttr(image, "alt") %>" data-lazyload="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(timelineSliderImage, "Image"))%>" data-bgposition="center top" data-bgfit="100%" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" data-no-retina  >
-				                                                    </li>
-		                                                			<%
-		                                                		}
-		                                                	%>	
-		                                                </ul>
-		                                                <div class="tp-bannertimer flv_rev_21"></div>
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    <div class="detail-col">
+		                                	<%
+		                                		if(timelineSliderImages.size() > 0) {
+		                                			%>
+					                                    <div class="time-cover">
+					                                        <div id="rev_slider_16_2_wrapper" class="rev_slider_wrapper">
+					                                            <div id="rev_slider_16_2" class="rev_slider" data-version="5.0.4.1">
+					                                                <ul>
+					                                                	<%
+					                                                		for(Element timelineSliderImage : timelineSliderImages) {
+					                                                			Element image = (Element)timelineSliderImage.selectSingleNode("Field[@name='Image']");
+					                                                			%>
+								                                                    <li data-index="rs-21" data-transition="fade" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide" data-description="">
+								                                                        <img src='<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(timelineSliderImage, "Image"))%>'  alt="<%=XmlUtils.getFieldAttr(image, "alt") %>" data-lazyload="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(timelineSliderImage, "Image"))%>" data-bgposition="center top" data-bgfit="100%" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" data-no-retina  >
+								                                                    </li>
+					                                                			<%
+					                                                		}
+					                                                	%>	
+					                                                </ul>
+					                                                <div class="tp-bannertimer flv_rev_21"></div>
+					                                            </div>
+					                                        </div>
+					                                    </div>
+		                                			<%
+		                                		}
+		                                	%>
+		                                    <div class="detail-col" <%=contentStyle%>>
 		                                        <div>
 		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title", true)%>' escapeXml="false"></c:out></h2>
 		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out>
@@ -193,6 +205,8 @@
 		                        </div>
 								<%
 							} else if("Html5VideoTimelineBlk".equals(widgetName)) {
+								String video = XmlUtils.getFieldRaw(element, "Video");
+								String contentStyle = !StringUtils.isEmpty(video) ? "" : "style='width:100%'";
 								%>
 								<div class="col-sm-height col-2">
 		                            <div class="row-height">
@@ -200,14 +214,21 @@
 		                                    <div><img src="${Content}/images/spacer.png"/></div>
 		                                </div>
 		                                <div class="col2-sm2">
-		                                    <div class="time-cover">
-		                                    <div id="jp_container_128" class="jp-video mfn-jcontainer jp-video-360p">
-		                                        <div class="jp-type-single">
-		                                            <div id="jquery_jplayer_128" class="jp-jplayer mfn-jplayer" data-m4v="<%=Global.getDocUploadPath(XmlUtils.getFieldRaw(element, "Video")) %>" data-img="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(element, "Image")) %>"></div>
-		                                           	<%@include file="/WEB-INF/Shared/Video.jsp" %>
-		                                        </div>
-		                                    </div></div>
-		                                    <div class="detail-col">
+		                                	<%
+		                                		if(!StringUtils.isEmpty(video)) {
+		                                			%>
+					                                    <div class="time-cover">
+						                                    <div id="jp_container_<%=element.attributeValue("id") %>" class="jp-video mfn-jcontainer jp-video-360p">
+						                                        <div class="jp-type-single">
+						                                            <div id="jquery_jplayer_<%=element.attributeValue("id") %>" class="jp-jplayer mfn-jplayer" data-m4v="<%=Global.getDocUploadPath(video) %>" data-img="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(element, "Image")) %>"></div>
+						                                           	<%@include file="/WEB-INF/Shared/Video.jsp" %>
+						                                        </div>
+						                                    </div>
+					                                    </div>
+		                                			<%
+		                                		}
+		                                	%>
+		                                    <div class="detail-col" <%=contentStyle %>>
 		                                        <div>
 		                                        	<h2><c:out value='<%=XmlUtils.getFieldRaw(element, "Title", true)%>' escapeXml="false"></c:out></h2>
 		                                        	<c:out value='<%=XmlUtils.getFieldRaw(element, "Content")%>' escapeXml="false"></c:out>

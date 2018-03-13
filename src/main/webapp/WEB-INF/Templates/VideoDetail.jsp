@@ -63,8 +63,8 @@
 	            </div>
 	        
 	            <!--Video1-->
-	            <div id="jp_container_128" class="jp-video mfn-jcontainer jp-video-360p2" style="">
-	                <div class="jp-type-single">
+	            <div id="jp_container_10000" class="jp-video mfn-jcontainer jp-video-360p2" style="">
+	                <div id="jquery_jplayer_10000" class="jp-type-single">
 	                    <div class="jp-jplayer mfn-jplayer" data-m4v="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Widget/Field[@name='Video']" escapeXml="false"/>" data-img="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Widget/Field[@name='Image']" escapeXml="false"/>" style="height:600px"></div>
 	                    <%@include file="/WEB-INF/Shared/Video.jsp" %>
 	                </div>

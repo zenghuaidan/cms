@@ -289,9 +289,9 @@
 			}
         %>
 		<div class="widget format-video <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
-	        <div id="jp_container_128" class="jp-video mfn-jcontainer jp-video-360p">
+	        <div id="jp_container_<%=i %>" class="jp-video mfn-jcontainer jp-video-360p">
 	            <div class="jp-type-single">
-	                <div id="jquery_jplayer_128" class="jp-jplayer mfn-jplayer" data-m4v="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Field[@name='Video']" escapeXml="false"/>" data-img="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>"></div>
+	                <div id="jquery_jplayer_<%=i %>" class="jp-jplayer mfn-jplayer" data-m4v="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Field[@name='Video']" escapeXml="false"/>" data-img="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>"></div>
 	                <%@ include file="/WEB-INF/Shared/Video.jsp" %>
 	            </div>
 	        </div>
