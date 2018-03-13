@@ -99,6 +99,10 @@ public class CmsProperties {
 		return getIntValue("MaxLevel");
 	}
 	
+	public static String getGACode() {		
+		return getValue("GACode");
+	}
+	
 	// size in M unit
 	public static int getImageMaxUploadSize() {
 		return getIntValue("ImageMaxUploadSize");		

@@ -7,7 +7,7 @@
 .hlgradbg a, .hlgradbg a:link, .hlgradbg a:visited { color: #fff;}
 .hlgradbg a:hover, .hlgradbg a:active, .hlgradbg a:focus { text-decoration: underline; outline: none; color: #fff;}
 .pg span:hover {}
-#cmslogo { padding: 12px 0px 0px 20px; width: auto; height: 70px; }
+#cmslogo { padding: 12px 0px 0px 20px; width: auto; height: 30px; }
 .selcmstab { color:#fff; }
 .newWdropbox  { color:#06c; }
 

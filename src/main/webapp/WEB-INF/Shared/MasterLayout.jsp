@@ -32,7 +32,7 @@
 	
 	Document contentDocument = pageContent.getPropertyXmlDoc();
 	String seoDesc = XmlUtils.getPtyFieldVal(contentDocument, "SeoDesc", false);
-	String seoKeys = XmlUtils.getPtyFieldVal(contentDocument, "SeoKeys", false);
+	String seoKeys = XmlUtils.getPtyFieldVal(contentDocument, "SeoKeys", false);	
 %>
 <head>
     <title><%=headTitle%></title>    
@@ -72,15 +72,19 @@
 
 	<sitemesh:write property='body'/>
    
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        $(function () {
-            try {
-                pageTracker = _gat._getTracker("");
-                pageTracker._trackPageview();             
-            } catch (err) { }
-        });
-    </script>
+   	<%
+   		String gaCode = CmsProperties.getGACode();
+   		if (!StringUtils.isEmpty(gaCode)) {
+   			%>
+			    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=gaCode %>"></script>
+			    <script>
+			      window.dataLayer = window.dataLayer || [];
+			      function gtag(){dataLayer.push(arguments);}
+			      gtag('js', new Date());
+			      gtag('config', '<%=gaCode %>');
+			    </script>
+   			<%
+   		}
+   	%>
 </body>
 </html>	        

@@ -12,7 +12,10 @@
 <link href="${Content}/css/enlarge-img.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/accordion.css" rel="stylesheet" type="text/css" />
 <style>
-    .sm-img .span_1_of_4.demo1 { background:#ececec no-repeat center center; background-size: contain}    
+    .sm-img .span_1_of_4.demo1 { background:#ececec no-repeat center center; background-size: contain}   
+    <c:if test="${isPageAdmin}">
+	    h1, h2, h3 { text-align: left !important; } 
+    </c:if>
 </style>
 <div class="general full-wrapper clearfix"> 
     <div class="inner-wrapper">

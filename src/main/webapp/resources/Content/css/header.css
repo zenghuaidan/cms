@@ -27,7 +27,7 @@
 
     /* overflow: hidden; */
     #Top_bar #logo:hover            { text-decoration: none;}
-    #Top_bar #logo img              { vertical-align:middle; max-height:100%;}
+    #Top_bar #logo img              { vertical-align:middle; max-height:100%; margin-top: 15px; }
     #Top_bar #logo img.logo-sticky  { display: none;}
 
    
@@ -197,7 +197,7 @@
     #Top_bar .logo #logo { padding:0}
   
     #Top_bar .logo img,
-    #Top_bar.is-sticky .logo img  { position:absolute; margin:0;  padding-left:0; left:55px;  top:15px;}
+    #Top_bar.is-sticky .logo img  { position:absolute; margin:0;  padding-left:0; left:55px;  top:0px;}
 
     #Top_bar.is-sticky a.responsive-menu-toggle  { top:15px;}
   /*  #Top_bar.is-sticky .top_bar_right span {line-height:70px;}*/
@@ -283,7 +283,7 @@
     #Top_bar .logo #logo { padding:0}
   
     #Top_bar .logo img,
-    #Top_bar.is-sticky .logo img  { position:absolute; margin:0;  padding-left:0; left:55px;  top:15px;}
+    #Top_bar.is-sticky .logo img  { position:absolute; margin:0;  padding-left:0; left:55px;  top:0px;}
 
     .lang-m      { display:block; position:fixed; right:20px; z-index:900; color:#fff}
     html #body.en .lang-m  { top:20px;}

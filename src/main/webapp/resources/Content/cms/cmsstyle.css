@@ -1,4 +1,4 @@
-﻿/*body{margin:0px; line-height:18px;color:#666666;text-decoration: none; -webkit-text-size-adjust:none;}
+/*body{margin:0px; line-height:18px;color:#666666;text-decoration: none; -webkit-text-size-adjust:none;}
 h1,h2,h3 { padding:0px; margin:0px; text-align:left; }      
 img{border: 0;}
 div{position:relative}
@@ -16,7 +16,7 @@ table td { vertical-align:top; }
 .hlbg                { background:#BB2650}
 .hlgradbg            { background-color:#BB2650}
 #admintopheader.hlgradbg { background-color:#BB2650}
-.woptlist .nwColorBox img, .woptlist .nwColorBox:hover img { background-color:#BB2650} /* Editor Color Box background color */ 
+.woptlist .nwColorBox img, .woptlist .nwColorBox:hover img { background-color:#124b98; } /* Editor Color Box background color */ 
 .whitefontover:hover { background-color:#d4eda9; color:#333;} /* CMS "Publish", "Mark Delete"...btn hover color */ 
 /* ======================================================================= */
 

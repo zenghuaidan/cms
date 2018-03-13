@@ -33,7 +33,11 @@ public class CommonController extends BaseController {
 		Document contentDocument = content.getContentXmlDoc();
 		
 		Element element = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='HorizontalTimelineBlks']/Widget[@id='" + timelineId + "']");
+		String detailContent = XmlUtils.getFieldRaw(element, "Detail", true);
+		String detailTitle = XmlUtils.getFieldRaw(element, "DetailTitle", false);
 		
-		return XmlUtils.getFieldRaw(element, "Detail", true);		
+		String result = "<div class='timeline_open_content'><h2 class='no-marg-top'>" + detailTitle + "</h2><span>" + detailContent + "</span></div>";
+		
+		return result;		
 	}
 }
