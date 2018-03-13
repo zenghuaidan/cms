@@ -205,20 +205,20 @@
                  <h1 id="currentMonth" year="" month=""><i class="previousMonth"></i><label></label><i class="nextMonth"></i></h1>
                  <div class="legend-blk">
                      <div class="legend">
-                         <div>Job</div>
-                         <div>Leisure</div>
+                         <div><%= lang.equals("en") ? "Job" : (lang.equals("tc") ? "工作" : "工作") %></div>
+                         <div><%= lang.equals("en") ? "Leisure" : (lang.equals("tc") ? "休閒" : "休闲") %></div>
                      </div>
                  </div>
                  <div class="clear"></div>
                  <div id="calendar">
                      <ul class="weekdays">
-                         <li>Sunday</li>
-                         <li>Monday</li>
-                         <li>Tuesday</li>
-                         <li>Wednesday</li>
-                         <li>Thursday</li>
-                         <li>Friday</li>
-                         <li>Saturday</li>
+                         <li><%= lang.equals("en") ? "Sunday" : "星期日" %></li>
+                         <li><%= lang.equals("en") ? "Monday" : "星期一" %></li>
+                         <li><%= lang.equals("en") ? "Tuesday" : "星期二" %></li>
+                         <li><%= lang.equals("en") ? "Wednesday" : "星期三" %></li>
+                         <li><%= lang.equals("en") ? "Thursday" : "星期四" %></li>
+                         <li><%= lang.equals("en") ? "Friday" : "星期五" %></li>
+                         <li><%= lang.equals("en") ? "Saturday" : "星期六" %></li>
                      </ul>
                  </div>
              </div>

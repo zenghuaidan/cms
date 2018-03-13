@@ -111,7 +111,7 @@
 
 
 
-  	/* â€¢ Image Scale */
+  	/* þýþýImage Scale */
   	.general .img-scale70  { width:70%; height:auto;}
   	.general .img-scale60  { width:60%; height:auto;}
   	.general .img-scale50  { width:50%; height:auto;}
@@ -126,7 +126,7 @@
   	}
 
 
-  	/* â€¢ Video */
+  	/* þýþýVideo */
   	.videoWrapper           { position:relative; padding-bottom:56.25%; /* 16:9 */ height:0;}
   	.videoWrapper iframe    { position:absolute; top:0; left:0; width:100%; height:100%; }
 
@@ -172,7 +172,7 @@
   	.general .col2-table-row:nth-child(odd)  { background-color:#dbdbdb; }
   	.general .col2-table-row:nth-child(even) { background-color:#dbdbdb; }
 
-  	/* â€¢ 2 col responsive table */
+  	/* þýþý2 col responsive table */
   	.general .col2-table-halfRow { display:block; table-layout:inherit;  height:100%; width:100%;}
   	.general .col2-table-halfRow .table-col { display:block; float:inherit; height:100%; padding:inherit;}
   	.general .col2-table-halfRow .half-col:nth-child(odd)    { width:100%; padding-right:0%; padding-bottom:20px} 
@@ -197,7 +197,7 @@
                         background-color:#999; background-image:none; padding:5px 0; color:#fff;}
     .btn-back:hover { background-color:#ba2950; cursor:pointer}
     html #body.en .btn-back:after { content:"< BACK"; padding-left:10px; }
-    html #body.tc .btn-back:after { content:"< è¿”å›ž"; padding-left:10px; }
+    html #body.tc .btn-back:after { content:"< ªð¦^"; padding-left:10px; }
 
 	}
 
