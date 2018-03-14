@@ -103,7 +103,7 @@
             <!--pagination!-->
 
             <div class="pagination">
-                <i class="fa fa-chevron-circle-left"></i>Page <input type="text" class="page">/ <label class="pageNum"></label>  <i class="fa fa-chevron-circle-right"></i>
+                <i class="fa fa-chevron-circle-left"></i><%= lang.equals("en") ? "Page" : (lang.equals("tc") ? "頁" : "页") %> <input type="text" class="page">/ <label class="pageNum"></label>  <i class="fa fa-chevron-circle-right"></i>
             </div>
         </div>
     </div>
