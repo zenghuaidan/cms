@@ -64,7 +64,7 @@
 					put("Form2Text7", Arrays.asList("餐廳<br />時間是 "));
 					put("Form2Text8", Arrays.asList("位置在"));
 					put("Form2Text9", Arrays.asList("任何地點"));
-					put("Form2Text10", Arrays.asList("例如: <em>香港島</em> or <em>九龍</em>"));
+					put("Form2Text10", Arrays.asList("例如: <em>香港島</em> 或者  <em>九龍</em>"));
 					put("Form2Option1", Arrays.asList("任何類型食物", "印度餐", "法國餐", "日本餐", "意大利餐"));
 					put("Form2Option2", Arrays.asList("標準的", "奇幻的", "時尚的", "傳統的", "浪漫的"));
 					put("Form2Option3", Arrays.asList("任何時候", "下午七點", "下午八點", "下午九點"));
@@ -86,7 +86,7 @@
 					put("Form2Text7", Arrays.asList("餐厅<br />时间是 "));
 					put("Form2Text8", Arrays.asList("位置在"));
 					put("Form2Text9", Arrays.asList("任何地点"));
-					put("Form2Text10", Arrays.asList("例如: <em>香港岛</em> or <em>九龙</em>"));
+					put("Form2Text10", Arrays.asList("例如: <em>香港岛</em> 或者  <em>九龙</em>"));
 					put("Form2Option1", Arrays.asList("任何类型食物", "印度餐", "法国餐", "日本餐", "意大利餐"));
 					put("Form2Option2", Arrays.asList("标准的", "奇幻的", "时尚的", "传统的", "浪漫的"));
 					put("Form2Option3", Arrays.asList("任何时候", "下午七点", "下午八点", "下午九点"));
