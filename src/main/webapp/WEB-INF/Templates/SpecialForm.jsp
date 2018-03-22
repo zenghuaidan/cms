@@ -47,6 +47,7 @@
 					put("Form2Option2", Arrays.asList("standard", "fancy", "hip", "traditional", "romantic"));
 					put("Form2Option3", Arrays.asList("anytime", "7 p.m.", "8 p.m.", "9 p.m."));
 					put("Submit", Arrays.asList("Submit"));
+					put("ThankYou", Arrays.asList("Thank you! We\'ll be in touch."));
 				}
 			});
 			put("tc", new HashMap<String, List<String>>() {
@@ -69,6 +70,7 @@
 					put("Form2Option2", Arrays.asList("標準的", "奇幻的", "時尚的", "傳統的", "浪漫的"));
 					put("Form2Option3", Arrays.asList("任何時候", "下午七點", "下午八點", "下午九點"));
 					put("Submit", Arrays.asList("提交"));
+					put("ThankYou", Arrays.asList("謝謝！我們会与您繼續保持聯繫。"));
 				}
 			});
 			put("sc", new HashMap<String, List<String>>() {
@@ -91,6 +93,7 @@
 					put("Form2Option2", Arrays.asList("标准的", "奇幻的", "时尚的", "传统的", "浪漫的"));
 					put("Form2Option3", Arrays.asList("任何时候", "下午七点", "下午八点", "下午九点"));
 					put("Submit", Arrays.asList("提交"));
+					put("ThankYou", Arrays.asList("谢谢！我们会与您继续保持联系"));
 				}
 			});
 		}
@@ -227,7 +230,7 @@
 
 			// let's just simulate something...
 			var messageEl = theForm.querySelector('.final-message');
-			messageEl.innerHTML = 'Thank you! We\'ll be in touch.';
+			messageEl.innerHTML = '<%=formMap.get(lang).get("ThankYou").get(0)%>';
 			classie.addClass(messageEl, 'show');
 		}
 	});
