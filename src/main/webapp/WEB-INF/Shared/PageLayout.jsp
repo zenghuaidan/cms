@@ -7,6 +7,7 @@
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
 <%@page import="java.util.*"%>
+<%@page import="org.dom4j.Element"%>
 <% 
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");		
@@ -110,8 +111,12 @@
     <!-- Footer-->
     <footer id="footer" class="font-s">
         <div class="inner-wrapper">
-            <x:out select="$contentXml/PageContent/Widget[@name='CopyRight']/Field" escapeXml="fasle" />            
+	        <%
+	        	Element copyrightElement = (Element)masterContent.getContentXmlDoc().selectSingleNode("/PageContent/Widget[@name='CopyRight']/Field");	        	
+	        %>
+	        <%=copyrightElement.getTextTrim().replace("#year#", (new Date().getYear() + 1900) + "") %>
+            <!--x:out select="$contentXml/PageContent/Widget[@name='CopyRight']/Field" escapeXml="fasle" /-->            
         </div>
     </footer>
-    <a href="#0" class="cd-top">Back to top</a>
+    <a href="#0" class="cd-top"><%= lang.equals("en") ? "Back to top" : (lang.equals("tc") ? "回到頂部" : "回到顶部") %></a>
 </div>
