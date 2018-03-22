@@ -11,7 +11,7 @@
   <Widgets>
 	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.widgetHolder" htagid="wholder">           
       <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
-      <AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
+      <!--AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" /-->
       <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
       <AcceptWidget wid="ImageDetailStyleGallery" ename="ImageDetailStyleGallery" label="Post with Cover Image, external link and detail" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
     </Widget>

@@ -123,17 +123,24 @@
   		<Field name="Category" type="mckfield" label="Category" />
   		<Field name="Image" type="imgfield" label="Image" />
   		<Field name="Video" type="docfield" label="Video" />
+  		<Field name="Link" type="lnkfield" label="Link" />
   		<Field name="Title" type="ttafield" label="Title" />
   		<Field name="Content" type="ttafield" label="Content" />		
   	</Widget>
-  	<Widget id="YoutubeStyleGallery">
+  	<!--Widget id="YoutubeStyleGallery">
   		<Field name="Date" type="datfield" label="Date" />
   		<Field name="Category" type="mckfield" label="Category" />
   		<Field name="Image" type="imgfield" label="Image" />
   		<Field name="Link" type="lnkfield" label="Link" />
   		<Field name="Title" type="ttafield" label="Title" />
   		<Field name="Content" type="ttafield" label="Content" />		
-  	</Widget>
+  	</Widget-->
+  	<!--Widget id="DescriptionStyleGallery">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Category" type="mckfield" label="Category" />  		  	
+  		<Field name="Title" type="ttafield" label="Title" />
+  		<Field name="Content" type="ttafield" label="Content" />
+  	</Widget-->
   	<Widget id="ImageStyleGallery">
   		<Field name="Date" type="datfield" label="Date" />
   		<Field name="Category" type="mckfield" label="Category" />
@@ -150,15 +157,6 @@
   		<Field name="Title" type="ttafield" label="Title" />
   		<Field name="Content" type="ttafield" label="Content" />
   		<Field name="Detail" type="redfield" label="Detail" />		
-  	</Widget>
-  	
-  	
-  	
-  	<Widget id="DescriptionStyleGallery">
-  		<Field name="Date" type="datfield" label="Date" />
-  		<Field name="Category" type="mckfield" label="Category" />  		  	
-  		<Field name="Title" type="ttafield" label="Title" />
-  		<Field name="Content" type="ttafield" label="Content" />
   	</Widget>
   	
   	<Widget id="SliderStyleGallery">
