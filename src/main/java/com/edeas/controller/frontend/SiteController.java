@@ -1,5 +1,6 @@
 package com.edeas.controller.frontend;
 
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -13,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.edeas.controller.cmsadmin.CmsProperties;
-import com.edeas.dto.LinkInfo;
 import com.edeas.model.Lang;
 import com.edeas.model.Page;
 import com.edeas.utils.XmlUtils;
-import com.edeas.web.InitServlet;
 
 @Controller
 public class SiteController extends FrontController {
@@ -31,6 +30,15 @@ public class SiteController extends FrontController {
 		String pageUrl = FilenameUtils.getBaseName(webpath);
 		List<Page> pages = queryService.findPageByUrl(pageUrl, false, true);
 		if(pages.size() > 0) {
+			if(pages.size() > 1) {
+				// check children first, sort to make children on top
+				pages.sort(new Comparator<Page>() {
+					@Override
+					public int compare(Page o1, Page o2) {
+						return new Long(o2.getId()).compareTo(o1.getId());
+					}
+				});				
+			}
 			for(Page page : pages) {
 				String url = request.getRequestURI();
 				if(url.equals(XmlUtils.getPageLink(page, lang, false).getLink())) {

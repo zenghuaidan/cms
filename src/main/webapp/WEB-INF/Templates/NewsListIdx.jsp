@@ -20,13 +20,7 @@
 	String lang = (String)request.getAttribute("lang");	
 	Page currentPage = (Page)request.getAttribute("currentPage");
 	List<Page> children = InitServlet.getQueryService().getChidrenByPageTimeFromDesc(currentPage.getId(), iscms, true);
-	
-	String detailPageUrl = "";
-	List<Page> detailPages = (List<Page>)InitServlet.getQueryService().findPageByTemplate("NewsDetail", iscms, true);
-	if (detailPages != null && detailPages.size() > 0) {
-		Page detailPage = detailPages.get(0);
-		detailPageUrl = XmlUtils.getPageLink(detailPage, lang, iscms, false).getLink();				
-	}
+		
 %>
 
 <div class="full-wrapper clearfix"> 
@@ -74,7 +68,7 @@
 			                        <div class="news-list-week"><fmt:formatDate value="${ pageTimeFrom }" pattern="E" /></div>
 			                    </div>
 			                </div>
-			                <a href="<%=detailPageUrl%>?newsPageId=<%=child.getId() %>">
+			                <a href="<%=XmlUtils.getPageLink(child, lang, iscms, false).getLink() %>">
 				                <div class="col-sm col-right <%=noImageClass%>">
 				                    <div>
 				                    	<c:if test="${hasImage}">
