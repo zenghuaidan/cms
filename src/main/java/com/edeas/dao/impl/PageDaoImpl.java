@@ -40,7 +40,7 @@ public abstract class PageDaoImpl<T extends Page> extends BasicDao<T> {
 	public T getFirstChild(long parentId, boolean checkActive, String order) {		
 		order = StringUtils.isBlank(order) ? "" : " order by " + order;
 		List<T> results = listByHQL("from " + getClz().getName() + " where parentId=? and del=0 " + (checkActive ? " and active=1 " : "") + order + " limit 0,1", new Long[]{ parentId });		
-		return results.size() == 1 ? results.get(0) : null;
+		return results.size() > 0 ? results.get(0) : null;
 	}
 
 	public List<T> findChildrenUnderTemplate(String template, boolean checkActive) {

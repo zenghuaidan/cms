@@ -287,19 +287,17 @@ public class XmlUtils {
                  {
                      sb.insert(0, Global.fixUrlPrefix.get(parentId));
                      linkInfo.setLink(Global.getWebUrl() + "/" + lang + "/" + sb.toString() + Global.WEBPAGEEXT);
+                 } else if (Global.goChildTemplates.containsKey(page.getTemplate())) {
+                     Page firstChild = InitServlet.getQueryService().getFirstChild(page.getId(), iscms, true, Global.goChildTemplates.get(page.getTemplate()));
+                     if (firstChild != null && !firstChild.isNew())
+                         linkInfo = getPageLink(firstChild, lang, iscms);
                  } else {
-                     if (Global.goChildTemplates.containsKey(page.getTemplate())) {
-                         Page firstChild = InitServlet.getQueryService().getFirstChild(page.getId(), iscms, true, Global.goChildTemplates.get(page.getTemplate()));
-                         if (firstChild != null && !firstChild.isNew())
-                             linkInfo = getPageLink(firstChild, lang, iscms);
-                     } else {
-                    	 while (parentId > 0) {
-                    		 Page parent = InitServlet.getQueryService().findPageById(parentId, iscms);
-                    		 sb.insert(0, parent.getUrl() + "/");
-                    		 parentId = parent.getParentId();
-                    	 }
-                    	 linkInfo.setLink(Global.getWebUrl() + "/" + lang + "/" + sb.toString() + Global.WEBPAGEEXT); 
-                     }
+                	 while (parentId > 0) {
+                		 Page parent = InitServlet.getQueryService().findPageById(parentId, iscms);
+                		 sb.insert(0, parent.getUrl() + "/");
+                		 parentId = parent.getParentId();
+                	 }
+                	 linkInfo.setLink(Global.getWebUrl() + "/" + lang + "/" + sb.toString() + Global.WEBPAGEEXT); 
                  }
              }
          }
