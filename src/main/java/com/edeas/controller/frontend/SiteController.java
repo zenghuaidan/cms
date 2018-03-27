@@ -30,18 +30,11 @@ public class SiteController extends FrontController {
 		String pageUrl = FilenameUtils.getBaseName(webpath);
 		List<Page> pages = queryService.findPageByUrl(pageUrl, false, true);
 		if(pages.size() > 0) {
-			if(pages.size() > 1) {
-				// check children first, sort to make children on top
-				pages.sort(new Comparator<Page>() {
-					@Override
-					public int compare(Page o1, Page o2) {
-						return new Long(o2.getId()).compareTo(o1.getId());
-					}
-				});				
-			}
+			String langSeg = "/" + lang + "/";
 			for(Page page : pages) {
 				String url = request.getRequestURI();
-				if(url.equals(XmlUtils.getPageLink(page, lang, false).getLink())) {
+				url = url.substring(url.indexOf(langSeg) + langSeg.length()).replace(".html", "");
+				if(url.equals(page.getPageUrl())) {
 					Page masterPage = queryService.getMasterPage(false);
 					model.addAttribute("iscms", false);
 					model.addAttribute("isPageAdmin", false);

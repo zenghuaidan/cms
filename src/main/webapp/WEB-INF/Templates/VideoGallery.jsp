@@ -96,7 +96,7 @@
                             	}
                            		for(String category : categories) {
                           			%>
-                           			<li><a data-rel=".cat-<%=category%>" href="#"><%=new String(MessageDigestUtils.decryptBASE64(category))%></a></li>
+                           			<li><a data-rel=".cat-<%=category.replaceAll("=", "") %>" href="#"><%=new String(MessageDigestUtils.decryptBASE64(category))%></a></li>
                           			<%                            			
                            		}
                             %>                             

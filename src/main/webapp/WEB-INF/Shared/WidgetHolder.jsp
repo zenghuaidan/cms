@@ -290,7 +290,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
+					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
 			}
         %>
 		<div class="widget format-video <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -326,7 +326,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
+					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
 			}
         %> 
 	    <div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -349,7 +349,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
+					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
 			}
         %>
 		<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -372,7 +372,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
+					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
 			}
         %>
 	 	<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -410,7 +410,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
+					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
 			}
         %>
         <div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -444,7 +444,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
+					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
 			}
         %>
 		<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -473,7 +473,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
+					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
 			}
         %>
 		<div class="news-gallery <%=year%> <%=categoryStr%> post-item isotope-item clearfix">

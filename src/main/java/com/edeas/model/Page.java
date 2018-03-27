@@ -397,32 +397,32 @@ public class Page<T extends Page, E extends Content> {
 		return this.release > 0;
 	}
 	
-//	@Transient
-//	public String getPageUrl() //the page's url without .html, it use for locate the page using user's url typing on the browser 
-//    {
-//        if (!this.isNew())
-//        {
-//            StringBuilder sb = new StringBuilder(this.url);
-//            if ("Sector".equals(this.template) || "TopSector".equals(this.template)) sb.append("/");
-//            
-//            if (Global.fixUrlPrefix.containsKey(this.parentId))
-//            {
-//                sb.insert(0, Global.fixUrlPrefix.get(this.parentId) + "/");
-//                return sb.toString();
-//            }
-//            else
-//            {
-//            	Page page = this;
-//            	while(page.getParent() != null) {
-//            		page = page.getParent();
-//            		sb.insert(0, page.getUrl() + "/");
-//            	}                
-//                return sb.toString();
-//            }
-//
-//        }
-//        return "";
-//    }
+	@Transient
+	public String getPageUrl() //the page's url without .html, it use for locate the page using user's url typing on the browser 
+    {
+        if (!this.isNew())
+        {
+            StringBuilder sb = new StringBuilder(this.url);
+            if ("Sector".equals(this.template) || "TopSector".equals(this.template)) sb.append("/");
+            
+            if (Global.fixUrlPrefix.containsKey(this.parentId))
+            {
+                sb.insert(0, Global.fixUrlPrefix.get(this.parentId) + "/");
+                return sb.toString();
+            }
+            else
+            {
+            	Page page = this;
+            	while(page.getParent() != null) {
+            		page = page.getParent();
+            		sb.insert(0, page.getUrl() + "/");
+            	}                
+                return sb.toString();
+            }
+
+        }
+        return "";
+    }
 	
 	public static final long MASTER_PAGE_PARENT_ID = -2;
 	public static final long HOME_PAGE_PARENT_ID = -1;
