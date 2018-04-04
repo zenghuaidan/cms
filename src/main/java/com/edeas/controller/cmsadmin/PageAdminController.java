@@ -451,4 +451,13 @@ public class PageAdminController extends CmsController {
          }
          return v;
      }
+	 
+	 @RequestMapping(path = {"PageAdmin/reqPublish"}, method={RequestMethod.GET})
+     public String reqPublish(Model model, int pageid)
+     {                  
+         model.addAttribute("action", "doReqPublish");
+         model.addAttribute("pageid", pageid);
+         model.addAttribute("title", "Publish Request");
+         return "PageAdmin/WorkflowForm";
+     }
 }

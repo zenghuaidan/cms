@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://activiti.org/bpmn20" id="definitions">
   <process id="VacationRequest" name="Edeas Vacation Request" isExecutable="true">
-    <startEvent id="theStart" activiti:initiator="requestor">
+    <startEvent id="theStart" activiti:initiator="initiator">
       <extensionElements>
         <activiti:executionListener event="start" class="com.edeas.activiti.MyExecutionListener"></activiti:executionListener>
       </extensionElements>
     </startEvent>
     <endEvent id="theEnd"></endEvent>
-    <userTask id="usertask1" name="Review" activiti:assignee="${requestor}"></userTask>
-    <sequenceFlow id="flow1" sourceRef="theStart" targetRef="usertask1"></sequenceFlow>
-    <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="theEnd"></sequenceFlow>
+    <userTask id="SubmitRequest" name="Submit Request" activiti:assignee="${initiator}">
+      <extensionElements>
+        <activiti:formProperty id="test1" name="test1 name" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="test2" name="test2 name" type="long" required="true"></activiti:formProperty>
+        <activiti:formProperty id="test3" name="test3 name" type="enum" required="true">
+          <activiti:value id="A" name="a"></activiti:value>
+          <activiti:value id="B" name="b"></activiti:value>
+          <activiti:value id="C" name="c"></activiti:value>
+          <activiti:value id="D" name="d"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="test4" name="test4 name" type="date" datePattern="dd-MM-yyyy" required="true"></activiti:formProperty>
+        <activiti:formProperty id="test5" name="test5 name" type="boolean" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow1" sourceRef="theStart" targetRef="SubmitRequest"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="SubmitRequest" targetRef="theEnd"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_VacationRequest">
     <bpmndi:BPMNPlane bpmnElement="VacationRequest" id="BPMNPlane_VacationRequest">
@@ -19,7 +32,7 @@
       <bpmndi:BPMNShape bpmnElement="theEnd" id="BPMNShape_theEnd">
         <omgdc:Bounds height="35.0" width="35.0" x="720.0" y="187.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+      <bpmndi:BPMNShape bpmnElement="SubmitRequest" id="BPMNShape_SubmitRequest">
         <omgdc:Bounds height="55.0" width="105.0" x="360.0" y="177.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
