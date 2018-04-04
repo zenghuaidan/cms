@@ -81,34 +81,6 @@
 
 	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
 	
-	<bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-		 <property name="corePoolSize" value="10" />
-		 <property name="maxPoolSize" value="100" />
-		 <property name="queueCapacity" value="500" />
-	</bean>
-	
-	<bean id="taskScheduler" class="com.edeas.scheduler.TaskScheduler" />
-	
-	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-	 	<property name="targetObject" ref="taskScheduler" />
-	 	<property name="targetMethod" value="doTrade" />
-	 	<property name="concurrent" value="false" />
-	</bean>
-	
-	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-	 	<property name="jobDetail" ref="jobDetail" />
-	 	<property name="cronExpression" value="*/1 * * * * ?" />
-	</bean>
-	
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-	 <property name="triggers">
-	  <list>
-	   <ref bean="cronTrigger" />
-	  </list>
-	 </property>
-	 <property name="taskExecutor" ref="executor" />
-	</bean>
-	
 	<!-- Activiti configuration -->
 	  <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
 	    <property name="dataSource" ref="dataSource" />
@@ -129,4 +101,8 @@
 	  <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
 	  <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
 	  <bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService" />
+	  
+	  <bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">
+		<property name="processEngine" ref="processEngine" />
+	  </bean>
 </beans>

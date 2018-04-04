@@ -1,6 +1,5 @@
 package com.edeas.controller.frontend;
 
-import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.edeas.controller.cmsadmin.CmsProperties;
 import com.edeas.model.Lang;
 import com.edeas.model.Page;
-import com.edeas.utils.XmlUtils;
 
 @Controller
 public class SiteController extends FrontController {
