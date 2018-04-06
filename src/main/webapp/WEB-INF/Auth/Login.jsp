@@ -30,7 +30,7 @@
 		html #body.cms-cover .btn-login:hover      { background-color:#740c2c}
 
 		html #body.cms-cover footer { color:#ececec}
-		html #body .error 			{ background-color:#ececec; border-top:1px solid #fff; color:#666; display:none;
+		html #body .error 			{ background-color:#ececec; border-top:1px solid #fff; color:#666;
 									-webkit-box-shadow: 3px 3px 0px 0px rgba(20, 20, 20, 0.10);
 									   -moz-box-shadow: 3px 3px 0px 0px rgba(20, 20, 20, 0.10);
 											box-shadow: 3px 3px 0px 0px rgba(20, 20, 20, 0.10);}
@@ -56,7 +56,7 @@
             <div class="row2"><div class="r2-pos">Content Management System</div></div>
         </div>
     </div>
-    <form id="loginform" name="loginform" method="post">
+    <form id="loginform" name="loginform" method="post" action="<%=Global.getCMSUrl() %>/j_spring_security_check">
         <div class="login-blk">
             <div class="login">
                 <div class="intro-blk">
@@ -86,12 +86,15 @@
                     <div class="login-field" onclick="E$('loginform').submit();">Login <i class="fa fa-angle-right"></i></div>
                     <div class="login-bg">&nbsp;</div>
                 </div>
-                <div class="error">
-                    <ul>
-                        <li><i class="fa fa-warning"></i>Please enter a valid username</li>
-                        <li><i class="fa fa-warning"></i>Please enter a valid password</li>
-                    </ul>
-                </div>
+                <c:if test="${not empty errors}">
+	                <div class="error">
+	                    <ul>
+	                        <c:forEach items="${errors}" var="error" >
+		                        <li><i class="fa fa-warning"></i><c:out value="${error}"></c:out></li>		                        		
+	                   		</c:forEach>
+	                    </ul>
+	                </div>
+                </c:if>
             </div>
 
             <footer>Developed by � edeas Limited</footer>

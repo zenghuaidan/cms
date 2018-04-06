@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edeas.model.User;
+import com.edeas.security.MD5PasswordEncoder;
 
 @Service(value="userService")
 @Transactional
@@ -11,7 +12,7 @@ public class UserServiceImpl extends BasicServiceImpl {
 
 	public User tryLogin(String userName, String password) {
 		try {			
-			return userDao.findByUserNameAndPassword(userName, User.getEncryptPassword(password));
+			return userDao.findByUserNameAndPassword(userName, new MD5PasswordEncoder().encode(password));
 		} catch (Exception e) {
 		}
 		return null;
@@ -26,7 +27,7 @@ public class UserServiceImpl extends BasicServiceImpl {
 	}
 	
 	public void updatePassword(String userName, String oldPassword, String newPassword) {
-		userDao.updatePassword(userName, User.getEncryptPassword(oldPassword), User.getEncryptPassword(newPassword));
+		userDao.updatePassword(userName, new MD5PasswordEncoder().encode(oldPassword), new MD5PasswordEncoder().encode(newPassword));
 	}
 	
 }

@@ -1,6 +1,8 @@
 package com.edeas.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,15 +15,43 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.edeas.controller.Global;
-import com.edeas.controller.cmsadmin.AuthController;
-import com.edeas.controller.cmsadmin.CmsProperties;
 import com.edeas.model.User;
 import com.edeas.service.impl.UserServiceImpl;
 
 public class LoginFilter implements Filter {
+	
+//	@Override
+//	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+//			throws IOException, ServletException {
+//		HttpServletRequest _request = (HttpServletRequest) request;   
+//		HttpServletResponse _response = (HttpServletResponse) response;
+//				
+//		String cmsurl = Global.getCMSURI();
+//		HttpSession session = getSession(_request);
+//		User user = (User)session.getAttribute(AuthController.LOGIN_USER);
+//		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
+//			if (CmsProperties.isDevMode()) {
+//				UserServiceImpl userService = (UserServiceImpl)WebApplicationContextUtils.getWebApplicationContext(_request.getSession().getServletContext()).getBean("userService");
+//				user = userService.tryLogin(CmsProperties.getDevLoginUser());
+//			}
+//			
+//			//if still could not find the user, then to login url
+//			if (user != null) {
+//				session.setAttribute(AuthController.LOGIN_USER, user);
+//				SystemSessionContext.addSession(session);
+//				chain.doFilter(request, response);
+//			} else {
+//				_response.sendRedirect(_request.getContextPath() + cmsurl);
+//			}
+//		} else {
+//			chain.doFilter(request, response);
+//		}
+//	}
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -30,25 +60,33 @@ public class LoginFilter implements Filter {
 		HttpServletResponse _response = (HttpServletResponse) response;
 				
 		String cmsurl = Global.getCMSURI();
-		HttpSession session = getSession(_request);
-		User user = (User)session.getAttribute(AuthController.LOGIN_USER);
-		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
-			if (CmsProperties.isDevMode()) {
-				UserServiceImpl userService = (UserServiceImpl)WebApplicationContextUtils.getWebApplicationContext(_request.getSession().getServletContext()).getBean("userService");
-				user = userService.tryLogin(CmsProperties.getDevLoginUser());
-			}
-			
-			//if still could not find the user, then to login url
-			if (user != null) {
-				session.setAttribute(AuthController.LOGIN_USER, user);
-				SystemSessionContext.addSession(session);
-				chain.doFilter(request, response);
+		UserDetails userDetails = SecurityContextHolder.getContext().getAuthentication() == null ? null : (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (!isCmsLoginPage(cmsurl, _request) && userDetails == null) {
+			String userName = (String) request.getParameter("userName");
+			String password = (String) request.getParameter("password");
+			List<String> errors = new ArrayList<String>();
+			if (StringUtils.isBlank(userName)) {
+				errors.add("Please input your user name.");	
+			} else if (StringUtils.isBlank(password)) {
+				errors.add("Please input your password.");	
 			} else {
+				UserServiceImpl userService = (UserServiceImpl)WebApplicationContextUtils.getWebApplicationContext(_request.getSession().getServletContext()).getBean("userService");
+				User user = userService.tryLogin(userName, password);						
+				if (user == null)
+					errors.add("Invalidate user name or password.");
+				else
+					SystemSessionContext.addSession(_request.getSession());
+			}
+			_request.getSession().setAttribute("errors", errors);
+			if (errors.size() > 0) {
 				_response.sendRedirect(_request.getContextPath() + cmsurl);
+			} else {
+				chain.doFilter(request, response);
 			}
 		} else {
 			chain.doFilter(request, response);
 		}
+		
 	}
 	
 	private HttpSession getSession(HttpServletRequest request) {
