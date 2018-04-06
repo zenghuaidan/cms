@@ -10,7 +10,11 @@ import com.edeas.security.MD5PasswordEncoder;
 @Transactional
 public class UserServiceImpl extends BasicServiceImpl {
 
-	public User tryLogin(String userName, String password) {
+	public User tryLogin(String userName, String password) {		
+		return findByUserNameAndPassword(userName, password);
+	}
+	
+	public User findByUserNameAndPassword(String userName, String password) {
 		try {			
 			return userDao.findByUserNameAndPassword(userName, new MD5PasswordEncoder().encode(password));
 		} catch (Exception e) {
@@ -18,12 +22,16 @@ public class UserServiceImpl extends BasicServiceImpl {
 		return null;
 	}
 	
-	public User tryLogin(String userName) {
+	public User findByUserName(String userName) {
 		try {			
 			return userDao.findByUserName(userName);
 		} catch (Exception e) {
 		}
 		return null;
+	}
+	
+	public User tryLogin(String userName) {		
+		return findByUserName(userName);
 	}
 	
 	public void updatePassword(String userName, String oldPassword, String newPassword) {

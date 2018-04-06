@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.edeas.controller.Global;
@@ -25,34 +23,6 @@ import com.edeas.service.impl.UserServiceImpl;
 
 public class LoginFilter implements Filter {
 	
-//	@Override
-//	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-//			throws IOException, ServletException {
-//		HttpServletRequest _request = (HttpServletRequest) request;   
-//		HttpServletResponse _response = (HttpServletResponse) response;
-//				
-//		String cmsurl = Global.getCMSURI();
-//		HttpSession session = getSession(_request);
-//		User user = (User)session.getAttribute(AuthController.LOGIN_USER);
-//		if (!isCmsLoginPage(cmsurl, _request) && user == null) {
-//			if (CmsProperties.isDevMode()) {
-//				UserServiceImpl userService = (UserServiceImpl)WebApplicationContextUtils.getWebApplicationContext(_request.getSession().getServletContext()).getBean("userService");
-//				user = userService.tryLogin(CmsProperties.getDevLoginUser());
-//			}
-//			
-//			//if still could not find the user, then to login url
-//			if (user != null) {
-//				session.setAttribute(AuthController.LOGIN_USER, user);
-//				SystemSessionContext.addSession(session);
-//				chain.doFilter(request, response);
-//			} else {
-//				_response.sendRedirect(_request.getContextPath() + cmsurl);
-//			}
-//		} else {
-//			chain.doFilter(request, response);
-//		}
-//	}
-	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -60,8 +30,7 @@ public class LoginFilter implements Filter {
 		HttpServletResponse _response = (HttpServletResponse) response;
 				
 		String cmsurl = Global.getCMSURI();
-		UserDetails userDetails = SecurityContextHolder.getContext().getAuthentication() == null ? null : (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (!isCmsLoginPage(cmsurl, _request) && userDetails == null) {
+		if (!isCmsLoginPage(cmsurl, _request)) {
 			String userName = (String) request.getParameter("userName");
 			String password = (String) request.getParameter("password");
 			List<String> errors = new ArrayList<String>();

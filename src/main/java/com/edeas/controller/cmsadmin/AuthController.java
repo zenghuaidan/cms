@@ -3,42 +3,22 @@ package com.edeas.controller.cmsadmin;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.model.User;
-import com.edeas.web.SystemSessionContext;
 
 @Controller
 public class AuthController extends CmsController {
 	
-	public static final String LOGIN_USER = "LOGIN_USER";
-	
 	@RequestMapping(path = {"Login", ""}, method={RequestMethod.GET})
 	public String login(){
 		return "Auth/Login";
-	}
-	
-	@RequestMapping(path = {"Login", ""}, method={RequestMethod.POST})
-	public String doLogin(Model model, String userName, String password, HttpSession session) {
-		User user = userService.tryLogin(userName, password);
-		if(user == null) {
-			return "Auth/Login";	
-		}
-		session.setAttribute(LOGIN_USER, user);
-		SystemSessionContext.addSession(session);
-		return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
-	}
-	
-	@RequestMapping(path = {"Logout"}, method={RequestMethod.GET})
-	public String logout(HttpSession session){
-		session.removeAttribute(LOGIN_USER);
-		return "redirect:Login";
 	}
 	
 	@ResponseBody
@@ -49,7 +29,8 @@ public class AuthController extends CmsController {
 		} else if(!newpwd.equals(retypepwd)) {
 			return new Result("Re-type password is not identical to New password", "Re-type password is not identical to New password");
 		} else {
-			User loginUser = (User)session.getAttribute(LOGIN_USER); 
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			User loginUser = userService.findByUserName(userDetails.getUsername()); 
 			if(StringUtils.isBlank(oldpwd) || userService.tryLogin(loginUser.getLogin(), oldpwd) == null) {
 				return new Result("Old password is incorrect", "Old password is incorrect");
 			}
