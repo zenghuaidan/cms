@@ -41,13 +41,13 @@
                         <div class="top_bar_left clearfix">
                             <!-- Logo-->
                             <div class="logo">
-                                <a id="logo" href="<%=Global.getCMSUrl() %>/index.html"><img class="img-scale" src="${Content}/css/images/logo-edeas.svg" alt="edeas" /></a>
+                                <a id="logo" href="<%=Global.getWebUrl() %>/${lang}/index.html"><img class="img-scale" src="${Content}/css/images/logo-edeas.svg" alt="edeas" /></a>
                             </div>
                             <!-- Main menu-->
                             <div class="menu_wrapper">
                                 <nav id="menu">
                                     <ul id="menu-main-menu" class="menu">
-                                        <li><a href="<%=Global.getCMSUrl() %>/index.html"><span><%=XmlUtils.getPtyFieldVal(homePage.getContent(lang).getPropertyXmlDoc(), "MenuName", false) %></span></a></li>
+                                        <li><a href="<%=Global.getWebUrl() %>/${lang}/index.html"><span><%=XmlUtils.getPtyFieldVal(homePage.getContent(lang).getPropertyXmlDoc(), "MenuName", false) %></span></a></li>
                        		         	<%
 							         		for(Page topPage : topPages) {
 							         			String menuName = XmlUtils.getPtyFieldVal(topPage.getContent(lang).getPropertyXmlDoc(), "MenuName", false);
