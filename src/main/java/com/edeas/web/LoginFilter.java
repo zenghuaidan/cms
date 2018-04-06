@@ -26,6 +26,8 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		// below logic only make sense when you want to customize the error login message
+		// login checking is handled by spring security
 		HttpServletRequest _request = (HttpServletRequest) request;   
 		HttpServletResponse _response = (HttpServletResponse) response;
 				
@@ -43,8 +45,8 @@ public class LoginFilter implements Filter {
 				User user = userService.tryLogin(userName, password);						
 				if (user == null)
 					errors.add("Invalidate user name or password.");
-				else
-					SystemSessionContext.addSession(_request.getSession());
+//				else
+//					SystemSessionContext.addSession(_request.getSession());
 			}
 			_request.getSession().setAttribute("errors", errors);
 			if (errors.size() > 0) {
