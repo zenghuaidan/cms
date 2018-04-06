@@ -31,7 +31,7 @@ public class AuthController extends CmsController {
 		} else {
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			User loginUser = userService.findByUserName(userDetails.getUsername()); 
-			if(StringUtils.isBlank(oldpwd) || userService.tryLogin(loginUser.getLogin(), oldpwd) == null) {
+			if(StringUtils.isBlank(oldpwd) || userService.findByUserNameAndPassword(loginUser.getLogin(), oldpwd) == null) {
 				return new Result("Old password is incorrect", "Old password is incorrect");
 			}
 			userService.updatePassword(loginUser.getLogin(), oldpwd, newpwd);

@@ -9,10 +9,6 @@ import com.edeas.security.MD5PasswordEncoder;
 @Service(value="userService")
 @Transactional
 public class UserServiceImpl extends BasicServiceImpl {
-
-	public User tryLogin(String userName, String password) {		
-		return findByUserNameAndPassword(userName, password);
-	}
 	
 	public User findByUserNameAndPassword(String userName, String password) {
 		try {			
@@ -28,11 +24,7 @@ public class UserServiceImpl extends BasicServiceImpl {
 		} catch (Exception e) {
 		}
 		return null;
-	}
-	
-	public User tryLogin(String userName) {		
-		return findByUserName(userName);
-	}
+	}	
 	
 	public void updatePassword(String userName, String oldPassword, String newPassword) {
 		userDao.updatePassword(userName, new MD5PasswordEncoder().encode(oldPassword), new MD5PasswordEncoder().encode(newPassword));

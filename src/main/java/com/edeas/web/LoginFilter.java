@@ -42,7 +42,7 @@ public class LoginFilter implements Filter {
 				errors.add("Please input your password.");	
 			} else {
 				UserServiceImpl userService = (UserServiceImpl)WebApplicationContextUtils.getWebApplicationContext(_request.getSession().getServletContext()).getBean("userService");
-				User user = userService.tryLogin(userName, password);						
+				User user = userService.findByUserNameAndPassword(userName, password);						
 				if (user == null)
 					errors.add("Invalidate user name or password.");
 //				else
