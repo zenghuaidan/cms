@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edeas.controller.cmsadmin.AuthController;
 import com.edeas.model.Content;
 import com.edeas.model.Lang;
 import com.edeas.model.Page;
@@ -24,7 +23,7 @@ public class CommonController extends BaseController {
 	@RequestMapping(path = {"timelineDetail"}, method={RequestMethod.GET})
 	@ResponseBody
 	public String timelineDetail(long pageId, String timelineId, String lang, boolean iscms, HttpSession session) {
-		if(!Lang.exists(lang) || iscms && session.getAttribute(AuthController.LOGIN_USER) == null)
+		if(!Lang.exists(lang))
 			return "";
 		
 		Page page = queryService.findPageById(pageId, iscms);
