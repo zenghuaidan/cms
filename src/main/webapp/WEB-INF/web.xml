@@ -31,6 +31,10 @@
 	<servlet>
 		<servlet-name>cms</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>cms</servlet-name>
@@ -67,7 +71,7 @@
 	<!-- Spring 的监听器可以通过这个上下文参数来获取beans.xml的位置 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:beans.xml /WEB-INF/security.xml</param-value>
+		<param-value>classpath:beans.xml classpath:security.xml</param-value>
 	</context-param>
 	<!--listener>
 		<listener-class>com.edeas.admango.web.SystemSessionListener</listener-class>

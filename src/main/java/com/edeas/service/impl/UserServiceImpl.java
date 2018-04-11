@@ -1,22 +1,23 @@
 package com.edeas.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edeas.model.User;
-import com.edeas.security.MD5PasswordEncoder;
 
 @Service(value="userService")
 @Transactional
 public class UserServiceImpl extends BasicServiceImpl {
 	
-	public User findByUserNameAndPassword(String userName, String password) {
-		try {			
-			return userDao.findByUserNameAndPassword(userName, new MD5PasswordEncoder().encode(password));
-		} catch (Exception e) {
-		}
-		return null;
-	}
+//	public User findByUserNameAndPassword(String userName, String password) {
+//		try {			
+//			return userDao.findByUserNameAndPassword(userName, password);
+//		} catch (Exception e) {
+//		}
+//		return null;
+//	}
 	
 	public User findByUserName(String userName) {
 		try {			
@@ -24,10 +25,14 @@ public class UserServiceImpl extends BasicServiceImpl {
 		} catch (Exception e) {
 		}
 		return null;
-	}	
+	}
+	
+	public List<User> findAll() {		
+		return userDao.findAll();
+	}
 	
 	public void updatePassword(String userName, String oldPassword, String newPassword) {
-		userDao.updatePassword(userName, new MD5PasswordEncoder().encode(oldPassword), new MD5PasswordEncoder().encode(newPassword));
+		userDao.updatePassword(userName, oldPassword, newPassword);
 	}
 	
 }

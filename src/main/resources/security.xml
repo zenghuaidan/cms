@@ -46,7 +46,7 @@
 	    <b:property name="defaultTargetUrl" value="/cmsadmin/SiteAdmin"></b:property>  
 	    <b:property name="forwardToDestination" value="true"></b:property>  
 	</b:bean>
-	<b:bean id="encoder" class="com.edeas.security.MD5PasswordEncoder"/>
+	<b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
 	<!-- jaas config -->	
 	<!--authentication-manager>
