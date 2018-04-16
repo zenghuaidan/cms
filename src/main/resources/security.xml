@@ -32,7 +32,10 @@
         <session-management>  
             <concurrency-control max-sessions="10" expired-url="/cmsadmin/Login"/>  
         </session-management>
-		<csrf disabled="true"/>		
+		<csrf disabled="true"/>
+	    <headers>
+	        <frame-options policy="SAMEORIGIN"/>
+	    </headers>		
 	</http>
 	<authentication-manager>	
 		 <authentication-provider user-service-ref="userLoginService">  		 
