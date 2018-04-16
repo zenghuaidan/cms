@@ -407,7 +407,7 @@ public class Page<T extends Page, E extends Content> {
             
             if (Global.fixUrlPrefix.containsKey(this.parentId))
             {
-                sb.insert(0, Global.fixUrlPrefix.get(this.parentId) + "/");
+                sb.insert(0, Global.fixUrlPrefix.get(this.parentId));
                 return sb.toString();
             }
             else
