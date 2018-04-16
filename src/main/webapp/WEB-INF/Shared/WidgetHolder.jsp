@@ -463,7 +463,7 @@
 	                </a>
 	                <div class="post-footer">
 	                    <a href="<%=detailPageUrl%>newsPageId=<%=currentPage.getId() %>&newsId=<x:out select="$widget/@id" escapeXml="false"/>"><div class="box"><i class="gi gi-more"></i></div></a>
-	                    <a href="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Field[@name='Document']" escapeXml="false"/>"> <div class="box"><i class="fa fa-download"></i></div></a>
+	                    <a target="_blank" href="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Field[@name='Document']" escapeXml="false"/>"> <div class="box"><i class="fa fa-download"></i></div></a>
 	                    <div class="clear"></div>
 	                </div>
 	            </div>
