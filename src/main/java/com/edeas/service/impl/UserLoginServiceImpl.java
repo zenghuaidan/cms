@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edeas.model.User;
+import com.edeas.model.UserRole;
 
 
 @Service("userLoginService")
@@ -23,8 +24,10 @@ public class UserLoginServiceImpl extends BasicServiceImpl implements UserDetail
 		User user = userDao.findByUserName(userName);
 		if (user == null)
 			throw new UsernameNotFoundException(userName + " not exists");
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();		
-		authorities.add(new SimpleGrantedAuthority(user.getUserRole().getName()));
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();	
+		for(UserRole userRole : user.getUserRoles()) {
+			authorities.add(new SimpleGrantedAuthority(userRole.getName()));			
+		}
 //		authorities.add(new SimpleGrantedAuthority("ROLE_Admin"));
 		return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), authorities);
 	}

@@ -11,11 +11,11 @@ function newuser() {
 
 function edituser(uid) {
    var udiv=$(".userblock div.inner[usrid$="+uid+"]");
-   //var name=udiv.find('div.firstnameval').text().split(', ');
-   var name=udiv.find('div.firstnameval').text();
+   var login=udiv.find('div.loginnameval').text();
+   var firstName=udiv.find('div.firstnameval').text();
+   var lastName=udiv.find('div.lastnameval').text();
    var email=udiv.find('div.emailval').text();
-   var active=udiv.find('div.activeval').text();
-   //var fname=name[1]; var lname=name[0]; 
+   var active=udiv.find('div.activeval').text(); 
    var roles=udiv.attr('roles').split(',');
    
    var htm="<form id='usrfm' class='userform editusr' method='post'>";

@@ -10,7 +10,7 @@ public class UserAdminController extends CmsController {
 	
 	@RequestMapping(path = {"UserAdmin", "UserAdmin/Index"}, method={RequestMethod.GET})
 	public String index(Model model) {
-		
+		model.addAttribute("navigation", "UserAdmin");
 		model.addAttribute("users", userService.findAll());
 		return "UserAdmin/Index";
 	}		

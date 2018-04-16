@@ -1,9 +1,9 @@
-﻿#newbtn { background:url(images/icon-new-user.png) no-repeat;}
+#newbtn { background:url(images/icon-new-user.png) no-repeat;}
 
 #userlist {padding:14px 0px 0px 0px; width:1423px}
-.userblock { width:474px; margin:0px 0px 14px 14px; height:180px; float:left; }
+.userblock { width:550px; margin:0px 0px 14px 14px; height:250px; float:left; }
 .userblock .band { float:left; width:30px; height:100%; background:url(images/img-paper-side.jpg); }
-.userblock .inner { width:444px; height:100%; float:left; background:#DFDFDF; 
+.userblock .inner { width:500px; height:100%; float:left; background:#DFDFDF; 
   /* IE10 Consumer Preview */ 
   background-image: -ms-linear-gradient(bottom left, #DFDFDF 0%, #FFFFFF 100%);
   /* Mozilla Firefox */ 
@@ -18,8 +18,8 @@
   background-image: linear-gradient(to top right, #DFDFDF 0%, #FFFFFF 100%); }
 
 /* USER BLOCK */
-.userblock .table { width:400px; margin:14px 0px 0px 0px; float:right; }
-.userblock .table .label { width:125px; background:#666; color:#fff; padding:0px 15px 0px 0px; 
+.userblock .table { width:450px; margin:14px 0px 0px 0px; float:right; }
+.userblock .table .label { width:150px; background:#666; color:#fff; padding:0px 15px 0px 0px; 
                             font-size:14px; line-height:34px; margin:0px 0px 3px 0px; 
                             text-align:right; float:left; clear:left; }
 .userblock .table .value { width:240px; background:#cecece;  padding:0px 10px; color:#000; 

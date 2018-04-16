@@ -45,7 +45,7 @@ a.noline:hover, a.noline:active, a.noline:focus { text-decoration: none; }
 			-moz-border-radius-topright: 5px; border-top-right-radius: 5px; }
 .roundbottom { -moz-border-radius-bottomleft: 5px; border-bottom-left-radius: 5px;
 			-moz-border-radius-bottomright: 5px; border-bottom-right-radius: 5px; }
-.roundall {}	
+.roundall {border-radius:3px}	
 
 .hide { display:none; }
 .fullw { width:100%; }

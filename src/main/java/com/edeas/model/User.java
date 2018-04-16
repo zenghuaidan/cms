@@ -3,13 +3,16 @@ package com.edeas.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,7 +36,7 @@ public class User implements Serializable {
 	private Date lastFailTime;
 	private Date createTime = new Date();
 	private Date updateTime;
-	private UserRole userRole;
+	private Set<UserRole> userRoles;
 	
 //INSERT INTO `db_larry_java_cms`.`CmsUser` (`id`, `active`, `createTime`, `email`, `firstName`, `lastFailTime`, `lastName`, `login`, `numFail`, `password`, `updateTime`) VALUES (1, '1', '2018-01-05', 'larry.zeng@edeas.hk', 'larry', '2018-01-05', 'zeng', 'larry', '0', '3HJK8Y+91OWRifX+dopfgxFScFA=', '2018-01-05');
 	@Id
@@ -147,13 +150,13 @@ public class User implements Serializable {
 		return this.firstName + this.lastName;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="rid")
-	public UserRole getUserRole() {
-		return userRole;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
-	public void setUserRole(UserRole userRole) {
-		this.userRole = userRole;
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
 	}	
 }

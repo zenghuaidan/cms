@@ -63,6 +63,7 @@
 	    	<%		
 	    		}
 	    	%>
+	    	<c:out escapeXml="false" value='<%=top("User", Global.getCMSUrl() + "/UserAdmin/Index", "UserAdmin", navigation) %>'></c:out>
 			<!-- todo -->  		
 	    </div>
 	    <div class="clear"></div>
