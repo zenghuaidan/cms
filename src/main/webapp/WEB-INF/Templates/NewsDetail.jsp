@@ -69,9 +69,9 @@
 	                <div class="clear"></div>
 	            </div>	        
 	
-	            <%-- <div>
+	            <div>
 	               <x:out select="$widget/*/Field[@name='Detail']" escapeXml="false"/>
-	            </div> --%>
+	            </div>
 	        </div>
 	    </div>
 	</div>

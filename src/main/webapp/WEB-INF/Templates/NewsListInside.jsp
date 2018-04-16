@@ -51,10 +51,11 @@
 	                </div>
 	                <div class="clear"></div>
 	            </div>	        
-	
+				<%-- 
 	            <div>
 	               <x:out select="$widget/*/Field[@name='Detail']" escapeXml="false"/>
 	            </div>
+	             --%>
 	            <jsp:include page="/WEB-INF/Shared/WidgetHolder.jsp" />
 	        </div>
 	    </div>
