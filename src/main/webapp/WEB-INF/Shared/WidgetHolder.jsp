@@ -287,6 +287,7 @@
   	  		Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
 			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);	
 			String year = XmlUtils.getFieldRaw(widget, "Date").split("-")[0];
+			String youTubeID = XmlUtils.getFieldRaw(widget, "YouTubeID");
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
@@ -295,13 +296,16 @@
         %>
 		<div class="widget format-video <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
 			<x:choose>
-			   <x:when select="$widget/Field[@name='Link'] = ''">
+			   <x:when select="$widget/Field[@name='Video'] != ''">
 			        <div id="jp_container_<%=i %>" class="jp-video mfn-jcontainer jp-video-360p">
 			            <div class="jp-type-single">
 			                <div id="jquery_jplayer_<%=i %>" class="jp-jplayer mfn-jplayer" data-m4v="<%=Global.getDocUploadPath() %>/<x:out select="$widget/Field[@name='Video']" escapeXml="false"/>" data-img="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>"></div>
 			                <%@ include file="/WEB-INF/Shared/Video.jsp" %>
 			            </div>
 			        </div>			      
+			   </x:when>
+			   <x:when select="$widget/Field[@name='YouTubeID'] != ''">		      
+			   		<iframe width="576" height="450" src="http://www.youtube.com/embed/<%=youTubeID %>?rel=0&amp;hd=1" frameborder="0" allowfullscreen=""></iframe>
 			   </x:when>			   
 			   <x:otherwise>
 			   		<a <%=linkAttr%>><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a>			      
