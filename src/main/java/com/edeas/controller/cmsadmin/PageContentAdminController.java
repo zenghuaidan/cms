@@ -49,7 +49,6 @@ public class PageContentAdminController extends CmsController {
 	@ResponseBody
     public String mceImgUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
     {
-		StringBuilder js = new StringBuilder();
 		String imgurl = "";
         CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
         if(multipartResolver.isMultipart(request))
@@ -73,7 +72,6 @@ public class PageContentAdminController extends CmsController {
 	@ResponseBody
     public String mceDocUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
     {
-		StringBuilder js = new StringBuilder();
 		String docurl = "";
         CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
         if(multipartResolver.isMultipart(request))
