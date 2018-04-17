@@ -16,6 +16,14 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	<!-- <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/">  
+	    <mvc:resource-chain resource-cache="false" auto-registration="false">  
+	        <mvc:resolvers>  
+	            <bean class="org.springframework.web.servlet.resource.WebJarsResourceResolver"></bean>  
+	            <bean class="org.springframework.web.servlet.resource.PathResourceResolver"></bean>  
+	        </mvc:resolvers>  
+	    </mvc:resource-chain>  
+	</mvc:resources>  -->
 	<!-- mvc:interceptors-->
 		<!-- this will intercept all the request -->
 		<!-- bean class="com.edeas.admango.web.AuthInterceptor"/-->
