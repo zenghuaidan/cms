@@ -46,7 +46,8 @@ import net.coobird.thumbnailator.Thumbnails.Builder;
 public class PageContentAdminController extends CmsController {	
 	
 	@RequestMapping(path = {"PageContentAdmin/MceImgUpload"}, method={RequestMethod.POST})
-    public void mceImgUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
+	@ResponseBody
+    public String mceImgUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
     {
 		StringBuilder js = new StringBuilder();
 		String imgurl = "";
@@ -65,16 +66,12 @@ public class PageContentAdminController extends CmsController {
 				}
             }            
         }
-        js.append("<script type='text/javascript'>");
-        js.append("parent.document.getElementById('" + iname + "').value='" + imgurl + "';");
-        js.append("parent.closeMceUp('" + iname + "');");
-        js.append("</script>");
-        response.getWriter().write(js.toString());
-		response.flushBuffer();
+		return imgurl;
     }
 
 	@RequestMapping(path = {"PageContentAdmin/MceDocUpload"}, method={RequestMethod.POST})
-    public void mceDocUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
+	@ResponseBody
+    public String mceDocUpload(String iname, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException
     {
 		StringBuilder js = new StringBuilder();
 		String docurl = "";
@@ -89,28 +86,18 @@ public class PageContentAdminController extends CmsController {
 					String orgfil = list.get(0).getOriginalFilename();										
 					String newFileName = newRandomFilename(Global.getDocUploadPhysicalPath(), orgfil);	
 					list.get(0).transferTo(new File(Global.getDocUploadPhysicalPath(newFileName)));															
-					docurl = Global.getImagesUploadPath(Global.IMAGE_EDITOR, newFileName);
+					docurl = Global.getDocUploadPath(newFileName);
 				}
             }            
         }
-        js.append("<script type='text/javascript'>");
-        js.append("parent.document.getElementById('" + iname + "').value='" + docurl + "';");
-        js.append("parent.closeMceUp('" + iname + "');");
-        js.append("</script>");
-        response.getWriter().write(js.toString());
-		response.flushBuffer();
+		return docurl;
     }
 	
 	@RequestMapping(path = {"PageContentAdmin/TinyMceUpFrame"}, method={RequestMethod.GET})
-	public void tinyMceUpFrame(String wtype, String iname, HttpServletResponse response) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        String aurl = Global.getCMSUrl() + "/PageContentAdmin" + (wtype.equals("webimage") ? "/MceImgUpload" : "/MceDocUpload");
-        sb.append("<html><body><form method='post' action='" + aurl + "' enctype='multipart/form-data'><div>");
-        sb.append("<input type='file' name='filedata' style='width:200px;' /> <input type='submit' value='Upload' />");
-        sb.append("<input type='hidden' name='iname' value='" + iname + "' />");
-        sb.append("</div></form></body></html>");
-        response.getWriter().write(sb.toString());
-		response.flushBuffer();
+	public String tinyMceUpFrame(String wtype, String iname, HttpServletResponse response, Model model) throws IOException {		
+		model.addAttribute("aurl", Global.getCMSUrl() + "/PageContentAdmin" + (wtype.equals("webimage") ? "/MceImgUpload" : "/MceDocUpload"));
+		model.addAttribute("iname", iname);
+		return "PageContentAdmin/TinyMceUpFrame";
 	}
 	
 	@ResponseBody
@@ -329,7 +316,8 @@ public class PageContentAdminController extends CmsController {
 	}
 	
 	@RequestMapping(path = {"PageContentAdmin/UpdateWidget"}, method={RequestMethod.POST})
-	public void updateWidget(HttpServletResponse response, HttpServletRequest request) throws ParseException, IOException {
+	@ResponseBody
+	public String updateWidget(HttpServletResponse response, HttpServletRequest request) throws ParseException, IOException {
 		StringBuffer error = new StringBuffer();
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		String lang = request.getParameter("lang");
@@ -393,25 +381,7 @@ public class PageContentAdminController extends CmsController {
 				queryService.addOrUpdate(page, true);
 			}
 		}
-		if(StringUtils.isBlank(error)) {
-            StringBuffer jb = new StringBuffer("<script type='text/javascript'>");
-            if ("win".equals(caller))
-                jb.append("window.opener.refresh(); window.close();");
-            else
-                jb.append("parent.refresh();");
-            jb.append("</script>");
-			response.getWriter().write(jb.toString());
-		} else {
-			StringBuffer eh = new StringBuffer("<html><body>");               
-            eh.append("<link href='"+ Global.getContentPath() + "/cms/cms.css' rel='stylesheet' type='text/css' />");
-            eh.append("<div class='widgeterr'>Sorry! Widget is unable to be saved. Please try again.<br />");
-            eh.append("Message: " + error + "<br />");
-            eh.append("<a href=\"javascript:window.history.back();\">Click here to go back</a>");
-            eh.append("</div>");
-            eh.append("</body></html>");
-            response.getWriter().write(eh.toString());
-		}
-		response.flushBuffer();
+		return error.toString();
 	}
 	
 	private String createWidgetNode(Document contentDocument, Element parentNode, Element widgetNode, String wid, String wname, String wxid, boolean addToFront)

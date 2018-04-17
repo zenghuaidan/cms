@@ -55,7 +55,8 @@
     <script src="${Script}/cms/defineuedit.js" type="text/javascript"></script>
     <script src="${Script}/cms/tinymce/tinymce.min.js" type="text/javascript"></script>
     <script src="${Script}/cms/define-tme.js" type="text/javascript"></script>    
-    <script src="${Script}/cms/ajaxform.js" type="text/javascript"></script>    
+    <script src="${Script}/cms/ajaxform.js" type="text/javascript"></script> 
+    <script src="${Script}/jquery.form.js" type="text/javascript"></script>    
 	<script type="text/javascript" src="${context}/dwr/engine.js"></script>
 	<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>    
     <script>
@@ -64,7 +65,28 @@
     <script type="text/javascript">
         function submitWidgetForm() {
             $(".xedfield textarea").each(function () { var dummy = $(this).val(); });
-            E$("widgetform").submit();
+            
+            var options = {
+           		success: function (error) {
+ 					if(error == '') {
+ 						if(window.opener) {
+ 							window.opener.refresh(); 
+ 							window.close();
+ 						} else {
+ 							parent.location.reload();	 							
+ 						}
+ 					} else {
+ 						alert(error);
+ 					}
+           		}
+           	};
+              
+           	$("#widgetform").ajaxForm(options);
+           	$('#widgetform').bind('form-pre-serialize', function(event, form, options, veto) {
+        		tinyMCE.triggerSave();
+        	});
+           	$("#widgetform").ajaxSubmit(options); 
+            
         }
 
         function closeWidgetForm() { <%=closejs%> }
