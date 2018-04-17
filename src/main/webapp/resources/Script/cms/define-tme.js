@@ -227,7 +227,7 @@ function setUpMgr(field_name, url, type, win) {
 	//juin.val('my browser value');
 	juin.hide();
 	var wtype = (type=="image")?"webimage":"webfile";
-	var ifuhtm = "<iframe id='upframe' src='"+U$('/PageContentAdmin/TinyMceUpFrame')+"?wtype="+wtype+"&iname="+field_name+"' width='' height='' frameborder='0' scrolling='no'></iframe>";
+	var ifuhtm = "<iframe id='upframe' src='"+U$('PageContentAdmin/TinyMceUpFrame')+"?wtype="+wtype+"&iname="+field_name+"' width='' height='' frameborder='0' scrolling='no'></iframe>";
 	juin.after(ifuhtm);
 	//hide ok and display warning
 	var jftp = juin.closest(".mce-floatpanel").find(".mce-foot .mce-container-body");
