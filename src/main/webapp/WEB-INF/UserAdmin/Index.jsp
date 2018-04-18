@@ -1,13 +1,5 @@
 <%@include file="/WEB-INF/Shared/commons.jsp" %>
 <%@page contentType="text/html;charset=UTF-8"%>
-<%@page import="org.apache.commons.lang3.StringUtils"%>
-<%@page import="com.edeas.service.impl.QueryServiceImpl"%>
-<%@page import="com.edeas.web.InitServlet"%>
-<%@page import="com.edeas.model.*"%>
-<%@page import="java.util.*"%>
-
-<%	 
-%>
 
 <link href="${Content}/cms/core/useradmin.css" rel="stylesheet" type="text/css" />
 <style>
@@ -78,7 +70,8 @@ var id_sa="";
 	                <div class="clear"></div>
 	                <div class="btnrow">
 	                    <div class="gradbtn roundall" onclick="edituser(${user.id})">Edit</div>
-	                    <div class="gradbtn roundall btnresetpwd" onclick="resetpwd(${user.id})">Reset Pwd</div>	                                      
+	                    <div class="gradbtn roundall btnresetpwd" onclick="resetpwd(${user.id})">Reset Pwd</div>	        
+	                    <div class="gradbtn roundall btnresetpwd" onclick="goUrl('<%=Global.getCMSUrl() + "/UserAdmin/Privileges/" %>${user.id}');">Privileges</div>                              
 	                </div>
 	           	</div>             
 	            <img class="icon" src="${Content}/images/spacer.gif" alt="Icon" />

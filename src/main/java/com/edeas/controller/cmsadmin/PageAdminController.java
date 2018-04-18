@@ -130,7 +130,7 @@ public class PageAdminController extends CmsController {
 				return "Templates/" + page.getTemplate();
 			}
 		}
-		return "redirect:/SiteAdmin";
+		return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 	}
 	
 	@RequestMapping(path = {"PageAdmin/Preview"}, method={RequestMethod.GET})
@@ -152,14 +152,14 @@ public class PageAdminController extends CmsController {
 				return "Templates/" + page.getTemplate();
 			}
 		}
-		return "redirect:/SiteAdmin";
+		return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 	}
 	
 	@RequestMapping(path = {"PageAdmin/FixPIDArticles"}, method={RequestMethod.GET})
 	public String fixPIDArticles(Model model, long fixpid, HttpServletRequest request) {
 		Page currentPage = queryService.findPageById(fixpid, true);
 		if (currentPage.isNew() || !CmsProperties.articleBaseTpls.containsKey(currentPage.getTemplate())) {
-			return "redirect:/SiteAdmin";
+			return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 		}
 		model.addAttribute("navigation", "FixPIDArticles-" + currentPage.getId());
 		model.addAttribute("currentPage", currentPage);		

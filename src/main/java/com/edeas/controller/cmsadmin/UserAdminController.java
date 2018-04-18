@@ -16,11 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edeas.controller.Global;
 import com.edeas.dto.Result;
+import com.edeas.model.Privilege;
 import com.edeas.model.User;
 import com.edeas.model.UserRole;
 import com.edeas.utils.MailUtils;
@@ -39,7 +42,6 @@ public class UserAdminController extends CmsController {
 	
 	@RequestMapping(path = {"UserAdmin/NewUser"}, method={RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("hasRole('Admin')")
 	public Result newUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request,  Model model) {
 		
 		if(bindingResult.hasErrors()) {
@@ -84,7 +86,6 @@ public class UserAdminController extends CmsController {
 	
 	@RequestMapping(path = {"UserAdmin/ModifyUser"}, method={RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("hasRole('Admin')")
 	public Result modifyUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request,  Model model) {
 		List<String> errors = new ArrayList<String>();
 		if(user.getId() == null) {
@@ -138,7 +139,6 @@ public class UserAdminController extends CmsController {
 	
 	@RequestMapping(path = {"UserAdmin/ResetPwd"}, method={RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("hasRole('Admin')")
 	public Result resetPwd(Long id) {
 		List<String> errors = new ArrayList<String>();
 		if(id == null) {
@@ -155,6 +155,23 @@ public class UserAdminController extends CmsController {
 		userService.updatePassword(user.getLogin(), user.getPassword(), PasswordUtils.encode(newPassword));
 		MailUtils.sendmail(user.getFirstName(), user.getEmail(), "Reset Passowrd", "Your new password is : " + newPassword, false, true);
 		return new Result();
+	}
+	
+	@RequestMapping(path = {"UserAdmin/Privileges/{id}"}, method={RequestMethod.GET})
+	public String privileges(@PathVariable Long id, Model model) {
+		if(id == null) {
+			return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
+		}			
+		
+		User user = userService.findById(id);		
+		if(user == null) {
+			return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
+		}
+
+		model.addAttribute("navigation", "UserAdmin");
+		model.addAttribute("user", user);
+		model.addAttribute("privileges", Privilege.orderList());
+		return "UserAdmin/Privileges";
 	}
 		
 }

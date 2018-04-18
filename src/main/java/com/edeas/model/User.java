@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,6 +48,7 @@ public class User implements Serializable {
 	private Date createTime = new Date();
 	private Date updateTime;
 	private Set<UserRole> userRoles;
+	private Set<PageRole> pageRoles;
 	
 //INSERT INTO `db_larry_java_cms`.`CmsUser` (`id`, `active`, `createTime`, `email`, `firstName`, `lastFailTime`, `lastName`, `login`, `numFail`, `password`, `updateTime`) VALUES (1, '1', '2018-01-05', 'larry.zeng@edeas.hk', 'larry', '2018-01-05', 'zeng', 'larry', '0', '3HJK8Y+91OWRifX+dopfgxFScFA=', '2018-01-05');
 	@Id
@@ -172,16 +175,41 @@ public class User implements Serializable {
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}	
+
+	@OneToMany(mappedBy="user")
+	@OrderBy("id asc")
+	public Set<PageRole> getPageRoles() {
+		return pageRoles;
+	}
+
+	public void setPageRoles(Set<PageRole> pageRoles) {
+		this.pageRoles = pageRoles;
+	}
+
+	@Transient
+	public String getRoles() {		
+		List<String> roles = new ArrayList<String>();
+		for(UserRole userRole : this.userRoles) {
+			roles.add(userRole.getName());
+		}
+		return String.join(",", roles);		
+	}
 	
 	@Transient
-	public String getRoles() {
-		if(this.userRoles != null) {
-			List<String> roles = new ArrayList<String>();
-			for(UserRole userRole : this.userRoles) {
-				roles.add(userRole.getName());
-			}
-			return String.join(",", roles);
+	public boolean isAdmin() {		
+		for(UserRole userRole : this.userRoles) {
+			if (userRole.getName().equals("ROLE_Admin"))
+				return true;
+		}		
+		return false;
+	}
+	
+	public boolean hasPageRole(long pageId, Privilege privilege) {
+		if(isActive()) return true;
+		for(PageRole pageRole : pageRoles) {
+			if(pageRole.getPrivilege().name().equals(privilege.getName()) && pageRole.getPage().getId() == pageId)
+				return true;
 		}
-		return "";
+		return false;
 	}
 }

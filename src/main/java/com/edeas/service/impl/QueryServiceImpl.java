@@ -11,7 +11,6 @@ import com.edeas.model.CmsPage;
 import com.edeas.model.Content;
 import com.edeas.model.LivePage;
 import com.edeas.model.Page;
-import com.edeas.model.UserRole;
 
 @Service(value="queryService")
 @Transactional
@@ -30,6 +29,10 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	public Page getMasterPage(boolean iscms) {
 		List<Page> pages = findPagesByParentId(Page.MASTER_PAGE_PARENT_ID, iscms, false); // don't check active for masterpage
 		return pages.size() > 0 ? pages.get(0) : (iscms ? new CmsPage() : new LivePage());
+	}
+	
+	public List<Page> getBottomPages(boolean iscms) {
+		return findPagesByParentId(Page.MASTER_PAGE_PARENT_ID, iscms, false);
 	}
 	
 	public List<Page> getOtherPages(boolean iscms) {
