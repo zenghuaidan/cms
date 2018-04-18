@@ -21,9 +21,10 @@ public class UserLoginServiceImpl extends BasicServiceImpl implements UserDetail
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User user = userDao.findByUserName(userName);
-		if (user == null)
+		List<User> users = userDao.findByUserNameOrEmail(userName, userName);
+		if (users == null || users.size() == 0)
 			throw new UsernameNotFoundException(userName + " not exists");
+		User user = users.get(0);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();	
 		for(UserRole userRole : user.getUserRoles()) {
 			authorities.add(new SimpleGrantedAuthority(userRole.getName()));			
