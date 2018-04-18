@@ -34,7 +34,7 @@
 .nousr { text-align:center; font-weight:bold; font-size:18px; margin:80px 0px; }
 
 /* USER FORM */
-.userform { width:705px; height:300px; /*border:solid 3px black;*/ }
+.userform { width:705px; height:330px; /*border:solid 3px black;*/ }
 .userform h2 { line-height:50px; font-size:26px; font-weight:normal; padding:0px 0px 0px 100px; }
 .userform .table { !display:inline-block; }
 .userform .table .label  { width:220px; background:#666; color:#fff; padding:0px 15px 0px 0px; 

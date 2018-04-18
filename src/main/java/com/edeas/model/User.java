@@ -2,12 +2,15 @@ package com.edeas.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,16 +22,23 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "CmsUser")
 public class User implements Serializable {
 	private static final long serialVersionUID = -5051085506032468813L;
 	private Long id;
+	@NotBlank
 	private String login;
 	private String password;
+	@Email
 	private String email;
+	@NotBlank
 	private String firstName;
+	@NotBlank
 	private String lastName;
 	private boolean active = true;
 	private int numFail;
@@ -39,6 +49,8 @@ public class User implements Serializable {
 	
 //INSERT INTO `db_larry_java_cms`.`CmsUser` (`id`, `active`, `createTime`, `email`, `firstName`, `lastFailTime`, `lastName`, `login`, `numFail`, `password`, `updateTime`) VALUES (1, '1', '2018-01-05', 'larry.zeng@edeas.hk', 'larry', '2018-01-05', 'zeng', 'larry', '0', '3HJK8Y+91OWRifX+dopfgxFScFA=', '2018-01-05');
 	@Id
+	@GeneratedValue(generator = "incrementGenerator") 
+	@GenericGenerator(name = "incrementGenerator", strategy = "increment")
 	public Long getId() {
 		return id;
 	}
@@ -47,7 +59,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	public String getLogin() {
 		return login;
 	}
@@ -65,7 +77,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	public String getEmail() {
 		return email;
 	}
@@ -74,6 +86,7 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	@Column(nullable=false)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -82,6 +95,7 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
+	@Column(nullable=false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -158,4 +172,16 @@ public class User implements Serializable {
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}	
+	
+	@Transient
+	public String getRoles() {
+		if(this.userRoles != null) {
+			List<String> roles = new ArrayList<String>();
+			for(UserRole userRole : this.userRoles) {
+				roles.add(userRole.getName());
+			}
+			return String.join(",", roles);
+		}
+		return "";
+	}
 }

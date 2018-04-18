@@ -10,11 +10,14 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 
 import com.edeas.service.impl.QueryServiceImpl;
+import com.edeas.service.impl.UserRoleServiceImpl;
 import com.edeas.service.impl.UserServiceImpl;
 
 public abstract class BaseController {
 	// put all the service on the basic controller
-	protected UserServiceImpl userService;	
+	protected UserServiceImpl userService;
+	
+	protected UserRoleServiceImpl userRoleService;
 	
 	protected QueryServiceImpl queryService;
 	
@@ -68,6 +71,11 @@ public abstract class BaseController {
 	@Inject
 	public void setProcessEngine(ProcessEngine processEngine) {
 		this.processEngine = processEngine;
+	}
+
+	@Inject
+	public void setUserRoleService(UserRoleServiceImpl userRoleService) {
+		this.userRoleService = userRoleService;
 	}
 	
 }

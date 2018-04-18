@@ -19,21 +19,21 @@ function edituser(uid) {
    var roles=udiv.attr('roles').split(',');
    
    var htm="<form id='usrfm' class='userform editusr' method='post'>";
-   htm+="<input type='hidden' name='usrid' value='"+uid+"' />";
+   htm+="<input type='hidden' name='id' value='"+uid+"' />";
    htm+=$("#layerpool .userform").html()+"</form>";
    TINY.box.show({ html: htm, openjs: function() {
       clearusr();
       $("#usrfm h2").text("MODIFY USER");
       //set user properties
-      //$("#usrfm input[name$=firstname]").val(fname);
-      //$("#usrfm input[name$=lastname]").val(lname);
-	  $("#usrfm input[name$=username]").val(name);
-      $("#usrfm input[name$=email]").val(email);
-      var a = (active=="Active")?true:false;
-      $("#usrfm input[name$=active]").attr('checked',a);
+      $("#usrfm input[name$=login]").val(login);
+      $("#usrfm input[name$=firstName]").val(firstName);
+      $("#usrfm input[name$=lastName]").val(lastName);
+      $("#usrfm input[name$=email]").val(email);	  
+      $("#usrfm input[name$=activeChk]").prop('checked',active=="Active");
+      $("#usrfm input[name$=active]").val($("#usrfm input[name$=activeChk]").prop('checked'));
       //set roles
       for (var i=0; i<roles.length; i++) {
-        $("#usrfm input[name$=chkrole"+roles[i]+"]").attr('checked',true);
+        $("#usrfm input[name$=chkrole"+roles[i]+"]").prop('checked',true);
       }
    } });
 }
@@ -46,69 +46,13 @@ function clearusr() {
   $("#usrfm div.roleval input,#usrfm div.scopeval input").attr('checked',false);
 }
 
-function valideldapusr(usr) {
-    var usrexist = false;
-    $.ajax({
-        type: "POST",
-        async: false,
-        url: cmsroot + 'Account/ValidateUser',
-        data: 'usrid=' + usr,
-        success: function (data) {
-            if (data) {
-                usrexist = true;
-                $("#usrfm input[name=firstname]").val(data.displayName);
-                $("#usrfm input[name=lastname]").val(data.displayName);
-                $("#usrfm input[name=email]").val(data.email);
-            } else {
-                usrexist = false;
-            }
-            
-        }
-    });
-    return usrexist;
-}
-
-function valideldapemail(email) {
-    var emailxist = false;
-    $.ajax({
-        type: "POST",
-        async: false,
-        url: cmsroot + 'Account/ValidateEmail',
-        data: 'email=' + email,
-        success: function (data) {
-            if (data) {
-                emailxist = true;
-                $("#usrfm input[name=firstname]").val(data.displayName);
-                $("#usrfm input[name=lastname]").val(data.displayName);
-                $("#usrfm input[name=username]").val(data.uid);
-            } else {
-                emailxist = false;
-            }
-            
-        }
-    });
-    return emailxist;
-}
-
-function validateusrfm(needADCheck) {
+function validateusrfm() {
     var err = ""; $("#usrfm .errmsg").text(err);
 
     //Required Text (.reqtxt) Check
     if (err == "") {
         $("#usrfm input.reqtxt").each(function () {
             if ($.trim($(this).val()) == "") { err = $(this).attr('reqmsg'); }
-        });
-    }
-
-    // Email Exist Check
-    if (err == "" && needADCheck) {
-        /*
-		$("#usrfm input[name=username]").each(function () {
-            if (!valideldapusr($(this).val())) { err = $(this).attr('ldapmsg'); }
-        });
-		*/
-		$("#usrfm input[name=email]").each(function () {
-            if (!valideldapemail($(this).val().trim())) { err = $(this).attr('emailmsg'); }
         });
     }
 
@@ -119,67 +63,33 @@ function validateusrfm(needADCheck) {
         });
     }	
 
-    //Require at least one role
-    /*
-    if (err=="") { 
-      //console.log('in role check'); 
-      var chk=0; 
-      $("#usrfm div.roleval input").each( function() {
-      if ($(this).is(':checked')) chk++;
-    }); if (chk<=0) err="At least one role must be checked"; }
-    */
-
     //Display error message
     if (err != "") { $("#usrfm .errmsg").text(err); return false; }
     else return true;
 }
 
-function submitusrfm(needADCheck) {
-    if (validateusrfm(needADCheck)) {
-    var u=($("#usrfm").hasClass('newusr'))?cmsroot+"Account/NewUser":cmsroot+"Account/ModifyUser";
+function submitusrfm() {
+    if (validateusrfm()) {
+    var u=($("#usrfm").hasClass('newusr'))?cmsroot+"UserAdmin/NewUser":cmsroot+"UserAdmin/ModifyUser";
     $.post(u,$("#usrfm").serialize(),function(data) {
-        if (data.Success == "True") {
+        if (data.success) {
             refresh();
         } else {
-            $("#usrfm .errmsg").text(data.Message);
-            //alert(data.Message);
+            $("#usrfm .errmsg").text(data.errorMsg);
         }
     },"json");
   }
 }
 
 function resetpwd(uid) {
- var l=cmsroot+"Content/images/spacer.gif";
+ var l=webroot+"/resources/Content/images/spacer.gif";
  var udiv=$(".userblock div.inner[usrid$="+uid+"]");
- var url=cmsroot+"Account/ResetPwd";
+ var url=cmsroot+"UserAdmin/ResetPwd";
  udiv.find(".btnresetpwd").append("<img class='smbtnload' src='"+l+"' alt='loading' />");
- $.post(url,{usrid:uid},function(data) {
-      if (data.Success=="True") {
+ $.post(url,{id:uid},function(data) {
+      if (data.success) {
         udiv.find(".btnresetpwd img").remove();
-      } else alert(data.Message);
- },"json");
-}
-
-//trigger activate / inactivate
-function trgactive(uid) {
- var sp=cmsroot+"Content/images/spacer.gif";
- var udiv=$(".userblock div.inner[usrid$="+uid+"]");
- var abtn=udiv.find(".btnafn");
- var url=(abtn.hasClass('activebtn'))?cmsroot+"Account/Activate":cmsroot+"Account/Inactivate";
- abtn.append("<img class='smbtnload' src='"+sp+"' alt='loading' />");
- $.post(url,{usrid:uid},function(data) {
-      if (data.Success=="True") {
-        if (abtn.hasClass('activebtn')) {
-          udiv.find(".activeval").text("Active");
-          abtn.text("Inactivate");
-          abtn.removeClass('activebtn').addClass('inactivebtn');
-        } else {
-          udiv.find(".activeval").text("Inactive");
-          abtn.text("Activate");
-          abtn.removeClass('inactivebtn').addClass('activebtn');        
-        }
-        udiv.find(".btnresetpwd img").remove();
-      } else alert(data.Message);
+      } else alert(data.errorMsg);
  },"json");
 }
 
@@ -213,12 +123,15 @@ function doSearch() {
     var sbox=$("#finduser input");
     var k = sbox.val().toLowerCase();
     var n=0;
-    if (k==defsearchtxt.toLowerCase() || $.trim(k)=="") { $(".userblock").show(); }
-    $(".userblock").each( function() {
-      var t = $(this).find('.firstnameval').text().toLowerCase()+" "+$(this).find('.emailval').text().toLowerCase();
-      if (t.indexOf(k)>=0) { $(this).show(); n++; } else $(this).hide();
-    });
-    if (n<=0) { $("#userlist").append($("#nousrdiv").html()); }
+    if (k==defsearchtxt.toLowerCase() || $.trim(k)=="") { 
+    	$(".userblock").show(); 
+	} else {
+		$(".userblock").each( function() {
+			var t = $(this).find('.loginnameval').text().toLowerCase()+" "+$(this).find('.firstnameval').text().toLowerCase()+" "+$(this).find('.lastnameval').text().toLowerCase()+" "+$(this).find('.emailval').text().toLowerCase();
+			if (t.indexOf(k)>=0) { $(this).show(); n++; } else $(this).hide();
+		});
+		if (n<=0) { $("#userlist").append($("#nousrdiv").html()); }		
+	}
 }
 
 function setSearch() {

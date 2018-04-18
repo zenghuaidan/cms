@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.edeas.controller.Global;
 import com.edeas.model.User;
 import com.edeas.service.impl.UserServiceImpl;
+import com.edeas.utils.PasswordUtils;
 
 public class LoginFilter implements Filter {
 	
@@ -44,7 +44,7 @@ public class LoginFilter implements Filter {
 			} else {
 				UserServiceImpl userService = (UserServiceImpl)WebApplicationContextUtils.getWebApplicationContext(_request.getSession().getServletContext()).getBean("userService");
 				User user = userService.findByUserName(userName);						
-				if (user == null || !new BCryptPasswordEncoder().matches(password, user.getPassword()))
+				if (user == null || !PasswordUtils.matches(password, user.getPassword()))
 					errors.add("Invalidate user name or password.");
 //				else
 //					SystemSessionContext.addSession(_request.getSession());

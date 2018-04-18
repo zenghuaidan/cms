@@ -163,7 +163,7 @@ h2.darkbg { padding:5px 10px; font-weight:bold; text-transform:uppercase; text-a
 .chgpwdform .btnrow .gradbtn { padding: 5px; margin:0px 5px 0px 0px; float:left; cursor:pointer;}
 .chgpwdform .bigicon { position:absolute; width:128px; height:134px; top:10px; left:10px; }                     
 .chgpwdform .btnrow .errmsg { color:red; float:left; line-height:28px; }            
-.chgpwdform .bigicon { background:url(core/images/icon-new-use-modify.png) no-repeat; background-position:10px 5px}
+.chgpwdform .bigicon { background:url(core/images/icon-change-password.png) no-repeat; background-position:10px 5px}
 
 /************* Site Admin ***************/
 #siteadmin #homepage { color:#fff; font-size:16px; text-transform:uppercase; transition:all 0.3s ease;}

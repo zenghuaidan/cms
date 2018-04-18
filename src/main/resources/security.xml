@@ -17,7 +17,8 @@
 		<intercept-url pattern="/admin/product" access="hasRole('Admin')"/>
 		<intercept-url pattern="/admin/template" access="hasRole('Admin')"/>
 		<intercept-url pattern="/admin/pdaadmin" access="hasRole('Admin')"/-->
-		<intercept-url pattern="/cmsadmin/**" access="hasRole('Admin')"/>
+		<intercept-url pattern="/cmsadmin/**" access="hasRole('Admin') or hasRole('User')"/>
+		<intercept-url pattern="/cmsadmin/UserAdmin/**" access="hasRole('Admin')"/>
 		
 		<form-login login-page="/cmsadmin/Login"
 			default-target-url="/cmsadmin/SiteAdmin" 

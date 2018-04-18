@@ -11,7 +11,7 @@ import com.edeas.model.CmsPage;
 import com.edeas.model.Content;
 import com.edeas.model.LivePage;
 import com.edeas.model.Page;
-import com.edeas.model.User;
+import com.edeas.model.UserRole;
 
 @Service(value="queryService")
 @Transactional

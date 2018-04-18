@@ -11,10 +11,12 @@ import com.edeas.dao.impl.LiveContentDaoImpl;
 import com.edeas.dao.impl.LivePageDaoImpl;
 import com.edeas.dao.impl.PageDaoImpl;
 import com.edeas.dao.impl.UserDaoImpl;
+import com.edeas.dao.impl.UserRoleDaoImpl;
 
 public abstract class BasicServiceImpl {
 	protected final Logger logger = Logger.getLogger(BasicServiceImpl.class);
 	protected UserDaoImpl userDao;
+	protected UserRoleDaoImpl userRoleDao;
 	protected LivePageDaoImpl livePageDao;
 	protected LiveContentDaoImpl liveContentDao;
 	protected CmsPageDaoImpl cmsPageDao;
@@ -31,6 +33,15 @@ public abstract class BasicServiceImpl {
 
 	public LivePageDaoImpl getLivePageDao() {
 		return livePageDao;
+	}
+
+	public UserRoleDaoImpl getUserRoleDao() {
+		return userRoleDao;
+	}
+
+	@Inject
+	public void setUserRoleDao(UserRoleDaoImpl userRoleDao) {
+		this.userRoleDao = userRoleDao;
 	}
 
 	@Inject

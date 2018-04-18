@@ -6,8 +6,7 @@
 <%@page import="com.edeas.model.*"%>
 <%@page import="java.util.*"%>
 
-<% 		
-
+<%	 
 %>
 
 <link href="${Content}/cms/core/useradmin.css" rel="stylesheet" type="text/css" />
@@ -65,7 +64,7 @@ var id_sa="";
 	<c:forEach items="${users}" var="user" >
 	    <div class="userblock">
 	        <div class="band"></div>
-	        <div class="inner" usrid='${user.id}' roles="">
+	        <div class="inner" usrid='${user.id}' roles="${ user.roles }">
 	            <div class="table">
 	                <div class="label">LOGIN NAME</div> <div class="loginnameval value">${user.login}</div>
 	                <div class='clear'></div>
@@ -79,8 +78,7 @@ var id_sa="";
 	                <div class="clear"></div>
 	                <div class="btnrow">
 	                    <div class="gradbtn roundall" onclick="edituser(${user.id})">Edit</div>
-	                    <div class="gradbtn roundall btnresetpwd" onclick="resetpwd(${user.id})">Reset Pwd</div>
-	                    <div class="gradbtn roundall btnafn ${user.active ? 'inactivebtn' : 'activebtn'}" onclick="trgactive(${user.id})">${user.active ? "Inactivate" : "Activate"}</div>                    
+	                    <div class="gradbtn roundall btnresetpwd" onclick="resetpwd(${user.id})">Reset Pwd</div>	                                      
 	                </div>
 	           	</div>             
 	            <img class="icon" src="${Content}/images/spacer.gif" alt="Icon" />
@@ -99,27 +97,31 @@ var id_sa="";
         <div class="table">            
             <div class="label">SCOPE</div> 
 			<div class="value scopeval">
-                <input type="checkbox" name="chkrolesa" value="yes" />Super Admin
+            	<c:forEach items="${roles}" var="role" >
+                	<input type="checkbox" name="chkrole${ role.name }" value="yes" />${ role.description }
+           		</c:forEach>   
             </div>
              
-            <div class='clear'></div>
+			<!--             
+			<div class='clear'></div>
             <div class="label">ROLE</div> 
             <div class="value roleval">
-            	<input type="checkbox" name="iname" value="yes"/>Test   
-            </div>
+           		<input type="checkbox" name="iname" value="yes"/>Test
+            </div> 
+            -->
             <div class='clear'></div>            
-            <div class="label">LOGIN NAME</div> <div class="value"><input name="login" type="text" value="" reqmsg="LDAP name is requried" /></div>            
+            <div class="label">LOGIN NAME</div> <div class="value"><input name="login" type="text" value="" reqmsg="Login name is requried" />&nbsp;</div>            
             <div class='clear'></div>
-            <div class="label">FIRST NAME</div> <div class="value"><input name="firstName" class="reqtxt" type="text" value="" reqmsg="First name is requried"/></div>
+            <div class="label">FIRST NAME</div> <div class="value"><input name="firstName" class="reqtxt" type="text" value="" reqmsg="First name is requried"/>&nbsp;</div>
             <div class='clear'></div>
-            <div class="label">LAST NAME</div> <div class="value"><input name="lastName" class="reqtxt" type="text" value="" reqmsg="Last name is required" /></div>
+            <div class="label">LAST NAME</div> <div class="value"><input name="lastName" class="reqtxt" type="text" value="" reqmsg="Last name is required" />&nbsp;</div>
             <div class='clear'></div>
-            <div class="label">EMAIL</div> <div class="value"><input name="email" class="reqtxt email" type="text" value="" reqmsg="Email is required" emailmsg="Invalid email address" /></div>                        
+            <div class="label">EMAIL</div> <div class="value"><input name="email" class="reqtxt email" type="text" value="" reqmsg="Email is required" emailmsg="Invalid email address" />&nbsp;</div>                        
             <div class='clear'></div>
-            <div class="label">ACTIVE</div> <div class="value"><input name="active" class="active" type="checkbox" value="yes" /></div>
+            <div class="label">ACTIVE</div> <div class="value"><input name="active" type="hidden" value="" /><input name="activeChk" class="active" type="checkbox" onchange="$('#usrfm input[name$=active]').val($(this).prop('checked'))" />&nbsp;</div>
             <div class="clear"></div>
             <div class="btnrow">
-                <div class="gradbtn roundall" onclick="submitusrfm(false)">Save</div>
+                <div class="gradbtn roundall" onclick="submitusrfm()">Save</div>
                 <div class="gradbtn roundall" onclick="closeusr();">Cancel</div>
                 <div class="gradbtn roundall" onclick="clearusr();">Clear</div>
                 <div class="errmsg"></div>

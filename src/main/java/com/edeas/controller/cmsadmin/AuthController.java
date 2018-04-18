@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.dto.Result;
 import com.edeas.model.User;
+import com.edeas.utils.PasswordUtils;
 
 @Controller
 public class AuthController extends CmsController {
@@ -33,10 +33,10 @@ public class AuthController extends CmsController {
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			User loginUser = userService.findByUserName(userDetails.getUsername()); 
 			String encodedPassword = loginUser.getPassword();
-			if(StringUtils.isBlank(oldpwd) || !new BCryptPasswordEncoder().matches(oldpwd, encodedPassword)) {
+			if(StringUtils.isBlank(oldpwd) || !PasswordUtils.matches(oldpwd, encodedPassword)) {
 				return new Result("Old password is incorrect", "Old password is incorrect");
 			}
-			userService.updatePassword(loginUser.getLogin(), encodedPassword, new BCryptPasswordEncoder().encode(newpwd));
+			userService.updatePassword(loginUser.getLogin(), encodedPassword, PasswordUtils.encode(newpwd));
 		}
 		return new Result("Password update successfully");
 	}
