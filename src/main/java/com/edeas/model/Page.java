@@ -1,7 +1,11 @@
 package com.edeas.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -309,13 +313,19 @@ public class Page<T extends Page, E extends Content> {
 	}
 
 	@Transient
-	public Set<T> getChildren(boolean isDelete) {
-		Set<T> elements = new HashSet<T>();
+	public List<T> getChildren(boolean isDelete) {
+		List<T> elements = new ArrayList<T>();
 		for(T page : this.children) {
 			if(((Page)page).isDelete()== isDelete) {
 				elements.add(page);
 			}
 		}
+		Collections.sort(elements, new Comparator<T>() {
+			@Override
+			public int compare(T o1, T o2) {
+				return ((Page)o1).getPageOrder() - ((Page)o2).getPageOrder();
+			}
+		});
 		return elements;
 	}
 	
@@ -458,7 +468,7 @@ public class Page<T extends Page, E extends Content> {
         	this.pageOrder = 1;
         } else {
         	int max = 0;
-        	for(Page page : parent.getChildren()) {
+        	for(Page page : parent.getChildren(false)) {
         		max = Math.max(max, page.getPageOrder());
         	}
         	this.pageOrder = max + 1;

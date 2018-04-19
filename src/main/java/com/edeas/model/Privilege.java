@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum Privilege {
-	editor("ed", "Editor", false, true, 1), publisher("pb", "Publisher", true, false, 2);
+	ed("ed", "Editor", false, true, 1), pb("pb", "Publisher", true, false, 2);
 	
 	private String name;
 	private String description;

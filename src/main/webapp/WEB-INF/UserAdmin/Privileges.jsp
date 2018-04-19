@@ -31,7 +31,7 @@
     padding: 5px !important;    
 }
 </style>
-
+<input type="hidden" id="currentUserId" value="${ user.id }"/>
 <div id="admintopheader" class="cmspgw hlgradbg" style="">
        <div style="float:left;"><a href="<%=Global.getCMSUrl() + "/UserAdmin/Index" %>" style="margin-left:20px;">Back to User Admin</a></div>
        <div style="float:right; margin-right:20px;">Privileges for user: ${ user.login }</div>
@@ -59,7 +59,7 @@
 	<!-- HEADER & HOMEPAGE -->
     <div id="saheader">
       <div class="pg">
-        <div id="homepage" class="roundall darkgradbg btmshadow" pgid="-1" style="width:155px;">
+        <div id="homepage" class="roundall darkgradbg btmshadow" pgid="<%=homePage.getId() %>" style="width:155px;">
 		    <%
 		    for(Privilege privilege : privileges) {
 		    	%>
@@ -98,7 +98,7 @@
 	        html.append("</div>");
 	      	if (numsubpg > 0) {
 	      		html.append("<div class='grp newpgdrop " + drpc + "' lv='" + nxtlv + "' style='display: none;'>");      
-	      		for(Page sub : (Set<Page>)page.getChildren()) {
+	      		for(Page sub : (List<Page>)page.getChildren(false)) {
 	      			html.append(pgdiv(nxtlv, sub, pvusr, pvlist));
 	      		}		        
 		        html.append("</div>");   
@@ -130,7 +130,7 @@
 				</div>
 				<div class='sectionpglist newpgdrop lv2drop' lv="2">
 			    <%
-				for (Page sec : (Set<Page>)top.getChildren(false))
+				for (Page sec : (List<Page>)top.getChildren(false))
 				{     
 			    	%>
 			    	<c:out escapeXml="false" value='<%=pgdiv(2, sec, user, privileges) %>'></c:out>

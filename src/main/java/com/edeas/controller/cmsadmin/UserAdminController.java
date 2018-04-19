@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
+import com.edeas.model.CmsPage;
+import com.edeas.model.Page;
+import com.edeas.model.PageRole;
 import com.edeas.model.Privilege;
 import com.edeas.model.User;
 import com.edeas.model.UserRole;
@@ -172,6 +175,16 @@ public class UserAdminController extends CmsController {
 		model.addAttribute("user", user);
 		model.addAttribute("privileges", Privilege.orderList());
 		return "UserAdmin/Privileges";
+	}
+	
+	@RequestMapping(path = {"UserAdmin/setUserPageRole"}, method={RequestMethod.POST})
+	@ResponseBody
+	public boolean setUserPageRole(Long userId, Long pageId, String role, boolean isOn) {
+		if(userId == null || pageId == null || !Privilege.exists(role)) {
+			return false;
+		}
+		
+		return userService.setUserPageRole(userId, pageId, role, isOn);
 	}
 		
 }

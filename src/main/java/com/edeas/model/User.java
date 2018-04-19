@@ -205,7 +205,7 @@ public class User implements Serializable {
 	}
 	
 	public boolean hasPageRole(long pageId, Privilege privilege) {
-		if(isActive()) return true;
+		if(isAdmin()) return true;
 		for(PageRole pageRole : pageRoles) {
 			if(pageRole.getPrivilege().name().equals(privilege.getName()) && pageRole.getPage().getId() == pageId)
 				return true;

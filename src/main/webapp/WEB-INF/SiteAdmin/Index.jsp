@@ -49,7 +49,7 @@
 	    String drpc = "lv" + nxtlv + "drop";
 	    
 	    Page page = queryService.findPageById(pgid, true);	    
-	    int numsubpg = page.getChildren().size();      
+	    int numsubpg = page.getChildren(false).size();      
 	    String template = page.getTemplate();
 		StringBuffer html = new StringBuffer();
 		html.append("<div class='" + pglv + " pgblk'>");
@@ -81,7 +81,7 @@
         	html.append("<div class='grp newpgdrop " + drpc + "' lv='" + nxtlv + "' style='display:none'>");
              if (!page.isExcTpl())                    
              {
-	            for (Page children : (Set<Page>)page.getChildren())
+	            for (Page children : (List<Page>)page.getChildren(false))
 	            {
                 	html.append(pgdiv(nxtlv, children.getId(), children.getStatus().getName(), children.isActive(), children.getName()));
                 }

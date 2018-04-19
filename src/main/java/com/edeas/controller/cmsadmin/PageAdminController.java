@@ -38,7 +38,7 @@ public class PageAdminController extends CmsController {
         StringBuilder sb = new StringBuilder();
         Page page = queryService.findPageById(pgid, true);
         if (attr.equals("thispgchild")) {
-        	Set<Page> children = page.getChildren();
+        	List<Page> children = page.getChildren(false);
             for(Page child : children)
                 sb.append("<option value='" + child.getId() + "'>" + child.getName() + "</option>");
         } else if (attr.startsWith("childoftpl")) {
@@ -89,7 +89,7 @@ public class PageAdminController extends CmsController {
         for (int i = 0; i < idtlv; i++) prefix += "&nbsp;&nbsp;&nbsp;";
         sb.append("<option value='" + page.getId() + "'>" + prefix + constprefix + page.getName() + "</option>");
         if (!Global.excludeSubMenuList.contains(page.getTemplate())) {
-        	Set<Page> children = page.getChildren();
+        	List<Page> children = page.getChildren(false);
             for(Page child : children)
                 sb.append(recurrsiveOption(idtlv + 1, child, constprefix));
         }            
@@ -105,7 +105,7 @@ public class PageAdminController extends CmsController {
         {
             sb.append("<option value='" + page.getId() + "'>" + prefix + constprefix + page.getName() + "</option>");
         }
-        Set<Page> children = page.getChildren();
+        List<Page> children = page.getChildren(false);
         for(Page child : children)
             sb.append(recurrsiveOptionOfTpl(idtlv + 1, tpl, child, constprefix));
         return sb.toString();

@@ -16,7 +16,7 @@
 					} else if($(this).closest('div').parent().hasClass('fullsect')){
 						$(this).removeClass('pb_active'); 
 						$(this).addClass('pb_inactive'); 
-						setPgRole(imgr,$(this),"off");
+						setPgRole(imgr,$(this),false);
 					}
 					else{
 						if($(this).closest('.topsect').parent().attr("id")=='topsectors')
@@ -28,7 +28,7 @@
 						} else {
 							$(this).removeClass('pb_active'); 
 							$(this).addClass('pb_inactive'); 
-							setPgRole(imgr,$(this),"off");
+							setPgRole(imgr,$(this),false);
 						}
 					}
 					
@@ -43,7 +43,7 @@
 					} else if($(this).closest('div').parent().hasClass('fullsect')){
 						$(this).removeClass('ed_active'); 
 						$(this).addClass('ed_inactive'); 
-						setPgRole(imgr,$(this),"off");
+						setPgRole(imgr,$(this),false);
 					} else{
 						if($(this).closest('.topsect').parent().attr("id")=='topsectors')
 							setAllInactive($(this),"topsect",imgr)
@@ -52,7 +52,7 @@
 						else {
 							$(this).removeClass('ed_active'); 
 							$(this).addClass('ed_inactive'); 
-							setPgRole(imgr,$(this),"off");
+							setPgRole(imgr,$(this),false);
 						}
 					}
 					
@@ -68,36 +68,29 @@ function setAllInactive(imgid,parentclass,imgr){
 		if(imgid.closest('.p2').children(0).find('img').hasClass(imgr+'_inactive')){
 		   imgid.removeClass(imgr+'_active'); 
 		   imgid.addClass(imgr+'_inactive'); 
-		   setPgRole(imgr,imgid,"off");
+		   setPgRole(imgr,imgid,false);
 		} 
 		else
 		   alert("User has right inherited from the parent page.  You cannot remove the right.");
 	}
-	else if(imgid.closest('".'+parentclass+'"').children(0).find('img').hasClass(imgr+'_inactive')){
+	else if(imgid.closest('.'+parentclass).children(0).find('img').hasClass(imgr+'_inactive')){
 	   imgid.removeClass(imgr+'_active'); 
 	   imgid.addClass(imgr+'_inactive'); 
-	   setPgRole(imgr,imgid,"off");
+	   setPgRole(imgr,imgid,false);
 	} 
 	else
 	   alert("User has right inherited from the parent page.  You cannot remove the right.");
 }
 
-
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
 function recursiveActive(imgid,imgr){
 	imgid.removeClass(imgr+'_inactive'); 
 	imgid.addClass(imgr+'_active'); 
 	imgid.closest('div').parent().children().find('.'+imgr+'_inactive').each( function () {
 		$(this).removeClass(imgr+'_inactive'); 
 		$(this).addClass(imgr+'_active'); 
-		setPgRole(imgr,$(this),"on");
+		setPgRole(imgr,$(this),true);
 	});        
-	setPgRole(imgr,imgid,"on");
+	setPgRole(imgr,imgid,true);
 }
 
 function recursiveInactive(imgid,imgr){
@@ -106,43 +99,22 @@ function recursiveInactive(imgid,imgr){
 	imgid.closest('div').parent().children().find('.'+imgr+'_active').each( function () {
 		$(this).removeClass(imgr+'_active'); 
 		$(this).addClass(imgr+'_inactive'); 
-		setPgRole(imgr,$(this),"off");
+		setPgRole(imgr,$(this),false);
 	});        
-	setPgRole(imgr,imgid,"off");
+	setPgRole(imgr,imgid,false);
 }
 
-function setPgRole(imgr,imgid,onoff){
-	var pvalue = getParameterByName("usr");
-	pgid=imgid.parent().attr("pgid");
-	$.post(cmsroot+"Account/setUserPgRight", { "usrid":pvalue,"pageid":pgid,"role":imgr,"onoff":onoff},
+function setPgRole(role,imgid,onoff){
+	var userId = $("#currentUserId").val();
+	var pageId=imgid.parent().attr("pgid");
+	$.post(cmsroot+"UserAdmin/setUserPageRole", { "userId":userId,"pageId":pageId,"role":role,"isOn":onoff},
 	function(data){
-		//console.log(data); // John
+		//console.log(data);
 	}, "json");
 
 }
 
-function setallactive() {
-	var id_sa=issa()
-	if (id_sa!=-1) {
-		$(".rolebtn").each( function() { 
-			if ($(this).hasClass('ed_inactive'))
-			{
-				$(this).removeClass('ed_inactive');
-				$(this).addClass('ed_active');
-			}
-		});
-		$(".rolebtn").each( function() { 
-			if ($(this).hasClass('pb_inactive'))
-			{
-				$(this).removeClass('pb_inactive');
-				$(this).addClass('pb_active');
-			}
-		
-	});
-}
-}
-
-function issa() { return $(document.getElementById("siteadmin")).attr("roles").indexOf("sa"); }
+function issa() { return $(document.getElementById("siteadmin")).attr("roles").indexOf("Admin"); }
 
 function setExpandCollapse() {
   $(".ec").click( function() {
@@ -169,5 +141,4 @@ function refreshSiteTree() {
 $(function() {
   setExpandCollapse();
   setPvBtns();
-  setallactive();
 });
