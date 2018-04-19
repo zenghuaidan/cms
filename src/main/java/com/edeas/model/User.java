@@ -27,6 +27,7 @@ import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.filter.Log4jNestedDiagnosticContextFilter;
 
 @Entity
 @Table(name = "CmsUser")
@@ -207,9 +208,20 @@ public class User implements Serializable {
 	public boolean hasPageRole(long pageId, Privilege privilege) {
 		if(isAdmin()) return true;
 		for(PageRole pageRole : pageRoles) {
-			if(pageRole.getPrivilege().name().equals(privilege.getName()) && pageRole.getPage().getId() == pageId)
+			if(pageRole.getPrivilege().name().equals(privilege.getName()) && pageRole.getPageId() == pageId)
 				return true;
 		}
 		return false;
+	}
+	
+	public String enterPagePermission(long pageId) {
+		if(isAdmin() || hasPageRole(pageId, Privilege.ed) || hasPageRole(pageId, Privilege.pb)) {
+			return "allow";
+		}
+		return "deny";
+	}
+	
+	public boolean hasEditPagePermission(long pageId) {
+		return isAdmin() || hasPageRole(pageId, Privilege.ed);
 	}
 }

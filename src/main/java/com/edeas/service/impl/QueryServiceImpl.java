@@ -11,6 +11,7 @@ import com.edeas.model.CmsPage;
 import com.edeas.model.Content;
 import com.edeas.model.LivePage;
 import com.edeas.model.Page;
+import com.edeas.model.User;
 
 @Service(value="queryService")
 @Transactional
@@ -115,6 +116,14 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	
 	public List<Page> getChidrenWithOrder(long parentId, boolean iscms, boolean checkActive, List<String> orders) {
 		return getPageDao(iscms).getChidrenWithOrder(parentId, checkActive, orders);
+	}
+	
+	public User findByUserName(String userName) {
+		try {			
+			return userDao.findByUserName(userName);
+		} catch (Exception e) {
+		}
+		return null;
 	}
 	
 }

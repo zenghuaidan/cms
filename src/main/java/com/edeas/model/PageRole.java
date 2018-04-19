@@ -17,7 +17,7 @@ public class PageRole {
 
 	private Long id;
 	private User user;
-	private CmsPage page;
+	private Long pageId;
 	private Privilege privilege;
 
 	@Id
@@ -40,14 +40,12 @@ public class PageRole {
 		this.user = user;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="pageid")
-	public CmsPage getPage() {
-		return page;
+	public Long getPageId() {
+		return pageId;
 	}
 
-	public void setPage(CmsPage page) {
-		this.page = page;
+	public void setPageId(Long pageId) {
+		this.pageId = pageId;
 	}
 
 	@Enumerated(EnumType.STRING)

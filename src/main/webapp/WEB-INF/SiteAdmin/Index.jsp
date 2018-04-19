@@ -38,9 +38,9 @@
 	}
 	
 	//SITEMAP
-	public String pgdiv(int lv, long pgid, String status, boolean active, String label)
+	public String pgdiv(int lv, long pgid, String status, boolean active, String label, User user)
 	{    
-	    String roleval = "allow";
+	    String roleval = user.enterPagePermission(pgid);
 	    String pgsc = "pgs" + status;
 	    String ico = (active) ? "active" : "inactive";
 	    String icolb = (active) ? "Active" : "Inactive";
@@ -66,10 +66,12 @@
                 html.append("<img class='ec' src='" + Global.getContentPath() + "/images/spacer.gif" + "' alt='' />");
                 html.append("</div>");
             }
-           	if ((CmsProperties.getMaxLevel() > lv && lv >=0 )
+           	if (user.hasEditPagePermission(page.getId())
+       			&&
+           		((CmsProperties.getMaxLevel() > lv && lv >=0 )
        			||
                 (CmsProperties.getForceChildTpls().containsKey(template) &&
-                (CmsProperties.getForceChildTpls().get(template)==-1 || CmsProperties.getForceChildTpls().get(template)>numsubpg))
+                (CmsProperties.getForceChildTpls().get(template)==-1 || CmsProperties.getForceChildTpls().get(template)>numsubpg)))
                )
             {
             	html.append(icoimg(nspc, "New Subpage"));
@@ -83,7 +85,7 @@
              {
 	            for (Page children : (List<Page>)page.getChildren(false))
 	            {
-                	html.append(pgdiv(nxtlv, children.getId(), children.getStatus().getName(), children.isActive(), children.getName()));
+                	html.append(pgdiv(nxtlv, children.getId(), children.getStatus().getName(), children.isActive(), children.getName(), user));
                 }
             }
 
@@ -100,15 +102,19 @@
 <%	
 	Page homePage = queryService.getHomePage(true);
 	String hpstatus = (homePage == null) ? "new" : homePage.getStatus().getName();
+	Long homePageId = homePage == null ? -1 : homePage.getId();
 	
 	Page masterPage = queryService.getMasterPage(true);
 	String masterpgstatus = (masterPage == null) ? "new" : masterPage.getStatus().getName();
+	Long masterPageId = masterPage == null ? -2 : masterPage.getId();
 	
 	List<? extends Page> topPages = queryService.getAllTopPage(true, true);
 	
 	List<? extends Page> otherPages = queryService.getOtherPages(true);
 	
 	boolean moreTopLevel = topPages.size() < CmsProperties.getMaxTopgs();
+	
+	User user = (User)request.getAttribute("user");
 %>
 <c:set var="moreTopLevel" value="<%=moreTopLevel %>"/>
 <link href="${Content}/cms/core/siteadmin.css" rel="stylesheet" type="text/css" />
@@ -120,19 +126,19 @@
 	<!-- HEADER & HOMEPAGE -->
     <div id="saheader">
         <div class="pg">
-            <div id="homepage" class="roundall darkgradbg btmshadow" pgid="-1">
+            <div id="homepage" class="roundall darkgradbg btmshadow" pgid="<%=homePageId%>">
       			<c:out escapeXml="false" value='<%=pgsimg(hpstatus) %>'></c:out>
-                <span status="allow">Homepage</span>
+                <span status="<%=user.enterPagePermission(homePageId) %>">Homepage</span>
             </div>
         </div>
-        <div id="sitebtnblk">
-            <div id="masterpgbtn" class="cmsbtn" onclick="goUrl('<%=Global.getCMSUrl() + "/PageAdmin/Index?id=-2" %>');">
+        <div id="sitebtnblk" class="pg">
+            <div id="masterpgbtn" class="cmsbtn" pgid="<%=masterPageId%>">
                 <c:out escapeXml="false" value='<%=pgsimg(masterpgstatus) %>'></c:out>             
-                <span status="allow">Masterpage</span>
+                <span status="<%=user.enterPagePermission(masterPageId) %>">Masterpage</span>
             </div> 
         </div>
         <div id="satopleft">	            
-            <c:if test="${ moreTopLevel }">
+            <c:if test="${ moreTopLevel && user.admin }">
 	            <div id="newtopbtn" class="cmsbtn newtopbtn">New Top Level Page</div>
             </c:if> 	            
         </div>
@@ -155,16 +161,18 @@
 	         <div class='pg p1' pgid='<%=topPage.getId() %>'>
 	         	<c:out escapeXml="false" value='<%=pgsimg(topPage.getStatus().getName()) %>'></c:out>
 	         	<c:out escapeXml="false" value='<%=icoimg(ico, icolb) %>'></c:out>                          
-	            <span status="allow"><%=topPage.getName() %></span>
+	            <span status="<%=user.enterPagePermission(topPage.getId()) %>"><%=topPage.getName() %></span>
 	            <c:if test="${!topPage.hideSubTpl}">
+	            	<% if(user.hasEditPagePermission(topPage.getId())) { %>
 	            	<c:out escapeXml="false" value='<%=icoimg("newsubpg", "New Subpage") %>'></c:out>
+	            	<% } %>
 	            </c:if>                        
 	         </div>
 	         <c:if test="${!topPage.hideSubTpl}">
 		         <div class='sectionpglist newpgdrop lv2drop' lv='2'>
 		         	<%
 		         		for(Page subPage : subPages) {		         			
-		         			out.print(pgdiv(2, subPage.getId(), subPage.getStatus().getName(), subPage.isActive(), subPage.getName()));		         			
+		         			out.print(pgdiv(2, subPage.getId(), subPage.getStatus().getName(), subPage.isActive(), subPage.getName(), user));		         			
 	         			} 
 	         		%>	             
 		         </div>
@@ -181,13 +189,15 @@
     <div id="btmmenu" class="fullsect">
         <div class='header' pgid="-3">
             <span>Other Pages</span>
+            <% if(user.hasEditPagePermission(-3)) { %>
             <c:out escapeXml="false" value='<%=icoimg("newsubpg", "New Subpage") %>'></c:out>
+            <% } %>
         </div>
         <div class='grp newpgdrop'>
         <%
     		for(Page otherPage : otherPages) {
     			if(!otherPage.isDelete()) {
-    				out.print(pgdiv(-3, otherPage.getId(), otherPage.getStatus().getName(), otherPage.isActive(), otherPage.getName()));
+    				out.print(pgdiv(-3, otherPage.getId(), otherPage.getStatus().getName(), otherPage.isActive(), otherPage.getName(), user));
     			}
    			} 
    		%>	

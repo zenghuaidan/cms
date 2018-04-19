@@ -1,15 +1,12 @@
 package com.edeas.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edeas.model.CmsPage;
-import com.edeas.model.Page;
 import com.edeas.model.PageRole;
 import com.edeas.model.Privilege;
 import com.edeas.model.User;
@@ -64,18 +61,17 @@ public class UserServiceImpl extends BasicServiceImpl {
 
 	public boolean setUserPageRole(Long userId, Long pageId, String role, boolean isOn) {
 		User user = findById(userId);
-		CmsPage page = cmsPageDao.getById(pageId);
-		if(user == null || page == null) return false;
+		if(user == null) return false;
 		if(!isOn) {
 			for(PageRole pageRole : user.getPageRoles()) {
-				if(pageRole.getPage().getId() == pageId && pageRole.getPrivilege().getName().equals(role)) {
+				if(pageRole.getPageId() == pageId && pageRole.getPrivilege().getName().equals(role)) {
 					pageRoleDao.delete(pageRole.getId());
 				}
 			}
 		} else {
 			PageRole newRole = new PageRole();
 			newRole.setUser(user);
-			newRole.setPage(page);
+			newRole.setPageId(pageId);
 			newRole.setPrivilege(Privilege.valueOf(role));
 			user.getPageRoles().add(newRole);
 			pageRoleDao.add(newRole);

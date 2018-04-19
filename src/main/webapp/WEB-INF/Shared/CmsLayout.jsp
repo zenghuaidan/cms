@@ -5,6 +5,16 @@
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.model.Page"%>
+<%@page import="com.edeas.model.*"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.userdetails.UserDetails"%>
+<%	
+	User user = (User)request.getAttribute("user");
+	if(user == null) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		user = InitServlet.getQueryService().findByUserName(userDetails.getUsername());	
+	}
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>		
 		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -57,10 +67,12 @@
 	    	<c:out escapeXml="false" value='<%=top("Website", Global.getCMSUrl() + "/SiteAdmin", "Website", navigation) %>'></c:out>
 	    	<%
 	    		List<Page> pages = queryService.findPageByTemplates(CmsProperties.articleBaseTpls.keySet().toArray(new String[]{}), true, true);
-	    		for(Page _page : pages) {	    			
-	    	%>
-	    		<c:out escapeXml="false" value='<%=top(_page.getName(), Global.getCMSUrl() + "/PageAdmin/FixPIDArticles?fixpid=" + _page.getId(), "FixPIDArticles-" + _page.getId(), navigation) %>'></c:out>
-	    	<%		
+	    		for(Page _page : pages) {	 
+	    			if(user.hasEditPagePermission(_page.getId())) {
+				    	%>
+			    		<c:out escapeXml="false" value='<%=top(_page.getName(), Global.getCMSUrl() + "/PageAdmin/FixPIDArticles?fixpid=" + _page.getId(), "FixPIDArticles-" + _page.getId(), navigation) %>'></c:out>
+				    	<%		
+	    			}
 	    		}
 	    	%>
     		<sec:authorize access="hasRole('Admin')">
