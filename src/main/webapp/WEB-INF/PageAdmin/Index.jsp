@@ -8,6 +8,7 @@
 <%@page import="com.edeas.model.Page"%>
 <%@page import="com.edeas.model.Content"%>
 <%@page import="java.util.*"%>
+<%@page import="com.edeas.model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/Shared/commons.jsp" %>
 <!-- Styles -->
@@ -49,6 +50,8 @@
 	Page currentPage = (Page)request.getAttribute("currentPage");
 	String templatePath = request.getRequestURL().toString().replaceAll(request.getRequestURI(), "") + Global.getCMSUrl() + "/" + lang + "/viewPage/" + currentPage.getId() + "?" + request.getQueryString();	
 	Content currentContent = (Content)currentPage.getContent(lang);
+	
+	User user = (User)request.getAttribute("user");
 %>
 <%!
 	public String pgbtn(String id, String lbl, boolean isfirst){
@@ -68,7 +71,9 @@
     </table>
     <div id="pgfuncbar" class="darkbg">
         <div class="left darkgradbg btmshadow">
+        	<% if(user.hasPageRole(currentPage.getId(), Privilege.pb)) { %>
         	<c:out escapeXml="false" value='<%=pgbtn("btnpublish", "Publish", true) %>'></c:out>
+        	<% } %>
         	<c:choose>
         		<c:when test="${currentPage.release <= 0}">
                 	<c:out escapeXml="false" value='<%=pgbtn("btndelete", "Delete", false) %>'></c:out>

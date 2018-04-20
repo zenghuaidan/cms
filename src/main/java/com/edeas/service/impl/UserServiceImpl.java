@@ -73,7 +73,6 @@ public class UserServiceImpl extends BasicServiceImpl {
 			newRole.setUser(user);
 			newRole.setPageId(pageId);
 			newRole.setPrivilege(Privilege.valueOf(role));
-			user.getPageRoles().add(newRole);
 			pageRoleDao.add(newRole);
 		}
 		return false;

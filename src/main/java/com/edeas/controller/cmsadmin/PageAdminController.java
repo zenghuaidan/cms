@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import com.edeas.model.LiveContent;
 import com.edeas.model.LivePage;
 import com.edeas.model.Page;
 import com.edeas.model.PageStatus;
+import com.edeas.model.User;
 import com.edeas.utils.DateUtils;
 
 @Controller
@@ -307,7 +310,8 @@ public class PageAdminController extends CmsController {
 		}
 		
 		if(page == null || page.isNew() || page.isDelete()) return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
-		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findByUserName(userDetails.getUsername());
 		Page masterPage = queryService.getMasterPage(true);
 		model.addAttribute("lang", lang);
 		model.addAttribute("isCms", true);
@@ -316,6 +320,7 @@ public class PageAdminController extends CmsController {
 		model.addAttribute("masterPage", masterPage);
 		model.addAttribute("referAction", "PageAdmin");
 		model.addAttribute("newatfront", false);
+		model.addAttribute("user", user);
 		Enumeration parameterNames = request.getParameterNames();
 		while(parameterNames.hasMoreElements()) {
 			String parameterName = (String)parameterNames.nextElement();

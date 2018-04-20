@@ -215,10 +215,14 @@ public class User implements Serializable {
 	}
 	
 	public String enterPagePermission(long pageId) {
-		if(isAdmin() || hasPageRole(pageId, Privilege.ed) || hasPageRole(pageId, Privilege.pb)) {
+		if(hasEnterPagePermission(pageId)) {
 			return "allow";
 		}
 		return "deny";
+	}
+	
+	public boolean hasEnterPagePermission(long pageId) {
+		return isAdmin() || hasPageRole(pageId, Privilege.ed) || hasPageRole(pageId, Privilege.pb);
 	}
 	
 	public boolean hasEditPagePermission(long pageId) {

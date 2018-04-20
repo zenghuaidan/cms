@@ -34,6 +34,13 @@
 			<bean class="com.edeas.admango.web.AuthInterceptor"/>
 		</mvc:interceptor-->
 	<!-- /mvc:interceptors-->
+	<mvc:interceptors>				
+		<!-- only intercept the request map to the url -->
+		<mvc:interceptor>
+			<mvc:mapping path="/cmsadmin/PageAdmin/Index"/>
+			<bean class="com.edeas.web.EnterPageInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<context:component-scan base-package="com.edeas.controller"/>
 	
 	<dwr:controller id="dwrController" debug="true">

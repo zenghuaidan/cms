@@ -9,11 +9,8 @@
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="org.springframework.security.core.userdetails.UserDetails"%>
 <%	
-	User user = (User)request.getAttribute("user");
-	if(user == null) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		user = InitServlet.getQueryService().findByUserName(userDetails.getUsername());	
-	}
+	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	User user = InitServlet.getQueryService().findByUserName(userDetails.getUsername());	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>		
