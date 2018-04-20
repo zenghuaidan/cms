@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.web.filter.Log4jNestedDiagnosticContextFilter;
 
 @Entity
 @Table(name = "CmsUser")

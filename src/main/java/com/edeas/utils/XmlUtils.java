@@ -24,6 +24,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import com.edeas.common.utils.MessageDigestUtils;
 import com.edeas.controller.Global;
 import com.edeas.controller.cmsadmin.CmsController;
 import com.edeas.dto.LinkInfo;

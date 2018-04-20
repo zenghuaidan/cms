@@ -319,6 +319,11 @@
 	    <version>${spring.version}</version>
 	    <scope>test</scope>
 	</dependency>
+	<dependency>
+	  	<groupId>com.edeas</groupId>
+  		<artifactId>edeas-common</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   <build>
   	<pluginManagement>
@@ -359,7 +364,7 @@
 			  <configuration>
 			    <scanIntervalSeconds>10</scanIntervalSeconds>
 			    <webApp>
-			      <contextPath>/cms</contextPath>
+			      <contextPath>/</contextPath>
 			    </webApp>
 			    <httpConnector>
 	          		<port>8081</port>

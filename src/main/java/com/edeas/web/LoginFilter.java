@@ -17,10 +17,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.edeas.common.utils.PasswordUtils;
 import com.edeas.controller.Global;
 import com.edeas.model.User;
 import com.edeas.service.impl.UserServiceImpl;
-import com.edeas.utils.PasswordUtils;
 
 public class LoginFilter implements Filter {
 	

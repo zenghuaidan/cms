@@ -10,7 +10,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,16 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edeas.common.utils.MailUtils;
+import com.edeas.common.utils.PasswordUtils;
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
-import com.edeas.model.CmsPage;
-import com.edeas.model.Page;
-import com.edeas.model.PageRole;
 import com.edeas.model.Privilege;
 import com.edeas.model.User;
 import com.edeas.model.UserRole;
-import com.edeas.utils.MailUtils;
-import com.edeas.utils.PasswordUtils;
 
 @Controller
 public class UserAdminController extends CmsController {

@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.edeas.model.CmsPage;
 import com.edeas.model.PageRole;
 import com.edeas.model.Privilege;
 import com.edeas.model.User;
