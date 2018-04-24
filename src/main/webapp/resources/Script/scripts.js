@@ -255,14 +255,16 @@
 		/* ---------------------------------------------------------------------------
 		 * Content sliders
 		 * --------------------------------------------------------------------------- */
-		mfnSliderContent();
-		mfnSliderOffer();
-		mfnSliderOfferThumb();
-		mfnSliderBlog();
-		mfnSliderClients();
-		mfnSliderPortfolio();
-		mfnSliderShop();
-		mfnSliderTestimonials();
+		setTimeout(function() {
+			mfnSliderContent();
+			mfnSliderOffer();
+			mfnSliderOfferThumb();
+			mfnSliderBlog();
+			mfnSliderClients();
+			mfnSliderPortfolio();
+			mfnSliderShop();
+			mfnSliderTestimonials();			
+		}, 100);
 		
 		
 		/* ---------------------------------------------------------------------------
