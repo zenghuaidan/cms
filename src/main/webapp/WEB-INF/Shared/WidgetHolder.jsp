@@ -167,12 +167,12 @@
 					           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");
 								String image = XmlUtils.tagimg(imageNode, Global.IMAGE_SOURCE, true, "", null);
 								
-								Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Link']");						
+/* 								Element linkNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Link']");						
 								String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
 								
-								String imageHtml = StringUtils.isBlank(linkAttr) ? image : ("<a " + linkAttr + ">" + image + "</a>");
+								String imageHtml = StringUtils.isBlank(linkAttr) ? image : ("<a " + linkAttr + ">" + image + "</a>"); */
 					       	%>
-		                	<li class="content_slider_li_<%=j%>"><%=imageHtml %></li>
+		                	<li class="content_slider_li_<%=j%>"><%=image %></li>
 				   			
 				   			<% j++; %>
 				   		</x:forEach>                

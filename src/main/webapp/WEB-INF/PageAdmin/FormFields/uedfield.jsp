@@ -5,7 +5,7 @@
 <%@page import="org.dom4j.Element"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.*"%>
-
+<%@page contentType="text/html;charset=UTF-8"%>
 <%
 	Element fieldData = (Element)request.getAttribute("fieldData");//data
 	Element widgetSchema = (Element)request.getAttribute("widgetSchema");//widget define

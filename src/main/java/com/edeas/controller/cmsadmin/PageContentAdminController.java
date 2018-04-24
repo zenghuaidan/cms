@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.edeas.common.utils.ImageUtils;
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.dwr.SchemaInfo;
@@ -656,10 +657,10 @@ public class PageContentAdminController extends CmsController {
 		Map<String, String> result = new HashMap<String, String>();
 		String err = "";	
 		try {
-			File sourceFile = new File(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName));
+			String sourceFilePath = Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName);
+			File sourceFile = new File(sourceFilePath);
 			file.transferTo(sourceFile);
-			BufferedImage sourceImg =ImageIO.read(sourceFile);
-			Builder<BufferedImage> builder = Thumbnails.of(sourceImg);
+			BufferedImage sourceImg =ImageIO.read(sourceFile);			
 			int width = sourceImg.getWidth();
 			int height = sourceImg.getHeight();
 			result.put("srcw", width + "");
@@ -689,27 +690,30 @@ public class PageContentAdminController extends CmsController {
 						err = "Invalid image size. Image width must same with the height";					
 					else {							
 						List<String> accepts = Arrays.asList(new String[] { 
-								Global.IMAGE_RESIZE, Global.IMAGE_RESIZE + "w", Global.IMAGE_RESIZE + "h",
-								Global.IMAGE_THUMB, Global.IMAGE_THUMB + "w", Global.IMAGE_THUMB + "h",
-								Global.IMAGE_CMGR, Global.IMAGE_CMGR + "w", Global.IMAGE_CMGR + "h" }
+							Global.IMAGE_RESIZE, Global.IMAGE_RESIZE + "w", Global.IMAGE_RESIZE + "h",
+							Global.IMAGE_THUMB, Global.IMAGE_THUMB + "w", Global.IMAGE_THUMB + "h",
+							Global.IMAGE_CMGR, Global.IMAGE_CMGR + "w", Global.IMAGE_CMGR + "h" }
 						);
 						if (accepts.contains(type)) {
 							String lastc = type.substring(type.length() - 1, type.length());
-							type = type.substring(0, type.length() - 1);								
-							if ("w".equals(lastc) && width > Integer.parseInt(fa[1]))
-								builder.width(Integer.parseInt(fa[1]));		                                            
-							else if ("h".equals(lastc) && height > Integer.parseInt(fa[1]))
-								builder.height(Integer.parseInt(fa[1]));
-							else {								
-								type = fa[0];									
-								if (width > Integer.parseInt(wh[0]))
-									builder.width(Integer.parseInt(wh[0]));																																															                                            			                                            
-								if (builder.asBufferedImage().getHeight() > Integer.parseInt(wh[1]))
-									builder.height(Integer.parseInt(wh[1]));
+							type = type.substring(0, type.length() - 1);
+							int w = width;
+							int h = height;
+							if ("w".equals(lastc)) {
+								w = Integer.parseInt(fa[1]);
+								h = (w * height) / width;
+							} else if ("h".equals(lastc)) {
+								h = Integer.parseInt(fa[1]);
+								w = (h * width) / height;
+							} else {								
+								type = fa[0];																	
+								w = Integer.parseInt(wh[0]);																																															                                            			                                            								
+								h = Integer.parseInt(wh[1]);
 							}
-							result.put(type + "w", builder.asBufferedImage().getWidth() + "");
-							result.put(type + "h", builder.asBufferedImage().getHeight() + "");
-							builder.toFile(Global.getImagesUploadPhysicalPath(type, newFileName));
+							result.put(type + "w", w + "");
+							result.put(type + "h", h + "");							
+							
+							ImageUtils.zoom(sourceFilePath, Global.getImagesUploadPhysicalPath(type, newFileName), w, h);
 						}
 					}
 					

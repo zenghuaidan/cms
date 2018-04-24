@@ -64,8 +64,8 @@
 			                <div class="col-sm col-left">
 			                    <div>
 			                        <div class="news-list-date"><fmt:formatDate value="${ pageTimeFrom }" pattern="dd" /></div>
-			                        <div class="news-list-month"><fmt:formatDate value="${ pageTimeFrom }" pattern="MM" /></div>
-			                        <div class="news-list-week"><fmt:formatDate value="${ pageTimeFrom }" pattern="E" /></div>
+			                        <div class="news-list-month"><fmt:formatDate value="${ pageTimeFrom }" pattern="MMM" /></div>
+			                        <%-- <div class="news-list-week"><fmt:formatDate value="${ pageTimeFrom }" pattern="E" /></div> --%>
 			                    </div>
 			                </div>
 			                <a href="<%=XmlUtils.getPageLink(child, lang, iscms, false).getLink() %>">

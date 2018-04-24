@@ -10,7 +10,7 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
-<%@page import="com.edeas.utils.MessageDigestUtils"%>
+<%@page import="com.edeas.common.utils.MessageDigestUtils"%>
 <%@ include file="/WEB-INF/Shared/commons.jsp" %>
 
 <link href="${Content}/css/filters.css" rel="stylesheet" type="text/css" />

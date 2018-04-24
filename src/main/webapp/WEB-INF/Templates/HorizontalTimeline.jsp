@@ -100,6 +100,7 @@
             		dateId = day + "/" + month + "/" + year;
             		dateStr = DateUtils.toMonth(Integer.parseInt(month), true) + ", " + Integer.parseInt(day);
             	}
+            	String detail = XmlUtils.getFieldRaw(element, "Detail", false);
     			%>
                 <div class="item" data-id="<%=dateId%>" data-description="<c:out value='<%=XmlUtils.getFieldRaw(element, "Description")%>' escapeXml="false"></c:out>">
                     <a class="image_rollover_bottom con_borderImage" data-description="ZOOM IN" href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE, XmlUtils.getFieldRaw(element, "Image")) %>" rel="lightbox[timeline]">
@@ -107,7 +108,9 @@
                     </a>
                     <h2><%=dateStr%></h2>
                     <span><c:out value='<%=XmlUtils.getFieldRaw(element, "Content", false)%>' escapeXml="false"></c:out></span>
-                    <div class="read_more" data-id="<%=dateId%>"><%= lang.equals("en") ? "Read more" : (lang.equals("tc") ? "閱讀更多" : "阅读更多") %></div>
+                    <%if(!StringUtils.isBlank(detail)) {%>
+                    	<div class="read_more" data-id="<%=dateId%>"><%= lang.equals("en") ? "Read more" : (lang.equals("tc") ? "閱讀更多" : "阅读更多") %></div>
+                    <%}%>
                 </div>
                 <div class="item_open" data-id="<%=dateId%>" data-access="<%=Global.getWebUrl() %>/common/timelineDetail?iscms=${iscms}&lang=${lang}&pageId=${currentPage.id}&timelineId=<%=XmlUtils.getFieldAttr(element, "id") %>">
                     <div class="item_open_content">

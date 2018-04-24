@@ -95,6 +95,8 @@
 
 	/* For Detail Inside Page */
 	.general.detail h1 { color:#ba2950 }
+	.general.detail .colorBox h1 { color:#fff }
+	.general.detail .greyBox h1 { color:#333 }
     .g-title-blk   { margin-bottom:50px; border-bottom:5px solid #ebebeb}
     .title-col1 { width:60px; float:left}
     .title-col2 { width:calc(100% - 60px); float:left}

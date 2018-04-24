@@ -36,7 +36,13 @@
 <%
 	QueryServiceImpl queryService = InitServlet.getQueryService();
 	Page currentPage = (Page)request.getAttribute("currentPage");
-	List<Page> children = queryService.findPagesByParentId(currentPage.getId(), true, false);
+	List<Page> children = currentPage.getChildren(false);
+	Collections.sort(children, new Comparator<Page>() {
+		@Override
+		public int compare(Page o1, Page o2) {
+			return o2.getPageTimeFrom().compareTo(o1.getPageTimeFrom());
+		}
+	});
 	Map<String, String> configMap = CmsProperties.articleBaseTpls.get(currentPage.getTemplate());
 %>
 <c:set var="configMap" value="<%=configMap %>"></c:set>

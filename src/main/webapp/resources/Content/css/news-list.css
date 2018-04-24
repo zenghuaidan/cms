@@ -31,7 +31,8 @@
   .news-list .col-sm.col-right  { width:75%;  background-color:#e7e7e7; transition: all 0.3s ease-out;}
 
   .news-list .col-sm.col-left>div  { padding:0 20px}
-  .news-list .col-sm.col-right>div { padding:20px 30px;}
+  .news-list .col-sm.col-right>div { padding:20px 30px;color:#333;}
+  .news-list:hover .col-sm.col-right>div {padding:20px 30px; color:#fff;}
 
   .news-list .col-sm.col-right .inner-list-blk { width:100%; height:100%; display:table; table-layout:fixed;}
   .news-list .col-sm.col-right .inner-list-blk .in-col-sm { height:100%; display:table-cell; float:none; vertical-align:top}

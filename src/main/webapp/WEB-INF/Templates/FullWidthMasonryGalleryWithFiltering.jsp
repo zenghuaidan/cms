@@ -1,4 +1,4 @@
-<%@page import="com.edeas.utils.MessageDigestUtils"%>
+<%@page import="com.edeas.common.utils.MessageDigestUtils"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="org.dom4j.Element"%>
 <%@page import="org.dom4j.Node"%>

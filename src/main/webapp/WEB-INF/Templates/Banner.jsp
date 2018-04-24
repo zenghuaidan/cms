@@ -53,7 +53,9 @@
 	<div class="hd-blk">
 	    <div class="hd-wrapper">
 	        <div class="hd-pos">
-	            <h1><%=headTitle%></h1>
+	        	<c:if test="${ template ne 'NewsListInside' }">
+	            	<h1><%=headTitle%></h1>
+	            </c:if>
 	        </div>
 	    </div>
 	</div>

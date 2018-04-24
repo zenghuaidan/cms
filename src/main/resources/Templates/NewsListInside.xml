@@ -4,7 +4,7 @@
   	<Field name="HeadTitle" type="txtfield" label="Header title" />
     <Field name="Image" type="imgfield" label="Image" attr="fix:500x300" /> 
     <Field name="Title" type="ttafield" label="Title" />
-    <Field name="Content" type="redfield" label="Content" style="width:605px;height:300px;" />
+    <Field name="Content" type="ttafield" label="Content" />
     <!--Field name="Detail" type="redfield" label="Detail" style="width:605px;height:300px;" /-->
   </Properties>
   <WidgetBox />
@@ -18,7 +18,7 @@
       <AcceptWidget wid="HRBlock" ename="HRBlk" label="HR Block" />
       <AcceptWidget wid="LeftRightPhotoBlk" ImageAlignOpts="LeftPhoto^Left Photo,RightPhoto^Right Photo" ename="LeftRightPhotoBlk" label="Left Right Photo" />      
       <AcceptWidget ename="PhotoSliders" wid="PhotoSliders" label="Photo Sliders" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoSlider:Image" cols="Image" AddFront="no">
-        <Widget ename="PhotoSlider" wid="ImageLinkBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:890x470" AddFront="no" />
+        <Widget ename="PhotoSlider" wid="ImgBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:890x470" AddFront="no" />
       </AcceptWidget>
       <AcceptWidget ename="ColumnImages" wid="ColumnImages" label="Column Images" isDynLst="yes" mgrtype="gallery" mgrattr="ColumnImage:Image" cols="Image" AddFront="no">
         <Widget ename="ColumnImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114" AddFront="no" />
