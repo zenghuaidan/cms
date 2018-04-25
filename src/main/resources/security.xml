@@ -11,13 +11,7 @@
 	
 	<!-- Below pattern is for c:import issue fix, PageAdmin/index.jsp -->
 	<http pattern="/cmsadmin/*/viewPage/**" security="none"/>		
-	<http auto-config="true" use-expressions="true">			
-		<!--intercept-url pattern="/admin/**" access="hasRole('Admin') or hasRole('User') or hasRole('Normal')"/>
-		<intercept-url pattern="/admin/**" access="hasAnyRole('Admin','User','Normal')"/>
-		<intercept-url pattern="/admin/show/**" access="hasRole('Admin')"/>
-		<intercept-url pattern="/admin/product" access="hasRole('Admin')"/>
-		<intercept-url pattern="/admin/template" access="hasRole('Admin')"/>
-		<intercept-url pattern="/admin/pdaadmin" access="hasRole('Admin')"/-->
+	<http auto-config="true" use-expressions="true">		
 		<intercept-url pattern="/cmsadmin/**" access="hasRole('Admin') or hasRole('User')"/>
 		<intercept-url pattern="/cmsadmin/UserAdmin/**" access="hasRole('Admin')"/>
 		
