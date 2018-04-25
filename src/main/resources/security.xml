@@ -6,6 +6,7 @@
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	<global-method-security pre-post-annotations="enabled" jsr250-annotations="enabled"/>						
 	<http pattern="/resources/**" security="none"/>
+	<http pattern="/cmsadmin" security="none"/>	
 	<http pattern="/cmsadmin/Login" security="none"/>
 	
 	<!-- Below pattern is for c:import issue fix, PageAdmin/index.jsp -->
@@ -20,17 +21,15 @@
 		<intercept-url pattern="/cmsadmin/**" access="hasRole('Admin') or hasRole('User')"/>
 		<intercept-url pattern="/cmsadmin/UserAdmin/**" access="hasRole('Admin')"/>
 		
-		<form-login login-page="/cmsadmin/Login"
-			default-target-url="/cmsadmin/SiteAdmin" 
-			authentication-failure-url="/cmsadmin/Login"
-			login-processing-url="/cmsadmin/j_spring_security_check"
+		<form-login login-page="/cmsadmin/Login"			
+			login-processing-url="/cmsadmin/doLogin"
 			username-parameter="userName" 
 			password-parameter="password"
-			authentication-success-handler-ref="authenticationSuccessHandler" 
-			/>
+			authentication-success-handler-ref="authenticationSuccessHandler"
+			authentication-failure-handler-ref="authenticationFailureHandler" />
 		<access-denied-handler ref="accessDeniedHandler"/> 
-		<logout invalidate-session="true" logout-url="/cmsadmin/j_spring_security_logout" logout-success-url="/cmsadmin/Login" />
-        <session-management>  
+		<logout invalidate-session="true" logout-url="/cmsadmin/Logout" logout-success-url="/cmsadmin/Login" />
+        <session-management>
             <concurrency-control max-sessions="10" expired-url="/cmsadmin/Login"/>  
         </session-management>
 		<csrf disabled="true"/>
@@ -44,11 +43,14 @@
 		</authentication-provider>
 	</authentication-manager>
 
-	<b:bean id="accessDeniedHandler" class="com.edeas.security.CmsAccessDeniedHandler"/>  
+	<b:bean id="accessDeniedHandler" class="com.edeas.security.CmsAccessDeniedHandler"/>
+	
+	<b:bean id="authenticationFailureHandler" class="com.edeas.security.CmsAuthenticationFailureHandler">
+		<b:property name="defaultFailureUrl" value="/cmsadmin/Login"></b:property>  
+	</b:bean>
 	      
-	<b:bean id="authenticationSuccessHandler" class="com.edeas.security.CmsAuthenticationSuccessHandler">  
-	    <b:property name="defaultTargetUrl" value="/cmsadmin/SiteAdmin"></b:property>  
-	    <b:property name="forwardToDestination" value="true"></b:property>  
+	<b:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">  
+		<b:property name="defaultTargetUrl" value="/cmsadmin/SiteAdmin"></b:property>
 	</b:bean>
 	<b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	

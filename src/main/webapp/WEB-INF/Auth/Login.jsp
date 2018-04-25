@@ -56,7 +56,7 @@
             <div class="row2"><div class="r2-pos">Content Management System</div></div>
         </div>
     </div>
-    <form id="loginform" name="loginform" method="post" action="<%=Global.getCMSUrl() %>/j_spring_security_check">
+    <form id="loginform" name="loginform" method="post" action="<%=Global.getCMSUrl() %>/doLogin">
         <div class="login-blk">
             <div class="login">
                 <div class="intro-blk">

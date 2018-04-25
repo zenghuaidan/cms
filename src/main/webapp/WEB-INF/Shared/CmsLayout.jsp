@@ -38,7 +38,7 @@
 	            <div class='top cmslightgreybg'>
 	                <span class="txtlnk" onclick="openchgpwd();">Change Password</span>
 	                |
-	                <span class="txtlnk" onclick="goUrl('<%=Global.getCMSUrl() %>/j_spring_security_logout');">Logout</span>
+	                <span class="txtlnk" onclick="goUrl('<%=Global.getCMSUrl() %>/Logout');">Logout</span>
 	            </div>
 	            <div class='bottom hlcolor'>
 	                <sec:authentication property="name"/>
