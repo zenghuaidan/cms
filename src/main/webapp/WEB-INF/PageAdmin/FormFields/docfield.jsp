@@ -22,7 +22,7 @@
             <div id="<%=fpm.getName() %>_view">
                 File: <%=val %>
                 <input type="button" value="View" onclick="window.open('<%=Global.getDocUploadPath(val) %>');" />
-                <input type="button" value="Clear" onclick="clrVal('<%=fpm.getName() %>'); $('#<%=fpm.getName() %>)_view').hide();" />
+                <input type="button" value="Clear" onclick="clrVal('<%=fpm.getName() %>'); $('#<%=fpm.getName() %>_view').hide();" />
             </div>
         <% } %>
         <%=fpm.getRemark() %>
