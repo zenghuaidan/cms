@@ -5,21 +5,21 @@
     <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
     <Field name="SeoDesc" type="txtfield" label="SEO Description" />
     <Field name="MenuName" type="txtfield" label="Menu name" />   
-    <Field name="Category" type="mtxtfield" label="Category" /> 
+    <!-- <Field name="Category" type="mtxtfield" label="Category" />  -->
   </Properties>
   <WidgetBox />
   <Widgets>
 	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.widgetHolder" htagid="wholder">           
-      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
-      <!--AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" ImageAttr="fix:576x450" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" /-->
+      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromCategoryTable" />
+      <!--AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" ImageAttr="fix:576x450" CategoryOpts="FromCategoryTable" /-->
       
-      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />      
-      <!--AcceptWidget wid="DescriptionStyleGallery" ename="DescriptionStyleGallery" label="Post with short description" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" /-->
+      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromCategoryTable" />      
+      <!--AcceptWidget wid="DescriptionStyleGallery" ename="DescriptionStyleGallery" label="Post with short description" CategoryOpts="FromCategoryTable" /-->
       
-      <AcceptWidget ename="SliderStyleGallery" wid="SliderStyleGallery" label="Post with Fix Size Slider" isDynLst="yes" mgrtype="gallery" mgrattr="Slider:Image" cols="Image" AddFront="yes" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true">
+      <AcceptWidget ename="SliderStyleGallery" wid="SliderStyleGallery" label="Post with Fix Size Slider" isDynLst="yes" mgrtype="gallery" mgrattr="Slider:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable">
         <Widget ename="Slider" wid="ImgBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:825x436" AddFront="no" />
       </AcceptWidget>
-      <AcceptWidget wid="ImageDocumentAndDetailStyleGallery" ename="ImageDocumentAndDetailStyleGallery" label="Post with Image(Include content page &amp; download document)" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
+      <AcceptWidget wid="ImageDocumentAndDetailStyleGallery" ename="ImageDocumentAndDetailStyleGallery" label="Post with Image(Include content page &amp; download document)" CategoryOpts="FromCategoryTable" />
     </Widget>
   </Widgets>
 </Template>

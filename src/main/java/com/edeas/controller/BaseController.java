@@ -9,6 +9,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 
+import com.edeas.service.impl.CategoryServiceImpl;
 import com.edeas.service.impl.QueryServiceImpl;
 import com.edeas.service.impl.UserRoleServiceImpl;
 import com.edeas.service.impl.UserServiceImpl;
@@ -16,6 +17,8 @@ import com.edeas.service.impl.UserServiceImpl;
 public abstract class BaseController {
 	// put all the service on the basic controller
 	protected UserServiceImpl userService;
+	
+	protected CategoryServiceImpl categoryService;
 	
 	protected UserRoleServiceImpl userRoleService;
 	
@@ -76,6 +79,11 @@ public abstract class BaseController {
 	@Inject
 	public void setUserRoleService(UserRoleServiceImpl userRoleService) {
 		this.userRoleService = userRoleService;
+	}
+
+	@Inject
+	public void setCategoryService(CategoryServiceImpl categoryService) {
+		this.categoryService = categoryService;
 	}
 	
 }

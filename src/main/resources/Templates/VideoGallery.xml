@@ -5,15 +5,15 @@
     <Field name="SeoKeys" type="txtfield" label="SEO Keywords" />
     <Field name="SeoDesc" type="txtfield" label="SEO Description" />
     <Field name="MenuName" type="txtfield" label="Menu name" />  
-    <Field name="Category" type="mtxtfield" label="Category" />    
+    <!-- <Field name="Category" type="mtxtfield" label="Category" />     -->
   </Properties>
   <WidgetBox />
   <Widgets>
 	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.widgetHolder" htagid="wholder">           
-      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
-      <!--AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" /-->
-      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
-      <AcceptWidget wid="ImageDetailStyleGallery" ename="ImageDetailStyleGallery" label="Post with Cover Image, external link and detail" CategoryOpts="FromPropertyMtxtfield:Category:encryptValue=true" />
+      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromCategoryTable" />
+      <!--AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" CategoryOpts="FromCategoryTable" /-->
+      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromCategoryTable" />
+      <AcceptWidget wid="ImageDetailStyleGallery" ename="ImageDetailStyleGallery" label="Post with Cover Image, external link and detail" CategoryOpts="FromCategoryTable" />
     </Widget>
   </Widgets>
 </Template>

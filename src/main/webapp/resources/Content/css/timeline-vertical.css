@@ -137,7 +137,7 @@
   .cd-timeline-content        { position:relative; margin-left:60px; background:white; border-radius:0.25em; padding:1em; box-shadow:0 3px 0 #d7e4ed;}
   .cd-timeline-content:after  { content: ""; display:table; clear:both;}
   .cd-timeline-content h2     { color:#303e49;}
-  .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date { font-size:13px; font-size: 0.8125rem;}
+  .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date { }
   .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date { display: inline-block;}
   .cd-timeline-content p { margin: 1em 0; line-height: 1.6;}
   .cd-timeline-content .cd-read-more { float:right; padding:.8em 1em; background:#acb7c0; color:white; border-radius:0.25em; transition: all 0.3s ease-out;}

@@ -6,7 +6,7 @@ function clearcat() {
 
 function newcat() {
     var htm="<form id='catfm' method='post'>";
-	htm+="<input type='hidden' name='catid' value='' />";
+	htm+="<input type='hidden' name='id' value='' />";
     htm+=$("#layerpool .catform").html()+"</form>";
     TINY.box.show({ html: htm, openjs: function() { clearcat();  } });
 }
@@ -14,23 +14,22 @@ function newcat() {
 function editcat(cid) {
 	var c = $("#cat-"+cid);	
     var htm="<form id='catfm' method='post'>";
-	htm+="<input type='hidden' name='catid' value='"+cid+"' />";
+	htm+="<input type='hidden' name='id' value='"+cid+"' />";
     htm+=$("#layerpool .catform").html()+"</form>";
     TINY.box.show({ html: htm, openjs: function() { 
 		var fm = $("#catfm");
 		clearcat();  
-		fm.find("input[name=name_en]").val(c.attr('name_en'));
-		fm.find("input[name=name_tc]").val(c.attr('name_tc'));
-		fm.find("input[name=name_sc]").val(c.attr('name_sc'));
+		fm.find("input[name=nameEN]").val(c.attr('name_en'));
+		fm.find("input[name=nameTC]").val(c.attr('name_tc'));
+		//fm.find("input[name=kind]").val(c.attr('kind'));
 	} });	
 }
 
 function delcat(cid) {
 	
 	if (confirm("You are going to delete a category that cannot be rollback. Do you want to continue?")) {
-		var pms = ""; //"?catid="+cid
-		var u = cmsroot+"CategoryAdmin/Delete"+pms;
-		$.post(u,{"catid":cid},function(data) {
+		var u = cmsroot+"CategoryAdmin/Delete";
+		$.post(u,{"id":cid},function(data) {
 		  if (data.success) {
 			location.reload(); 
 		  } else alert(data.errorMsg);
@@ -40,9 +39,7 @@ function delcat(cid) {
 
 function submitcat() {
 	var fm = $("#catfm");
-	var pms = ""; //"?catid="+pgid+"&lang="+lang+"&xid="+xid;
-	var u = cmsroot+"CategoryAdmin/Save"+pms;
-	//fm.attr("action",u);	
+	var u = cmsroot+"CategoryAdmin/Save";
     $.post(u,fm.serialize(),function(data) {
       if (data.success) {
 		location.reload(); 
@@ -53,11 +50,10 @@ function submitcat() {
 //Ordering
 function chgCatOrder(catid,beforeid) {
 	var c = $("#catlist");
-	var pms = ""; //?catid=catid&beforeid=beforeid
-	var u = cmsroot+"CategoryAdmin/ChgOrder"+pms;
+	var u = cmsroot+"CategoryAdmin/ChgOrder";
 	//console.log('u='+u);
  
-	$.post(u,{"catid":catid,"beforeid":beforeid,"kind":c.attr('kind'),"pid":c.attr('parentid')},function(data) {
+	$.post(u,{"id":catid,"beforeId":beforeid},function(data) {
 	  if (data.success) {
 		location.reload(); 
 	  } else alert(data.errorMsg);

@@ -4,9 +4,7 @@
 <%@page import="com.edeas.utils.XmlUtils"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.controller.cmsadmin.CmsProperties"%>
-<%@page import="com.edeas.model.CmsPage"%>
-<%@page import="com.edeas.model.Page"%>
-<%@page import="com.edeas.model.Content"%>
+<%@page import="com.edeas.model.*"%>
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
@@ -39,6 +37,7 @@
 	Content content = currentPage.getContent(lang);	
 	Document contentDocument = content.getContentXmlDoc();
 	List<Element> elements = (List<Element>)contentDocument.selectNodes("/PageContent/Widget[@name='WidgetHolder']/Widget");
+	List<Category> categories = InitServlet.getQueryService().getAllCategory();
 %>
 <c:if test="${isPageAdmin}">
     <style>
@@ -96,19 +95,19 @@
                         </ul>
                         <ul class="categories">
                             <li class="reset current-cat"><a class="all" data-rel="*" href="#">Show all</a></li>
-                            <%
-                            	List<String> categories = new ArrayList<String>();
-                            	for(Element element : elements) {                            		
-                            		for(String category : XmlUtils.getFieldRaw(element, "Category").split(";")) {
-	                            		if (!StringUtils.isBlank(category) && !categories.contains(category)) {
-	                            			categories.add(category);                            			
-	                            		}                            			
-                            		}
-                            	}
-                           		for(String category : categories) {
-                          			%>
-                           			<li><a data-rel=".cat-<%=category.replaceAll("=", "")%>" href="#"><%=new String(MessageDigestUtils.decryptBASE64(category))%></a></li>
-                          			<%                            			
+                            <%                            	
+                           		for(Category category : categories) {
+                           			for(Element element : elements) {
+                                		String categoryId = XmlUtils.getFieldRaw(element, "Category");
+                                		if (!StringUtils.isBlank(categoryId) && categoryId.equals(category.getId() + "")) {    
+                                			String name = (Lang.en.getName().equals(lang) ? category.getNameEN()
+                									: (Lang.tc.getName().equals(lang) ? category.getNameTC() : category.getNameSC()));
+		                          			%>
+		                           			<li><a data-rel=".cat-<%=category.getId() %>" href="#"><%=name%></a></li>
+		                          			<%                            			
+		                          			break;
+                                		}
+                                	}
                            		}
                             %>                                 
                             <li class="close">

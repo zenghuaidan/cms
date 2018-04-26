@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
 
+import com.edeas.dao.impl.CategoryDaoImpl;
 import com.edeas.dao.impl.CmsContentDaoImpl;
 import com.edeas.dao.impl.CmsPageDaoImpl;
 import com.edeas.dao.impl.ContentDaoImpl;
@@ -17,6 +18,7 @@ import com.edeas.dao.impl.UserRoleDaoImpl;
 public abstract class BasicServiceImpl {
 	protected final Logger logger = Logger.getLogger(BasicServiceImpl.class);
 	protected UserDaoImpl userDao;
+	protected CategoryDaoImpl categoryDao;
 	protected UserRoleDaoImpl userRoleDao;
 	protected PageRoleDaoImpl pageRoleDao;
 	protected LivePageDaoImpl livePageDao;
@@ -77,6 +79,11 @@ public abstract class BasicServiceImpl {
 	@Inject
 	public void setPageRoleDao(PageRoleDaoImpl pageRoleDao) {
 		this.pageRoleDao = pageRoleDao;
+	}
+	
+	@Inject
+	public void setCategoryDao(CategoryDaoImpl categoryDao) {
+		this.categoryDao = categoryDao;
 	}
 	
 }

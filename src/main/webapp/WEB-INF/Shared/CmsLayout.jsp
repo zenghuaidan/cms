@@ -73,6 +73,7 @@
 	    		}
 	    	%>
     		<sec:authorize access="hasRole('Admin')">
+		    	<c:out escapeXml="false" value='<%=top("Categoty", Global.getCMSUrl() + "/CategoryAdmin/Index", "CategoryAdmin", navigation) %>'></c:out>
 		    	<c:out escapeXml="false" value='<%=top("User", Global.getCMSUrl() + "/UserAdmin/Index", "UserAdmin", navigation) %>'></c:out>
    			</sec:authorize>
 			<!-- todo -->  		

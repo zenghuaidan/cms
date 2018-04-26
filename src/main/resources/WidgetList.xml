@@ -121,10 +121,10 @@
   	<Widget id="Html5VideoStyleGallery">
   		<Field name="Date" type="datfield" label="Date" />
   		<Field name="Category" type="mckfield" label="Category" />
-  		<Field name="Image" type="imgfield" label="Image" />
+  		<Field name="Image" type="imgfield" label="Video Cover" />
   		<Field name="Video" type="docfield" label="Video" />
   		<Field name="YouTubeID" type="txtfield" label="YouTube ID" />
-  		<Field name="Link" type="lnkfield" label="Link" />
+  		<!-- <Field name="Link" type="lnkfield" label="Link" /> -->
   		<Field name="Title" type="ttafield" label="Title" />
   		<Field name="Content" type="ttafield" label="Content" />		
   	</Widget>

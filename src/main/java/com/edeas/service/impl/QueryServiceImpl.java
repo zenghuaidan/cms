@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.edeas.model.Category;
 import com.edeas.model.CmsPage;
 import com.edeas.model.Content;
 import com.edeas.model.LivePage;
@@ -125,5 +126,8 @@ public class QueryServiceImpl extends BasicServiceImpl {
 		}
 		return null;
 	}
-	
+
+	public List<Category> getAllCategory() {
+		return categoryDao.findAllWithOrderAsc();
+	}
 }

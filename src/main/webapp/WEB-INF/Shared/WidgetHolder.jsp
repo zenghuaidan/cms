@@ -284,14 +284,14 @@
   	<x:if select="$widgetName = 'Html5VideoStyleGallery'">
   	    <%
        		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
-  	  		Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
-			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);	
+  	  		//Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
+			String linkAttr = "";//XmlUtils.getLinkAttr(linkNode, lang, iscms);	
 			String year = XmlUtils.getFieldRaw(widget, "Date").split("-")[0];
 			String youTubeID = XmlUtils.getFieldRaw(widget, "YouTubeID");
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
+					categoryStr += ("cat-" + category + " ");
 			}
         %>
 		<div class="widget format-video <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -304,11 +304,14 @@
 			            </div>
 			        </div>			      
 			   </x:when>
-			   <x:when select="$widget/Field[@name='YouTubeID'] != ''">		      
-			   		<iframe width="576" height="450" src="http://www.youtube.com/embed/<%=youTubeID %>?rel=0&amp;hd=1" frameborder="0" allowfullscreen=""></iframe>
+			   <x:when select="$widget/Field[@name='YouTubeID'] != ''">	
+			   		<div class='video-wrp'>	      
+			   			<iframe width="100%" height="100%" src="http://www.youtube.com/embed/<%=youTubeID %>?rel=0&amp;hd=1" frameborder="0" allowfullscreen=""></iframe>
+			   		</div>
 			   </x:when>			   
 			   <x:otherwise>
-			   		<a <%=linkAttr%>><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a>			      
+			   		<%-- <a <%=linkAttr%>><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a> --%>
+			   		<img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/>			      
 			   </x:otherwise>
 			</x:choose>
 	        <div class="post-desc-wrapper">
@@ -330,7 +333,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
+					categoryStr += ("cat-" + category + " ");
 			}
         %> 
 	    <div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -353,7 +356,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
+					categoryStr += ("cat-" + category + " ");
 			}
         %>
 		<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -376,7 +379,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
+					categoryStr += ("cat-" + category + " ");
 			}
         %>
 	 	<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -414,7 +417,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
+					categoryStr += ("cat-" + category + " ");
 			}
         %>
         <div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -448,7 +451,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
+					categoryStr += ("cat-" + category + " ");
 			}
         %>
 		<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
@@ -477,7 +480,7 @@
 			String categoryStr = "";
 			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
 				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category.replaceAll("=", "") + " ");
+					categoryStr += ("cat-" + category + " ");
 			}
         %>
 		<div class="news-gallery <%=year%> <%=categoryStr%> post-item isotope-item clearfix">

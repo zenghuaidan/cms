@@ -10,6 +10,7 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <%
 	Page currentPage = (Page)request.getAttribute("currentPage");
 	long pageId = (Long)request.getAttribute("pageid");
