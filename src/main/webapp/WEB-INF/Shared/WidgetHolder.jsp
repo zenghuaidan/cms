@@ -275,7 +275,7 @@
 		            <c:if test="${not hasImage}">                    
 	                    <div class="post-desc">
 	                        <div class="post-title">
-	                            <h2 class="entry-title"><a <%=linkAttr%>><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></a></h2>
+	                            <h2 class="entry-title"><a href="#"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></a></h2>
 	                        </div>
 	                    </div>
 		            </c:if>

@@ -354,6 +354,7 @@ public class PageContentAdminController extends CmsController {
 				SchemaInfo fpm = XmlUtils.getSchemaInfo(field, templateDefine);
 				Element dataField = (Element)widgetNode.selectSingleNode("Field[@name='" + fpm.getName() + "']");
 				String value = request.getParameter(fpm.getName());
+				value = value == null ? "" : value;
 				if (Lang.en.equals(Lang.getByName(lang))) value = value.replaceAll("<br /><br />", "<br />&nbsp;<br />");
 				if (dataField == null) {
 					dataField = widgetNode.addElement("Field");
