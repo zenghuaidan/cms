@@ -7,6 +7,7 @@
 <%@page import="com.edeas.service.impl.QueryServiceImpl"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <link href="${Content}/css/general.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/slider.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/enlarge-img.css" rel="stylesheet" type="text/css" />

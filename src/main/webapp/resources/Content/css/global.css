@@ -48,7 +48,7 @@
     .hd-blk {  width:100%; height:260px; display:table; background:#666; }
     .hd-blk .hd-wrapper { display:table-cell; vertical-align:bottom }
     .hd-blk .hd-wrapper .hd-pos { max-width:1200px; margin:0 auto;}
-    .hd-blk .hd-wrapper .hd-pos h1 { color:#fff; padding:0 25px 20px 25px}
+    .hd-blk .hd-wrapper .hd-pos h1 { color:#fff; padding:0 25px 20px 25px; text-align: left;}
 
     #footer { background-color:#000; color:#ccc; padding:20px 0; width:100%;}
     #footer .inner-wrapper { max-width:1150px; padding:0 25px;}

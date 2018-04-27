@@ -9,6 +9,7 @@
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
 <%@page import="com.edeas.common.utils.MessageDigestUtils"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/Shared/commons.jsp" %>
 
 <link href="${Content}/css/filters.css" rel="stylesheet" type="text/css" />
@@ -38,6 +39,7 @@
 	Document contentDocument = content.getContentXmlDoc();
 	List<Element> elements = (List<Element>)contentDocument.selectNodes("/PageContent/Widget[@name='WidgetHolder']/Widget");
 	List<Category> categories = InitServlet.getQueryService().getAllCategory();
+	String showAll = lang.equals("en") ? "Show all" : (lang.equals("tc") ? "顯示所有" : "显示所有");
 %>
 <c:if test="${isPageAdmin}">
     <style>
@@ -54,12 +56,12 @@
                 <!--  Filter Area -->
                 <div id="Filters" class="isotope-filters">
                     <ul class="filters_buttons">
-                        <li class="label"><i class="fa fa-filter"></i>Filter by</li>
+                        <li class="label"><i class="fa fa-filter"></i><%= lang.equals("en") ? "Filter by" : (lang.equals("tc") ? "篩選" : "筛选") %></li>
                         <li class="year">
-                            <a class="open" href="#">Year</a>
+                            <a class="open" href="#"><%=lang.equals("en") ? "Year" : (lang.equals("tc") ? "年份" : "年份")%></a>
                         </li>
                         <li class="categories">
-                            <a class="open" href="#">Categories</a>
+                            <a class="open" href="#"><%=lang.equals("en") ? "Categories" : (lang.equals("tc") ? "類別" : "类别")%></a>
                         </li>
                         <!--li class="reset">
                             <a class="close" data-rel="*" href="#"><i class="gi gi-show-thumbnails"></i>Show all</a>
@@ -67,7 +69,7 @@
                     </ul>
                     <div class="filters_wrapper">
                          <ul class="year">
-                            <li class="reset current-cat"><a class="all" data-rel="*" href="#">Show all</a></li>
+                            <li class="reset current-cat"><a class="all" data-rel="*" href="#"><%=showAll%></a></li>
                             <%
                             	List<String> years = new ArrayList<String>();
                             	for(Element element : elements) {
@@ -94,7 +96,7 @@
                             </li>
                         </ul>
                         <ul class="categories">
-                            <li class="reset current-cat"><a class="all" data-rel="*" href="#">Show all</a></li>
+                            <li class="reset current-cat"><a class="all" data-rel="*" href="#"><%=showAll%></a></li>
                             <%                            	
                            		for(Category category : categories) {
                            			for(Element element : elements) {

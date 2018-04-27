@@ -7,6 +7,7 @@
 <%@page import="com.edeas.service.impl.QueryServiceImpl"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <script type="text/javascript" src="${Plugin}/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="${Plugin}/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="${Plugin}/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
@@ -45,7 +46,7 @@
 
              <div class="news">
                  <div class="news-pos">
-                     <h2>Latest News</h2>
+                     <h2><%= lang.equals("en") ? "Latest News" : (lang.equals("tc") ? "最新消息" : "最新消息") %></h2>
                      <div class="recent-posts">
                          <ul>
                          	<% int i = 1; %>
@@ -78,7 +79,7 @@
 
              <div class="links">
                  <div class="links-pos">
-                     <h2>Quick Links</h2>
+                     <h2><%= lang.equals("en") ? "Quick Links" : (lang.equals("tc") ? "快速導航" : "快速导航") %></h2>
                      <ul>
                          <% i = 1; %>
                          <x:forEach select="$contentXml/PageContent/Widget[@name='HomepageQuickLinks']/Widget[@name='QuickLink']" var="quickLink" varStatus="status">

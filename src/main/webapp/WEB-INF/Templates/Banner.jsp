@@ -7,6 +7,7 @@
 <%@page import="com.edeas.service.impl.QueryServiceImpl"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <% 
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");	

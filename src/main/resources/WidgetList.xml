@@ -115,7 +115,8 @@
   		<Field name="Date" type="datfield" label="Date" />
   		<Field name="Category" type="drpfield" label="Category" />
 		<Field name="Title" type="ttafield" label="Title" />
-		<Field name="Link" type="lnkfield" label="Link" />		
+		<Field name="Color" type="txtfield" label="No Image Background Color" />
+		<!-- <Field name="Link" type="lnkfield" label="Link" /> -->		
   	</Widget>
   	
   	<Widget id="Html5VideoStyleGallery">

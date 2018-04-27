@@ -11,6 +11,7 @@
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
 <%@ include file="/WEB-INF/Shared/commons.jsp" %>
+<%@page contentType="text/html;charset=UTF-8"%>
 <% 
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");	

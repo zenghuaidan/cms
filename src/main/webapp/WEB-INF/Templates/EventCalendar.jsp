@@ -16,6 +16,7 @@
 <%@page import="java.lang.reflect.InvocationTargetException"%>
 <%@page import="java.lang.reflect.Type"%>
 <%@page import="com.edeas.dto.*"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <link href="${Content}/css/calendar.css" rel="stylesheet" type="text/css" />
 <%
 	boolean iscms = (Boolean)request.getAttribute("iscms");

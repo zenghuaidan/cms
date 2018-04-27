@@ -227,14 +227,17 @@
    	<x:if select="$widgetName = 'PhotoAlbums'">
        	<%
        		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
-            Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
-			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);			
+            //Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
+			//String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);			
 			String year = XmlUtils.getFieldRaw(widget, "Date").split("-")[0];
+			String color = XmlUtils.getFieldRaw(widget, "Color");
+			color = StringUtils.isBlank(color) ? "#17bbce" : color;
+			if(!StringUtils.isBlank(color) && !color.startsWith("#")) color = "#" + color;
 			
 			List<Element> imageNodes = (List<Element>)widget.selectNodes("Widget[@name='PhotoAlbum']");
 			boolean hasImage = imageNodes != null && imageNodes.size() > 0;
 			String noImageClass = hasImage ? "" : "no-img";
-			String noImageBackground = hasImage ? "" : "style='background-color:#17bbce;'";
+			String noImageBackground = hasImage ? "" : "style='background-color:" + color + ";'";
         %>           	
         <c:set var="hasImage" value="<%=hasImage%>"></c:set>
     	<div <%=noImageBackground%> class="photo-gallery post-item isotope-item clearfix <%=noImageClass%> <%=year%> cat-<x:out select="$widget/Field[@name='Category']" escapeXml="false"/>">
@@ -253,7 +256,7 @@
 			                    </div>
 			                </div>
 			                <div class="post-title">
-			                    <h2 class="entry-title"><a <%=linkAttr%>><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></a></h2>
+			                    <h2 class="entry-title"><a href="#"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></a></h2>
 			                </div>
 			                <div class="links-wrappper clearfix" >
 			                	<c:set var="first" value="true"></c:set>

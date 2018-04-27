@@ -47,7 +47,7 @@
 					put("Form2Option2", Arrays.asList("standard", "fancy", "hip", "traditional", "romantic"));
 					put("Form2Option3", Arrays.asList("anytime", "7 p.m.", "8 p.m.", "9 p.m."));
 					put("Submit", Arrays.asList("Submit"));
-					put("ThankYou", Arrays.asList("Thank you! We\'ll be in touch."));
+					put("ThankYou", Arrays.asList("Thank you! We'll be in touch."));
 				}
 			});
 			put("tc", new HashMap<String, List<String>>() {
@@ -230,7 +230,7 @@
 
 			// let's just simulate something...
 			var messageEl = theForm.querySelector('.final-message');
-			messageEl.innerHTML = '<%=formMap.get(lang).get("ThankYou").get(0)%>';
+			messageEl.innerHTML = "<%=formMap.get(lang).get("ThankYou").get(0)%>";
 			classie.addClass(messageEl, 'show');
 		}
 	});

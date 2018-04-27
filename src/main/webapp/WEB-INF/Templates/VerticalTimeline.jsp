@@ -8,6 +8,7 @@
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
 <%@page import="java.util.*"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <link href="${Content}/css/timeline.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/video-player.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/rev-slider.css" rel="stylesheet" type="text/css" />

@@ -9,6 +9,7 @@
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="com.edeas.model.*"%>
 <%@page import="java.util.*"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <link href="${Content}/css/timeline-vertical.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="${Script}/vertical-timeline/modernizr.js"></script>

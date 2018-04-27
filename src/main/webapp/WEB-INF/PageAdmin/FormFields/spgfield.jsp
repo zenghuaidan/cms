@@ -31,6 +31,14 @@
 				} else if("Template".equals(subtypeAndValue[0])) {
 					String template = subtypeAndValue[1];
 					pages = queryService.findPageByTemplate(template, true, true);
+					if ("NewsListInside".equals(template)) {
+						Collections.sort(pages, new Comparator<Page>() {
+							@Override
+							public int compare(Page o1, Page o2) {
+								return o2.getPageTimeFrom().compareTo(o1.getPageTimeFrom());
+							}
+						});						
+					}
 				} else {
 					// not support...
 				}

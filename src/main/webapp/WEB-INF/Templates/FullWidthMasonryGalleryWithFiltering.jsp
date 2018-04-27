@@ -10,6 +10,7 @@
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
 <%@ include file="/WEB-INF/Shared/commons.jsp" %>
+<%@page contentType="text/html;charset=UTF-8"%>
 
 <link href="${Content}/css/filters.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/lightbox.css" rel="stylesheet" type="text/css" />
@@ -55,6 +56,7 @@
 		<%
 	}
 	List<Category> categories = InitServlet.getQueryService().getAllCategory();
+	String showAll = lang.equals("en") ? "Show all" : (lang.equals("tc") ? "顯示所有" : "显示所有");
 %>
 <div class="clearfix"> 
     <div class="full-wrapper clearfix bg-darkGrey">
@@ -63,17 +65,17 @@
             <div class="inner-wrapper ph-full-masonry">
                 <div id="Filters" class="isotope-filters" data-parent="column_filters">
                     <ul class="filters_buttons">
-                        <li class="label"><i class="fa fa-filter"></i>Filter by</li>
+                        <li class="label"><i class="fa fa-filter"></i><%= lang.equals("en") ? "Filter by" : (lang.equals("tc") ? "篩選" : "筛选") %></li>
                         <li class="year">
-                            <a class="open" href="#">Year</a>
+                            <a class="open" href="#"><%=lang.equals("en") ? "Year" : (lang.equals("tc") ? "年份" : "年份")%></a>
                         </li>
                         <li class="categories">
-                            <a class="open" href="#"><i class="icon-tag"></i>Categories<i class="icon-down-dir"></i></a>
+                            <a class="open" href="#"><i class="icon-tag"></i><%=lang.equals("en") ? "Categories" : (lang.equals("tc") ? "類別" : "类别")%><i class="icon-down-dir"></i></a>
                         </li>
                     </ul>
                     <div class="filters_wrapper">
                         <ul class="year">
-                            <li class="reset current-cat"><a class="all" data-rel="*" href="#">Show all</a></li>
+                            <li class="reset current-cat"><a class="all" data-rel="*" href="#"><%=showAll%></a></li>
                             <%
                             	List<String> years = new ArrayList<String>();
                             	for(Element element : elements) {
@@ -98,7 +100,7 @@
                             <li class="close"><a href="#"><i class="fa fa-times"></i></a></li>
                         </ul>
                         <ul class="categories">
-                            <li class="reset current-cat"><a class="all" data-rel="*" href="#">Show all</a></li>                            
+                            <li class="reset current-cat"><a class="all" data-rel="*" href="#"><%=showAll%></a></li>                            
                             <%                            	
                            		for(Category category : categories) {
                            			for(Element element : elements) {

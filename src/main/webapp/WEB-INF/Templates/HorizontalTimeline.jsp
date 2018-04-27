@@ -9,6 +9,7 @@
 <%@page import="com.edeas.model.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.edeas.utils.DateUtils"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <link href="${Content}/css/flat.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/lightbox.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />

@@ -10,8 +10,8 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/Shared/commons.jsp" %>
-
 <link href="${Content}/css/news-list.css" rel="stylesheet" type="text/css" />
 <link href="${Content}/css/pagination.css" rel="stylesheet" type="text/css" />
 

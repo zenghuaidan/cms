@@ -10,6 +10,7 @@
 <%@page import="com.edeas.service.impl.*"%>
 <%@page import="com.edeas.web.InitServlet"%>
 <%@page import="org.dom4j.Document"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/Shared/commons.jsp" %>
 <link rel="stylesheet" type="text/css" href="${Content}/css/index.css" />
 <link rel="stylesheet" type="text/css" href="${Content}/css/jquery.simplebanner-edit.css" />

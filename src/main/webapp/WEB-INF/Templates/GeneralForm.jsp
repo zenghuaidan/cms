@@ -11,6 +11,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <link href="${Content}/css/form-general.css" rel="stylesheet" type="text/css" />
 <style>
     @media only screen and (max-width: 745px) {
