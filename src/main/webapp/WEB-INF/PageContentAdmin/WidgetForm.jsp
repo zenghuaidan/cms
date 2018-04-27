@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="org.dom4j.Element"%>
 <%@page import="org.dom4j.Node"%>
 <%@page import="com.edeas.utils.XmlUtils"%>
@@ -18,6 +19,8 @@
 	String wxid = (String)request.getAttribute("wxid");
 	String parentxid = (String)request.getAttribute("parentxid");
 	String caller = (String)request.getAttribute("caller");
+	String iszipupload = (String)request.getAttribute("iszipupload");
+	boolean zipUpload = StringUtils.isBlank(iszipupload) ? false : "yes".equals(iszipupload);
 	String closejs = "win".endsWith(caller) ? "window.opener.refresh();window.close();" : "parent.TINY.box.hide();";  
 	
 	Document tempateDocument = XmlUtils.getTemplateDocument(currentPage.getTemplate());
@@ -116,16 +119,28 @@
         <div class="content">
             <table id="widgetformtbl" cellspacing="1">
             	<%
-            		for(Element field : fields) {
-            			String fieldType = field.attributeValue("type", "");
-            			String fieldPath = "/WEB-INF/PageAdmin/FormFields/" + fieldType + ".jsp";
-            			request.setAttribute("fieldData", dataWidget == null ? null : dataWidget.selectSingleNode("Field[@name='" + XmlUtils.getFieldAttr(field, "name") + "']"));
-    	                request.setAttribute("widgetSchema", widget);
-    	                request.setAttribute("fieldSchema", field);
-    	                request.setAttribute("formType", "widget");
-        		%>
-        				<jsp:include page="<%=fieldPath %>" />
-          		<%
+            		if(!zipUpload) {
+	            		for(Element field : fields) {
+	            			String fieldType = field.attributeValue("type", "");
+	            			String fieldPath = "/WEB-INF/PageAdmin/FormFields/" + fieldType + ".jsp";
+	            			request.setAttribute("fieldData", dataWidget == null ? null : dataWidget.selectSingleNode("Field[@name='" + XmlUtils.getFieldAttr(field, "name") + "']"));
+	    	                request.setAttribute("widgetSchema", widget);
+	    	                request.setAttribute("fieldSchema", field);
+	    	                request.setAttribute("formType", "widget");
+			        		%>
+		        				<jsp:include page="<%=fieldPath %>" />
+			          		<%
+	            		}            			
+            		} else {
+            			%>
+	            			<tr class="datafield">
+							    <td class="label" style="vertical-align:top;">Image Zip File: </td>
+							    <td class="field">
+							    	<input type='hidden' name="isZipUpload" value="yes" />
+							        <input type='file' name="image_zip_upload_file"  />							        
+							    </td>
+							</tr>
+            			<%
             		}
             	%>
             </table>

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,8 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
@@ -26,9 +29,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.edeas.common.utils.ImageUtils;
+import com.edeas.common.utils.ZipUtils;
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.dwr.SchemaInfo;
@@ -38,9 +43,6 @@ import com.edeas.model.Lang;
 import com.edeas.model.Page;
 import com.edeas.utils.XmlUtils;
 import com.hankcs.hanlp.HanLP;
-
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.Thumbnails.Builder;
 
 @Controller
 @SuppressWarnings({"rawtypes", "unchecked"})
@@ -297,7 +299,7 @@ public class PageContentAdminController extends CmsController {
 	}
 	
 	@RequestMapping(path = {"PageContentAdmin/WidgetForm"}, method={RequestMethod.GET})
-	public String widgetForm(Model model, long pageid, String lang, String wid, String wname, String wxid, String parentxid, String caller, HttpServletRequest request) throws ParseException {
+	public String widgetForm(Model model, long pageid, String lang, String wid, String wname, String wxid, String parentxid, String caller, String iszipupload,  HttpServletRequest request) throws ParseException {
 		if (Lang.exists(lang)) {
 			Page currentPage = queryService.findPageById(pageid, true);
 			if (!currentPage.isNew()) {
@@ -307,6 +309,7 @@ public class PageContentAdminController extends CmsController {
 				model.addAttribute("wxid", wxid);
 				model.addAttribute("parentxid", parentxid);
 				model.addAttribute("caller", caller);
+				model.addAttribute("iszipupload", iszipupload);
 				model.addAttribute("currentPage", currentPage);			
 				return "PageContentAdmin/WidgetForm";
 			}
@@ -316,7 +319,47 @@ public class PageContentAdminController extends CmsController {
 	
 	@RequestMapping(path = {"PageContentAdmin/UpdateWidget"}, method={RequestMethod.POST})
 	@ResponseBody
-	public String updateWidget(HttpServletResponse response, HttpServletRequest request) throws ParseException, IOException {
+	public String updateWidget(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		boolean isZipUpload = "yes".equals(request.getParameter("isZipUpload"));
+		if(isZipUpload) {
+			StringBuffer error = new StringBuffer();
+	        CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+	        if(multipartResolver.isMultipart(request))
+	        {
+	        	String fname = "image_zip_upload_file";
+	            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+				if(multiRequest.getMultiFileMap().containsKey(fname)) {
+					List<MultipartFile> list = multiRequest.getMultiFileMap().get(fname);
+					if (list.size() == 1 && !StringUtils.isBlank(list.get(0).getOriginalFilename())) {						
+						String originalFilename = list.get(0).getOriginalFilename();
+						if("zip".equals(FilenameUtils.getExtension(originalFilename).toLowerCase())) {							
+							String zipPath = Global.getImagesZipUploadPhysicalPath();
+							File zipPathFile = new File(zipPath);
+							FileUtils.deleteQuietly(zipPathFile);
+							zipPathFile.mkdirs();							
+							
+							String zipFileName = FilenameUtils.concat(zipPath, originalFilename);
+							File zipFile = new File(zipFileName);
+							list.get(0).transferTo(zipFile);
+							
+							ZipUtils.unzipFile(zipFileName);
+							Collection<File> images = FileUtils.listFiles(zipPathFile, new String[] {"bmp", "jpg", "jpeg", "png", "gif"}, true);
+							for(File image : images) {
+								error.append(updateWidget(multiRequest, image));
+							}
+							FileUtils.deleteQuietly(zipPathFile);
+						}
+
+					}
+	            }   				
+	        }
+	        return "";
+		} else {
+			return updateWidget(request, null);			
+		}
+	}
+
+	private String updateWidget(HttpServletRequest request, File zipUploadImage) {
 		StringBuffer error = new StringBuffer();
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		String lang = request.getParameter("lang");
@@ -374,7 +417,7 @@ public class PageContentAdminController extends CmsController {
 				dataField.addAttribute("name", fpm.getName());
 				dataField.addAttribute("ftype", fpm.getType());
 				dataField.setText(XmlUtils.toCDATA(value));
-				error.append(setSpecialField(fpm, dataField, request));
+				error.append(setSpecialField(fpm, dataField, request, zipUploadImage));
 			}
 			if(StringUtils.isBlank(error.toString())) {
 				content.setContentXml(XmlUtils.formatXml(contentDocument));
@@ -513,7 +556,7 @@ public class PageContentAdminController extends CmsController {
 			dataField.addAttribute("name", fpm.getName());
 			dataField.addAttribute("ftype", fpm.getType());
 			dataField.setText(XmlUtils.toCDATA(value));
-			errors.append(setSpecialField(fpm, dataField, request) + System.lineSeparator());
+			errors.append(setSpecialField(fpm, dataField, request, null) + System.lineSeparator());
 		}
 		if (StringUtils.isBlank(errors.toString())) {
 			content.setPropertyXml(XmlUtils.formatXml(propDocument));		
@@ -522,12 +565,12 @@ public class PageContentAdminController extends CmsController {
 		return errors.toString().trim();
 	}
 	
-	private String setSpecialField(SchemaInfo fpm, Element dataField, HttpServletRequest request)
+	private String setSpecialField(SchemaInfo fpm, Element dataField, HttpServletRequest request, File zipUploadImage)
 	{
 		String err = "";
 		switch (fpm.getType())
 		{
-			case "imgfield": err = setImageElement(fpm, dataField, request); break;
+			case "imgfield": err = setImageElement(fpm, dataField, request, zipUploadImage); break;
 			case "lnkfield": err = setLinkElement(fpm, dataField, request); break;
 			case "docfield": setDocElement(fpm, dataField, request); break;
 			case "spgfield": setSubpageElement(fpm, dataField, request); break;
@@ -621,47 +664,57 @@ public class PageContentAdminController extends CmsController {
         return newf;
     }
 	
-	private String setImageElement(SchemaInfo fpm, Element dataField, HttpServletRequest request)
+	private String setImageElement(SchemaInfo fpm, Element dataField, HttpServletRequest request, File zipUploadImage)
 	{
-		String err = "";
-		String fid = fpm.getName();
-		String fileidx = fid + "_file";
-		String imageAttribute = fpm.getAttribute();
-		String alt = request.getParameter(fid + "_alt");
-		dataField.addAttribute("alt", alt);		
-        CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
-        if(multipartResolver.isMultipart(request))
-        {
-            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
-			if(multiRequest.getMultiFileMap().containsKey(fileidx)) {
-				List<MultipartFile> list = multiRequest.getMultiFileMap().get(fileidx);
-				if (CmsProperties.getImageMaxUploadSize() > 0 && list.size() == 1 && !StringUtils.isBlank(list.get(0).getOriginalFilename())) {
-					if(list.get(0).getSize() < CmsProperties.getImageMaxUploadSize() * 1024 * 1024) {
-						String newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE), list.get(0).getOriginalFilename());											
-						Map<String, String> result = mgnCmsImg(list.get(0), newFileName, imageAttribute);
-						err = result.remove("ERROR");
-						for (String attr : result.keySet()) {
-							dataField.addAttribute(attr, result.get(attr));
+		try {
+			String err = "";
+			String fid = fpm.getName();
+			String fileidx = fid + "_file";
+			String imageAttribute = fpm.getAttribute();
+			String alt = request.getParameter(fid + "_alt");
+			dataField.addAttribute("alt", alt);
+			CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+			String newFileName = "";
+			if(multipartResolver.isMultipart(request))
+			{
+				MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+				if(multiRequest.getMultiFileMap().containsKey(fileidx)) {
+					List<MultipartFile> list = multiRequest.getMultiFileMap().get(fileidx);
+					if (CmsProperties.getImageMaxUploadSize() > 0 && list.size() == 1 && !StringUtils.isBlank(list.get(0).getOriginalFilename())) {
+						if(list.get(0).getSize() < CmsProperties.getImageMaxUploadSize() * 1024 * 1024) {
+							newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE), list.get(0).getOriginalFilename());								
+							list.get(0).transferTo(new File(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName)));						
+						} else {
+							err = "Image size shoud not more than " + CmsProperties.getImageMaxUploadSize() + "M";
 						}
-						dataField.setText(XmlUtils.toCDATA(newFileName));
-					} else {
-						err = "Image size shoud not more than " + CmsProperties.getImageMaxUploadSize() + "M";
 					}
-				}
-            }            
-           
-        }
-		return err;
+				}            
+				
+			}
+			
+			if(zipUploadImage != null) {
+				newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE), zipUploadImage.getName());
+				FileUtils.moveFile(zipUploadImage, new File(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName)));        	
+			}
+			Map<String, String> result = mgnCmsImg(newFileName, imageAttribute);
+			err = result.remove("ERROR");
+			for (String attr : result.keySet()) {
+				dataField.addAttribute(attr, result.get(attr));
+			}
+			dataField.setText(XmlUtils.toCDATA(newFileName));
+			
+			return err;			
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 	}
 
-	private Map<String, String> mgnCmsImg(MultipartFile file, String newFileName, String attr) {
+	private Map<String, String> mgnCmsImg(String newFileName, String attr) {
 		Map<String, String> result = new HashMap<String, String>();
 		String err = "";	
 		try {
-			String sourceFilePath = Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName);
-			File sourceFile = new File(sourceFilePath);
-			file.transferTo(sourceFile);
-			BufferedImage sourceImg =ImageIO.read(sourceFile);			
+			String sourceFilePath = Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName);			
+			BufferedImage sourceImg =ImageIO.read(new File(sourceFilePath));			
 			int width = sourceImg.getWidth();
 			int height = sourceImg.getHeight();
 			result.put("srcw", width + "");

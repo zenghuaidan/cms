@@ -23,6 +23,7 @@
 	Document tempateDocument = XmlUtils.getTemplateDocument(currentPage.getTemplate());
 	Element templateMgrNode = (Element)tempateDocument.selectSingleNode("//Widget[@ename='"+mgrname+"']");
 	if (templateMgrNode == null) templateMgrNode = (Element)tempateDocument.selectSingleNode("//AcceptWidget[@ename='"+mgrname+"']");
+	boolean canZipUpload = templateMgrNode == null ? false : templateMgrNode.attributeValue("canZipUpload", "no").toLowerCase().equals("yes");
 	Element templateChildrenNode = (templateMgrNode == null) ? null : (Element)templateMgrNode.selectSingleNode("Widget");
     String childWidgetId = XmlUtils.getFieldAttr(templateChildrenNode, "wid");
 	String childWidgetName = XmlUtils.getFieldAttr(templateChildrenNode, "ename");
@@ -66,7 +67,8 @@
     <script type="text/javascript" src="${context}/dwr/engine.js"></script>
 	<script type="text/javascript" src="${context}/dwr/interface/dwrService.js"></script>
     <script type="text/javascript">
-        function neww() { openWidgetFormWin(<%=pageId%>,'<%=lang%>','new','<%=childWidgetId%>','<%=childWidgetName%>','<%=mgrxid%>','openerrefresh'); }
+        function neww() { openWidgetFormWin(<%=pageId%>,'<%=lang%>','new','<%=childWidgetId%>','<%=childWidgetName%>','<%=mgrxid%>','no','openerrefresh'); }
+        function newwbyuploadzip() { openWidgetFormWin(<%=pageId%>,'<%=lang%>','new','<%=childWidgetId%>','<%=childWidgetName%>','<%=mgrxid%>','yes','openerrefresh'); }
         function editw(xid) { openWidgetFormWin(<%=pageId%>,'<%=lang%>',xid,'<%=childWidgetId%>','<%=childWidgetName%>','<%=mgrxid%>','openerrefresh'); }
         function delw(xid) {
             if (confirm("You are going to delete a widget which cannot be undo.  Do you want to continue?")) {
@@ -98,7 +100,12 @@
             <h2 class="darkbg fnbar">
                 <span>&nbsp;</span>
                 <div class="right darkgradbg btmshadow">
-                    <div id="btnnewpg" class="icobtn whitefontover" onclick="neww();">New</div>
+	                <% if(canZipUpload) {
+	                	%>
+		                    <div class="btnnewpg icobtn whitefontover" onclick="newwbyuploadzip();">Batch Image Upload</div>			                
+	                	<%
+	                } %>
+                    <div class="btnnewpg icobtn whitefontover" onclick="neww();">New</div>
                 </div>
             </h2>
         </div>

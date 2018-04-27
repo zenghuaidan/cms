@@ -105,4 +105,8 @@ public class Global {
 	public static String getImagesUploadPhysicalPath() {
 		return getPhysicalPath("/resources/Content/uploads/images");
 	}
+	
+	public static String getImagesZipUploadPhysicalPath() {
+		return FilenameUtils.concat(getImagesUploadPhysicalPath(), "zip");
+	}
 }

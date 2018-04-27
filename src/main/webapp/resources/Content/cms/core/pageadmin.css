@@ -1,4 +1,4 @@
-﻿#cmspage { overflow:initial; width:980px; padding:0 0px; }
+#cmspage { overflow:initial; width:980px; padding:0 0px; }
 #header { z-index:100; }
 /***** Header *****/
 #breadcumber { /*width:600px; float:left; margin:3px 0px 0px 20px;*/ padding:3px 0px 0px 20px}
@@ -58,9 +58,9 @@
 #btnapplycn 			{ background-image:url(images/apply-cn.png); }
 
 
-#btnnewpg 				{ background-image:url(images/icon-new.png); }
+.btnnewpg 				{ background-image:url(images/icon-new.png); }
 
-#btnnewpg.icobtn		{ background-position:12px 9px; }
+.btnnewpg.icobtn		{ background-position:12px 9px; }
 #btnclosepg 			{ background-image:url(images/icon-close-page.png); }
 #btnundoreqdel 			{ background-image:url(images/icon-undoDelete.png); }
 
@@ -73,7 +73,7 @@
 
 #ajaxform .btmshadow { margin-top:-11px; height:35px; overflow:hidden;}
 #ajaxform .whitefontover { padding-top:0px}
-#ajaxform #btnnewpg {background-position:10px 5px}
+#ajaxform .btnnewpg {background-position:10px 5px}
 
 #ajaxform .whitefontover:hover { background:#999; height:35px; color:#fff;
 								 background-image:url(images/icon-new.png); background-position:10px 5px; background-repeat:no-repeat;}

@@ -54,8 +54,7 @@ var id_sa="";
 <!-- USER LISTING -->
 <div id="userlist">
 	<c:forEach items="${users}" var="user" >
-	    <div class="userblock">
-	        <div class="band"></div>
+	    <div class="userblock">	        
 	        <div class="inner" usrid='${user.id}' roles="${ user.roles }">
 	            <div class="table">
 	                <div class="label">LOGIN NAME</div> <div class="loginnameval value">${user.login}</div>
@@ -76,7 +75,8 @@ var id_sa="";
 	           	</div>             
 	            <img class="icon" src="${Content}/images/spacer.gif" alt="Icon" />
 	        </div>
-	    </div>		                        		
+	    </div>
+	    		                        		
 	</c:forEach>
 </div>  
 

@@ -441,10 +441,10 @@ function openWidgetForm(pgid,lang,wxid,wid,wname,parentxid,close) {
     }});
 }
 
-function openWidgetFormWin(pgid,lang,wxid,wid,wname,parentxid,close) {
+function openWidgetFormWin(pgid,lang,wxid,wid,wname,parentxid,iszipupload,close) {
     var u=cmsroot+"PageContentAdmin/WidgetForm?pageid="+pgid+"&lang="+lang;
     u+="&wxid="+wxid+"&wid="+wid+"&wname="+wname+"&parentxid="+parentxid;
-    u+="&caller=win";
+    u+="&caller=win&iszipupload="+iszipupload;
     window.open(u,null,"width=980,height=620,status=no,toolbar=no,menubar=no,location=no");
 }
 
