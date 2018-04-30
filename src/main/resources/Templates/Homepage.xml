@@ -8,7 +8,7 @@
   </Properties>
   <WidgetBox />
   <Widgets>
-    <Widget ename="HomepageBanners" wid="WidgetListMgr" jsel="article.content" mgrtype="gallery" mgrattr="Banner:DesktopImage" cols="Image">
+    <Widget ename="HomepageBanners" wid="WidgetListMgr" jsel="article.content" canZipUpload="yes" mgrtype="gallery" mgrattr="Banner:DesktopImage" cols="Image">
       <Widget ename="Banner" wid="Banner" DesktopImageAttr="cmgrw:114" AddFront="no" />
     </Widget>
     
@@ -18,7 +18,7 @@
       <Widget ename="QuickLink" wid="TextLinkBlock" AddFront="yes" />
     </Widget>
     
-    <Widget ename="HomepageNews" wid="WidgetListMgr" jsel="div.news" mgrtype="gallery" mgrattr="News:Image" cols="Image">
+    <Widget ename="HomepageNews" wid="WidgetListMgr" jsel="div.news" canZipUpload="yes" mgrtype="gallery" mgrattr="News:Image" cols="Image">
       <Widget ename="News" wid="ImagePageBlock" PageAttr="Parent:Template=NewsListInside,TopOpt:----Please Select----^" ImageAttr="cmgrw:114,fix:160x160" PageLabel="News" AddFront="yes" />
     </Widget> 
     

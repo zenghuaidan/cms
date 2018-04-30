@@ -17,10 +17,10 @@
       <AcceptWidget wid="TextBlock" ename="SpaceBlk" label="Space Block" TextLabel="Height" TextDefault="30px" />
       <AcceptWidget wid="HRBlock" ename="HRBlk" label="HR Block" />
       <AcceptWidget wid="LeftRightPhotoBlk" ImageAlignOpts="LeftPhoto^Left Photo,RightPhoto^Right Photo" ename="LeftRightPhotoBlk" label="Left Right Photo" />      
-      <AcceptWidget ename="PhotoSliders" wid="PhotoSliders" label="Photo Sliders" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoSlider:Image" cols="Image" AddFront="no">
+      <AcceptWidget ename="PhotoSliders" wid="PhotoSliders" label="Photo Sliders" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoSlider:Image" cols="Image" AddFront="no">
         <Widget ename="PhotoSlider" wid="ImageLinkBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:890x470" AddFront="no" />
       </AcceptWidget>
-      <AcceptWidget ename="ColumnImages" wid="ColumnImages" label="Column Images" isDynLst="yes" mgrtype="gallery" mgrattr="ColumnImage:Image" cols="Image" AddFront="no">
+      <AcceptWidget ename="ColumnImages" wid="ColumnImages" label="Column Images" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="ColumnImage:Image" cols="Image" AddFront="no">
         <Widget ename="ColumnImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114" AddFront="no" />
       </AcceptWidget>
       <AcceptWidget wid="TextLinkBlock" ename="ActionButton" label="Action Button" />

@@ -16,7 +16,7 @@
       <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromCategoryTable" />      
       <!--AcceptWidget wid="DescriptionStyleGallery" ename="DescriptionStyleGallery" label="Post with short description" CategoryOpts="FromCategoryTable" /-->
       
-      <AcceptWidget ename="SliderStyleGallery" wid="SliderStyleGallery" label="Post with Fix Size Slider" isDynLst="yes" mgrtype="gallery" mgrattr="Slider:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable">
+      <AcceptWidget ename="SliderStyleGallery" wid="SliderStyleGallery" label="Post with Fix Size Slider" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="Slider:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable">
         <Widget ename="Slider" wid="ImgBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:825x436" AddFront="no" />
       </AcceptWidget>
       <AcceptWidget wid="ImageDocumentAndDetailStyleGallery" ename="ImageDocumentAndDetailStyleGallery" label="Post with Image(Include content page &amp; download document)" CategoryOpts="FromCategoryTable" />
