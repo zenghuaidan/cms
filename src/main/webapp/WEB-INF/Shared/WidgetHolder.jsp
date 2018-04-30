@@ -187,28 +187,16 @@
    		</c:if>        
    	</x:if>
    	
-   	<x:if select="$widgetName = 'ColumnImages'">
-       	<div class="widget sm-img group">
-           	<% int j = 1; %>
-	   		<x:forEach select="$widget/Widget[@name='ColumnImage']" var="imageItem" varStatus="status">
-		   		<%
-		           	Element imageNode = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]/Widget[" + j + "]/Field[@name='Image']");					
-          			String imageUrl = Global.getImagesUploadPath(Global.IMAGE_SOURCE, imageNode.getTextTrim());
-		       	%>
-            	<div class="col span_1_of_4" style="background: url('<%=imageUrl%>') #ececec no-repeat center center; background-size: contain;"></div>	   			
-	   			<% j++; %>
-	   		</x:forEach>
-	   		<%
-	   			if(j == 1) {
-	   				%>
-	   					<c:if test="${ isPageAdmin }">
-	       					<div style="text-align:center"># Configure Column Image Item</div>
-	   					</c:if>
-	   				<%
-	   			}
-	   		%>       
-            <div class="clear"></div>
-    	</div>
+   	<x:if select="$widgetName = 'ColumnImages'">    	
+        <div class="widget greyBox photolist photo-gallery">
+            <div class="list">
+      	   		<x:forEach select="$widget/Widget[@name='ColumnImage']" var="imageItem" varStatus="status">      	   									   		               		
+                   	<img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" as="${status.index lt 8 }">               		
+		            <div style='display:none;' class='photo-item' data-src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-thumb="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-subHtml="<x:out select="$imageItem/Field[@name='Image']/alt" escapeXml="false"/>"></div>
+				</x:forEach>                            
+            </div>            
+            <div class="mgal"><i class="fa fa-external-link adj-icon"></i></div>
+        </div>
    	</x:if>
    	<x:if select="$widgetName = 'ActionButton'">   			
        	<%
@@ -326,53 +314,6 @@
 	        </div>
 	    </div>          	
    	</x:if>
-	<%--
-	<x:if select="$widgetName = 'YoutubeStyleGallery'">
-       	<%
-       		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
-            Element linkNode = (Element)widget.selectSingleNode("Field[@name='Link']");			
-			String linkAttr = XmlUtils.getLinkAttr(linkNode, lang, iscms);
-			String year = XmlUtils.getFieldRaw(widget, "Date").split("-")[0];
-			String categoryStr = "";
-			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
-				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
-			}
-        %> 
-	    <div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
-	        <a <%=linkAttr%>><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a>
-	        <div class="post-desc-wrapper">
-	            <div class="post-desc">
-	                <div class="post-date font-s"><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></div>
-	                <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
-	                <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
-	            </div>
-	        </div>
-	    </div>
-   	</x:if> 
-   	--%>
-   	<%--
-   	<x:if select="$widgetName = 'DescriptionStyleGallery'">
-   	  	<%
-       		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
-			String year = XmlUtils.getFieldRaw(widget, "Date").split("-")[0];
-			String categoryStr = "";
-			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
-				if(!StringUtils.isBlank(category))
-					categoryStr += ("cat-" + category + " ");
-			}
-        %>
-		<div class="widget <%=year%> <%=categoryStr%> post-item isotope-item clearfix">
-            <div class="post-desc-wrapper">
-                <div class="post-desc">
-                    <div class="post-date font-s"><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></div>
-                    <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
-                    <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
-                </div>
-            </div>
-    	</div>
-   	</x:if>
-   	--%>
    	<x:if select="$widgetName = 'ImageStyleGallery'">
    		<%
        		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");

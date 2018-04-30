@@ -56,7 +56,7 @@
                         </li>
                         <!--li class="reset">
                             <a class="close" data-rel="*" href="#"><i class="gi gi-show-thumbnails"></i>Show all</a>
-                        </li!-->
+                        </li-->
                     </ul>
                     <div class="filters_wrapper">
                          <ul class="year">
