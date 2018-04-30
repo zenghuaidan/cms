@@ -1,5 +1,7 @@
 package com.edeas.dwr;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class SchemaInfo {
 	private String name;
 	private String type;
@@ -63,6 +65,20 @@ public class SchemaInfo {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	
+	public boolean canZipUpload() {		
+		if (!StringUtils.isBlank(attribute))
+		{
+			String[] ra = attribute.split(",");
+			for (String r : ra) {
+				String[] _ra = r.split(":");
+				if (_ra[0].equals("zipUpload")) {
+					return _ra[1].toLowerCase().equals("yes");
+				}
+			}
+		}
+		return false;
 	}
 
 }

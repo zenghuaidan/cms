@@ -12,7 +12,7 @@
     <Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel=".main-content-pos" htagid="wholder">
       <AcceptWidget wid="ImageTimelineBlk" ename="ImageTimelineBlk" label="Image Timeline Block" ImageAttr="fix:400x252"/>
       <AcceptWidget ename="TimelineSliderImages" wid="TimelineSliderImages" label="Slider Timeline Block" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="TimelineSliderImage:Image" cols="Image" AddFront="no">
-        <Widget ename="TimelineSliderImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114,fix:400x252" AddFront="no" />
+        <Widget ename="TimelineSliderImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114,fix:400x252,zipUpload:yes" AddFront="no" />
       </AcceptWidget>
       <AcceptWidget wid="Html5VideoTimelineBlk" ename="Html5VideoTimelineBlk" label="Html5 Video Timeline Block" />
     </Widget>

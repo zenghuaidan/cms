@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -15,7 +16,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,12 +29,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.edeas.common.utils.ExcelUtils;
 import com.edeas.common.utils.ImageUtils;
 import com.edeas.common.utils.ZipUtils;
 import com.edeas.controller.Global;
+import com.edeas.dto.ImageInfo;
 import com.edeas.dto.Result;
 import com.edeas.dwr.SchemaInfo;
 import com.edeas.model.CmsContent;
@@ -343,10 +344,28 @@ public class PageContentAdminController extends CmsController {
 							list.get(0).transferTo(zipFile);
 							
 							ZipUtils.unzipFile(zipFileName);
+							
+							Map<String, File> imageDataMap = new HashMap<String, File>();
 							Collection<File> images = FileUtils.listFiles(zipPathFile, new String[] {"bmp", "jpg", "jpeg", "png", "gif"}, true);
 							for(File image : images) {
-								error.append(updateWidget(multiRequest, image));
+								imageDataMap.put(FilenameUtils.getBaseName(image.getName()), image);
 							}
+							
+							Collection<File> xlsFiles = FileUtils.listFiles(zipPathFile, new String[] {"xls", "xlsx", "xlsm"}, true);
+							for(File xls : xlsFiles) {
+								ArrayList<ArrayList<ArrayList<Object>>> imageData = ExcelUtils.readExcel(xls);
+								for(ArrayList<Object> item : imageData.get(0)) {
+									String imageName = item.size() > 0 ? item.get(0).toString() : "";
+									String alt = item.size() > 1 ? item.get(1).toString() : "";
+									String caption = item.size() > 2 ? item.get(2).toString() : "";
+									if (imageDataMap.containsKey(imageName)) {										
+										ImageInfo imageInfo = new ImageInfo(imageDataMap.get(imageName), alt, caption);
+										error.append(updateWidget(multiRequest, imageInfo));										
+									}
+								}
+							}
+							
+							
 							FileUtils.deleteQuietly(zipPathFile);
 						}
 
@@ -359,7 +378,7 @@ public class PageContentAdminController extends CmsController {
 		}
 	}
 
-	private String updateWidget(HttpServletRequest request, File zipUploadImage) {
+	private String updateWidget(HttpServletRequest request, ImageInfo imageInfo) {
 		StringBuffer error = new StringBuffer();
 		Long pageId = Long.parseLong(request.getParameter("pageid"));
 		String lang = request.getParameter("lang");
@@ -417,7 +436,7 @@ public class PageContentAdminController extends CmsController {
 				dataField.addAttribute("name", fpm.getName());
 				dataField.addAttribute("ftype", fpm.getType());
 				dataField.setText(XmlUtils.toCDATA(value));
-				error.append(setSpecialField(fpm, dataField, request, zipUploadImage));
+				error.append(setSpecialField(fpm, dataField, request, imageInfo));
 			}
 			if(StringUtils.isBlank(error.toString())) {
 				content.setContentXml(XmlUtils.formatXml(contentDocument));
@@ -565,12 +584,12 @@ public class PageContentAdminController extends CmsController {
 		return errors.toString().trim();
 	}
 	
-	private String setSpecialField(SchemaInfo fpm, Element dataField, HttpServletRequest request, File zipUploadImage)
+	private String setSpecialField(SchemaInfo fpm, Element dataField, HttpServletRequest request, ImageInfo imageInfo)
 	{
 		String err = "";
 		switch (fpm.getType())
 		{
-			case "imgfield": err = setImageElement(fpm, dataField, request, zipUploadImage); break;
+			case "imgfield": err = setImageElement(fpm, dataField, request, imageInfo); break;
 			case "lnkfield": err = setLinkElement(fpm, dataField, request); break;
 			case "docfield": setDocElement(fpm, dataField, request); break;
 			case "spgfield": setSubpageElement(fpm, dataField, request); break;
@@ -664,7 +683,7 @@ public class PageContentAdminController extends CmsController {
         return newf;
     }
 	
-	private String setImageElement(SchemaInfo fpm, Element dataField, HttpServletRequest request, File zipUploadImage)
+	private String setImageElement(SchemaInfo fpm, Element dataField, HttpServletRequest request, ImageInfo imageInfo)
 	{
 		try {
 			String err = "";
@@ -672,7 +691,7 @@ public class PageContentAdminController extends CmsController {
 			String fileidx = fid + "_file";
 			String imageAttribute = fpm.getAttribute();
 			String alt = request.getParameter(fid + "_alt");
-			dataField.addAttribute("alt", alt);
+			String caption = request.getParameter(fid + "_caption");
 			CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
 			String newFileName = "";
 			if(multipartResolver.isMultipart(request))
@@ -691,16 +710,24 @@ public class PageContentAdminController extends CmsController {
 				}            
 				
 			}
+						
+			if(imageInfo != null && fpm.canZipUpload()) {
+				newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE), imageInfo.getImage().getName());
+				FileUtils.moveFile(imageInfo.getImage(), new File(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName))); 
+				alt = imageInfo.getAlt();
+				caption = imageInfo.getCaption();
+			}
 			
-			if(zipUploadImage != null) {
-				newFileName = newRandomFilename(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE), zipUploadImage.getName());
-				FileUtils.moveFile(zipUploadImage, new File(Global.getImagesUploadPhysicalPath(Global.IMAGE_SOURCE, newFileName)));        	
+			if (!StringUtils.isBlank(newFileName)) {
+				Map<String, String> result = mgnCmsImg(newFileName, imageAttribute);
+				err = result.remove("ERROR");
+				for (String attr : result.keySet()) {
+					dataField.addAttribute(attr, result.get(attr));
+				}				
 			}
-			Map<String, String> result = mgnCmsImg(newFileName, imageAttribute);
-			err = result.remove("ERROR");
-			for (String attr : result.keySet()) {
-				dataField.addAttribute(attr, result.get(attr));
-			}
+			
+			dataField.addAttribute("alt", alt);
+			dataField.addAttribute("caption", caption);
 			dataField.setText(XmlUtils.toCDATA(newFileName));
 			
 			return err;			

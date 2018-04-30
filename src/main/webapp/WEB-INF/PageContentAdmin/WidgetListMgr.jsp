@@ -102,7 +102,9 @@
                 <div class="right darkgradbg btmshadow">
 	                <% if(canZipUpload) {
 	                	%>
-		                    <div class="btnnewpg icobtn whitefontover" onclick="newwbyuploadzip();">Batch Image Upload</div>			                
+		                    <div class="btnnewpg icobtn whitefontover" style="cursor:unset">
+		                    	<div><label style="cursor:pointer" onclick="newwbyuploadzip();">Batch Image Upload</label>&nbsp;&nbsp;&nbsp;<a href="${Content}/BatchUploadImage.zip">Download Sample</a></div>		                    	
+		                    </div>		                    			               
 	                	<%
 	                } %>
                     <div class="btnnewpg icobtn whitefontover" onclick="neww();">New</div>

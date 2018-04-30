@@ -9,7 +9,7 @@
   <WidgetBox />
   <Widgets>
     <Widget ename="HomepageBanners" wid="WidgetListMgr" jsel="article.content" canZipUpload="yes" mgrtype="gallery" mgrattr="Banner:DesktopImage" cols="Image">
-      <Widget ename="Banner" wid="Banner" DesktopImageAttr="cmgrw:114" AddFront="no" />
+      <Widget ename="Banner" wid="Banner" DesktopImageAttr="cmgrw:114,zipUpload:yes" AddFront="no" />
     </Widget>
     
     <Widget ename="Introduction" wid="TwoTitleContentBlock" label="Title" jsel="div.intro" /> 
@@ -19,7 +19,7 @@
     </Widget>
     
     <Widget ename="HomepageNews" wid="WidgetListMgr" jsel="div.news" canZipUpload="yes" mgrtype="gallery" mgrattr="News:Image" cols="Image">
-      <Widget ename="News" wid="ImagePageBlock" PageAttr="Parent:Template=NewsListInside,TopOpt:----Please Select----^" ImageAttr="cmgrw:114,fix:160x160" PageLabel="News" AddFront="yes" />
+      <Widget ename="News" wid="ImagePageBlock" PageAttr="Parent:Template=NewsListInside,TopOpt:----Please Select----^" ImageAttr="cmgrw:114,fix:160x160,zipUpload:yes" PageLabel="News" AddFront="yes" />
     </Widget> 
     
   </Widgets>
