@@ -463,7 +463,7 @@
             <div class="post-desc-wrapper">
 	            <div class="post-desc">
 	                <div class="post-date font-s"><x:out select="$widget/Field[@name='Date']" escapeXml="false"/></div>
-	                <a href="news-detail.html">
+	                <a href="<%=detailPageUrl%>newsPageId=<%=currentPage.getId() %>&newsId=<x:out select="$widget/@id" escapeXml="false"/>">
 	                    <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
 	                    <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
 	                </a>
@@ -513,6 +513,43 @@
 		        </div>
 	        </div>
     	</div>
+   	</x:if>
+   	<x:if select="$widgetName = 'GeneralGallery'">
+   	  	<%
+       		Element widget = (Element)contentDocument.selectSingleNode("/PageContent/Widget[@name='WidgetHolder']/Widget[" + i + "]");
+   	  		String dateStr = XmlUtils.getFieldRaw(widget, "Date");
+			String year = dateStr.split("-")[0];
+			String month = StringUtils.isBlank(dateStr) ? "" : dateStr.split("-")[1];
+			String date = StringUtils.isBlank(dateStr) ? "" : dateStr.split("-")[2];
+			String categoryStr = "";
+			for(String category : XmlUtils.getFieldRaw(widget, "Category").split(";")) {
+				if(!StringUtils.isBlank(category))
+					categoryStr += ("cat-" + category + " ");
+			}
+			List<Element> imageNodes = (List<Element>)widget.selectNodes("Widget[@name='Gallery']");
+			boolean hasImage = imageNodes != null && imageNodes.size() > 0;
+        %>
+        <c:set var="hasImage" value="<%=hasImage%>"></c:set>
+        <div class="general-gallery <%=year%> <%=categoryStr%> post-item isotope-item clearfix photo-gallery">
+        	<div class="widget">
+	            <c:if test="${hasImage}">		        	
+	            	<a href="#"><img width="576" height="450" src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$widget/Widget[@name='Gallery'][1]/Field[@name='Image']" escapeXml="false"/>" class="img-scale"/></a>
+	            </c:if>
+	            <div style='display:none;'>
+			   		<x:forEach select="$widget/Widget[@name='Gallery']" var="slider" varStatus="status">				                    			                  	            
+			            <div class='photo-item' data-src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$slider/Field[@name='Image']" escapeXml="false"/>" data-thumb="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$slider/Field[@name='Image']" escapeXml="false"/>" data-subHtml="<x:out select="$slider/Field[@name='Image']/alt" escapeXml="false"/>"></div>
+					</x:forEach> 
+				</div>
+	            <div class="post-desc-wrapper">
+	                <div class="post-desc">
+	                    <div class="post-date font-s"><%=StringUtils.isBlank(dateStr) ? "" : month + "." + date + "." + year %></div>
+	                    <h3 class="txt-red"><x:out select="$widget/Field[@name='Title']" escapeXml="false"/></h3>
+	                    <span class="bg-red photo-no font-s"><%=imageNodes.size()%> photo(s)</span>
+	                    <div class="post-content"><x:out select="$widget/Field[@name='Content']" escapeXml="false"/></div>
+	                </div>
+	            </div>
+            </div>
+        </div>
    	</x:if>
    	
    	<x:if select="$widgetName = 'AccordionOrToggles'">  

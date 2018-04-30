@@ -168,6 +168,13 @@
   		<Field name="Content" type="ttafield" label="Content" />
   	</Widget>
   	
+  	<Widget id="Gallery">
+  		<Field name="Date" type="datfield" label="Date" />
+  		<Field name="Category" type="drpfield" label="Category" />
+  		<Field name="Title" type="ttafield" label="Title" />
+  		<Field name="Content" type="ttafield" label="Content" />
+  	</Widget>
+  	
   	<Widget id="ImageDocumentAndDetailStyleGallery">
   		<Field name="Date" type="datfield" label="Date" />
   		<Field name="Category" type="drpfield" label="Category" />

@@ -24,4 +24,5 @@
       <RefTemplate refid="NewsListInside" name="News" />
     </AcceptChildList>
   </Template>
+  <Template id="Gallery" name="Gallery" />
 </TemplateList>

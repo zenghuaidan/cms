@@ -358,10 +358,12 @@ public class XmlUtils {
 									: (Lang.tc.getName().equals(lang) ? category.getNameTC() : category.getNameSC()));
 					valueList.add(result);
 				}
+			} else {				
+				return optStr.split(",");
 			}
 			return valueList.toArray(new String[]{});
 		} else {
-			return optStr.split(",");
+			return new String[]{};
 		}
 	}
 	 

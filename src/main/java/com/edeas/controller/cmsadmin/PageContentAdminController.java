@@ -352,16 +352,23 @@ public class PageContentAdminController extends CmsController {
 							}
 							
 							Collection<File> xlsFiles = FileUtils.listFiles(zipPathFile, new String[] {"xls", "xlsx", "xlsm"}, true);
-							for(File xls : xlsFiles) {
-								ArrayList<ArrayList<ArrayList<Object>>> imageData = ExcelUtils.readExcel(xls);
-								for(ArrayList<Object> item : imageData.get(0)) {
-									String imageName = item.size() > 0 ? item.get(0).toString() : "";
-									String alt = item.size() > 1 ? item.get(1).toString() : "";
-									String caption = item.size() > 2 ? item.get(2).toString() : "";
-									if (imageDataMap.containsKey(imageName)) {										
-										ImageInfo imageInfo = new ImageInfo(imageDataMap.get(imageName), alt, caption);
-										error.append(updateWidget(multiRequest, imageInfo));										
+							if (xlsFiles.size() > 0) {
+								for(File xls : xlsFiles) {
+									ArrayList<ArrayList<ArrayList<Object>>> imageData = ExcelUtils.readExcel(xls);
+									for(ArrayList<Object> item : imageData.get(0)) {
+										String imageName = item.size() > 0 ? item.get(0).toString() : "";
+										String alt = item.size() > 1 ? item.get(1).toString() : "";
+										String caption = item.size() > 2 ? item.get(2).toString() : "";
+										if (imageDataMap.containsKey(imageName)) {										
+											ImageInfo imageInfo = new ImageInfo(imageDataMap.get(imageName), alt, caption);
+											error.append(updateWidget(multiRequest, imageInfo));										
+										}
 									}
+								}								
+							} else {
+								for(File image : imageDataMap.values()) {
+									ImageInfo imageInfo = new ImageInfo(image, "", "");
+									error.append(updateWidget(multiRequest, imageInfo));
 								}
 							}
 							
