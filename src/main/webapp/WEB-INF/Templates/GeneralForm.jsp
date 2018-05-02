@@ -15,11 +15,11 @@
 <link href="${Content}/css/form-general.css" rel="stylesheet" type="text/css" />
 <style>
     @media only screen and (max-width: 745px) {
-    table.quantity td:nth-of-type(1):before { content: "Mooncake Type:"; width:100%; display:none }
-    table.quantity td:nth-of-type(2):before { content: "Original Price:"; }
-    table.quantity td:nth-of-type(3):before { content: "Special Price:"; }
-    table.quantity td:nth-of-type(4):before { content: "Quantity:"; }
-    table.quantity td:nth-of-type(5):before { content: "Amount:"; }
+    table.quantity td:nth-of-type(1):before { content: "${lang eq 'en' ? 'Mooncake Type:' : (lang eq 'tc' ? '月餅類型:' : '月饼类型:')}"; width:100%; display:none }
+    table.quantity td:nth-of-type(2):before { content: "${lang eq 'en' ? 'Original Price:' : (lang eq 'tc' ? '原價:' : '原价:')}"; }
+    table.quantity td:nth-of-type(3):before { content: "${lang eq 'en' ? 'Special Price:' : (lang eq 'tc' ? '特價:' : '特价:')}"; }
+    table.quantity td:nth-of-type(4):before { content: "${lang eq 'en' ? 'Quantity:' : (lang eq 'tc' ? '數量:' : '数量:')}"; }
+    table.quantity td:nth-of-type(5):before { content: "${lang eq 'en' ? 'Amount:' : (lang eq 'tc' ? '總計:' : '总计:')}"; }
     }
 </style>
 <%
