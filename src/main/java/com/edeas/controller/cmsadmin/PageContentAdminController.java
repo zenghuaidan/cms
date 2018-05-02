@@ -731,11 +731,11 @@ public class PageContentAdminController extends CmsController {
 				for (String attr : result.keySet()) {
 					dataField.addAttribute(attr, result.get(attr));
 				}				
+				dataField.addAttribute("alt", alt);
+				dataField.addAttribute("caption", caption);
+				dataField.setText(XmlUtils.toCDATA(newFileName));
 			}
 			
-			dataField.addAttribute("alt", alt);
-			dataField.addAttribute("caption", caption);
-			dataField.setText(XmlUtils.toCDATA(newFileName));
 			
 			return err;			
 		} catch (Exception e) {
