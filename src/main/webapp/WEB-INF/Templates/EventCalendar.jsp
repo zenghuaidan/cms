@@ -74,7 +74,7 @@
 	}
 	
 	function getMonth(month) {
-		return ["January", "February", "March", "April", "May", "June", "July", "Aguest", "September", "October", "November", "December"][month];
+		return ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Agu", "Sept", "Oct", "Nov", "Dec"][month];
 	}
 	
 	function initCalendar(year, month) {
