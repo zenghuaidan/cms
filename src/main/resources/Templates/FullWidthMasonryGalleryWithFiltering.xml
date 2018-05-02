@@ -11,7 +11,7 @@
   <Widgets>
 
     <Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.isotope_wrapper" htagid="wholder">           
-      <AcceptWidget ename="PhotoAlbums" wid="PhotoAlbums" label="Photo Albums" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoAlbum:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable">
+      <AcceptWidget ename="PhotoAlbums" wid="PhotoAlbums" label="Photo Albums" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="PhotoAlbum:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^">
         <Widget ename="PhotoAlbum" wid="ImgBlock" label="Album Item" ImageAttr="cmgrw:114,zipUpload:yes" AddFront="no" />
       </AcceptWidget>      
     </Widget>

@@ -10,10 +10,9 @@
   <WidgetBox />
   <Widgets>
 	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.widgetHolder" htagid="wholder">           
-      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromCategoryTable" />
-      <!--AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" CategoryOpts="FromCategoryTable" /-->
-      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromCategoryTable" />
-      <AcceptWidget wid="ImageDetailStyleGallery" ename="ImageDetailStyleGallery" label="Post with Cover Image, external link and detail" CategoryOpts="FromCategoryTable" />
+      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^" />
+      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^" />
+      <AcceptWidget wid="ImageDetailStyleGallery" ename="ImageDetailStyleGallery" label="Post with Cover Image, external link and detail" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^" />
     </Widget>
   </Widgets>
 </Template>

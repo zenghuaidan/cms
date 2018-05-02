@@ -105,9 +105,15 @@
 	/* submit button */
 	.nl-submit-wrap { margin-top: 0.4em;}
 
-	.nl-form .nl-submit { line-height:3; text-transform:uppercase; cursor:pointer;
+	.nl-form .nl-submit { text-transform:uppercase; cursor:pointer;
 						  position:relative; background:#76C3BD; color:#fff;
 						  padding: 0 1em 0 0; font-size:40%; font-weight:bold; letter-spacing:3px;}
+
+	.nl-form .nl-submit:hover {background:#51a19b;}
+	
+	html #body.en .nl-form .nl-submit {line-height:3;}
+	html #body.tc .nl-form .nl-submit,
+	html #body.sc .nl-form .nl-submit {line-height:2.5;} 
 
 	.nl-submit:before { content:url('images/icon-go.svg');	color:#fff;
 						float:left; padding:0 0.7em; margin:0 0.8em 0 0; background:#69B1A9; }

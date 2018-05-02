@@ -17,15 +17,19 @@
     String optStr = "property".equals(formType) ? XmlUtils.getFieldAttr(fieldSchema, "opts") : XmlUtils.getFieldAttr(widgetSchema, fpm.getName() + "Opts");    
     String[] opts = XmlUtils.parseOpts(request, optStr);
 %>
-<c:set var="opts" value="<%=opts %>"></c:set>
-<c:set var="val" value="<%=val %>"></c:set>
+
 <tr class="datafield">
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>: </td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
         <select id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" style="<%=fpm.getStyle() %>">
-	        <c:forEach items="${opts }" var="opt">
-	        	<option value="${fn:split(opt, '^')[0]}" ${fn:split(opt, '^')[0] eq val ? ' selected' : ''}>${fn:split(opt, '^')[1]}</option>
-	        </c:forEach>        
+        	<%
+        		for(String opt : opts) {
+        			String[] options = opt.split("\\^", -1);
+        			%>
+			        	<option value="<%=options[1] %>" <%=options[0].equals(val) ? "selected" : "" %>><%=options[0] %></option>
+        			<%
+        		}
+        	%>    
         </select>
         <%=fpm.getRemark() %>
     </td>

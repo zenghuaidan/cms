@@ -130,4 +130,44 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	public List<Category> getAllCategory() {
 		return categoryDao.findAllWithOrderAsc();
 	}
+	
+	public void chgPgOrder(Long id, Long beforeId) {
+		Page thispg = findPageById(id, true);
+		Page parent = findPageById(thispg.getParentId(), true);
+		List<Page> pages = parent.getChildren(false);
+		
+        if (beforeId > 0)
+        {
+        	Page beforepg = findPageById(beforeId, true);
+            int newo = beforepg.getPageOrder() - 1;
+
+            if (beforepg.getPageOrder() > thispg.getPageOrder())
+            {
+                for(Page page : pages) {
+                	if (page.getPageOrder() > thispg.getPageOrder() && page.getPageOrder() < beforepg.getPageOrder())
+                		page.setPageOrder(page.getPageOrder() - 1);
+                }
+            }
+            else if (beforepg.getPageOrder() < thispg.getPageOrder())
+            {
+                newo = beforepg.getPageOrder();              
+                for(Page page : pages) {                	
+                	if (page.getPageOrder() >= beforepg.getPageOrder() && page.getPageOrder() < thispg.getPageOrder())
+                		page.setPageOrder(page.getPageOrder() + 1);
+                }
+            }     
+            thispg.setPageOrder(newo);
+        }
+        else
+        {
+        	int newo = 1;
+        	for(Page page : pages) {
+        		if (page.getPageOrder() > thispg.getPageOrder())
+        			page.setPageOrder(page.getPageOrder() - 1);
+            	newo = Math.max(newo, page.getPageOrder());
+            }
+        	thispg.setPageOrder(newo + 1);
+        }
+		
+	}
 }

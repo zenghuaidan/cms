@@ -10,7 +10,7 @@
   <Widgets>
 	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.widgetHolder" htagid="wholder">                 
       
-      <AcceptWidget ename="GeneralGallery" wid="Gallery" label="Galery" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="Gallery:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable">
+      <AcceptWidget ename="GeneralGallery" wid="Gallery" label="Galery" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="Gallery:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^">
         <Widget ename="Gallery" wid="ImgBlock" label="Gallery Item" ImageAttr="cmgrw:114,zipUpload:yes" AddFront="no" />
       </AcceptWidget>      
     </Widget>

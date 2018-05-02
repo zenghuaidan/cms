@@ -191,9 +191,9 @@
         <div class="widget greyBox photolist">
             <div class="list">
       	   		<x:forEach select="$widget/Widget[@name='ColumnImage']" var="imageItem" varStatus="status">      	   		
-      	   			<a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-sub-html="<x:out select="$imageItem/Field[@name='Image']/alt" escapeXml="false"/>"><img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" alt="<x:out select="$imageItem/Field[@name='Image']/alt" escapeXml="false"/>" title="<x:out select="$imageItem/Field[@name='Image']/alt" escapeXml="false"/>" as="0"></a>      	   									   		               		
+      	   			<a href="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-sub-html="<x:out select="$imageItem/Field[@name='Image']/caption" escapeXml="false"/>"><img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" alt="<x:out select="$imageItem/Field[@name='Image']/alt" escapeXml="false"/>" title="<x:out select="$imageItem/Field[@name='Image']/caption" escapeXml="false"/>" as="0"></a>      	   									   		               		
                    	<%-- <img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" as="${status.index lt 8 }">               		
-		            <div style='display:none;' class='photo-item' data-src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-thumb="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-subHtml="<x:out select="$imageItem/Field[@name='Image']/alt" escapeXml="false"/>"></div> --%>
+		            <div style='display:none;' class='photo-item' data-src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-thumb="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$imageItem/Field[@name='Image']" escapeXml="false"/>" data-subHtml="<x:out select="$imageItem/Field[@name='Image']/caption" escapeXml="false"/>"></div> --%>
 				</x:forEach>                            
             </div>            
             <div class="mgal"><i class="fa fa-external-link adj-icon"></i></div>
@@ -479,7 +479,7 @@
 	            </c:if>
 	            <div style='display:none;'>
 			   		<x:forEach select="$widget/Widget[@name='Gallery']" var="slider" varStatus="status">				                    			                  	            
-			            <div class='photo-item' data-src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$slider/Field[@name='Image']" escapeXml="false"/>" data-thumb="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$slider/Field[@name='Image']" escapeXml="false"/>" data-subHtml="<x:out select="$slider/Field[@name='Image']/alt" escapeXml="false"/>"></div>
+			            <div class='photo-item' data-src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$slider/Field[@name='Image']" escapeXml="false"/>" data-thumb="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$slider/Field[@name='Image']" escapeXml="false"/>" data-subHtml="<x:out select="$slider/Field[@name='Image']/caption" escapeXml="false"/>"></div>
 					</x:forEach> 
 				</div>
 	            <div class="post-desc-wrapper">

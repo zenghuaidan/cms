@@ -29,7 +29,7 @@
 		{
 			put("en", new HashMap<String, List<String>>() {
 				{
-					put("Form1", Arrays.asList("Minimal Form Interface<br/>Simplistic, single input view form"));
+					put("Form1", Arrays.asList("Simplistic, single input view form"));
 					put("QuestionFormOptions", Arrays.asList("What's your favorite movie?", "Where do you live?", "What time do you got to work?", "How do you like your veggies?", "What book inspires you?", "What's your profession?", "What's your profession?"));
 					put("SendAnswers", Arrays.asList("Send answers"));
 					put("Form2", Arrays.asList("Text Input Effects<br/>Simple ideas for enhancing text input interactions"));
@@ -52,7 +52,7 @@
 			});
 			put("tc", new HashMap<String, List<String>>() {
 				{
-					put("Form1", Arrays.asList("请求繁体翻译"));
+					put("Form1", Arrays.asList("簡單美觀輸入框"));
 					put("QuestionFormOptions", Arrays.asList("你最喜歡哪部電郵?", "你居住在何處?", "你的工作時間是什麼?", "你如何看待素食主義者", "什麼書最能激勵你?", "你最擅長那個方面?"));
 					put("SendAnswers", Arrays.asList("提交答案"));
 					put("Form2", Arrays.asList("请求繁体翻译"));
@@ -75,7 +75,7 @@
 			});
 			put("sc", new HashMap<String, List<String>>() {
 				{
-					put("Form1", Arrays.asList("请求简体翻译"));
+					put("Form1", Arrays.asList("简单美观输入框"));
 					put("QuestionFormOptions", Arrays.asList("你最喜欢哪部电邮?", "你居住在何处?", "你的工作时间是什麽?", "你如何看待素食主义者", "什麽书最能激励你?", "你最擅长那个方面?"));
 					put("SendAnswers", Arrays.asList("提交答桉"));
 					put("Form2", Arrays.asList("请求简体翻译"));

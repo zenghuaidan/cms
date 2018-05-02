@@ -29,8 +29,15 @@
     <td class="label" style="vertical-align:top;"><%=fpm.getLabel() %>:</td>
     <td class="field <%=fpm.getType() %>" fid="<%=fpm.getName() %>">
         <input type="hidden" id="<%=fpm.getName() %>" name="<%=fpm.getName() %>" value="<%=chkvals %>" />
+           	<%
+        		for(String opt : opts) {
+        			String[] options = opt.split("\\^", -1);
+        			%>
+        				<input type='checkbox' value="<%=options[1] %>" <%=chkvals.contains(options[1]) ? "checked" : "" %> /><%=options[0] %>
+        			<%
+        		}
+        	%>  
    	    <c:forEach items="${opts }" var="opt">
-        	<input type='checkbox' value="${fn:split(opt, '^')[0]}" ${fn:contains(chkvals, fn:split(opt, '^')[0]) ? 'checked' : ''} />${fn:split(opt, '^')[1]}
         </c:forEach>      
     </td>
 </tr>

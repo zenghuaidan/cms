@@ -10,16 +10,14 @@
   <WidgetBox />
   <Widgets>
 	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel="div.widgetHolder" htagid="wholder">           
-      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromCategoryTable" />
-      <!--AcceptWidget wid="YoutubeStyleGallery" ename="YoutubeStyleGallery" label="Post with Youtube" ImageAttr="fix:576x450" CategoryOpts="FromCategoryTable" /-->
+      <AcceptWidget wid="Html5VideoStyleGallery" ename="Html5VideoStyleGallery" label="Post with HTML5 Video" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^" />      
       
-      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromCategoryTable" />      
-      <!--AcceptWidget wid="DescriptionStyleGallery" ename="DescriptionStyleGallery" label="Post with short description" CategoryOpts="FromCategoryTable" /-->
+      <AcceptWidget wid="ImageStyleGallery" ename="ImageStyleGallery" label="Post with Cover Image and external link" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^" />           
       
-      <AcceptWidget ename="SliderStyleGallery" wid="SliderStyleGallery" label="Post with Fix Size Slider" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="Slider:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable">
+      <AcceptWidget ename="SliderStyleGallery" wid="SliderStyleGallery" label="Post with Fix Size Slider" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="Slider:Image" cols="Image" AddFront="yes" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^">
         <Widget ename="Slider" wid="ImgBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:825x436,zipUpload:yes" AddFront="no" />
       </AcceptWidget>
-      <AcceptWidget wid="ImageDocumentAndDetailStyleGallery" ename="ImageDocumentAndDetailStyleGallery" label="Post with Image(Include content page &amp; download document)" CategoryOpts="FromCategoryTable" />
+      <AcceptWidget wid="ImageDocumentAndDetailStyleGallery" ename="ImageDocumentAndDetailStyleGallery" label="Post with Image(Include content page &amp; download document)" CategoryOpts="FromCategoryTable;TopOpt:----Please Select----^" />
     </Widget>
   </Widgets>
 </Template>

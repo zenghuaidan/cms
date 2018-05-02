@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,6 @@ import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
-import org.jaxen.function.IdFunction;
 
 import com.edeas.common.utils.MessageDigestUtils;
 import com.edeas.controller.Global;
@@ -308,63 +308,75 @@ public class XmlUtils {
          return linkInfo;
      }
 
-	public static String[] parseOpts(HttpServletRequest request, String optStr) throws Exception {
+	public static String[] parseOpts(HttpServletRequest request, String optSettingStr) throws Exception {
 		//FromPropertyMtxtfield:Category:encryptValue=true,otherVlue=xxx
-		if (!StringUtils.isBlank(optStr)) {
-			String lang = (String) request.getAttribute("lang");
-			List<String> valueList = new ArrayList<String>();
-			if(optStr.contains("FromPropertyMtxtfield")) {
-				String[] settings = optStr.split(":", 2);
-				if (settings.length == 2 && !StringUtils.isBlank(settings[1])) {
-					String[] filedNameAndItsSetting = settings[1].split(":", 2);
-					String fieldeName = filedNameAndItsSetting[0];
-					boolean encryptValue = false;
-					if (filedNameAndItsSetting.length == 2) {
-						String[] fieldSettings = filedNameAndItsSetting[1].split(",");
-						for(String filedSetting : fieldSettings) {
-							String settingName = filedSetting.split("=", 2)[0];
-							switch (settingName) {
-							case "encryptValue":
-								encryptValue = filedSetting.split("=", 2).length == 2 ? Boolean.parseBoolean(filedSetting.split("=", 2)[1]) : false;
-								break;
-							default:
-								break;
+		//,TopOpt:----Please Select----^
+		List<String> resultList = new ArrayList<String>();
+		for(String optStr : optSettingStr.split(";")) {
+			if (!StringUtils.isBlank(optStr)) {
+				String lang = (String) request.getAttribute("lang");
+				if(optStr.contains("FromPropertyMtxtfield")) {
+					List<String> valueList = new ArrayList<String>();
+					String[] settings = optStr.split(":", 2);
+					if (settings.length == 2 && !StringUtils.isBlank(settings[1])) {
+						String[] filedNameAndItsSetting = settings[1].split(":", 2);
+						String fieldeName = filedNameAndItsSetting[0];
+						boolean encryptValue = false;
+						if (filedNameAndItsSetting.length == 2) {
+							String[] fieldSettings = filedNameAndItsSetting[1].split(",");
+							for(String filedSetting : fieldSettings) {
+								String settingName = filedSetting.split("=", 2)[0];
+								switch (settingName) {
+								case "encryptValue":
+									encryptValue = filedSetting.split("=", 2).length == 2 ? Boolean.parseBoolean(filedSetting.split("=", 2)[1]) : false;
+									break;
+								default:
+									break;
+								}
 							}
+						}				
+						
+						Page currentPage = (Page) request.getAttribute("currentPage");
+						Content content = currentPage.getContent(lang);
+						Document propertyDocument = content.getPropertyXmlDoc();
+						String values = XmlUtils.getPtyFieldVal(propertyDocument, fieldeName, false);
+						if (!StringUtils.isBlank(values)) {
+							Type type = new TypeToken<String[]>(){}.getType();
+							String[] opts = new Gson().fromJson(values, type);
+							for(int i = 0; i < opts.length; i++) {
+								String value = encryptValue ? MessageDigestUtils.encryptBASE64(opts[i].getBytes()) : opts[i];
+								String displayValue = opts[i];
+								String result = displayValue + "^" + value;
+								if (!valueList.contains(result)) {
+									valueList.add(result);
+								}
+							}					
 						}
-					}				
-					
-					Page currentPage = (Page) request.getAttribute("currentPage");
-					Content content = currentPage.getContent(lang);
-					Document propertyDocument = content.getPropertyXmlDoc();
-					String values = XmlUtils.getPtyFieldVal(propertyDocument, fieldeName, false);
-					if (!StringUtils.isBlank(values)) {
-						Type type = new TypeToken<String[]>(){}.getType();
-						String[] opts = new Gson().fromJson(values, type);
-						for(int i = 0; i < opts.length; i++) {
-							String value = encryptValue ? MessageDigestUtils.encryptBASE64(opts[i].getBytes()) : opts[i];
-							String displayValue = opts[i];
-							String result = value + "^" + displayValue;
-							if (!valueList.contains(result)) {
-								valueList.add(result);
-							}
-						}					
+					}
+					resultList.addAll(valueList);
+				} else if(optStr.contains("FromCategoryTable")) {
+					List<Category> categories = InitServlet.getQueryService().getAllCategory();
+					List<String> valueList = new ArrayList<String>();
+					for(Category category : categories) {
+						String result = (Lang.en.getName().equals(lang) ? category.getNameEN()
+										: (Lang.tc.getName().equals(lang) ? category.getNameTC() : category.getNameSC()))
+								 		+ "^" + category.getId(); 
+						valueList.add(result);
+					}
+					resultList.addAll(valueList);
+				} else {	
+					String[] settings = optStr.split(":", 2);
+					if (settings.length == 2 && !StringUtils.isBlank(settings[1])) {
+						if ("TopOpt".equals(settings[0])) {
+							resultList.addAll(0, Arrays.asList(settings[1].split(",")));
+						} else {
+							resultList.addAll(Arrays.asList(settings[1].split(",")));
+						}
 					}
 				}
-			} else if(optStr.contains("FromCategoryTable")) {
-				List<Category> categories = InitServlet.getQueryService().getAllCategory();
-				for(Category category : categories) {
-					String result = category.getId() + "^" + 
-							(Lang.en.getName().equals(lang) ? category.getNameEN()
-									: (Lang.tc.getName().equals(lang) ? category.getNameTC() : category.getNameSC()));
-					valueList.add(result);
-				}
-			} else {				
-				return optStr.split(",");
-			}
-			return valueList.toArray(new String[]{});
-		} else {
-			return new String[]{};
+			}		
 		}
+		return resultList.toArray(new String[]{});
 	}
 	 
 }
