@@ -25,7 +25,19 @@
 <script type="text/javascript" src="${Script}/lg-hash.js"></script>
 <script type="text/javascript" src="${Script}/lg-pager.js"></script>
 <c:if test="${not isPageAdmin}">	
-	<script type="text/javascript" src="${Script}/photo.js"></script>
+	<%-- <script type="text/javascript" src="${Script}/photo.js"></script> --%>
+	<script type="text/javascript">
+		$(function() {
+		   $(".photolist>.list").each(function() {
+		      $(this).lightGallery();
+		   });
+		   $(".photolist .mgal").click(function() {
+		      //alert($(this).prev().html());
+		      //$(this).prev().data('lightGallery').slide(0);
+		      $(this).prev().find("a").eq(0).click();
+		   });
+		});
+	</script>
 </c:if>
 
 <style>   
