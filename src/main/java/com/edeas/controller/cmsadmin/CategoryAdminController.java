@@ -27,12 +27,6 @@ public class CategoryAdminController extends CmsController {
 	@ResponseBody
 	public Result Save(Category category) {
 		if(category.getId() != null) {
-			Category categoryDB = categoryService.findById(category.getId());
-			if(categoryDB != null) {
-				categoryDB.setNameEN(category.getNameEN());
-				categoryDB.setNameTC(category.getNameTC());
-				categoryDB.setNameSC(HanLP.t2s(category.getNameTC()));
-			}
 			categoryService.update(category);		
 		} else {
 			category.setNameSC(HanLP.t2s(category.getNameTC()));

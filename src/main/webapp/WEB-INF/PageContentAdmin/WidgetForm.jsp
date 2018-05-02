@@ -48,6 +48,7 @@
         #widgetformtbl { width: 100%; }
         .ttafield textarea { width: 500px; height: 100px; }
         input.altxt { width: 400px; }
+        textarea.cptxt { width: 400px; }
     </style>    
     <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${Script}/datetimepicker/jquery.datetimepicker.css" />

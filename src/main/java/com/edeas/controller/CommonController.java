@@ -20,7 +20,7 @@ import com.edeas.utils.XmlUtils;
 public class CommonController extends BaseController {	
 	protected final Logger logger = Logger.getLogger(CommonController.class);
 	
-	@RequestMapping(path = {"timelineDetail"}, method={RequestMethod.GET})
+	@RequestMapping(path = {"timelineDetail"}, method={RequestMethod.GET}, produces ="text/plain; charset=UTF-8")
 	@ResponseBody
 	public String timelineDetail(long pageId, String timelineId, String lang, boolean iscms, HttpSession session) {
 		if(!Lang.exists(lang))

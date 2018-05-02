@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edeas.model.Category;
+import com.hankcs.hanlp.HanLP;
 
 @Service(value="categoryService")
 @Transactional
@@ -30,7 +31,13 @@ public class CategoryServiceImpl extends BasicServiceImpl {
 	}
 
 	public void update(Category category) {
-		categoryDao.update(category);
+		Category categoryDB = findById(category.getId());
+		if(categoryDB != null) {
+			categoryDB.setNameEN(category.getNameEN());
+			categoryDB.setNameTC(category.getNameTC());
+			categoryDB.setNameSC(HanLP.t2s(category.getNameTC()));
+		}
+		categoryDao.update(categoryDB);
 	}
 
 	public void chgOrder(Long id, Long beforeId) {

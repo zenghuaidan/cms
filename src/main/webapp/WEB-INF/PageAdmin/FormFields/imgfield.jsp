@@ -14,6 +14,7 @@
 	SchemaInfo fpm = XmlUtils.getSchemaInfo(fieldSchema, widgetSchema);
 	String val = (fieldData == null) ? fpm.getDefaultValue() : fieldData.getTextTrim();
 	String alt = XmlUtils.getFieldAttr(fieldData, "alt");
+	String caption = XmlUtils.getFieldAttr(fieldData, "caption");
 	
     StringBuffer imgdesc = new StringBuffer("<span style='text-transform:none;'>");
     if(!StringUtils.isBlank(fpm.getAttribute())) {
@@ -53,6 +54,9 @@
         <% } %>                       
         <div>
             Alt Text: <input type="text" class="altxt" id="<%=fpm.getName() %>_alt" name="<%=fpm.getName() %>_alt" fid="<%=fpm.getName() %>" value="<%=alt %>" />
+            <br/>
+            <br/>
+            Caption: <textarea class="cptxt" id="<%=fpm.getName() %>_caption" name="<%=fpm.getName() %>_caption" fid="<%=fpm.getName() %>" ><%=caption %></textarea>
         </div>
         <%=fpm.getRemark() %>
     </td>
