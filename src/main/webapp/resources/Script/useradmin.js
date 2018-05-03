@@ -6,7 +6,13 @@
 function newuser() {
     var htm="<form id='usrfm' class='userform newusr' method='post'>";
     htm+=$("#layerpool .userform").html()+"</form>";
-    TINY.box.show({ html: htm, openjs: function() {clearusr(); $("#usrfm h2").text("NEW USER"); } });
+    TINY.box.show({ html: htm, openjs: function() {
+    	clearusr(); 
+    	$("#usrfm h2").text("NEW USER");
+    	$("#usrfm input[name$=activeChk]").prop('checked', false);
+        $("#usrfm input[name$=active]").val($("#usrfm input[name$=activeChk]").prop('checked'));
+	} 
+    });
 }
 
 function edituser(uid) {
