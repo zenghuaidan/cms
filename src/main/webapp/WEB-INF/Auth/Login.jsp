@@ -66,13 +66,13 @@
                     </div>
                     <section class="text-effect pos">
                         <span class="input input--ruri">
-                            <input type="text" class="input__field input__field--ruri" name="userName" id="userName" value="larry" />
+                            <input type="text" class="input__field input__field--ruri" name="userName" id="userName" />
                             <label class="input__label input__label--ruri" for="userName">
                                 <span class="input__label-content input__label-content--ruri"><i class="fa fa-user"></i> Username</span>
                             </label>
                         </span>
                         <span class="input input--ruri">
-                            <input type="password" class="input__field input__field--ruri" name="password" id="password" value="testing" />                            
+                            <input type="password" class="input__field input__field--ruri" name="password" id="password" />                            
                             <label class="input__label input__label--ruri" for="password">
                                 <span class="input__label-content input__label-content--ruri"><i class="fa fa-lock"></i> Password</span>
                             </label>
