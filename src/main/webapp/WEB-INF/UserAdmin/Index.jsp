@@ -7,6 +7,7 @@
     .tclose { top:8px; right:8px; width:21px; height:21px; background: url("${Content}/core/images/btn-close.png");}
     .tclose:hover { background-position:bottom left; }
     .gradbtn {line-height:18px}
+    #usrfm { width: 705px; height:350px;}
     #admintopheader .sep {
 	    height: 31px;
 	    margin: 2px 10px 0px 10px;
