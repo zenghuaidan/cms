@@ -48,7 +48,11 @@
     }
 
     @media only screen and (max-width: 745px) {
-     #Filters { padding-bottom:0}
+     #Filters { 
+     	padding-bottom:0;
+     	padding-left: 20px;
+     	padding-right: 20px;
+     }
     #Filters .filters_wrapper ul li   { width:48.5%;}
     #Filters .filters_buttons li.reset { float:left; margin:10px 0 0 0; padding:5px 0;}
 

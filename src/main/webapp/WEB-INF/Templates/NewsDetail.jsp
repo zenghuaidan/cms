@@ -41,6 +41,13 @@
 		}
 	}
 %>
+<c:if test="${not isMasonry}">
+	<style>
+	    @media only screen and (max-width: 745px) {		    
+		    .inner-wrapper .main-content-pos  { padding-top:80px !important; }		    	
+	    }
+	</style>
+</c:if>
 <c:if test="${isPageAdmin}">
 	<style>
 		div.title-col2 h1 { text-align:unset !important}

@@ -120,7 +120,7 @@
         .col-sm-height.col-2 .col2-sm2 {  width:85%;}
 
 
-        #end { margin-top:-20px}
+        #end { margin-top:0px; margin-left:6px;}
         #end .e-col1 { display:none;}
         #end .e-col2 { width:15%;}
         .end-dot  {  background-image:url(images/timeline-dot-end.svg); background-position:top center; background-repeat:no-repeat;

@@ -21,7 +21,7 @@
         <Widget ename="PhotoSlider" wid="ImageLinkBlock" label="Slider Item" ImageAttr="cmgrw:114,fix:890x470,zipUpload:yes" AddFront="no" />
       </AcceptWidget>
       <AcceptWidget ename="ColumnImages" wid="ColumnImages" label="Column Images" canZipUpload="yes" isDynLst="yes" mgrtype="gallery" mgrattr="ColumnImage:Image" cols="Image" AddFront="no">
-        <Widget ename="ColumnImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114,zipUpload:yes" AddFront="no" />
+        <Widget ename="ColumnImage" wid="ImgBlock" label="Image Item" ImageAttr="cmgrw:114,zipUpload:yes,allowCaption:yes" AddFront="no" />
       </AcceptWidget>
       <AcceptWidget wid="TextLinkBlock" ename="ActionButton" label="Action Button" />
       <AcceptWidget ename="AccordionOrToggles" wid="AccordionOrToggles" TypeOpts="accordion^Accordion,toggle^Toggle" label="Accordion or Toggle" isDynLst="yes" mgrtype="txtlist" mgrattr="AccordionOrToggle:Title" cols="Text">

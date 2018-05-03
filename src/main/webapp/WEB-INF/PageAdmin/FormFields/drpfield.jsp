@@ -26,7 +26,7 @@
         		for(String opt : opts) {
         			String[] options = opt.split("\\^", -1);
         			%>
-			        	<option value="<%=options[1] %>" <%=options[0].equals(val) ? "selected" : "" %>><%=options[0] %></option>
+			        	<option value="<%=options[1] %>" <%=options[1].equals(val) ? "selected" : "" %>><%=options[0] %></option>
         			<%
         		}
         	%>    

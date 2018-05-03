@@ -349,6 +349,7 @@ public class PageContentAdminController extends CmsController {
 							Collection<File> images = FileUtils.listFiles(zipPathFile, new String[] {"bmp", "jpg", "jpeg", "png", "gif"}, true);
 							for(File image : images) {
 								imageDataMap.put(FilenameUtils.getBaseName(image.getName()), image);
+								imageDataMap.put(image.getName(), image);
 							}
 							
 							Collection<File> xlsFiles = FileUtils.listFiles(zipPathFile, new String[] {"xls", "xlsx", "xlsm"}, true);
