@@ -6,14 +6,19 @@
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	<global-method-security pre-post-annotations="enabled" jsr250-annotations="enabled"/>						
 	<http pattern="/resources/**" security="none"/>
+	<http pattern="/dwr/**" security="none"/>
 	<http pattern="/cmsadmin" security="none"/>	
 	<http pattern="/cmsadmin/Login" security="none"/>
 	
 	<!-- Below pattern is for c:import issue fix, PageAdmin/index.jsp -->
 	<http pattern="/cmsadmin/*/viewPage/**" security="none"/>		
-	<http auto-config="true" use-expressions="true">		
-		<intercept-url pattern="/cmsadmin/**" access="hasRole('Admin') or hasRole('User')"/>
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/tc/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/sc/**" access="isAuthenticated()"/>		
+		<intercept-url pattern="/cmsadmin/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/cmsadmin/UserAdmin/**" access="hasRole('Admin')"/>
+		<intercept-url pattern="/cmsadmin/CategoryAdmin/**" access="hasRole('Admin')"/>
 		
 		<form-login login-page="/cmsadmin/Login"			
 			login-processing-url="/cmsadmin/doLogin"
