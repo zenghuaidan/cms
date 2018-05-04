@@ -99,7 +99,7 @@
             		String month = date.split("-")[1];
             		String day = date.split("-")[2];
             		dateId = day + "/" + month + "/" + year;
-            		dateStr = DateUtils.toMonth(Integer.parseInt(month), true) + ", " + Integer.parseInt(day) + " " + Integer.parseInt(year);
+            		dateStr = DateUtils.toMonth(Integer.parseInt(month), false) + ", " + Integer.parseInt(day) + " " + Integer.parseInt(year);
             	}
             	String detail = XmlUtils.getFieldRaw(element, "Detail", false);
     			%>

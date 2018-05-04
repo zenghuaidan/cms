@@ -103,8 +103,11 @@
 	                <% if(canZipUpload) {
 	                	%>
 		                    <div class="btnnewpg icobtn whitefontover" style="cursor:unset">
-		                    	<div><label style="cursor:pointer" onclick="newwbyuploadzip();">Batch Image Upload</label>&nbsp;&nbsp;&nbsp;<a href="${Content}/BatchUploadImage.zip">Download Sample</a></div>		                    	
+		                    	<div><label style="cursor:pointer" onclick="newwbyuploadzip();">Batch Image Upload in zip</label></div>		                    	
 		                    </div>		                    			               
+							<div class="icobtn whitefontover" style="border-left:1px solid #666; border-right:3px solid #fff; padding-left:10px; background-image:none;">
+								<a href="${Content}/BatchUploadImage.zip" style="text-decoration:none;"><span style="color:#fff;">Download Excel Sample</span></a>
+							</div>
 	                	<%
 	                } %>
                     <div class="btnnewpg icobtn whitefontover" onclick="neww();">New</div>
