@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.common.utils.MailUtils;
-import com.edeas.common.utils.PasswordUtils;
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
 import com.edeas.model.Privilege;
 import com.edeas.model.User;
 import com.edeas.model.UserRole;
+import com.edeas.utils.PasswordUtils;
 
 @Controller
 public class UserAdminController extends CmsController {

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edeas.common.utils.PasswordUtils;
 import com.edeas.dto.Result;
 import com.edeas.model.User;
+import com.edeas.utils.PasswordUtils;
 
 @Controller
 public class AuthController extends CmsController {
