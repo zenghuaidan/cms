@@ -65,9 +65,21 @@ public class UserAdminController extends CmsController {
 		String newPassword = UUID.randomUUID().toString().substring(0, 6);
 		user.setUserRoles(getUIUserRoles(request));		
 		user.setPassword(PasswordUtils.encode(newPassword));
-		userService.addUser(user);
 		
-		MailUtils.sendmail(user.getFirstName(), user.getEmail(), "Init Passowrd", "Your init password is : " + newPassword, false, true);
+		try{			
+			InputStream emailContent = this.getClass().getResourceAsStream("/email/newuser.tpl");
+			String emailContentStr = IOUtils.toString(emailContent, "utf-8");
+			emailContent.close();
+			Map<String, String> emailContentMap = new HashMap<String, String>();
+			emailContentMap.put("firstname", user.getFirstName());
+			emailContentMap.put("email", user.getEmail());
+			emailContentMap.put("password", newPassword);
+			emailContentMap.put("cmsurl", CmsProperties.getHost() + Global.getCMSUrl());
+			MailUtils.sendmailWithTemplate(user.getFirstName(), user.getEmail(), CmsProperties.getValue("NEWUSR_SUBJECT"), emailContentStr, emailContentMap, false, true);
+			userService.addUser(user);
+		} catch (Exception e) {
+			return new Result("Create User failed", e.getMessage());
+		}		
 		return new Result();
 	}
 	
@@ -156,7 +168,7 @@ public class UserAdminController extends CmsController {
 		String newPassword = UUID.randomUUID().toString().substring(0, 6);		
 		
 		try{			
-			InputStream emailContent = this.getClass().getResourceAsStream("/email/newuser.tpl");
+			InputStream emailContent = this.getClass().getResourceAsStream("/email/resetpwd.tpl");
 			String emailContentStr = IOUtils.toString(emailContent, "utf-8");
 			emailContent.close();
 			Map<String, String> emailContentMap = new HashMap<String, String>();
@@ -164,7 +176,7 @@ public class UserAdminController extends CmsController {
 			emailContentMap.put("email", user.getEmail());
 			emailContentMap.put("password", newPassword);
 			emailContentMap.put("cmsurl", CmsProperties.getHost() + Global.getCMSUrl());
-			MailUtils.sendmailWithTemplate(user.getFirstName(), user.getEmail(), CmsProperties.getValue("NEWUSR_SUBJECT"), emailContentStr, emailContentMap, false, true);
+			MailUtils.sendmailWithTemplate(user.getFirstName(), user.getEmail(), CmsProperties.getValue("RESETPWD_SUBJECT"), emailContentStr, emailContentMap, false, true);
 			userService.updatePassword(user.getLogin(), user.getPassword(), PasswordUtils.encode(newPassword));
 		} catch (Exception e) {
 			return new Result("Create User failed", e.getMessage());
