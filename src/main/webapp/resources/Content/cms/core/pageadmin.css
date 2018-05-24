@@ -26,8 +26,8 @@
 
 #btnpublish 			{ background-image:url(images/icon-publish.png); }
 #btnpublish:hover 		{ background-image:url(images/icon-publish-d.png); }
-#btnreqpublish 	  		{ background-image:url(images/iicon-publish.png); }
-#btnreqpublish:hover	{ background-image:url(images/iicon-publish.png); }
+#btnreqpublish 	  		{ background-image:url(images/icon-publish.png); }
+#btnreqpublish:hover	{ background-image:url(images/icon-publish-d.png); }
 
 #btndelete 				{ background-image:url(images/icon-reqDelete.png); }
 #btndelete:hover 		{ background-image:url(images/icon-reqDelete-d.png); }

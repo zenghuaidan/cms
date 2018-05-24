@@ -75,7 +75,7 @@
 <body>
     <div id="ajaxform">
         <h1><%= currentPage.isNew() ? "NewPage" : "ConfigPage"  %></h1>    
-	    <form actoin='PageAdmin/<%= currentPage.isNew() ? "Create" : "Update" %>' id ="pgconfigform" name ="pgconfigform">
+	    <form actoin='PageAdmin/<%= currentPage.isNew() ? "Save" : "Update" %>' id ="pgconfigform" name ="pgconfigform">
 	        <h2 class="darkbg">Configuration</h2>
 	        <div id="pgform">
 	            <input type="hidden" name="pageid" value="<%= currentPage.isNew() ? 0 : currentPage.getId() %>" />

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,13 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
-import com.edeas.model.CmsContent;
 import com.edeas.model.CmsPage;
 import com.edeas.model.Lang;
-import com.edeas.model.LiveContent;
-import com.edeas.model.LivePage;
 import com.edeas.model.Page;
-import com.edeas.model.PageStatus;
 import com.edeas.model.User;
 import com.edeas.utils.DateUtils;
 
@@ -228,9 +223,9 @@ public class PageAdminController extends CmsController {
 		if (page.isNew()) {
 			return new Result("Failed", "Can not find this page=" + pgid + " to mark delete with");
 		}
-		page.increateEdit();
-		page.setStatus(PageStatus.EDIT);
-		page.setApproveLevel(0);
+//		page.increateEdit();
+//		page.setStatus(PageStatus.EDIT);
+//		page.setApproveLevel(0);
 		page.setReqDelete(true);
 		queryService.addOrUpdate(page, true);
 		return new Result();
@@ -243,51 +238,13 @@ public class PageAdminController extends CmsController {
 		if (page.isNew()) {
 			return new Result("Failed", "Can not find this page=" + pgid + " to unmark delete with");
 		}
-		page.increateEdit();
-		page.setStatus(PageStatus.EDIT);
-		page.setApproveLevel(0);
+//		page.increateEdit();
+//		page.setStatus(PageStatus.EDIT);
+//		page.setApproveLevel(0);
 		page.setReqDelete(false);
 		queryService.addOrUpdate(page, true);
 		return new Result();
-	}
-	
-	@ResponseBody
-	@RequestMapping(path = {"PageAdmin/DoPublish"}, method={RequestMethod.POST})
-	public Result doPublish(Model model, long pgid, HttpServletRequest request) {
-		CmsPage cmsPage = (CmsPage)queryService.findPageById(pgid, true);
-		if (!cmsPage.isNew()) {
-			
-			cmsPage.increateRelease();
-			cmsPage.setEdit(0);
-			cmsPage.setStatus(PageStatus.LIVE);
-			cmsPage.setPublishTime(new Date());
-			if(cmsPage.isReqDelete()) {
-				cmsPage.setDelete(true);
-			}
-			
-			LivePage livePageParent = (LivePage)queryService.findPageById(cmsPage.getParentId(), false);
-			LivePage livePage = (LivePage)queryService.findPageById(pgid, false);
-			livePage.copyFrom(cmsPage);
-			livePage.setParent(livePageParent);
-			livePage.setCmsPage(cmsPage);
-			
-			for (CmsContent cmsContent : (Set<CmsContent>)cmsPage.getContents()) {
-				LiveContent liveContent = livePage.getContent(cmsContent.getLang());
-				if (liveContent == null || liveContent.isNew()) {
-					liveContent = new LiveContent();
-					livePage.getContents().add(liveContent);
-				}
-				liveContent.copyFrom(cmsContent);
-				liveContent.setPage(livePage);				
-			}			
-			queryService.addOrUpdate(livePage, false);
-			logger.info("Page=" + pgid + " has been published successfully");
-			return new Result("backsiteadmin");
-		} else {
-			logger.warn("Can not find this page=" + pgid + " for publish");
-			return new Result("Failed", "Can not find this page for publish");
-		}		
-	}
+	}	
 	
 	@RequestMapping(path = {"PageAdmin/Index"}, method={RequestMethod.GET})
 	public String index(Model model, long id, String lang, HttpServletRequest request) {
@@ -457,12 +414,48 @@ public class PageAdminController extends CmsController {
          return v;
      }
 	 
-	 @RequestMapping(path = {"PageAdmin/reqPublish"}, method={RequestMethod.GET})
-     public String reqPublish(Model model, int pageid)
-     {                  
-         model.addAttribute("action", "doReqPublish");
-         model.addAttribute("pageid", pageid);
-         model.addAttribute("title", "Publish Request");
-         return "PageAdmin/WorkflowForm";
-     }
+//		reqPublish,declinePg
+	@RequestMapping(path = { "PageAdmin/reqPublish" }, method = { RequestMethod.GET })
+	public String reqPublish(Model model, int pageid) {
+		model.addAttribute("action", "doReqPublish");
+		model.addAttribute("pageid", pageid);
+		model.addAttribute("title", "Publish Request");
+		model.addAttribute("approvers", userService.findAllApprovers(pageid));
+		return "PageAdmin/WorkflowForm";
+	}
+
+	@RequestMapping(path = { "PageAdmin/doReqPublish" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Result doReqPublish(long pgid, long approverId, String message) {
+		return queryService.doReqPublish(pgid, approverId, message);
+	}
+
+	@RequestMapping(path = { "PageAdmin/declinePg" }, method = { RequestMethod.GET })
+	public String declinePg(Model model, int pageid) {
+		model.addAttribute("action", "doDecline");
+		model.addAttribute("pageid", pageid);
+		model.addAttribute("title", "Decline Request");
+		model.addAttribute("approvers", userService.findAllApprovers(pageid));
+		return "PageAdmin/WorkflowForm";
+	}
+
+	@RequestMapping(path = { "PageAdmin/doDecline" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Result doDecline(long pgid, String message) {
+		return queryService.doDecline(pgid, message);
+	}
+	
+	@RequestMapping(path = { "PageAdmin/publish" }, method = { RequestMethod.GET })
+	public String publish(Model model, int pageid) {
+		model.addAttribute("action", "doPublish");
+		model.addAttribute("pageid", pageid);
+		model.addAttribute("title", "Approve Request");		
+		return "PageAdmin/WorkflowForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = {"PageAdmin/doPublish"}, method={RequestMethod.POST})
+	public Result doPublish(long pgid, String message) {
+		return queryService.doPublish(pgid, message);
+	}
 }

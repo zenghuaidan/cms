@@ -14,6 +14,7 @@ import com.edeas.dao.impl.PageDaoImpl;
 import com.edeas.dao.impl.PageRoleDaoImpl;
 import com.edeas.dao.impl.UserDaoImpl;
 import com.edeas.dao.impl.UserRoleDaoImpl;
+import com.edeas.dao.impl.WorkflowMsgDaoImpl;
 
 public abstract class BasicServiceImpl {
 	protected final Logger logger = Logger.getLogger(BasicServiceImpl.class);
@@ -24,7 +25,8 @@ public abstract class BasicServiceImpl {
 	protected LivePageDaoImpl livePageDao;
 	protected LiveContentDaoImpl liveContentDao;
 	protected CmsPageDaoImpl cmsPageDao;
-	protected CmsContentDaoImpl cmsContentDao;	
+	protected CmsContentDaoImpl cmsContentDao;
+	protected WorkflowMsgDaoImpl workflowMsgDao;
 
 	public UserDaoImpl getUserDao() {
 		return userDao;
@@ -84,6 +86,11 @@ public abstract class BasicServiceImpl {
 	@Inject
 	public void setCategoryDao(CategoryDaoImpl categoryDao) {
 		this.categoryDao = categoryDao;
+	}
+
+	@Inject
+	public void setWorkflowMsgDao(WorkflowMsgDaoImpl workflowMsgDao) {
+		this.workflowMsgDao = workflowMsgDao;
 	}
 	
 }

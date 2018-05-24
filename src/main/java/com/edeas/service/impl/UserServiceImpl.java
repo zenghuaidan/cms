@@ -42,6 +42,17 @@ public class UserServiceImpl extends BasicServiceImpl {
 		return userDao.findAll();
 	}
 	
+	public List<User> findAllApprovers(long pageId) {		
+		List<User> users = findAll();
+		List<User> approvers = new ArrayList<User>();
+		for(User user : users) {
+			if(user.hasPublishPagePermission(pageId)) {
+				approvers.add(user);
+			}
+		}
+		return approvers;
+	}
+	
 	public void updatePassword(String userName, String oldPassword, String newPassword) {
 		userDao.updatePassword(userName, oldPassword, newPassword);
 	}

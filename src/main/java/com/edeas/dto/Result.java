@@ -2,6 +2,7 @@ package com.edeas.dto;
 
 public class Result {
 	private boolean success;
+	private boolean delPage;
 	private String successMsg;
 	private String errorCode;
 	private String errorMsg;
@@ -55,6 +56,14 @@ public class Result {
 
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
+	}
+
+	public boolean isDelPage() {
+		return delPage;
+	}
+
+	public void setDelPage(boolean delPage) {
+		this.delPage = delPage;
 	}
 
 }

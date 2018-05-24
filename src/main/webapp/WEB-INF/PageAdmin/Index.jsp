@@ -52,11 +52,12 @@
 	Content currentContent = (Content)currentPage.getContent(lang);
 	
 	User user = (User)request.getAttribute("user");
+	int firstpgbtn = 0;
 %>
 <%!
-	public String pgbtn(String id, String lbl, boolean isfirst){
+	public String pgbtn(String id, String lbl, int isfirst){
 		StringBuffer sb = new StringBuffer();
-		if(!isfirst) sb.append("<div class='btnsep'></div>");
+		if(isfirst != 0) sb.append("<div class='btnsep'></div>");
 		sb.append("<div id='" + id + "' class='icobtn whitefontover'>" + lbl + "</div>");
 		return sb.toString();
 	}
@@ -72,30 +73,37 @@
     <div id="pgfuncbar" class="darkbg">
         <div class="left darkgradbg btmshadow">
         	<% if(user.hasPageRole(currentPage.getId(), Privilege.pb)) { %>
-        	<c:out escapeXml="false" value='<%=pgbtn("btnpublish", "Publish", true) %>'></c:out>
+        		<c:out escapeXml="false" value='<%=pgbtn("btnpublish", "Publish", firstpgbtn++) %>'></c:out>
         	<% } %>
-        	<c:choose>
-        		<c:when test="${currentPage.release <= 0}">
-                	<c:out escapeXml="false" value='<%=pgbtn("btndelete", "Delete", false) %>'></c:out>
-        		</c:when>
-        		<c:when test="${!currentPage.reqDelete}">
-                	<c:out escapeXml="false" value='<%=pgbtn("btnreqdel", "MarkDelete", false) %>'></c:out>
-        		</c:when>
-        		<c:when test="${currentPage.reqDelete}">
-            		<c:out escapeXml="false" value='<%=pgbtn("btnundoreqdel", "UnmarkDelete", false) %>'></c:out>
-        		</c:when> 
-      		    <c:otherwise>
-        		</c:otherwise>        		       		
-        	</c:choose>        	
+        	<% if(user.hasPageRole(currentPage.getId(), Privilege.pb) && currentPage.canDecline()) { %>
+        		<c:out escapeXml="false" value='<%=pgbtn("btndecline", "Decline", firstpgbtn++) %>'></c:out>
+        	<% } %>
+        	<% if(!user.hasPageRole(currentPage.getId(), Privilege.pb) && user.hasPageRole(currentPage.getId(), Privilege.ed) && currentPage.canPublishRequest()) { %>
+        		<c:out escapeXml="false" value='<%=pgbtn("btnreqpublish", "Publish Request", firstpgbtn++) %>'></c:out>
+        	<% } %>
+        	<% if(user.hasPageRole(currentPage.getId(), Privilege.ed) && !currentPage.hasPublished()) { %>		        		
+           		<c:out escapeXml="false" value='<%=pgbtn("btndelete", "Delete", firstpgbtn++) %>'></c:out>
+        	<% } %>
+        	<% if(user.hasPageRole(currentPage.getId(), Privilege.ed) && currentPage.canMarkDeleted()) { %>		        		
+                	<c:out escapeXml="false" value='<%=pgbtn("btnreqdel", "Mark Delete", firstpgbtn++) %>'></c:out>
+        	<% } %>
+        	<% if(user.hasPageRole(currentPage.getId(), Privilege.ed) && currentPage.isReqDelete()) { %>		        		
+            		<c:out escapeXml="false" value='<%=pgbtn("btnundoreqdel", "Unmark Delete", firstpgbtn++) %>'></c:out>
+        	<% } %>
         </div>
         <div class="right darkgradbg btmshadow">
-       		<c:out escapeXml="false" value='<%=pgbtn(applybtn1, applylbl1, true) %>'></c:out>
-       		<c:out escapeXml="false" value='<%=pgbtn(applybtn2, applylbl2, false) %>'></c:out>
-       		<c:if test="${!currentPage.masterPage}">
-       			<c:out escapeXml="false" value='<%=pgbtn("btnconfig", "Config", false) %>'></c:out>
-       		</c:if>
+           	<% 
+           		if(user.hasPageRole(currentPage.getId(), Privilege.pb)) {
+           		firstpgbtn = 0;
+           	%>
+	       		<c:out escapeXml="false" value='<%=pgbtn(applybtn1, applylbl1, firstpgbtn++) %>'></c:out>
+	       		<c:out escapeXml="false" value='<%=pgbtn(applybtn2, applylbl2, firstpgbtn++) %>'></c:out>
+	       		<c:if test="${!currentPage.masterPage}">
+	       			<c:out escapeXml="false" value='<%=pgbtn("btnconfig", "Config", firstpgbtn++) %>'></c:out>
+	       		</c:if>
+        	<% } %>
             <c:if test="${!currentPage.noPreviewTpl}">
-            	<c:out escapeXml="false" value='<%=pgbtn("btnpreview", "Preview", false) %>'></c:out>
+            	<c:out escapeXml="false" value='<%=pgbtn("btnpreview", "Preview", firstpgbtn++) %>'></c:out>
             </c:if>                    
             </div>
         </div>

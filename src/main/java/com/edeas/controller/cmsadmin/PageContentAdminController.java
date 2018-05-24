@@ -42,6 +42,7 @@ import com.edeas.model.CmsContent;
 import com.edeas.model.Content;
 import com.edeas.model.Lang;
 import com.edeas.model.Page;
+import com.edeas.model.PageStatus;
 import com.edeas.utils.XmlUtils;
 import com.hankcs.hanlp.HanLP;
 
@@ -556,7 +557,8 @@ public class PageContentAdminController extends CmsController {
 			content.init(page, lang);
 			page.getContents().add(content);
 		}
-		
+		page.increateEdit();
+		page.setStatus(PageStatus.EDIT);
 		Document propDocument = content.getPropertyXmlDoc();
 		Element propDataXml = (Element)propDocument.selectSingleNode("/Properties");
 		for(Element field : fieldList) {

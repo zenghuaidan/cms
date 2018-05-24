@@ -163,7 +163,7 @@ public class User implements Serializable {
 //	而且还需要注意的是这个注解要加在属性的get方法上。
 	@Transient
 	public String getName() {
-		return this.firstName + this.lastName;
+		return this.firstName + " " + this.lastName;
 	}
 	
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -221,10 +221,14 @@ public class User implements Serializable {
 	}
 	
 	public boolean hasEnterPagePermission(long pageId) {
-		return isAdmin() || hasPageRole(pageId, Privilege.ed) || hasPageRole(pageId, Privilege.pb);
+		return isAdmin() || hasEditPagePermission(pageId) || hasPublishPagePermission(pageId);
 	}
 	
 	public boolean hasEditPagePermission(long pageId) {
 		return isAdmin() || hasPageRole(pageId, Privilege.ed);
+	}
+	
+	public boolean hasPublishPagePermission(long pageId) {
+		return isAdmin() || hasPageRole(pageId, Privilege.pb);
 	}
 }

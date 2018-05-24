@@ -390,10 +390,10 @@ function doAjaxWFAct(pgid,action) {
 }
 
 function publishPg(pgid) { 
-	//doWorkflow(pgid,"Publish"); 
-	if (confirm("You are going to publish the page live which cannot be undo.  Do you want to continue?")) {
-		doAjaxWFAct(pgid,"DoPublish");
-	}
+	doWorkflow(pgid,"publish"); 
+//	if (confirm("You are going to publish the page live which cannot be undo.  Do you want to continue?")) {
+//		doAjaxWFAct(pgid,"DoPublish");
+//	}
 }
 function reqPublishPg(pgid) { doWorkflow(pgid,"reqPublish"); }
 function declinePg(pgid) { doWorkflow(pgid,"declinePg"); }

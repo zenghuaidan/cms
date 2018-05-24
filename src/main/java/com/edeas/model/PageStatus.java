@@ -1,7 +1,7 @@
 package com.edeas.model;
 
 public enum PageStatus {
-	NEW("new"), EDIT("edit"), LIVE("live");
+	NEW("new"), EDIT("edit"), WAIT("wait"), DECLINED("declined"), LIVE("live");
 	
 	private String name;
 	

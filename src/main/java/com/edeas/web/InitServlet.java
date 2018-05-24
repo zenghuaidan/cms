@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.edeas.common.utils.MailUtils;
+import com.edeas.controller.cmsadmin.CmsProperties;
 import com.edeas.service.impl.QueryServiceImpl;
 
 public class InitServlet extends HttpServlet {
@@ -20,8 +22,19 @@ public class InitServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		wc = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		initMail();
 	}
 	
+	private void initMail() {
+		MailUtils.username = CmsProperties.getValue("mail_username");
+		MailUtils.password = CmsProperties.getValue("mail_password");
+		MailUtils.frommail = CmsProperties.getValue("mail_frommail");
+		MailUtils.protocal = CmsProperties.getValue("mail_protocal");
+		MailUtils.host = CmsProperties.getValue("mail_host");
+		MailUtils.port = CmsProperties.getValue("mail_port");
+		MailUtils.socketFactoryPort = CmsProperties.getValue("mail_socketFactoryPort");
+	}
+
 	public static WebApplicationContext getWc() {
 		return wc;
 	}		

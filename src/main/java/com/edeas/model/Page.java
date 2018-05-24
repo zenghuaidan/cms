@@ -407,6 +407,28 @@ public class Page<T extends Page, E extends Content> {
 		return this.release > 0;
 	}
 	
+//	public boolean canPublish() {
+//		// WAIT: editor has sent the publish request
+//		// EDIT: this page has been edited
+//		return this.status.equals(PageStatus.WAIT) || this.getStatus().equals(PageStatus.EDIT);
+//	}
+	
+	public boolean canDecline() {
+		// WAIT: editor has sent the publish request
+		return this.status.equals(PageStatus.WAIT);
+	}		
+	
+	public boolean canMarkDeleted() {
+		// release > 0: has publish before
+		// !reqDelete: the page did not set as mark delete
+		return hasPublished() && !reqDelete;
+	}
+	
+	public boolean canPublishRequest() {
+		// EDIT: this page has been edited
+		return !this.status.equals(PageStatus.WAIT) && (this.status.equals(PageStatus.NEW) || this.status.equals(PageStatus.EDIT) || this.status.equals(PageStatus.DECLINED) || this.reqDelete);
+	}		
+	
 	@Transient
 	public String getPageUrl() //the page's url without .html, it use for locate the page using user's url typing on the browser 
     {

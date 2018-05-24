@@ -27,13 +27,13 @@
 	    function submitWorkflowForm() {
 	        var u = "<%=Global.getCMSUrl() %>/PageAdmin/${action}"        
 	        $.post(u, $("#workflowform").serialize(), function (data) {
-	            if (data.Success == "True") {
-	                if (data.IsDel === "True") parent.goUrl('<%=Global.getCMSUrl() %>/SiteAdmin');
+	            if (data.success) {
+	                if (data.delPage) parent.goUrl('<%=Global.getCMSUrl() %>/SiteAdmin');
 	                else {
 	                    parent.refreshonclose = true;
 	                    parent.TINY.box.hide();
 	                }
-	            } else alert(data.Message);
+	            } else alert(data.errorMsg);
 	        }, "json");
 	        //$("#workflowform").attr("action",u).attr("method","post").submit();
 	        $("#wfwform").html("<h2 class='darkbg'>&nbsp;</h2><div id='loading'> <b>Processing</b> <br /> Please be patient and do not close this layer <br /> Once compeleted, your page will auto refresh</div>");
@@ -56,7 +56,13 @@
 				        <input type="hidden" name="pgid" value="${ pageid }" />
 				        <textarea name="message" rows="5"></textarea>
 				        <c:if test="${ action == 'doReqPublish' }">
-				            <div>Approver : <select name="approver">  </select></div>
+				            <div>Approver : 
+				            	<select name="approverId">
+				              		<c:forEach items="${approvers}" var="approver" >
+				              			<option value="${ approver.id }">${ approver.name }</option>
+				              		</c:forEach>
+				            	</select>
+				            </div>
 				        </c:if>                
 				    </div>
 				    

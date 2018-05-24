@@ -1,15 +1,19 @@
 package com.edeas.controller.cmsadmin;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -149,10 +153,22 @@ public class UserAdminController extends CmsController {
 			return new Result("User not exists", "Could not find user for reset password");
 		}				
 		
-		String newPassword = UUID.randomUUID().toString().substring(0, 6);
+		String newPassword = UUID.randomUUID().toString().substring(0, 6);		
 		
-		userService.updatePassword(user.getLogin(), user.getPassword(), PasswordUtils.encode(newPassword));
-		MailUtils.sendmail(user.getFirstName(), user.getEmail(), "Reset Passowrd", "Your new password is : " + newPassword, false, true);
+		try{			
+			InputStream emailContent = this.getClass().getResourceAsStream("/email/newuser.tpl");
+			String emailContentStr = IOUtils.toString(emailContent, "utf-8");
+			emailContent.close();
+			Map<String, String> emailContentMap = new HashMap<String, String>();
+			emailContentMap.put("firstname", user.getFirstName());
+			emailContentMap.put("email", user.getEmail());
+			emailContentMap.put("password", newPassword);
+			emailContentMap.put("cmsurl", CmsProperties.getHost() + Global.getCMSUrl());
+			MailUtils.sendmailWithTemplate(user.getFirstName(), user.getEmail(), CmsProperties.getValue("NEWUSR_SUBJECT"), emailContentStr, emailContentMap, false, true);
+			userService.updatePassword(user.getLogin(), user.getPassword(), PasswordUtils.encode(newPassword));
+		} catch (Exception e) {
+			return new Result("Create User failed", e.getMessage());
+		}
 		return new Result();
 	}
 	
