@@ -71,7 +71,7 @@ var id_sa="";
 	                <div class="btnrow">
 	                    <div class="gradbtn roundall" onclick="edituser(${user.id})">Edit</div>
 	                    <div class="gradbtn roundall btnresetpwd" onclick="resetpwd(${user.id})">Reset Pwd</div>	        
-	                    <div class="gradbtn roundall btnresetpwd" onclick="goUrl('<%=Global.getCMSUrl() + "/UserAdmin/Privileges/" %>${user.id}');">Privileges</div>                              
+	                    <div class="gradbtn roundall" onclick="goUrl('<%=Global.getCMSUrl() + "/UserAdmin/Privileges/" %>${user.id}');">Privileges</div>                              
 	                </div>
 	           	</div>             
 	            <img class="icon" src="${Content}/images/spacer.gif" alt="Icon" />
