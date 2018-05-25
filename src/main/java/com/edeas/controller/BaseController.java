@@ -10,6 +10,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 
 import com.edeas.service.impl.CategoryServiceImpl;
+import com.edeas.service.impl.DonationServiceImpl;
 import com.edeas.service.impl.QueryServiceImpl;
 import com.edeas.service.impl.UserRoleServiceImpl;
 import com.edeas.service.impl.UserServiceImpl;
@@ -21,6 +22,8 @@ public abstract class BaseController {
 	protected CategoryServiceImpl categoryService;
 	
 	protected UserRoleServiceImpl userRoleService;
+	
+	protected DonationServiceImpl donationService;
 	
 	protected QueryServiceImpl queryService;
 	
@@ -84,6 +87,11 @@ public abstract class BaseController {
 	@Inject
 	public void setCategoryService(CategoryServiceImpl categoryService) {
 		this.categoryService = categoryService;
+	}
+
+	@Inject
+	public void setDonationService(DonationServiceImpl donationService) {
+		this.donationService = donationService;
 	}
 	
 }

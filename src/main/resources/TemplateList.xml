@@ -3,6 +3,7 @@
   <Template id="Masterpage" name="Masterpage" isunique="yes" fixpid="-2" />
   <Template id="Homepage" name="Homepage" isunique="yes" fixpid="-1" />  
   <Template id="General" name="General" />
+  <Template id="Donation" name="Donation" isunique="yes" />
   <Template id="Sector" name="Sector" top="yes"/>
   <Template id="Link" name="Link" top="yes"  />
   <Template id="FixWidthMasonryGallery" name="Fix Width Masonry Gallery (Carousel popup effect)" />

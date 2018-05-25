@@ -1,19 +1,19 @@
 package com.edeas.controller;
 
-import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.common.utils.MailUtils;
-import com.edeas.controller.cmsadmin.CmsProperties;
 import com.edeas.dto.Result;
 import com.edeas.model.Content;
+import com.edeas.model.Donation;
 import com.edeas.model.Lang;
 import com.edeas.model.Page;
 import com.edeas.utils.XmlUtils;
@@ -109,5 +109,60 @@ public class CommonController extends BaseController {
 		MailUtils.sendmail(name, email,  "Simplistic, single input view form", emailContentStr, false, true);	
 		
 		return new Result();		
+	}
+	
+	@RequestMapping(path = {"donation"}, method={RequestMethod.POST})
+	@ResponseBody
+	public Result donation(String salutation, String firstName, String lastName, String address, String country, String telephone, String email, String notification, String amount, HttpServletRequest request) {
+		
+		Set<String> errorFields = new HashSet<String>();
+		Enumeration<String> parameterNames = request.getParameterNames();		
+		while(parameterNames.hasMoreElements()) {
+			String parameterName = (String)parameterNames.nextElement();
+			if(StringUtils.isBlank(request.getParameter(parameterName)))
+				errorFields.add(parameterName);				
+		}
+		try {
+			Long.parseLong(amount);
+		} catch (Exception e) {
+			errorFields.add("amount");
+		}
+		errorFields.remove("notification");
+		if(errorFields.size() > 0)
+			return new Result("Error Input", String.join(",", errorFields));
+		
+		Donation donation = new Donation();
+		donation.setSalutation(salutation);
+		donation.setFirstName(firstName);
+		donation.setLastName(lastName);
+		donation.setAddress(address);
+		donation.setCountry(country);
+		donation.setTelephone(telephone);
+		donation.setEmail(email);
+		donation.setNotification(notification);
+		donation.setAmount(amount);
+		
+		Donation donationDb = donationService.addDonation(donation);
+		Result success = new Result();
+		success.setSuccessMsg(donationDb.getId() + "");
+		return success;		
+	}
+	
+	@RequestMapping(path = {"donationsuccess"}, method={RequestMethod.GET})
+	@ResponseBody
+	public Result donationSuccess(HttpServletRequest request) {
+		long id = Long.parseLong(request.getParameter("refid"));
+		Donation donation = donationService.findById(id);
+		donation.setSuccess(true);
+		donationService.updateDonation(donation);
+		return new Result();
+	}
+	
+	@RequestMapping(path = {"donationfail"}, method={RequestMethod.GET})
+	@ResponseBody
+	public Result donationFail(HttpServletRequest request) {
+		long id = Long.parseLong(request.getParameter("refid"));
+		donationService.deleteById(id);;
+		return new Result();
 	}
 }

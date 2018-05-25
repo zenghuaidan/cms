@@ -8,6 +8,7 @@ import com.edeas.dao.impl.CategoryDaoImpl;
 import com.edeas.dao.impl.CmsContentDaoImpl;
 import com.edeas.dao.impl.CmsPageDaoImpl;
 import com.edeas.dao.impl.ContentDaoImpl;
+import com.edeas.dao.impl.DonationDaoImpl;
 import com.edeas.dao.impl.LiveContentDaoImpl;
 import com.edeas.dao.impl.LivePageDaoImpl;
 import com.edeas.dao.impl.PageDaoImpl;
@@ -27,6 +28,7 @@ public abstract class BasicServiceImpl {
 	protected CmsPageDaoImpl cmsPageDao;
 	protected CmsContentDaoImpl cmsContentDao;
 	protected WorkflowMsgDaoImpl workflowMsgDao;
+	protected DonationDaoImpl donationDao;
 
 	public UserDaoImpl getUserDao() {
 		return userDao;
@@ -91,6 +93,11 @@ public abstract class BasicServiceImpl {
 	@Inject
 	public void setWorkflowMsgDao(WorkflowMsgDaoImpl workflowMsgDao) {
 		this.workflowMsgDao = workflowMsgDao;
+	}
+
+	@Inject
+	public void setDonationDao(DonationDaoImpl donationDao) {
+		this.donationDao = donationDao;
 	}
 	
 }
