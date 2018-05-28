@@ -8,6 +8,10 @@
   </Properties>
   <WidgetBox />
   <Widgets>
-    
+	<Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel=".general" htagid="wholder">
+      <AcceptWidget wid="RichEditor" ename="RichContent" label="Rich Text" />
+      <AcceptWidget wid="RichEditor" ename="GreyBox" label="Grey Box" ContentAttr="pushcss:editor_grey" />
+      <AcceptWidget wid="RichEditor" ename="ColorBox" label="Color Box" ContentAttr="pushcss:editor_color" />     
+    </Widget>    
   </Widgets>
 </Template>

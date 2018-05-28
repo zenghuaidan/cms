@@ -16,6 +16,7 @@
 <%
 	boolean iscms = (Boolean)request.getAttribute("iscms");
 	String lang = (String)request.getAttribute("lang");
+	Page currentPage = (Page)request.getAttribute("currentPage");
 	Map<String, Map<String, List<String>>> formMap = new HashMap<String, Map<String, List<String>>>() {		
 		{
 			put("en", new HashMap<String, List<String>>(){ 
@@ -35,7 +36,9 @@
 					
 					
 					put("CountcharactersintextareaNote", Arrays.asList("<span> Max 500 characters. No of </span><div id='charNum'>0</div><span> character(s).</span>"));
-					put("ErrorMessage", Arrays.asList(" is Invalid."));					
+					put("ErrorMessage", Arrays.asList(" is Invalid."));
+					put("PaypalSuccess", Arrays.asList("Online Donation – Successful"));
+					put("PaypalFail", Arrays.asList("Online Donation – Unsuccessful"));
 				} 
 			});
 			put("tc", new HashMap<String, List<String>>(){ 
@@ -56,6 +59,8 @@
 					
 					put("CountcharactersintextareaNote", Arrays.asList("<span> 最多輸入500個字符. 已輸入字符數為 </span><div id='charNum'>0</div>"));
 					put("ErrorMessage", Arrays.asList("信息不正確."));
+					put("PaypalSuccess", Arrays.asList("網上捐款 - 付款成功"));
+					put("PaypalFail", Arrays.asList("網上捐款 - 未能付款"));
 				} 
 			});
 			put("sc", new HashMap<String, List<String>>(){ 
@@ -76,99 +81,112 @@
 					
 					put("CountcharactersintextareaNote", Arrays.asList("<span> 最多输入500个字符. 已输入字符数为 </span><div id='charNum'>0</div>"));
 					put("ErrorMessage", Arrays.asList("信息不正确."));
+					put("PaypalSuccess", Arrays.asList("网上捐款 – 付款成功"));
+					put("PaypalFail", Arrays.asList("网上捐款 – 未能付款"));
 				} 
 			});
 		}
 	};
 %>
-
-<div class="full-wrapper clearfix"> 
+<style>
+	.paypalresult {
+		font-size: 25px;
+		text-align: center;
+		display: none;
+	}
+</style>
+<div class="general full-wrapper clearfix"> 
     <div class="inner-wrapper">
-        <div class="main-content-pos">            
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("SalutationLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                    <div class="radio-blk">                        
-                        <%for (int i = 0; i < formMap.get(lang).get("Salutation").size(); i++) {%>                   						
-                        	<input type="radio" <%= i==0 ? "checked" : "" %> name="salutation" value="<%=formMap.get(lang).get("Salutation").get(i) %>"> <%=formMap.get(lang).get("Salutation").get(i) %>
+        <div class="main-content-pos">            		 
+        	<jsp:include page="/WEB-INF/Shared/WidgetHolder.jsp" />   	
+    		<div id="success" class="paypalresult"><%=formMap.get(lang).get("PaypalSuccess").get(0) %></div>
+    		<div id="fail" class="paypalresult"><%=formMap.get(lang).get("PaypalFail").get(0) %></div>
+    		<div id="paypalInfo">
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("SalutationLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <div class="radio-blk">                        
+	                        <%for (int i = 0; i < formMap.get(lang).get("Salutation").size(); i++) {%>                   						
+	                        	<input type="radio" <%= i==0 ? "checked" : "" %> name="salutation" value="<%=formMap.get(lang).get("Salutation").get(i) %>"> <%=formMap.get(lang).get("Salutation").get(i) %>
+							<%}%>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("FirstNameLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <input type="text" class="form" id="firstName">
+	                    <div class="error font-s errorfirstName">'<%=formMap.get(lang).get("FirstNameLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("LastNameLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <input type="text" class="form" id="lastName">
+	                    <div class="error font-s errorlastName">'<%=formMap.get(lang).get("LastNameLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>
+	
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("CorrespondenceAddressLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <textarea class="address" id="field"></textarea>
+	                    <div class="font-s"><%=formMap.get(lang).get("CountcharactersintextareaNote").get(0) %></div>
+	                    <div class="error font-s erroraddress">'<%=formMap.get(lang).get("CorrespondenceAddressLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>
+	
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("CountryLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                   <select id="country">         				
+	                        <%for (int i = 0; i < formMap.get(lang).get("Country").size(); i++) {
+	                        	String country = formMap.get(lang).get("Country").get(i);
+	                        	String selected = "Hong Kong (SAR)".equals(country) || "香港".equals(country) ? "selected" : "";
+	                        %>
+	                        	<option <%=selected %> value="<%=country %>"><%=country %></option>	                    						
+							<%}%>
+	                    </select>
+	                    <div class="error font-s errorcountry">'<%=formMap.get(lang).get("CountryLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>
+	            
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("TelephoneLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <input type="text" class="form" id="telephone">
+	                    <div class="error font-s errortelephone">'<%=formMap.get(lang).get("TelephoneLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>
+	            
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("EmailLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <input type="text" class="form" id="email">
+	                    <div class="error font-s erroremail">'<%=formMap.get(lang).get("EmailLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>
+	
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"> <%=formMap.get(lang).get("NotificationLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">                                        
+						<%for (int i = 0; i < formMap.get(lang).get("Notification").size(); i++) {%>
+		                    <div class="checkbox-blk">
+		                        <input class="checkbox" name="notification" type="checkbox" value="<%=formMap.get(lang).get("Notification").get(i) %>"><%=formMap.get(lang).get("Notification").get(i) %>
+		                    </div>							
 						<%}%>
-                    </div>
-                </div>
-            </div>
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("FirstNameLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                    <input type="text" class="form" id="firstName">
-                    <div class="error font-s errorfirstName">'<%=formMap.get(lang).get("FirstNameLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-                </div>
-            </div>
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("LastNameLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                    <input type="text" class="form" id="lastName">
-                    <div class="error font-s errorlastName">'<%=formMap.get(lang).get("LastNameLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-                </div>
-            </div>
-
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("CorrespondenceAddressLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                    <textarea class="address" id="field"></textarea>
-                    <div class="font-s"><%=formMap.get(lang).get("CountcharactersintextareaNote").get(0) %></div>
-                    <div class="error font-s erroraddress">'<%=formMap.get(lang).get("CorrespondenceAddressLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-                </div>
-            </div>
-
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("CountryLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                   <select id="country">         				
-                        <%for (int i = 0; i < formMap.get(lang).get("Country").size(); i++) {
-                        	String country = formMap.get(lang).get("Country").get(i);
-                        	String selected = "Hong Kong (SAR)".equals(country) || "香港".equals(country) ? "selected" : "";
-                        %>
-                        	<option <%=selected %> value="<%=country %>"><%=country %></option>	                    						
-						<%}%>
-                    </select>
-                    <div class="error font-s errorcountry">'<%=formMap.get(lang).get("CountryLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-                </div>
-            </div>
-            
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("TelephoneLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                    <input type="text" class="form" id="telephone">
-                    <div class="error font-s errortelephone">'<%=formMap.get(lang).get("TelephoneLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-                </div>
-            </div>
-            
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("EmailLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                    <input type="text" class="form" id="email">
-                    <div class="error font-s erroremail">'<%=formMap.get(lang).get("EmailLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-                </div>
-            </div>
-
-            <div class="row-height">
-                <div class="col-sm-height col-left"> <%=formMap.get(lang).get("NotificationLabel").get(0) %></div>
-                <div class="col-sm-height col-right">                                        
-					<%for (int i = 0; i < formMap.get(lang).get("Notification").size(); i++) {%>
-	                    <div class="checkbox-blk">
-	                        <input class="checkbox" name="notification" type="checkbox" value="<%=formMap.get(lang).get("Notification").get(i) %>"><%=formMap.get(lang).get("Notification").get(i) %>
-	                    </div>							
-					<%}%>
-                </div>
-            </div>
-            <div class="row-height">
-                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("MoneyLabel").get(0) %></div>
-                <div class="col-sm-height col-right">
-                    <input type="text" class="form" id="amount">
-                    <div class="error font-s erroramount">'<%=formMap.get(lang).get("MoneyLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-                </div>
-            </div>  
-			<br/>
-        	<input style="float:right" type="image" src="${ Content }/images/paypal.jpg" id="submit" alt="PayPal – The safer, easier way to pay online!"/>
+	                </div>
+	            </div>
+	            <div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("MoneyLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <input type="text" class="form" id="amount">
+	                    <div class="error font-s erroramount">'<%=formMap.get(lang).get("MoneyLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>  
+				<br/>
+	        	<input style="float:right" type="image" src="${ Content }/images/paypal.jpg" id="submit" alt="PayPal – The safer, easier way to pay online!"/>
+        	</div>
         </div>
         <!-- https://www.paypal.com" -->
 		<form id="paypalForm" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
@@ -181,8 +199,8 @@
 			<input type="hidden" name="no_shipping" value="1"/>
 			<input type="hidden" name="rm" value="1"/>
 			<input type="hidden" name="cbt" value="Click here to complete the payment process."/>
-			<input type="hidden" id="ppok" name="return" value="<%=CmsProperties.getHost() %>/common/donationsuccess"/>
-			<input type="hidden" id="ppfail" name="cancel_return" value="<%=CmsProperties.getHost() %>/common/donationfail"/>
+			<input type="hidden" id="ppok" name="return" url="<%=CmsProperties.getHost() %>/common/donationsuccess?refid="/>
+			<input type="hidden" id="ppfail" name="cancel_return" url="<%=CmsProperties.getHost() %>/common/donationfail?refid="/>
 			<input type="hidden" name="currency_code" value="HKD"/>
 			<input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynow_LG.gif:NonHosted"/>
 			<input type="hidden" id="ppid" name="item_number" value="" />
@@ -192,6 +210,16 @@
 </div>
 
 <script>
+	function fail() {
+		$("#paypalInfo").hide();
+		$("#fail").show();
+	}
+	
+	function success() {
+		$("#paypalInfo").hide();
+		$("#success").show();
+	}
+
 	$(function() {
 	    $("#field").keyup(function(){
 	        el = $(this);
@@ -219,13 +247,16 @@
 	    			"telephone": $.trim($("#telephone").val()),
 	    			"email": $.trim($("#email").val()),
 	    			"notification": notifications.join(","),
-	    			"amount": $.trim($("#amount").val())
+	    			"amount": $.trim($("#amount").val()),
+	    			"pageId": <%=currentPage.getId() %>
     			},	    		
 				function(data) {
 			        if (data.success) {	
 			        	
 			        	$("#ppamt").val($.trim($("#amount").val()));
 			        	$("#ppid").val(data.successMsg);
+			        	$("#ppok").val($("#ppok").attr("url") + data.successMsg);
+			        	$("#ppfail").val($("#ppfail").attr("url") + data.successMsg);
 			        	$("#paypalForm").submit();	
 			        } else {
 			        	var errorFields = data.errorMsg.split(",");

@@ -1,5 +1,6 @@
 package com.edeas.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.common.utils.MailUtils;
 import com.edeas.dto.Result;
+import com.edeas.model.CmsPage;
 import com.edeas.model.Content;
 import com.edeas.model.Donation;
 import com.edeas.model.Lang;
@@ -113,7 +116,7 @@ public class CommonController extends BaseController {
 	
 	@RequestMapping(path = {"donation"}, method={RequestMethod.POST})
 	@ResponseBody
-	public Result donation(String salutation, String firstName, String lastName, String address, String country, String telephone, String email, String notification, String amount, HttpServletRequest request) {
+	public Result donation(String salutation, String firstName, String lastName, String address, String country, String telephone, String email, String notification, String amount, Long pageId, HttpServletRequest request) {
 		
 		Set<String> errorFields = new HashSet<String>();
 		Enumeration<String> parameterNames = request.getParameterNames();		
@@ -141,6 +144,7 @@ public class CommonController extends BaseController {
 		donation.setEmail(email);
 		donation.setNotification(notification);
 		donation.setAmount(amount);
+		donation.setCmsPage((CmsPage)queryService.findPageById(pageId, true));
 		
 		Donation donationDb = donationService.addDonation(donation);
 		Result success = new Result();
@@ -149,20 +153,18 @@ public class CommonController extends BaseController {
 	}
 	
 	@RequestMapping(path = {"donationsuccess"}, method={RequestMethod.GET})
-	@ResponseBody
-	public Result donationSuccess(HttpServletRequest request) {
+	public String donationSuccess(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		long id = Long.parseLong(request.getParameter("refid"));
 		Donation donation = donationService.findById(id);
 		donation.setSuccess(true);
 		donationService.updateDonation(donation);
-		return new Result();
+		return "Common/donationsuccess";
 	}
 	
 	@RequestMapping(path = {"donationfail"}, method={RequestMethod.GET})
-	@ResponseBody
-	public Result donationFail(HttpServletRequest request) {
+	public String donationFail(HttpServletRequest request) {
 		long id = Long.parseLong(request.getParameter("refid"));
 		donationService.deleteById(id);;
-		return new Result();
+		return "Common/donationfail";
 	}
 }

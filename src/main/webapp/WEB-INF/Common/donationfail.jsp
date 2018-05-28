@@ -1,0 +1,1 @@
+<script type='text/javascript'>opener.fail();window.close();</script>

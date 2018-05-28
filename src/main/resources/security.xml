@@ -20,6 +20,7 @@
 		-->		
 		<intercept-url pattern="/cmsadmin/UserAdmin/**" access="hasRole('Admin')"/>
 		<intercept-url pattern="/cmsadmin/CategoryAdmin/**" access="hasRole('Admin')"/>
+		<intercept-url pattern="/cmsadmin/DonationAdmin/**" access="hasRole('Admin')"/>
 		<intercept-url pattern="/cmsadmin/**" access="isAuthenticated()"/>
 		
 		<form-login login-page="/cmsadmin/Login"			

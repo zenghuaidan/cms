@@ -5,6 +5,7 @@
     <mapping path="/cmsadmin/PageAdmin/FixPIDArticles" decorator="/WEB-INF/Shared/CmsLayout.jsp" />
     <mapping path="/cmsadmin/UserAdmin/**" decorator="/WEB-INF/Shared/CmsLayout.jsp" />
     <mapping path="/cmsadmin/CategoryAdmin/**" decorator="/WEB-INF/Shared/CmsLayout.jsp" />
+    <mapping path="/cmsadmin/DonationAdmin/**" decorator="/WEB-INF/Shared/CmsLayout.jsp" />
     
     <mapping>
       	<path>/cmsadmin/en/viewPage/*</path>

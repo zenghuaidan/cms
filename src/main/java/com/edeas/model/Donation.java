@@ -6,8 +6,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,6 +34,7 @@ public class Donation implements Serializable {
 	private String notification; 
 	private String amount;
 	private boolean success;
+	private CmsPage cmsPage;
 	private Date createTime = new Date();
 	private Date updateTime;
 	
@@ -124,6 +128,16 @@ public class Donation implements Serializable {
 
 	public void setSuccess(boolean success) {
 		this.success = success;
+	}
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="pageid")
+	public CmsPage getCmsPage() {
+		return cmsPage;
+	}
+
+	public void setCmsPage(CmsPage cmsPage) {
+		this.cmsPage = cmsPage;
 	}
 	
 	@Temporal(TemporalType.TIMESTAMP)

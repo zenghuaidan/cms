@@ -11,8 +11,8 @@
   <Widgets>
     <Widget wid="WidgetHolder" ename="WidgetHolder" width="" height="" jsel=".general" htagid="wholder">
       <AcceptWidget wid="RichEditor" ename="RichContent" label="Rich Text" />
-      <AcceptWidget wid="RichEditor" ename="GreyBox" label="Grey Box" ContentAttr="pushcss:editor_grey,tool:mini" />
-      <AcceptWidget wid="RichEditor" ename="ColorBox" label="Color Box" ContentAttr="pushcss:editor_color,tool:mini" />
+      <AcceptWidget wid="RichEditor" ename="GreyBox" label="Grey Box" ContentAttr="pushcss:editor_grey" />
+      <AcceptWidget wid="RichEditor" ename="ColorBox" label="Color Box" ContentAttr="pushcss:editor_color" />
       <AcceptWidget wid="ScaleImgBlock" ename="ScaleImage" label="Scale Image" ScaleOpts="img-scale^All device 100% wide,img-scale70^Desktop 70% mobile 100% wide,img-scale60^Desktop 60% mobile 100% wide,img-scale50^Desktop 50% mobile 100% wide,img-scale40^Desktop 40% mobile 100% wide" />      
       <AcceptWidget wid="TextBlock" ename="SpaceBlk" label="Space Block" TextLabel="Height" TextDefault="30px" />
       <AcceptWidget wid="HRBlock" ename="HRBlk" label="HR Block" />
