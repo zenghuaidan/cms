@@ -17,7 +17,7 @@ public class CategoryAdminController extends CmsController {
 	
 	@RequestMapping(path = {"CategoryAdmin", "CategoryAdmin/Index"}, method={RequestMethod.GET})
 	public String Index(Model model) {
-		List<Category> categories = categoryService.findAll();
+		List<Category> categories = categoryService.findAllWithOrderAsc();
 		model.addAttribute("categories", categories);
 		model.addAttribute("navigation", "CategoryAdmin");
 		return "CategoryAdmin/Index";

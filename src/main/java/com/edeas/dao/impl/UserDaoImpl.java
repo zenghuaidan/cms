@@ -16,17 +16,18 @@ public class UserDaoImpl extends BasicDao<User> {
 //	}
 	
 	public User findByUserName(String userName) {
-		List<User> users = listByHQL("from User where login=?", new String[]{userName});
+		List<User> users = listByHQL("from " + getClz().getName() + " where login=?", new String[]{userName});
 //		List<User> users = listBySQL("select * from CmsUser where login=? and password=?", new String[]{userName, password}, User.class, true);
 		return users.size() > 0 ? users.get(0) : null;
 	}
 	
 	public List<User> findByUserNameOrEmail(String userName, String email) {
-		List<User> users = listByHQL("from User where login=? or email=?", new String[]{userName, email});
+		List<User> users = listByHQL("from " + getClz().getName() + " where login=? or email=?", new String[]{userName, email});
 		return users;
 	}
 
 	public void updatePassword(String userName, String oldPassword, String newPassword) {
 		updateBySQL("update " + getTableName() + " set password=? where login=? and password=?", new String[]{newPassword, userName, oldPassword});
 	}
+	
 }

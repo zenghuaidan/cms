@@ -101,12 +101,12 @@
 %>
 <%	
 	Page homePage = queryService.getHomePage(true);
-	String hpstatus = (homePage == null) ? "new" : homePage.getStatus().getName();
-	Long homePageId = homePage == null ? -1 : homePage.getId();
+	String hpstatus = (homePage.isNew()) ? "new" : homePage.getStatus().getName();
+	Long homePageId = homePage.isNew() ? -1 : homePage.getId();
 	
 	Page masterPage = queryService.getMasterPage(true);
-	String masterpgstatus = (masterPage == null) ? "new" : masterPage.getStatus().getName();
-	Long masterPageId = masterPage == null ? -2 : masterPage.getId();
+	String masterpgstatus = (masterPage.isNew()) ? "new" : masterPage.getStatus().getName();
+	Long masterPageId = masterPage.isNew() ? -2 : masterPage.getId();
 	
 	List<? extends Page> topPages = queryService.getAllTopPage(true, true);
 	

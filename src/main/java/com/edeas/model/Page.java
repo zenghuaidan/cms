@@ -56,7 +56,8 @@ public class Page<T extends Page, E extends Content> {
 	private Date updateTime;
 	private Set<E> contents = new HashSet<E>();
 	private Set<T> children = new HashSet<T>();
-
+	private String siteId;
+	
 	@Transient
 	public Long getId() {
 		if(this instanceof CmsPage) return ((CmsPage)this).getId();
@@ -372,6 +373,14 @@ public class Page<T extends Page, E extends Content> {
 		this.release++;
 	}
 	
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
+	}
+
 	@Transient
 	public String getUrlPath() {
 		StringBuffer sb = new StringBuffer("/");
@@ -498,6 +507,7 @@ public class Page<T extends Page, E extends Content> {
 	}
 	
 	public void copyFrom(Page o) {
+		this.siteId = o.getSiteId();
 		this.parentId = o.getParentId();
 		this.rootId = o.getRootId();
 		this.pageLevel = o.getPageLevel();

@@ -102,6 +102,13 @@
     		<div id="success" class="paypalresult"><%=formMap.get(lang).get("PaypalSuccess").get(0) %></div>
     		<div id="fail" class="paypalresult"><%=formMap.get(lang).get("PaypalFail").get(0) %></div>
     		<div id="paypalInfo">
+    			<div class="row-height">
+	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("MoneyLabel").get(0) %></div>
+	                <div class="col-sm-height col-right">
+	                    <input type="text" class="form" id="amount">
+	                    <div class="error font-s erroramount">'<%=formMap.get(lang).get("MoneyLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
+	                </div>
+	            </div>
 	            <div class="row-height">
 	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("SalutationLabel").get(0) %></div>
 	                <div class="col-sm-height col-right">
@@ -136,7 +143,7 @@
 	                </div>
 	            </div>
 	
-	            <div class="row-height">
+	            <div class="row-height" style="display:none;">
 	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("CountryLabel").get(0) %></div>
 	                <div class="col-sm-height col-right">
 	                   <select id="country">         				
@@ -151,7 +158,7 @@
 	                </div>
 	            </div>
 	            
-	            <div class="row-height">
+	            <div class="row-height" style="display:none;">
 	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("TelephoneLabel").get(0) %></div>
 	                <div class="col-sm-height col-right">
 	                    <input type="text" class="form" id="telephone">
@@ -159,7 +166,7 @@
 	                </div>
 	            </div>
 	            
-	            <div class="row-height">
+	            <div class="row-height" style="display:none;">
 	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("EmailLabel").get(0) %></div>
 	                <div class="col-sm-height col-right">
 	                    <input type="text" class="form" id="email">
@@ -167,7 +174,7 @@
 	                </div>
 	            </div>
 	
-	            <div class="row-height">
+	            <div class="row-height" style="display:none;">
 	                <div class="col-sm-height col-left"> <%=formMap.get(lang).get("NotificationLabel").get(0) %></div>
 	                <div class="col-sm-height col-right">                                        
 						<%for (int i = 0; i < formMap.get(lang).get("Notification").size(); i++) {%>
@@ -176,14 +183,7 @@
 		                    </div>							
 						<%}%>
 	                </div>
-	            </div>
-	            <div class="row-height">
-	                <div class="col-sm-height col-left"><span class="error-star">*</span> <%=formMap.get(lang).get("MoneyLabel").get(0) %></div>
-	                <div class="col-sm-height col-right">
-	                    <input type="text" class="form" id="amount">
-	                    <div class="error font-s erroramount">'<%=formMap.get(lang).get("MoneyLabel").get(0) %>'<%=formMap.get(lang).get("ErrorMessage").get(0) %></div>
-	                </div>
-	            </div>  
+	            </div>	             
 				<br/>
 	        	<input style="float:right" type="image" src="${ Content }/images/paypal.jpg" id="submit" alt="PayPal – The safer, easier way to pay online!"/>
         	</div>
@@ -213,11 +213,13 @@
 	function fail() {
 		$("#paypalInfo").hide();
 		$("#fail").show();
+		$(".cd-top").click();
 	}
 	
 	function success() {
 		$("#paypalInfo").hide();
 		$("#success").show();
+		$(".cd-top").click();
 	}
 
 	$(function() {
@@ -243,10 +245,10 @@
 	    			"firstName": $.trim($("#firstName").val()),	    		
 	    			"lastName": $.trim($("#lastName").val()),
 	    			"address": $.trim($("textarea.address").val()),
-	    			"country": $.trim($("#country").val()),
-	    			"telephone": $.trim($("#telephone").val()),
-	    			"email": $.trim($("#email").val()),
-	    			"notification": notifications.join(","),
+	    			"country": "HongKong", //$.trim($("#country").val()),
+	    			"telephone": "123456", //$.trim($("#telephone").val()),
+	    			"email": "test@test.com", //$.trim($("#email").val()),
+	    			"notification": "", //notifications.join(","),
 	    			"amount": $.trim($("#amount").val()),
 	    			"pageId": <%=currentPage.getId() %>
     			},	    		

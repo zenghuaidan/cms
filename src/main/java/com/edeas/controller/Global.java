@@ -17,7 +17,7 @@ public class Global {
 	public static final String IMAGE_RESIZE = "resize";
 	public static final String IMAGE_CMGR = "cmgr";
 	public static final String IMAGE_THUMB = "thumb";
-	public static final String WEBPAGEEXT = ".html";
+	public static final String WEBPAGEEXT = ".html";	
 	
 	public static final Map<Long, String> fixUrlPrefix = new HashMap<Long, String>() {		
 		{

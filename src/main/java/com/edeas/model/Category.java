@@ -23,6 +23,7 @@ public class Category {
 	private String nameSC;
 	private String kind;
 	private int corder;
+	private String siteId;
 	private Date createTime = new Date();
 	private Date updateTime;
 
@@ -75,6 +76,14 @@ public class Category {
 
 	public void setCorder(int corder) {
 		this.corder = corder;
+	}
+
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

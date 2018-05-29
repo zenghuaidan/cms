@@ -12,12 +12,12 @@ import com.hankcs.hanlp.HanLP;
 @Transactional
 public class CategoryServiceImpl extends BasicServiceImpl {
 	
-	public List<Category> findAll() {
+	public List<Category> findAllWithOrderAsc() {
 		return categoryDao.findAllWithOrderAsc();
 	}		
 	
 	public Category addCategory(Category category) {
-		List<Category> categories = findAll();
+		List<Category> categories = findAllWithOrderAsc();
 		category.setCorder(categories.size() == 0 ? 1 : categories.get(categories.size() - 1).getCorder() + 1);
 		return categoryDao.add(category);
 	}
@@ -41,7 +41,7 @@ public class CategoryServiceImpl extends BasicServiceImpl {
 	}
 
 	public void chgOrder(Long id, Long beforeId) {
-		List<Category> categories = findAll();
+		List<Category> categories = findAllWithOrderAsc();
 		Category thiscat = findById(id);
 		
         if (beforeId > 0)

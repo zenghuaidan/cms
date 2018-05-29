@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.edeas.model.Category;
 import com.edeas.model.Donation;
 
 @Service(value="donationService")

@@ -10,6 +10,8 @@ import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.edeas.web.SiteIdHolder;
+
 @SuppressWarnings("serial")
 public class CmsProperties {
 
@@ -84,7 +86,23 @@ public class CmsProperties {
 	}
 	
 	public static String getCMSSiteName() {
-		return getValue("CmsSiteName");		
+		String[] sites = getCMSSite();
+		Map<String, String> siteMap = new HashMap<String, String>();
+		for(String site : sites) {
+			siteMap.put(site.split(":")[0], site.split(":")[1]);
+		}
+		return siteMap.get(SiteIdHolder.getSiteId());		
+	}
+
+	public static String[] getCMSSite() {
+		String value = getValue("CmsSiteName");
+		String[] sites = value.split(",");
+		return sites;
+	}
+	
+	public static String getDefaultSiteId() {
+		String[] sites = getCMSSite();
+		return sites[0].split(":")[0];		
 	}
 	
 	public static String getDefaultLanguage() {

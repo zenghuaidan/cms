@@ -22,7 +22,7 @@ public class InitServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		wc = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
-		initMail();
+		initMail();		
 	}
 	
 	private void initMail() {

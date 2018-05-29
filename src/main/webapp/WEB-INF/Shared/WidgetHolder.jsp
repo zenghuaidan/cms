@@ -500,7 +500,7 @@
               		<x:forEach select="$widget/Widget[@name='AccordionOrToggle']" var="item" varStatus="status">
 		                <div class="question">
 		                    <div class="title">
-		                        <i class="fa fa-plus acc-icon-plus"></i><i class="fa fa-minus acc-icon-minus"></i><x:out select="$item/Field[@name='Title']" escapeXml="false"/>
+		                        <i class="fa fa-minus acc-icon-plus"></i><i class="fa fa-plus acc-icon-minus"></i><x:out select="$item/Field[@name='Title']" escapeXml="false"/>
 		                    </div>
 		                    <div class="answer">
 		                        <x:out select="$item/Field[@name='Content']" escapeXml="false"/>
