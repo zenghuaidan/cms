@@ -93,7 +93,7 @@
         </div>
         <div class="right darkgradbg btmshadow">
            	<% 
-           		if(user.hasPageRole(currentPage.getId(), Privilege.pb)) {
+           		if(user.hasPageRole(currentPage.getId(), Privilege.ed)) {
            		firstpgbtn = 0;
            	%>
 	       		<c:out escapeXml="false" value='<%=pgbtn(applybtn1, applylbl1, firstpgbtn++) %>'></c:out>

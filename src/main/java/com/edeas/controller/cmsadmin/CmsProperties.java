@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.aspectj.weaver.reflect.ReflectionBasedResolvedMemberImpl;
 
 import com.edeas.web.SiteIdHolder;
 
@@ -93,6 +94,15 @@ public class CmsProperties {
 		}
 		return siteMap.get(SiteIdHolder.getSiteId());		
 	}
+	
+	public static String getHost() {
+		String[] sites = getCMSSite();
+		for(String site : sites) {
+			if(site.split(":")[0].equalsIgnoreCase(SiteIdHolder.getSiteId()))
+				return site.split(":")[2]; 
+		}
+		return "";
+	}
 
 	public static String[] getCMSSite() {
 		String value = getValue("CmsSiteName");
@@ -119,10 +129,6 @@ public class CmsProperties {
 	
 	public static String getGACode() {		
 		return getValue("GACode");
-	}
-	
-	public static String getHost() {		
-		return getValue("HOST");
 	}
 	
 	// size in M unit

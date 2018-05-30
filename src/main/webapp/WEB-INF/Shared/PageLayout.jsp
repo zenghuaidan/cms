@@ -116,7 +116,7 @@
 	        <%
 	        	Element copyrightElement = (Element)masterContent.getContentXmlDoc().selectSingleNode("/PageContent/Widget[@name='CopyRight']/Field");	        	
 	        %>
-	        <%=copyrightElement.getTextTrim().replace("#year#", (new Date().getYear() + 1900) + "") %>
+	        <%=copyrightElement == null ? "" : copyrightElement.getTextTrim().replace("#year#", (new Date().getYear() + 1900) + "") %>
             <!--x:out select="$contentXml/PageContent/Widget[@name='CopyRight']/Field" escapeXml="fasle" /-->            
         </div>
     </footer>

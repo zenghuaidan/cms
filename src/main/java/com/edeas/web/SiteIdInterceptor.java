@@ -24,17 +24,18 @@ public class SiteIdInterceptor implements HandlerInterceptor {
 			throws Exception {
 		logger.debug("Url:" + request.getRequestURI());
 		logger.debug("Host:" + request.getHeader("Host"));
-		if(request.getSession().getAttribute(SiteIdHolder.SITE_ID) == null) {
-			if(!request.getRequestURI().contains(Global.getCMSURI())) {			
-				for(String site : CmsProperties.getCMSSite()) {
-					String[] siteInfo = site.split(":");
-					if (siteInfo.length >= 3 && request.getHeader("Host").toLowerCase().contains(siteInfo[2].toLowerCase())) {
-						request.getSession().setAttribute(SiteIdHolder.SITE_ID, siteInfo[0]);
-						break;
-					}
+		
+		if(!request.getRequestURI().contains(Global.getCMSURI()) 
+				&& ( request.getRequestURI().contains("/en/") || request.getRequestURI().contains("/sc/") || request.getRequestURI().contains("/tc/") )) {			
+			for(String site : CmsProperties.getCMSSite()) {
+				String[] siteInfo = site.split(":");
+				if (siteInfo.length >= 3 && request.getHeader("Host").toLowerCase().contains(siteInfo[2].toLowerCase())) {
+					request.getSession().setAttribute(SiteIdHolder.SITE_ID, siteInfo[0]);
+					break;
 				}
 			}
 		}
+		
 		
 		if(request.getSession().getAttribute(SiteIdHolder.SITE_ID) == null) {
 			request.getSession().setAttribute(SiteIdHolder.SITE_ID, CmsProperties.getDefaultSiteId());

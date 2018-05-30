@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edeas.dto.Result;
 import com.edeas.model.Category;
+import com.edeas.web.SiteIdHolder;
 import com.hankcs.hanlp.HanLP;
 
 @Controller
@@ -30,6 +31,7 @@ public class CategoryAdminController extends CmsController {
 			categoryService.update(category);		
 		} else {
 			category.setNameSC(HanLP.t2s(category.getNameTC()));
+			category.setSiteId(SiteIdHolder.getSiteId());
 			categoryService.addCategory(category);
 		}
 		return new Result();

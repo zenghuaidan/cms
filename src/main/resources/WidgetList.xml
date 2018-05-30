@@ -241,4 +241,14 @@
   		<Field name="Detail" type="ttafield" label="Detail Content" />
   	</Widget>
   	
+  	<!-- Online Shop -->
+  	<Widget id="OnlineShopItem">
+  		<Field name="Name" type="txtfield" label="Product Name" />
+  		<Field name="Description" type="ttafield" label="Description" />  		
+  		<Field name="Image" type="imgfield" label="Image" />	
+  		<Field name="OrignalPrice" type="txtfield" label="Original Price" />
+  		<Field name="SpecialPrice" type="txtfield" label="Special Price" />
+  	</Widget>
+  	
+  	
 </WidgetList>

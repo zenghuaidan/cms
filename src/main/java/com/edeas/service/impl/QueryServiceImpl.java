@@ -31,6 +31,7 @@ import com.edeas.model.PageStatus;
 import com.edeas.model.Privilege;
 import com.edeas.model.User;
 import com.edeas.model.WorkflowMsg;
+import com.edeas.web.SiteIdHolder;
 
 @Service(value="queryService")
 @Transactional
@@ -90,6 +91,7 @@ public class QueryServiceImpl extends BasicServiceImpl {
 	
 	public void addOrUpdate(Page page, boolean iscms) {
 		if(page.isNew()){
+			page.setSiteId(SiteIdHolder.getSiteId());
 			getPageDao(iscms).add(page);	
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			User login = userDao.findByUserName(userDetails.getUsername());
