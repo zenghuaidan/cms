@@ -85,7 +85,7 @@
 	    </div>
 	    <div class="clear"></div>
 	    <div id="cmsfooter" class="cmspgw">
-	        Developed By &copy; Edeas Limited
+	        DEVELOPED BY &copy; EDEAS LIMITED
 	    </div>
 	    <div id="cmslayerpool" style="display:none;">
 	        <div class="chgpwdform">	        

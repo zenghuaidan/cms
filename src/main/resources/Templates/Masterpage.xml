@@ -6,6 +6,7 @@
   </Properties>
   <WidgetBox />
   <Widgets>
+  	<Widget ename="Logo" wid="DocBlock" label="Logo" jsel="#logo" />
   	<Widget ename="CopyRight" wid="TextAreaBlock" label="CopyRight" jsel="#footer .inner-wrapper" />
   </Widgets>
 </Template>

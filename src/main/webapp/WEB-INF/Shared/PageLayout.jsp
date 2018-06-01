@@ -42,8 +42,11 @@
                     <div class="one">
                         <div class="top_bar_left clearfix">
                             <!-- Logo-->
+                            <%
+					        	Element logoElement = (Element)masterContent.getContentXmlDoc().selectSingleNode("/PageContent/Widget[@name='Logo']/Field");	        	
+					        %>
                             <div class="logo">
-                                <a id="logo" href="<%=homePageLink %>"><img class="img-scale" src="${Content}/css/images/logo-edeas.svg" alt="edeas" /></a>
+                                <a id="logo" href="<%=homePageLink %>"><img class="img-scale" src="<%=Global.getDocUploadPath(logoElement == null ? "" : logoElement.getTextTrim())%>" alt="edeas" /></a>
                             </div>
                             <!-- Main menu-->
                             <div class="menu_wrapper">

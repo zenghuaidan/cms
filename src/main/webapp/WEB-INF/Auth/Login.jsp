@@ -97,7 +97,7 @@
                 </c:if>
             </div>
 
-            <footer>Developed by @ edeas Limited</footer>
+            <footer>DEVELOPED BY @ EDEAS LIMITED</footer>
         </div>
     </form>
     <script type="text/javascript" src="${Script}/classie.js"></script>

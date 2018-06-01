@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.edeas.controller.Global;
 import com.edeas.dto.Result;
@@ -127,7 +129,7 @@ public class PageAdminController extends CmsController {
 				}
 				return "Templates/" + page.getTemplate();
 			}
-		}
+		}		
 		return "redirect:" + Global.getCMSURI() + "/SiteAdmin";
 	}
 	
@@ -205,6 +207,7 @@ public class PageAdminController extends CmsController {
 					logger.info("Soft delete success, the page=" + id + " has been marked as deleted");
 					return new Result("refresh");					
 				} else {
+					//todo
 					queryService.delete(page.getId());
 					logger.info("Hard delete success, the page=" + id + " has been deleted from database");
 					return new Result("backsiteadmin");

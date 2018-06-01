@@ -57,7 +57,7 @@
 	                         		Page newsPage = InitServlet.getQueryService().findPageById(newsPageId, iscms);
 	                         		Content newsContent = newsPage.getContent(lang);
 	                         		Document ptyDocument = newsContent.getPropertyXmlDoc();
-	                         		String contentStr = XmlUtils.getPtyFieldVal(ptyDocument, "Content", true);
+	                         		String titleStr = XmlUtils.getPtyFieldVal(ptyDocument, "Title", true);
 	                         	%>
 	                         	<c:set var="newsDate" value="<%=newsPage.getPageTimeFrom() %>"></c:set>
 	                             <li class="post">
@@ -66,7 +66,7 @@
 	                                    	<div class="photo"><img src="<%=Global.getImagesUploadPath(Global.IMAGE_SOURCE) %>/<x:out select="$news/Field[@name='Image']" escapeXml="false"/>" class="img-scale" /></div>
 	                                    </x:if>
 	                                     <div class="desc">
-	                                         <div class="post-intro"><c:out value="<%=contentStr%>" escapeXml="false"></c:out></div>
+	                                         <div class="post-intro"><c:out value="<%=titleStr%>" escapeXml="false"></c:out></div>
 	                                         <div class="date"><fmt:formatDate value="${newsDate}" pattern="MMMM dd, yyyy" /></div>
 	                                     </div>
 	                                 </a>

@@ -37,7 +37,7 @@ public class AuthController extends CmsController {
 				return new Result("Old password is incorrect", "Old password is incorrect");
 			}
 			userService.updatePassword(loginUser.getLogin(), encodedPassword, PasswordUtils.encode(newpwd));
-		}
+		}					
 		return new Result("Password update successfully");
 	}
 }

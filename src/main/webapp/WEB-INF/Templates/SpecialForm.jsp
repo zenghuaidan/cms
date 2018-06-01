@@ -201,7 +201,7 @@
 					<div class="nl-submit-wrap">
 						<button class="nl-submit" type="submit"><%=formMap.get(lang).get("Submit").get(0)%></button>
 					</div>
-					<div class="nl-overlay">sdfsfdsfsdfsd</div>
+					<div class="nl-overlay"></div>
 				</div>
 			</section>
 		</div>

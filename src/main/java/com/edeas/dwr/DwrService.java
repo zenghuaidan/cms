@@ -26,6 +26,6 @@ public class DwrService {
 	@RemoteMethod
 	public void setSiteId(String siteId) {		
 		WebContext webContext = WebContextFactory.get();
-		webContext.getHttpServletRequest().getSession().setAttribute(SiteIdHolder.SITE_ID, siteId);
+		webContext.getHttpServletRequest().getSession().setAttribute(SiteIdHolder.CMS_SITE_ID, siteId);		
 	}
 }

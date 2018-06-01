@@ -22,26 +22,19 @@ public class SiteIdInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		logger.debug("Url:" + request.getRequestURI());
-		logger.debug("Host:" + request.getHeader("Host"));
-		
+		SiteIdHolder.setWeb(false);
 		if(!request.getRequestURI().contains(Global.getCMSURI()) 
-				&& ( request.getRequestURI().contains("/en/") || request.getRequestURI().contains("/sc/") || request.getRequestURI().contains("/tc/") )) {			
+				&& ( request.getRequestURI().contains("/en/") || request.getRequestURI().contains("/sc/") || request.getRequestURI().contains("/tc/") )) {
+			SiteIdHolder.setWeb(true); 
 			for(String site : CmsProperties.getCMSSite()) {
 				String[] siteInfo = site.split(":");
-				if (siteInfo.length >= 3 && request.getHeader("Host").toLowerCase().contains(siteInfo[2].toLowerCase())) {
-					request.getSession().setAttribute(SiteIdHolder.SITE_ID, siteInfo[0]);
+				if (siteInfo.length >= 3 && siteInfo[2].toLowerCase().contains(request.getHeader("SiteId").toLowerCase())) {
+					request.getSession().setAttribute(SiteIdHolder.WEB_SITE_ID, siteInfo[0]);
 					break;
 				}
 			}
 		}
-		
-		
-		if(request.getSession().getAttribute(SiteIdHolder.SITE_ID) == null) {
-			request.getSession().setAttribute(SiteIdHolder.SITE_ID, CmsProperties.getDefaultSiteId());
-		}
-			
-		SiteIdHolder.setSiteId(request.getSession().getAttribute(SiteIdHolder.SITE_ID).toString());
+						
 		return true;
 	}
 

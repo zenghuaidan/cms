@@ -86,6 +86,7 @@
 			cart = "";
 		}
 		var newCart = "";
+		var added = false;
 		for(var i = 0; i < cart.split(",").length; i++) {
 			var itemId = cart.split(",")[i];
 			if (itemId == "")
@@ -93,27 +94,34 @@
 			var item = id + ":";
 			if(itemId.indexOf(item) < 0) {
 				newCart += (itemId + ",");
+			} else {
+				if (count != 0) {
+					newCart += (id + ":" + count + ",");	
+					added = true;					
+				}
 			}
 		}
-		if (count != 0)
+		if (count != 0 && !added)
 			newCart += (id + ":" + count + ",");
 		$.cookie('cart', newCart, { path: '/' });
 		initCount();
 	}
 	
-	function increaseItem(id) {
-		var count = parseInt($(".input-quantity").val());
+	function increaseItem(_this, id) {
+		var count = parseInt($(_this).parent().find(".input-quantity").val());
 		count = count+1;
-		$(".input-quantity").val(count);
+		$(_this).parent().find(".input-quantity").val(count);
 		addToCart(id, count);
+		refresh();
 	}
 	
-	function decreaseItem(id) {
-		var count = parseInt($(".input-quantity").val());
+	function decreaseItem(_this, id) {
+		var count = parseInt($(_this).parent().find(".input-quantity").val());
 		if(count == 0) return;
 		count = count-1;
-		$(".input-quantity").val(count);
+		$(_this).parent().find(".input-quantity").val(count);
 		addToCart(id, count);
+		refresh();
 	}
 	
 	function initCount() {
@@ -124,9 +132,13 @@
 	function showCart() {
 		if($(".badge").text() == "0")
 			return;
+		$("#cartSummary").show();
+		refresh();
+	}
+	
+	function refresh() {
 		var quantity = '<%= lang.equals("en") ? "Quantity" : (lang.equals("tc") ? "數量" : "数量") %>';
 		var cart = $.cookie('cart');
-		$("#cartSummary").show();
 		$("ul.shop-item").html("");
 		$("#payment").find("tbody").html("");
 		if (cart == undefined)
@@ -164,9 +176,9 @@
 			        "<td>" + ($.trim(spprice) == "" ? "-" : spprice) + "</td>" +
 			        "<td>" +
 			            "<div>" +
-			                "<div class='btn-minus' onclick='decreaseItem(\"" + itemId + "\")'></div>" +
+			                "<div class='btn-minus' onclick='decreaseItem(this, \"" + itemId + "\")'></div>" +
 			                "<div class='input-quantity-blk'><input class='input-quantity' type='text' value='" + itemCount + "' readonly></div>" +
-			                "<div class='btn-add' onclick='increaseItem(\"" + itemId + "\")'></div>" +
+			                "<div class='btn-add' onclick='increaseItem(this, \"" + itemId + "\")'></div>" +
 			            "</div>" +
 			            "<div class='clear'></div>" +
 			        "</td>" +
